@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-10-02T01:15:46.410Z",
+  "locale": "zh-TW",
+  "status": "PASS",
+  "TOTAL_PROMPT_ENTRIES": 2380,
+  "TOTAL_LIVE_UI_ENTRIES": 451,
+  "TOTAL_SOURCE_REFERENCE_ENTRIES": 0,
+  "ENTRIES_REQUIRING_ZH_TW": 2831,
+  "ENTRIES_WITH_COMPLETE_ZH_TW": 2831,
+  "ENTRIES_REVIEW_REQUIRED": 0,
+  "ENGLISH_ONLY_USER_DESCRIPTION_FIELDS": 0,
+  "SIMPLIFIED_CHINESE_USER_DESCRIPTION_FIELDS": 0,
+  "SIMPLIFIED_CHINESE_FIELD_SAMPLES": [],
+  "STALE_LOCALIZATIONS_REGENERATED": 0,
+  "PROMPT_CATALOG_CONTENT_HASH": "6b34422c272bd08dfeb941e17085eebd4df061a9a769a2a088c76a4b02d23166",
+  "LIVE_UI_CATALOG_CONTENT_HASH": "35e9bca1e665a89b6822f4f3a9eb6e5bc6f4b73d243625ff111391c7fce9f8d5",
+  "LOCALIZATION_CONTENT_HASH": "9b0f789c9425d9076c43dd0b1f73a93439d382f51f4fdc6364bd9851c9012997",
+  "risk_key_count": 81,
+  "interaction_key_count": 24,
+  "live_type_key_count": 31,
+  "sampled_sources": [
+    "animejs-live-ui",
+    "kokonut-ui-oss",
+    "retro-ui-oss",
+    "magic-ui-oss",
+    "smooth-ui-oss",
+    "unlumen-ui-public-registry",
+    "animos-external-reference",
+    "prompt-database"
+  ],
+  "runtime_policy": {
+    "file_protocol": true,
+    "fetch_localization_json": false,
+    "remote_translation_service": false,
+    "generated_js": "visual-catalog/localization-zh-TW.js"
+  }
+}

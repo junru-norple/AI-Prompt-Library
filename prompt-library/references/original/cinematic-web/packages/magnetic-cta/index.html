@@ -1,0 +1,40 @@
+<!doctype html>
+<!-- SPDX-FileCopyrightText: 2026 junru-norple -->
+<!-- SPDX-License-Identifier: MIT -->
+<html lang="zh-Hant" data-cinematic-id="cinematic-web:magnetic-cta" data-preview-ready="false">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; connect-src 'none'; media-src 'none'; font-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>售票亭磁吸行動按鈕</title>
+  <style>
+    :root{color-scheme:dark;--ink:#f4f0e7;--muted:#aaa59b;--paper:#090b10;--accent:#e9b872;--line:rgba(255,255,255,.16);font-family:"Segoe UI",system-ui,sans-serif}
+    *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--paper);color:var(--ink)}body{overflow-x:hidden}
+    button,a{font:inherit}button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .eyebrow{margin:0;font:700 11px/1.2 ui-monospace,Consolas,monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+    .preview-badge{position:fixed;z-index:30;top:12px;right:12px;padding:7px 10px;border:1px solid var(--line);background:rgba(5,7,11,.72);backdrop-filter:blur(10px);font:700 10px/1 ui-monospace,Consolas,monospace;letter-spacing:.12em;color:var(--muted)}
+    :root{--paper:#29150f;--ink:#fff3d8;--muted:#cfb99e;--accent:#ff6047;--line:rgba(255,243,216,.22)}
+    .booth{min-height:100svh;display:grid;grid-template-columns:clamp(50px,8vw,120px) 1fr}.marquee{writing-mode:vertical-rl;display:flex;justify-content:space-around;align-items:center;border-right:1px dashed var(--muted);font:800 11px ui-monospace,monospace;letter-spacing:.18em;color:var(--muted)}section{display:grid;place-items:center;align-content:center;padding:40px;text-align:center}h1{font:500 clamp(48px,8vw,112px)/.9 Georgia,serif;margin:.25em 0 .55em}.field{width:min(72vw,480px);aspect-ratio:1;position:relative;display:grid;place-items:center}.field>i{position:absolute;border:1px solid var(--line);border-radius:50%;inset:8%}.field>i:nth-child(2){inset:23%;border-style:dashed}.field>i:nth-child(3){inset:36%;border-color:var(--accent)}button{position:relative;z-index:2;width:190px;aspect-ratio:1.65;border:0;border-radius:9px;background:var(--ink);color:var(--paper);box-shadow:14px 14px 0 var(--accent);cursor:pointer;transition:transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .2s}button:before,button:after{content:"";position:absolute;top:50%;width:18px;aspect-ratio:1;border-radius:50%;background:var(--paper);transform:translateY(-50%)}button:before{left:-9px}button:after{right:-9px}button span{display:block;font:800 22px/1 sans-serif}button small{display:block;margin-top:12px;font:10px ui-monospace,monospace;letter-spacing:.12em}button:active{box-shadow:7px 7px 0 var(--accent)}#status{font-size:12px;color:var(--muted)}@media(max-width:600px){.booth{grid-template-columns:1fr}.marquee{writing-mode:horizontal-tb;min-height:48px;border-right:0;border-bottom:1px dashed var(--muted)}section{padding:70px 20px 30px}.field{width:min(90vw,390px)}}
+    @media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}
+  </style>
+</head>
+<body>
+  <span class="preview-badge" aria-hidden="true">OFFLINE · ISOLATED</span>
+  <main class="booth"><div class="marquee"><span>ONE NIGHT ONLY</span><span>LOCAL PREMIERE</span><span>SEAT 24</span></div><section><p class="eyebrow">BOX OFFICE · WINDOW 03</p><h1>把下一幕，<br>握在手裡。</h1><div class="field" id="field"><i></i><i></i><i></i><button id="ticket" type="button"><span>預留座位</span><small>18 SEP · 20:30</small></button></div><p id="status" role="status">Pointer、鍵盤與觸控皆可操作</p></section></main>
+  <script>
+  (()=>{
+    'use strict';
+    const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const runtime={id:'cinematic-web:magnetic-cta',ready:false,reducedMotion:reduced,activeRaf:0,activeTimers:0,disposed:false,theme:'BOX OFFICE / CTA'};
+    window.__CINEMATIC_PREVIEW_STATE__=runtime;
+    const disposers=[];
+    window.__cinematicDispose=(fn)=>{if(typeof fn==='function')disposers.push(fn)};
+    const finish=()=>{runtime.ready=true;document.documentElement.dataset.previewReady='true'};
+    const button=document.querySelector('#ticket');const field=document.querySelector('#field');const status=document.querySelector('#status');let frame=0;const move=(event)=>{if(reduced)return;const box=field.getBoundingClientRect();const dx=event.clientX-(box.left+box.width/2);const dy=event.clientY-(box.top+box.height/2);const distance=Math.hypot(dx,dy);if(frame)cancelAnimationFrame(frame);frame=requestAnimationFrame(()=>{runtime.activeRaf=0;frame=0;button.style.transform=distance<box.width*.48?'translate('+(dx*.1)+'px,'+(dy*.1)+'px)':''});runtime.activeRaf=1};const reset=()=>{button.style.transform=''};addEventListener('pointermove',move,{passive:true});field.addEventListener('pointerleave',reset);button.addEventListener('click',()=>{status.textContent='座位已保留於本機示範狀態';button.animate([{transform:button.style.transform},{transform:button.style.transform+' scale(.98)'},{transform:button.style.transform}],{duration:240})});__cinematicDispose(()=>{removeEventListener('pointermove',move);if(frame)cancelAnimationFrame(frame)});
+    finish();
+    addEventListener('pagehide',()=>{for(const dispose of disposers.splice(0)){try{dispose()}catch(_){}}runtime.activeRaf=0;runtime.activeTimers=0;runtime.disposed=true},{once:true});
+  })();
+  </script>
+</body>
+</html>

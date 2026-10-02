@@ -1,0 +1,1294 @@
+
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'sha256-4ldFw2J4yhzQndSwYR4ip7Io8KRkZPtyQBBivV5IK4A='; img-src data:; font-src 'none'; media-src 'none'; connect-src 'none'; frame-src 'none'; child-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"><meta name="atlas-source-entry" content="open-design-official:template:social-media-dashboard">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Open Design · Social Analytics</title>
+  
+  
+  
+  <style>
+    :root {
+      /* Totality Festival Design System — bind palette */
+      --surface: #121318;
+      --surface-dim: #121318;
+      --surface-bright: #38393f;
+      --surface-container-lowest: #0d0e13;
+      --surface-container-low: #1a1b21;
+      --surface-container: #1e1f25;
+      --surface-container-high: #292a2f;
+      --surface-container-highest: #34343a;
+      --on-surface: #e3e1e9;
+      --on-surface-variant: #d0c6ab;
+      --inverse-surface: #e3e1e9;
+      --inverse-on-surface: #2f3036;
+      --outline: #999077;
+      --outline-variant: #4d4732;
+      --surface-tint: #e9c400;
+      --primary: #fff6df;
+      --on-primary: #3a3000;
+      --primary-container: #ffd700;
+      --on-primary-container: #705e00;
+      --inverse-primary: #705d00;
+      --secondary: #bdf4ff;
+      --on-secondary: #00363d;
+      --secondary-container: #00e3fd;
+      --on-secondary-container: #00616d;
+      --tertiary: #fcf3ff;
+      --on-tertiary: #3b2754;
+      --tertiary-container: #e7d1ff;
+      --on-tertiary-container: #6b5586;
+      --error: #ffb4ab;
+      --on-error: #690005;
+      --error-container: #93000a;
+      --on-error-container: #ffdad6;
+      --background: #121318;
+      --on-background: #e3e1e9;
+      --surface-variant: #34343a;
+
+      /* Typography */
+      --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+      /* Spacing */
+      --spacing-unit: 8px;
+      --gutter: 24px;
+      --margin-desktop: 64px;
+
+      /* Premium glass levels */
+      --glass-bg-level-1: rgba(52, 52, 58, 0.15);
+      --glass-bg-level-2: rgba(52, 52, 58, 0.25);
+      --glass-bg-level-3: rgba(52, 52, 58, 0.35);
+      --glass-border: rgba(255, 255, 255, 0.12);
+      --glass-border-strong: rgba(255, 255, 255, 0.2);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: radial-gradient(ellipse at 50% 0%, rgba(255, 215, 0, 0.08) 0%, transparent 60%),
+                  radial-gradient(ellipse at 100% 100%, rgba(0, 227, 253, 0.06) 0%, transparent 50%),
+                  var(--surface);
+      color: var(--on-surface);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(18, 19, 24, 0.75);
+      backdrop-filter: blur(32px) saturate(180%);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 16px var(--margin-desktop);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo-block {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-block img {
+      height: 32px;
+      width: auto;
+      filter: drop-shadow(0 0 8px rgba(0, 227, 253, 0.3));
+    }
+
+    .logo-label {
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--on-surface-variant);
+    }
+
+    .platform-switcher-inline {
+      display: flex;
+      gap: 8px;
+      margin-left: 24px;
+    }
+
+    .platform-pill {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 500;
+      padding: 6px 16px;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--on-surface-variant);
+      border: 1px solid var(--outline-variant);
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .platform-pill.active {
+      background: var(--glass-bg-level-2);
+      color: var(--primary);
+      border-color: var(--primary-container);
+      box-shadow: 0 0 32px rgba(255, 215, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .time-range-tabs {
+      display: flex;
+      gap: 4px;
+    }
+
+    .time-tab {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 6px 12px;
+      background: transparent;
+      color: var(--on-surface-variant);
+      border: none;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    .time-tab.active {
+      color: var(--primary);
+    }
+
+    .user-block {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      filter: drop-shadow(0 0 6px rgba(0, 227, 253, 0.3));
+    }
+
+    .user-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .user-name {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--on-surface);
+    }
+
+    .user-role {
+      font-size: 12px;
+      color: var(--on-surface-variant);
+    }
+
+    /* Hero Strip */
+    .hero-strip {
+      position: sticky;
+      top: 65px;
+      z-index: 90;
+      background: rgba(18, 19, 24, 0.85);
+      backdrop-filter: blur(40px) saturate(180%);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 32px var(--margin-desktop);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero-content {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .hero-text {
+      flex: 1;
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: 48px;
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--primary);
+      margin-bottom: 8px;
+      text-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
+    }
+
+    .hero-meta {
+      font-size: 14px;
+      color: var(--on-surface-variant);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      padding: 12px 24px;
+      height: 48px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--primary-container);
+      color: var(--on-primary);
+      box-shadow: 0 0 32px rgba(255, 215, 0, 0.5), 0 4px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 0 48px rgba(255, 215, 0, 0.7), 0 8px 24px rgba(0, 0, 0, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: rgba(189, 244, 255, 0.08);
+      color: var(--secondary);
+      border: 1px solid var(--secondary);
+      backdrop-filter: blur(12px);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(189, 244, 255, 0.15);
+      box-shadow: 0 0 24px rgba(189, 244, 255, 0.2);
+    }
+
+    /* Ask Bar */
+    .ask-bar {
+      padding: 24px var(--margin-desktop);
+      background: var(--glass-bg-level-1);
+      backdrop-filter: blur(20px);
+    }
+
+    .ask-input {
+      width: 100%;
+      font-family: var(--font-body);
+      font-size: 16px;
+      padding: 16px 20px;
+      background: rgba(13, 14, 19, 0.6);
+      color: var(--on-surface);
+      border: 1px solid var(--glass-border);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(8px);
+    }
+
+    .ask-input:focus {
+      outline: none;
+      border-color: var(--secondary-container);
+      box-shadow: 0 0 0 3px rgba(0, 227, 253, 0.15), 0 0 32px rgba(0, 227, 253, 0.2);
+      background: rgba(13, 14, 19, 0.8);
+    }
+
+    .ask-input::placeholder {
+      color: var(--on-surface-variant);
+      opacity: 0.6;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 32px var(--margin-desktop);
+    }
+
+    /* Platform Switcher Cards */
+    .platform-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .platform-card {
+      background: var(--glass-bg-level-1);
+      backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 24px;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .platform-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .platform-card.active::before {
+      opacity: 1;
+    }
+
+    .platform-card.active {
+      background: var(--glass-bg-level-2);
+      border-color: var(--primary-container);
+      box-shadow: 0 0 48px rgba(255, 215, 0, 0.3), 0 8px 32px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .platform-card:hover:not(.active) {
+      background: var(--glass-bg-level-2);
+      border-color: var(--glass-border-strong);
+      transform: translateY(-2px);
+    }
+
+    .platform-card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .platform-icon {
+      font-size: 24px;
+    }
+
+    .platform-name {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--on-surface);
+    }
+
+    .platform-handle {
+      font-size: 14px;
+      color: var(--on-surface-variant);
+    }
+
+    /* KPI Row */
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .kpi-card {
+      background: var(--glass-bg-level-1);
+      backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .kpi-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    }
+
+    .kpi-label {
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--on-surface-variant);
+      margin-bottom: 8px;
+    }
+
+    .kpi-value {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--on-surface);
+      margin-bottom: 4px;
+    }
+
+    .kpi-delta {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 14px;
+      color: var(--secondary);
+      filter: drop-shadow(0 0 8px rgba(189, 244, 255, 0.3));
+    }
+
+    .kpi-footnote {
+      font-size: 12px;
+      color: var(--on-surface-variant);
+      margin-top: 4px;
+    }
+
+    /* Main Grid - 3 columns */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .chart-card {
+      background: var(--glass-bg-level-1);
+      backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chart-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    }
+
+    .chart-header {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--on-surface);
+      margin-bottom: 24px;
+    }
+
+    .chart-svg {
+      width: 100%;
+      height: 280px;
+    }
+
+    .top-post-card {
+      background: var(--glass-bg-level-1);
+      backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .top-post-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    }
+
+    .post-header-tag {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--on-primary-container);
+      background: var(--primary-container);
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+      box-shadow: 0 0 24px rgba(255, 215, 0, 0.4);
+    }
+
+    .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .post-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--glass-border);
+    }
+
+    .post-handle-block {
+      flex: 1;
+    }
+
+    .post-handle {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--on-surface);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .verified-badge {
+      color: var(--secondary-container);
+      font-size: 16px;
+      filter: drop-shadow(0 0 6px rgba(0, 227, 253, 0.5));
+    }
+
+    .post-timestamp {
+      font-size: 12px;
+      color: var(--on-surface-variant);
+    }
+
+    .post-body {
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--on-surface);
+      margin-bottom: 12px;
+    }
+
+    .post-media {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.12) 0%, rgba(18, 19, 24, 0.9) 100%);
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      border-radius: 8px;
+      margin-bottom: 12px;
+      box-shadow: 0 0 24px rgba(255, 215, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      overflow: hidden;
+    }
+
+    .post-media svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .post-media-caption {
+      position: absolute;
+      left: 12px;
+      bottom: 10px;
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--primary);
+      opacity: 0.85;
+    }
+
+    .post-engagement {
+      display: flex;
+      gap: 16px;
+      font-size: 13px;
+      color: var(--on-surface-variant);
+    }
+
+    /* Geo Map Card */
+    .geo-card {
+      background: var(--glass-bg-level-1);
+      backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .geo-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    }
+
+    .geo-map {
+      width: 100%;
+      height: 200px;
+      position: relative;
+    }
+
+    .geo-dot {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--primary-container);
+      box-shadow: 0 0 16px rgba(255, 215, 0, 0.6);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.3); opacity: 0.7; }
+    }
+
+    .geo-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .geo-stat {
+      font-size: 13px;
+    }
+
+    .geo-stat-label {
+      color: var(--on-surface-variant);
+    }
+
+    .geo-stat-value {
+      font-family: var(--font-display);
+      font-weight: 600;
+      color: var(--on-surface);
+    }
+
+    /* GitHub Contributors */
+    .contributors-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .contributor-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .contributor-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid var(--glass-border);
+      box-shadow: 0 0 16px rgba(0, 227, 253, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .contributor-avatar:hover {
+      border-color: var(--secondary);
+      box-shadow: 0 0 24px rgba(0, 227, 253, 0.4);
+      transform: scale(1.05);
+    }
+
+    .contributor-name {
+      font-size: 11px;
+      color: var(--on-surface-variant);
+      text-align: center;
+    }
+
+    .contributor-commits {
+      font-size: 10px;
+      color: var(--on-surface-variant);
+      opacity: 0.7;
+    }
+
+    /* Lower Grid */
+    .lower-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .trending-card, .comments-card {
+      background: var(--glass-bg-level-1);
+      backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .trending-card::before, .comments-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--on-surface);
+      margin-bottom: 20px;
+    }
+
+    .trending-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(153, 144, 119, 0.15);
+    }
+
+    .trending-row:last-child {
+      border-bottom: none;
+    }
+
+    .trending-name {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--on-surface);
+    }
+
+    .trending-count {
+      font-size: 13px;
+      color: var(--on-surface-variant);
+      margin-left: 8px;
+    }
+
+    .sparkline {
+      width: 60px;
+      height: 20px;
+    }
+
+    .comment-item {
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(153, 144, 119, 0.15);
+    }
+
+    .comment-item:last-child {
+      border-bottom: none;
+    }
+
+    .comment-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .comment-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--glass-bg-level-2);
+      border: 1px solid var(--glass-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .comment-handle {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--on-surface);
+    }
+
+    .comment-time {
+      font-size: 12px;
+      color: var(--on-surface-variant);
+    }
+
+    .comment-body {
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--on-surface-variant);
+      margin-bottom: 6px;
+    }
+
+    .comment-engagement {
+      font-size: 12px;
+      color: var(--on-surface-variant);
+    }
+
+    /* GitHub specific styles */
+    .github-chart-explosive {
+      position: relative;
+    }
+
+    .milestone-marker {
+      position: absolute;
+      font-size: 11px;
+      font-family: var(--font-display);
+      font-weight: 600;
+      color: var(--primary);
+      background: rgba(255, 215, 0, 0.15);
+      padding: 4px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--primary-container);
+      box-shadow: 0 0 16px rgba(255, 215, 0, 0.3);
+    }
+  </style>
+<style data-atlas-owned-adapter>@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:0s!important;transition-delay:0s!important;scroll-behavior:auto!important}}</style></head>
+<body data-atlas-language-policy="ORIGINAL_SOURCE_LABELED">
+  
+  <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+    <defs>
+      <linearGradient id="brandRing" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#7CFFB4"/>
+        <stop offset="100%" stop-color="#1FE3D6"/>
+      </linearGradient>
+    </defs>
+  </svg>
+
+  
+  <header data-od-id="header">
+    <div class="header-left">
+      <div class="logo-block">
+        <svg class="brand-mark" viewBox="0 0 64 64" width="32" height="32" aria-label="Open Design">
+          <circle cx="32" cy="32" r="28" fill="#1c1c20" stroke="url(#brandRing)" stroke-width="3"/>
+          <path d="M22 22 L46 32 L26 36 L22 46 Z" fill="none" stroke="url(#brandRing)" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+        </svg>
+        <span class="logo-label">ANALYTICS</span>
+      </div>
+      <div class="platform-switcher-inline">
+        <button class="platform-pill active" data-platform="x">X</button>
+        <button class="platform-pill" data-platform="github">GitHub</button>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="time-range-tabs">
+        <button class="time-tab active">7D</button>
+        <button class="time-tab">30D</button>
+        <button class="time-tab">90D</button>
+        <button class="time-tab">YTD</button>
+      </div>
+      <div class="user-block">
+        <svg class="user-avatar" viewBox="0 0 64 64" aria-label="Open Design avatar">
+          <circle cx="32" cy="32" r="30" fill="#1c1c20" stroke="url(#brandRing)" stroke-width="2.5"/>
+          <path d="M22 22 L46 32 L26 36 L22 46 Z" fill="none" stroke="url(#brandRing)" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+        </svg>
+        <div class="user-info">
+          <div class="user-name">Open Design</div>
+          <div class="user-role">Design agent · by Nexu Labs</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  
+  <section class="hero-strip" data-od-id="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="hero-headline" id="hero-headline">Open Design shipped 9 posts on X this week.</h1>
+        <p class="hero-meta" id="hero-meta">Engagement up 0.6% vs. last week · Top thread reached 38K accounts</p>
+      </div>
+      <div class="hero-actions">
+        <button class="btn btn-secondary">Export report</button>
+        <button class="btn btn-primary" id="hero-cta">New post →</button>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="ask-bar" data-od-id="ask">
+    <input 
+      type="text" 
+      class="ask-input" 
+      id="ask-input"
+      placeholder="Ask across your posts — 'top performing last week', 'comments from verified accounts'..."
+    >
+  </section>
+
+  
+  <div class="container">
+    
+    <div class="platform-cards" data-od-id="platform-switcher">
+      <div class="platform-card active" data-platform-card="x">
+        <div class="platform-card-header">
+          <span class="platform-icon">𝕏</span>
+          <div>
+            <div class="platform-name">X (Twitter)</div>
+            <div class="platform-handle">@opendesignhq</div>
+          </div>
+        </div>
+      </div>
+      <div class="platform-card" data-platform-card="github">
+        <div class="platform-card-header">
+          <span class="platform-icon">⚙</span>
+          <div>
+            <div class="platform-name">GitHub</div>
+            <div class="platform-handle">nexu-io/open-design</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="kpi-row" data-od-id="kpis">
+      <div class="kpi-card">
+        <div class="kpi-label" id="kpi-1-label">Followers</div>
+        <div class="kpi-value" id="kpi-1-value">14,287</div>
+        <div class="kpi-delta">↗ <span id="kpi-1-delta">+2.3%</span></div>
+        <div class="kpi-footnote" id="kpi-1-footnote">vs. 13,968 last week</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label" id="kpi-2-label">Engagement Rate</div>
+        <div class="kpi-value" id="kpi-2-value">4.80%</div>
+        <div class="kpi-delta">↗ <span id="kpi-2-delta">+0.4%</span></div>
+        <div class="kpi-footnote" id="kpi-2-footnote">vs. 4.4% last week</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label" id="kpi-3-label">Likes (7D)</div>
+        <div class="kpi-value" id="kpi-3-value">1,842</div>
+        <div class="kpi-delta">↗ <span id="kpi-3-delta">+18%</span></div>
+        <div class="kpi-footnote" id="kpi-3-footnote">+280 vs. last week</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label" id="kpi-4-label">Reposts (7D)</div>
+        <div class="kpi-value" id="kpi-4-value">487</div>
+        <div class="kpi-delta">↗ <span id="kpi-4-delta">+22%</span></div>
+        <div class="kpi-footnote" id="kpi-4-footnote">+88 vs. last week</div>
+      </div>
+    </div>
+
+    
+    <div class="main-grid">
+      
+      <div class="chart-card" data-od-id="growth-chart">
+        <h2 class="chart-header" id="chart-title">Follower Growth · 30D</h2>
+        <div class="github-chart-explosive">
+          <svg class="chart-svg" id="chart-svg" viewBox="0 0 600 280"></svg>
+        </div>
+      </div>
+
+      
+      <div class="geo-card" data-od-id="geo-distribution">
+        <h2 class="chart-header">Audience Geography</h2>
+        <div class="geo-map">
+          <svg width="100%" height="200" viewBox="0 0 400 200" preserveAspectRatio="xMidYMid meet">
+            
+            <g fill="rgba(208, 198, 171, 0.18)" stroke="rgba(208, 198, 171, 0.45)" stroke-width="0.6" stroke-linejoin="round">
+              
+              <path d="M 38,52 L 56,46 L 78,44 L 96,50 L 108,58 L 112,72 L 102,86 L 90,92 L 78,90 L 70,98 L 58,104 L 48,98 L 40,84 L 34,68 Z"/>
+              
+              <path d="M 90,92 L 100,100 L 108,112 L 102,118 L 94,114 L 88,104 Z"/>
+              
+              <path d="M 110,118 L 122,120 L 130,134 L 134,150 L 130,164 L 122,176 L 114,168 L 110,150 L 108,134 Z"/>
+              
+              <path d="M 134,40 L 146,38 L 154,46 L 150,56 L 138,54 Z"/>
+              
+              <path d="M 178,52 L 196,48 L 212,52 L 220,60 L 216,72 L 204,76 L 190,72 L 180,66 Z"/>
+              
+              <path d="M 196,82 L 218,80 L 230,90 L 234,108 L 230,128 L 220,142 L 208,148 L 196,140 L 188,124 L 186,104 L 192,90 Z"/>
+              
+              <path d="M 230,80 L 248,76 L 256,86 L 252,96 L 240,98 L 230,92 Z"/>
+              
+              <path d="M 220,52 L 248,46 L 280,44 L 308,48 L 326,58 L 332,72 L 322,84 L 304,88 L 286,84 L 268,82 L 250,76 L 232,68 L 222,60 Z"/>
+              
+              <path d="M 296,98 L 308,100 L 318,108 L 312,116 L 300,114 Z"/>
+              
+              <path d="M 308,138 L 332,136 L 346,144 L 344,156 L 328,162 L 314,158 L 306,150 Z"/>
+              
+              <path d="M 332,68 L 340,72 L 338,82 L 332,80 Z"/>
+              
+              <path d="M 178,60 L 184,58 L 184,66 L 178,66 Z"/>
+              
+              <path d="M 358,164 L 366,168 L 364,176 L 358,172 Z"/>
+            </g>
+
+            
+            <circle cx="78" cy="72" r="6" class="geo-dot" style="animation-delay: 0s"/>     
+            <circle cx="200" cy="62" r="8" class="geo-dot" style="animation-delay: 0.3s"/>   
+            <circle cx="276" cy="62" r="5" class="geo-dot" style="animation-delay: 0.6s"/>   
+            <circle cx="334" cy="74" r="4" class="geo-dot" style="animation-delay: 0.9s"/>   
+            <circle cx="120" cy="146" r="5" class="geo-dot" style="animation-delay: 1.2s"/>  
+            <circle cx="328" cy="148" r="4" class="geo-dot" style="animation-delay: 1.5s"/>  
+          </svg>
+        </div>
+        <div class="geo-stats">
+          <div class="geo-stat">
+            <div class="geo-stat-label">North America</div>
+            <div class="geo-stat-value">38%</div>
+          </div>
+          <div class="geo-stat">
+            <div class="geo-stat-label">Europe</div>
+            <div class="geo-stat-value">31%</div>
+          </div>
+          <div class="geo-stat">
+            <div class="geo-stat-label">Asia-Pacific</div>
+            <div class="geo-stat-value">22%</div>
+          </div>
+          <div class="geo-stat">
+            <div class="geo-stat-label">Other</div>
+            <div class="geo-stat-value">9%</div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="top-post-card" data-od-id="top-post">
+        <div id="post-section">
+          <div class="post-header-tag" id="post-tag">Click-through rate 5.8%</div>
+          <div class="post-meta">
+            <svg class="post-avatar" viewBox="0 0 64 64" aria-label="Open Design avatar">
+              <circle cx="32" cy="32" r="30" fill="#1c1c20" stroke="url(#brandRing)" stroke-width="2.5"/>
+              <path d="M22 22 L46 32 L26 36 L22 46 Z" fill="none" stroke="url(#brandRing)" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+            </svg>
+            <div class="post-handle-block">
+              <div class="post-handle">
+                @opendesignhq
+                <span class="verified-badge">✓</span>
+              </div>
+              <div class="post-timestamp">4h</div>
+            </div>
+          </div>
+          <div class="post-body" id="post-body">
+            Live artifacts just shipped. Paste a DESIGN.md, get a dashboard that actually ticks. Video below.
+          </div>
+          <div class="post-media" aria-label="Video thumbnail">
+            <svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice">
+              <defs>
+                <radialGradient id="postMediaGlow" cx="50%" cy="50%" r="55%">
+                  <stop offset="0%" stop-color="rgba(255,215,0,0.55)"/>
+                  <stop offset="60%" stop-color="rgba(255,215,0,0.15)"/>
+                  <stop offset="100%" stop-color="rgba(18,19,24,0)"/>
+                </radialGradient>
+                <linearGradient id="postMediaLine" x1="0%" y1="100%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="rgba(189,244,255,0.0)"/>
+                  <stop offset="50%" stop-color="rgba(189,244,255,0.65)"/>
+                  <stop offset="100%" stop-color="rgba(255,215,0,0.95)"/>
+                </linearGradient>
+              </defs>
+              <rect width="320" height="180" fill="rgba(13,14,19,0.85)"/>
+              <circle cx="160" cy="92" r="80" fill="url(#postMediaGlow)"/>
+              
+              <path d="M 8,148 C 60,140 90,128 120,114 S 180,84 220,68 S 280,38 312,30"
+                    fill="none" stroke="url(#postMediaLine)" stroke-width="2.5" stroke-linecap="round"/>
+              
+              <circle cx="120" cy="114" r="3.5" fill="rgba(189,244,255,0.9)"/>
+              <circle cx="220" cy="68" r="4" fill="rgba(255,215,0,0.95)"/>
+              <circle cx="312" cy="30" r="3.5" fill="rgba(255,215,0,0.9)"/>
+              
+              <g transform="translate(146,80)">
+                <circle cx="14" cy="14" r="14" fill="rgba(18,19,24,0.6)" stroke="rgba(255,215,0,0.9)" stroke-width="1.5"/>
+                <path d="M 11,8 L 11,20 L 21,14 Z" fill="rgba(255,215,0,0.95)"/>
+              </g>
+            </svg>
+            <span class="post-media-caption">Live · 0:22</span>
+          </div>
+          <div class="post-engagement" id="post-engagement">
+            <span>❤ <span id="post-likes">312</span></span>
+            <span>🔁 <span id="post-reposts">48</span></span>
+            <span>💬 <span id="post-comments">22</span></span>
+          </div>
+        </div>
+
+        <div id="contributors-section" style="display: none;">
+          <h3 class="section-title">Top Contributors</h3>
+          <div class="contributors-grid" id="contributors-grid"></div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="lower-grid">
+      
+      <div class="trending-card" data-od-id="trending">
+        <h3 class="section-title" id="trending-title">Trending in AI × Design</h3>
+        <div id="trending-list">
+          <div class="trending-row">
+            <div>
+              <span class="trending-name">design.md</span>
+              <span class="trending-count">142 posts</span>
+            </div>
+            <svg class="sparkline" viewBox="0 0 60 20">
+              <polyline points="0,15 10,12 20,14 30,10 40,8 50,5 60,3" fill="none" stroke="var(--primary)" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="trending-row">
+            <div>
+              <span class="trending-name">claude design</span>
+              <span class="trending-count">98 posts</span>
+            </div>
+            <svg class="sparkline" viewBox="0 0 60 20">
+              <polyline points="0,18 10,16 20,14 30,12 40,9 50,7 60,4" fill="none" stroke="var(--primary)" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="trending-row">
+            <div>
+              <span class="trending-name">live artifacts</span>
+              <span class="trending-count">87 posts</span>
+            </div>
+            <svg class="sparkline" viewBox="0 0 60 20">
+              <polyline points="0,16 10,15 20,13 30,11 40,10 50,6 60,2" fill="none" stroke="var(--primary)" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="trending-row">
+            <div>
+              <span class="trending-name">vibecoding</span>
+              <span class="trending-count">72 posts</span>
+            </div>
+            <svg class="sparkline" viewBox="0 0 60 20">
+              <polyline points="0,17 10,16 20,15 30,13 40,11 50,8 60,5" fill="none" stroke="var(--primary)" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="trending-row">
+            <div>
+              <span class="trending-name">agent os</span>
+              <span class="trending-count">64 posts</span>
+            </div>
+            <svg class="sparkline" viewBox="0 0 60 20">
+              <polyline points="0,18 10,17 20,16 30,14 40,12 50,10 60,7" fill="none" stroke="var(--primary)" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="trending-row">
+            <div>
+              <span class="trending-name">dogfooding</span>
+              <span class="trending-count">58 posts</span>
+            </div>
+            <svg class="sparkline" viewBox="0 0 60 20">
+              <polyline points="0,19 10,18 20,17 30,15 40,14 50,11 60,8" fill="none" stroke="var(--primary)" stroke-width="2"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="comments-card" data-od-id="top-comments">
+        <h3 class="section-title" id="comments-title">Top Comments · This Week</h3>
+        <div id="comments-list">
+          <div class="comment-item">
+            <div class="comment-meta">
+              <div class="comment-avatar">JD</div>
+              <span class="comment-handle">@designerjames</span>
+              <span class="verified-badge">✓</span>
+              <span class="comment-time">2d</span>
+            </div>
+            <div class="comment-body">This is insane. The annotation dots on the chart especially — that's the level of craft I want from design tools.</div>
+            <div class="comment-engagement">❤ 87 · 💬 12</div>
+          </div>
+          <div class="comment-item">
+            <div class="comment-meta">
+              <div class="comment-avatar">SK</div>
+              <span class="comment-handle">@sarahkim_design</span>
+              <span class="comment-time">3d</span>
+            </div>
+            <div class="comment-body">Finally — a design system tool that doesn't feel like it was built by engineers for engineers. The glass aesthetic is 🔥</div>
+            <div class="comment-engagement">❤ 64 · 💬 8</div>
+          </div>
+          <div class="comment-item">
+            <div class="comment-meta">
+              <div class="comment-avatar">MC</div>
+              <span class="comment-handle">@mikecode</span>
+              <span class="verified-badge">✓</span>
+              <span class="comment-time">5d</span>
+            </div>
+            <div class="comment-body">Tried the live artifacts preview today. Went from DESIGN.md → working dashboard in 90 seconds. This changes everything.</div>
+            <div class="comment-engagement">❤ 112 · 💬 24</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+<aside id="atlas-source-proof" aria-label="Atlas 來源證據 / Source evidence" data-language-exempt="original-source" style="all:initial;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;position:relative;z-index:2147483647;padding:10px 14px;color:#30464d;background:#f8faf9;border-top:1px solid rgba(21,39,45,.22);font:12px/1.4 ui-monospace,Consolas,monospace"><span>來源版式離線適配（保留原文）· 原始程式已停用；本機適配器提供頁面與減動控制<br><span lang="en">Offline source-layout adaptation; original text retained. Source scripts are disabled; local adapters provide page and reduced-motion controls.</span></span><span>bf714528070d · c1731368b495</span></aside><script data-atlas-owned-adapter="0" data-atlas-script-sha256="e25745c36278ca1cd09dd4b0611e22a7b228f0a46464fb72401062bd5e482b80">(function reducedMotionRuntime() {
+  'use strict';
+  const media = matchMedia('(prefers-reduced-motion: reduce)');
+  const held = new Map();
+  let scheduled = 0, closed = false;
+  const state = { version: 1, reduced: media.matches, sampled: 0, scheduled: false };
+  Object.defineProperty(window, '__atlasSourceMotion', { value: state });
+  function scan() {
+    scheduled = 0; state.scheduled = false;
+    if (closed) return;
+    state.reduced = media.matches;
+    const current = new Set(document.getAnimations().filter(animation => animation instanceof CSSAnimation));
+    for (const [animation] of held) if (!current.has(animation)) held.delete(animation);
+    if (!media.matches) {
+      for (const [animation, prior] of held) {
+        animation.playbackRate = prior.rate;
+        animation.currentTime = prior.time;
+        if (prior.state === 'running') animation.play();
+        else if (prior.state === 'paused') animation.pause();
+      }
+      held.clear(); return;
+    }
+    for (const animation of current) {
+      if (held.has(animation)) continue;
+      const effect = animation.effect, timing = effect && effect.getTiming();
+      if (!timing || !Number.isFinite(Number(timing.duration)) || Number(timing.duration) <= 0) continue;
+      const prior = { state: animation.playState, time: animation.currentTime, rate: animation.playbackRate };
+      const duration = Number(timing.duration), delay = Number(timing.delay) || 0;
+      const iterations = Number(timing.iterations);
+      const pose = iterations === Infinity ? delay + duration / 2 : delay + duration * iterations;
+      if (!Number.isFinite(pose)) continue;
+      animation.pause(); animation.currentTime = Math.max(0, pose);
+      held.set(animation, prior); state.sampled++;
+    }
+  }
+  function schedule() {
+    if (closed || scheduled || (!media.matches && !held.size)) return;
+    state.scheduled = true; scheduled = requestAnimationFrame(scan);
+  }
+  const resize = new ResizeObserver(() => { if (media.matches) schedule(); });
+  resize.observe(document.documentElement);
+  document.addEventListener('animationstart', schedule, true);
+  document.addEventListener('atlas-source-deck-change', schedule);
+  document.addEventListener('DOMContentLoaded', schedule, { once: true });
+  window.addEventListener('load', schedule, { once: true });
+  media.addEventListener('change', schedule);
+  window.addEventListener('pagehide', () => {
+    closed = true; resize.disconnect(); media.removeEventListener('change', schedule);
+    document.removeEventListener('animationstart', schedule, true);
+    document.removeEventListener('atlas-source-deck-change', schedule);
+    if (scheduled) cancelAnimationFrame(scheduled);
+    // A bfcache page retains the source Animation objects and their original
+    // playback state; discard neither merely because the document is hidden.
+    scheduled = 0; state.scheduled = false;
+  });
+  window.addEventListener('pageshow', () => {
+    if (!closed) return;
+    closed = false; resize.observe(document.documentElement);
+    document.addEventListener('animationstart', schedule, true);
+    document.addEventListener('atlas-source-deck-change', schedule);
+    media.addEventListener('change', schedule);
+    schedule();
+  });
+  schedule();
+})();</script></body>
+</html>

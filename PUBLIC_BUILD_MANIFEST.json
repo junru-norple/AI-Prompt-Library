@@ -1,0 +1,50 @@
+{
+  "schema_version": "2.0.0",
+  "publisher_id": "ai-prompt-library-publication-pipeline-v2",
+  "publisher_handle": "junru-norple",
+  "generated_at": "2026-09-21T00:00:00.000Z",
+  "public_library_entry_count": 5298,
+  "public_complete_entry_count": 5298,
+  "public_reference_entry_count": 0,
+  "public_source_count": 16,
+  "public_prompt_content_count": 2380,
+  "public_cinematic_web_count": 10,
+  "public_download_artifact_count": 5912,
+  "public_unified_index_hash": "f0a1dd9b2c97d6da59e6f438f9f4de3fa15cbeaa3e0ef384bda77e7e984bc35e",
+  "public_download_manifest_hash": "ba3529b7929a59e185652cb3d080daed0a986437c1dc5cde33fadb62db3b8e7d",
+  "public_provenance_manifest_hash": "f531c53096ba0c4fc1dab2b0d5e98737fe1b5f6dbd98fe8a2dbd27be113619e2",
+  "public_redistribution_policy_sha256": "581feb2539e52046220cfb4637fc1dd53537ba8385fafad4e47693398421c2fb",
+  "public_sanitization_manifest_sha256": "4cd416e34da2b3514a65edbede50005e8c84d4cb357a176fbb1d4b9cf4726348",
+  "public_verification_support_sources": [
+    {
+      "public_path": "prompt-library/scripts/Audit_Final_Category_Content.js",
+      "canonical_source_sha256": "e9525ed52fd3cda9de8926bbd6c1838721e4956fc02f221e5ffee6dea6c42277",
+      "public_sha256": "6e865d2072c954332f75c0ddc97eee662fe4aadcfa4bfedede471abfc4b192bc",
+      "projection": "EXISTING_READ_ONLY_PREDICATES"
+    },
+    {
+      "public_path": "prompt-library/scripts/Build_Visual_Catalog_Localization.js",
+      "canonical_source_sha256": "263cbf20feaeefe8f1bc414dbde60b082051f3e57ca9675df821f717cff5afb8",
+      "public_sha256": "263cbf20feaeefe8f1bc414dbde60b082051f3e57ca9675df821f717cff5afb8",
+      "projection": "EXISTING_LOCALIZATION_PREDICATES"
+    }
+  ],
+  "public_license_scope_hash": "4ccf9a95a861e95576550eb8848943236ad3e0502fdc33275df9f5767cda2c9c",
+  "content_file_count": 9315,
+  "content_total_bytes": 506669774,
+  "content_tree_hash": "3fa66aa81226ca4701aceba409326e75ddfdd18d6788a05af2d8fb862aebfca7",
+  "content_tree_hash_excludes": [
+    "PUBLIC_BUILD_MANIFEST.json",
+    "VALIDATION_SUMMARY.md"
+  ],
+  "publication_model": "ALLOWLIST_FIRST_DEFAULT_DENY",
+  "license_model": "SCOPED_MIT_CC_BY_AND_UPSTREAM_TERMS",
+  "gates": {
+    "public_only": true,
+    "relative_paths_only": true,
+    "offline_previews": true,
+    "no_runtime_network": true,
+    "no_large_files": true,
+    "no_nested_repository": true
+  }
+}

@@ -1,0 +1,3170 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-09-21T00:00:00.000Z",
+  "locale": "zh-TW/en",
+  "registry_policy_zh_tw": "所有標記均為已驗證的使用提醒；授權、來源、安全狀態與 Runtime 行為分開判定。",
+  "registry_policy_en": "Every marker is a verified usage note; license, provenance, safety status, and runtime behavior are evaluated separately.",
+  "marker_count": 81,
+  "active_marker_count": 55,
+  "retired_marker_count": 26,
+  "original_index_sha256": "46e0c56493569843bea49bf2aef829ee49588466304c5937e6db5ef82b44e580",
+  "records": [
+    {
+      "id": "account-or-payment",
+      "stable_id": "account-or-payment",
+      "name_zh_tw": "下載後的可選第三方服務可能需要帳號或費用",
+      "name_en": "Account Or Payment",
+      "classification": "LIMITATION",
+      "retired": false,
+      "active": true,
+      "scope": "DOWNLOADED_SOURCE_ONLY",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "Library 不需帳號或付款，也不收集憑證；原始內容具名的第三方服務為下載後可選項目，使用前由使用者確認方案與費用。",
+      "library_behavior_en": "The Library requires no account or payment and collects no credentials. Any third-party service named in the original content is optional after download and requires user confirmation of plan and cost.",
+      "downloaded_source_limit_zh_tw": "只在使用者下載並主動整合來源後適用；執行前必須閱讀原始內容、套件文件與授權。",
+      "downloaded_source_limit_en": "Applies only after the user downloads and deliberately integrates the source; read the original content, package documentation, and license before acting.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": "possible-and-optional",
+          "payment": "possible-and-optional",
+          "network": false,
+          "installation": false,
+          "third_party_service": "named-in-original-content-and-optional"
+        }
+      },
+      "preview_offline_substitution": false,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 98
+    },
+    {
+      "id": "auto-deploy",
+      "stable_id": "auto-deploy",
+      "name_zh_tw": "原始內容提及部署；Library 內永遠封鎖",
+      "name_en": "Auto Deploy",
+      "classification": "BLOCKED",
+      "retired": false,
+      "active": true,
+      "scope": "DOWNLOADED_SOURCE_ONLY",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "Library 只顯示文字並永遠封鎖部署、登入、資源建立、發布與付費動作。",
+      "library_behavior_en": "The Library displays text only and always blocks deployment, sign-in, resource creation, publishing, and paid actions.",
+      "downloaded_source_limit_zh_tw": "只在使用者下載並主動整合來源後適用；執行前必須閱讀原始內容、套件文件與授權。",
+      "downloaded_source_limit_en": "Applies only after the user downloads and deliberately integrates the source; read the original content, package documentation, and license before acting.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": false,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 240
+    },
+    {
+      "id": "brand-imitation",
+      "stable_id": "brand-imitation",
+      "name_zh_tw": "原始內容可能涉及品牌風格仿作",
+      "name_en": "Brand Imitation",
+      "classification": "INFO",
+      "retired": false,
+      "active": true,
+      "scope": "PUBLIC_PREVIEW_RUNTIME",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "此標記是已驗證的技術資訊，不會觸發 Library 行為。",
+      "library_behavior_en": "This marker is verified technical information and triggers no Library action.",
+      "downloaded_source_limit_zh_tw": "沒有額外 Library 執行需求；仍應依下載套件文件與授權使用。",
+      "downloaded_source_limit_en": "Adds no Library execution requirement; use downloaded material according to its package documentation and license.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": false,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 9
+    },
+    {
+      "id": "continuous-animation-throttled",
+      "stable_id": "continuous-animation-throttled",
+      "name_zh_tw": "連續動畫已限制為可見時播放",
+      "name_en": "Continuous Animation Throttled",
+      "classification": "FIXED",
+      "retired": false,
+      "active": true,
+      "scope": "PUBLIC_PREVIEW_RUNTIME",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "正式 Preview 已完成隔離、本機化或負載控制；標記保留作驗證追溯。",
+      "library_behavior_en": "The formal Preview is isolated, localized, or load-bounded; the marker remains as verification traceability.",
+      "downloaded_source_limit_zh_tw": "沒有額外 Library 執行需求；仍應依下載套件文件與授權使用。",
+      "downloaded_source_limit_en": "Adds no Library execution requirement; use downloaded material according to its package documentation and license.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": true,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 7
+    },
+    {
+      "id": "custom-nodes-not-installed",
+      "stable_id": "custom-nodes-not-installed",
+      "name_zh_tw": "下載後的 Workflow 可能需要另行安裝自訂節點",
+      "name_en": "Custom Nodes Not Installed",
+      "classification": "LIMITATION",
+      "retired": false,
+      "active": true,
+      "scope": "DOWNLOADED_SOURCE_ONLY",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "此標記只說明下載後整合限制，不是瀏覽 Library 的需求或待辦。",
+      "library_behavior_en": "This marker describes a post-download integration limitation, not a Library requirement or unresolved task.",
+      "downloaded_source_limit_zh_tw": "只在使用者下載並主動整合來源後適用；執行前必須閱讀原始內容、套件文件與授權。",
+      "downloaded_source_limit_en": "Applies only after the user downloads and deliberately integrates the source; read the original content, package documentation, and license before acting.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": "required-or-possible",
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": false,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 667
+    },
+    {
+      "id": "dangerous-command",
+      "stable_id": "dangerous-command",
+      "name_zh_tw": "原始內容含高風險指令；Library 內禁止執行",
+      "name_en": "Dangerous Command",
+      "classification": "BLOCKED",
+      "retired": false,
+      "active": true,
+      "scope": "DOWNLOADED_SOURCE_ONLY",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "此內容只供閱讀；Library 與 Preview 不會執行，任何後續動作都需使用者明確確認。",
+      "library_behavior_en": "This content is display-only. The Library and Preview do not execute it, and any follow-up action requires explicit user confirmation.",
+      "downloaded_source_limit_zh_tw": "只在使用者下載並主動整合來源後適用；執行前必須閱讀原始內容、套件文件與授權。",
+      "downloaded_source_limit_en": "Applies only after the user downloads and deliberately integrates the source; read the original content, package documentation, and license before acting.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": false,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 3
+    },
+    {
+      "id": "exact-duplicate-canonical",
+      "stable_id": "exact-duplicate-canonical",
+      "name_zh_tw": "完全重複內容已綁定單一 canonical 項目",
+      "name_en": "Exact Duplicate Canonical",
+      "classification": "INFO",
+      "retired": false,
+      "active": true,
+      "scope": "PUBLIC_PREVIEW_RUNTIME",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "此標記是已驗證的技術資訊，不會觸發 Library 行為。",
+      "library_behavior_en": "This marker is verified technical information and triggers no Library action.",
+      "downloaded_source_limit_zh_tw": "沒有額外 Library 執行需求；仍應依下載套件文件與授權使用。",
+      "downloaded_source_limit_en": "Adds no Library execution requirement; use downloaded material according to its package documentation and license.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": false,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 5
+    },
+    {
+      "id": "exact-duplicate-canonicalized",
+      "stable_id": "exact-duplicate-canonicalized",
+      "name_zh_tw": "完全重複內容已完成 canonical 收斂",
+      "name_en": "Exact Duplicate Canonicalized",
+      "classification": "FIXED",
+      "retired": false,
+      "active": true,
+      "scope": "PUBLIC_PREVIEW_RUNTIME",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "正式 Preview 已完成隔離、本機化或負載控制；標記保留作驗證追溯。",
+      "library_behavior_en": "The formal Preview is isolated, localized, or load-bounded; the marker remains as verification traceability.",
+      "downloaded_source_limit_zh_tw": "沒有額外 Library 執行需求；仍應依下載套件文件與授權使用。",
+      "downloaded_source_limit_en": "Adds no Library execution requirement; use downloaded material according to its package documentation and license.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": true,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 5
+    },
+    {
+      "id": "generated-local-specimen-no-remote-assets",
+      "stable_id": "generated-local-specimen-no-remote-assets",
+      "name_zh_tw": "本機生成的展示實例不使用遠端素材",
+      "name_en": "Generated Local Specimen No Remote Assets",
+      "classification": "FIXED",
+      "retired": false,
+      "active": true,
+      "scope": "PUBLIC_PREVIEW_RUNTIME",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "正式 Preview 已完成隔離、本機化或負載控制；標記保留作驗證追溯。",
+      "library_behavior_en": "The formal Preview is isolated, localized, or load-bounded; the marker remains as verification traceability.",
+      "downloaded_source_limit_zh_tw": "沒有額外 Library 執行需求；仍應依下載套件文件與授權使用。",
+      "downloaded_source_limit_en": "Adds no Library execution requirement; use downloaded material according to its package documentation and license.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": "possible",
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": true,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 151
+    },
+    {
+      "id": "global-element-selectors-scope-before-integration",
+      "stable_id": "global-element-selectors-scope-before-integration",
+      "name_zh_tw": "下載後整合前需限制全域元素選擇器範圍",
+      "name_en": "Global Element Selectors Scope Before Integration",
+      "classification": "LIMITATION",
+      "retired": false,
+      "active": true,
+      "scope": "DOWNLOADED_SOURCE_ONLY",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "此標記只說明下載後整合限制，不是瀏覽 Library 的需求或待辦。",
+      "library_behavior_en": "This marker describes a post-download integration limitation, not a Library requirement or unresolved task.",
+      "downloaded_source_limit_zh_tw": "只在使用者下載並主動整合來源後適用；執行前必須閱讀原始內容、套件文件與授權。",
+      "downloaded_source_limit_en": "Applies only after the user downloads and deliberately integrates the source; read the original content, package documentation, and license before acting.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": false,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 10
+    },
+    {
+      "id": "hosted-service-or-api",
+      "stable_id": "hosted-service-or-api",
+      "name_zh_tw": "下載後的完整功能可能使用託管服務或 API",
+      "name_en": "Hosted Service Or Api",
+      "classification": "LIMITATION",
+      "retired": false,
+      "active": true,
+      "scope": "DOWNLOADED_SOURCE_ONLY",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "此標記只說明下載後整合限制，不是瀏覽 Library 的需求或待辦。",
+      "library_behavior_en": "This marker describes a post-download integration limitation, not a Library requirement or unresolved task.",
+      "downloaded_source_limit_zh_tw": "只在使用者下載並主動整合來源後適用；執行前必須閱讀原始內容、套件文件與授權。",
+      "downloaded_source_limit_en": "Applies only after the user downloads and deliberately integrates the source; read the original content, package documentation, and license before acting.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": "possible-and-optional",
+          "payment": false,
+          "network": "possible",
+          "installation": false,
+          "third_party_service": "named-in-original-content-and-optional"
+        }
+      },
+      "preview_offline_substitution": false,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 301
+    },
+    {
+      "id": "isolated-event-listeners",
+      "stable_id": "isolated-event-listeners",
+      "name_zh_tw": "互動事件已限制在隔離 Preview 內",
+      "name_en": "Isolated Event Listeners",
+      "classification": "FIXED",
+      "retired": false,
+      "active": true,
+      "scope": "PUBLIC_PREVIEW_RUNTIME",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "正式 Preview 已完成隔離、本機化或負載控制；標記保留作驗證追溯。",
+      "library_behavior_en": "The formal Preview is isolated, localized, or load-bounded; the marker remains as verification traceability.",
+      "downloaded_source_limit_zh_tw": "沒有額外 Library 執行需求；仍應依下載套件文件與授權使用。",
+      "downloaded_source_limit_en": "Adds no Library execution requirement; use downloaded material according to its package documentation and license.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": true,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 9
+    },
+    {
+      "id": "local-file-ui-simulated-no-upload",
+      "stable_id": "local-file-ui-simulated-no-upload",
+      "name_zh_tw": "檔案介面只使用本機示範資料，不會上傳",
+      "name_en": "Local File Ui Simulated No Upload",
+      "classification": "FIXED",
+      "retired": false,
+      "active": true,
+      "scope": "PUBLIC_PREVIEW_RUNTIME",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "正式 Preview 已完成隔離、本機化或負載控制；標記保留作驗證追溯。",
+      "library_behavior_en": "The formal Preview is isolated, localized, or load-bounded; the marker remains as verification traceability.",
+      "downloaded_source_limit_zh_tw": "沒有額外 Library 執行需求；仍應依下載套件文件與授權使用。",
+      "downloaded_source_limit_en": "Adds no Library execution requirement; use downloaded material according to its package documentation and license.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": true,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 1
+    },
+    {
+      "id": "local-generated-example",
+      "stable_id": "local-generated-example",
+      "name_zh_tw": "Atlas 已生成本機、受控的成果範例",
+      "name_en": "Local Generated Example",
+      "classification": "FIXED",
+      "retired": false,
+      "active": true,
+      "scope": "PUBLIC_PREVIEW_RUNTIME",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "正式 Preview 已完成隔離、本機化或負載控制；標記保留作驗證追溯。",
+      "library_behavior_en": "The formal Preview is isolated, localized, or load-bounded; the marker remains as verification traceability.",
+      "downloaded_source_limit_zh_tw": "沒有額外 Library 執行需求；仍應依下載套件文件與授權使用。",
+      "downloaded_source_limit_en": "Adds no Library execution requirement; use downloaded material according to its package documentation and license.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": true,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 151
+    },
+    {
+      "id": "local-project-authored",
+      "stable_id": "local-project-authored",
+      "name_zh_tw": "由本專案原創並由專案 provenance 證明",
+      "name_en": "Local Project Authored",
+      "classification": "INFO",
+      "retired": false,
+      "active": true,
+      "scope": "PUBLIC_PREVIEW_RUNTIME",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "此標記是已驗證的技術資訊，不會觸發 Library 行為。",
+      "library_behavior_en": "This marker is verified technical information and triggers no Library action.",
+      "downloaded_source_limit_zh_tw": "沒有額外 Library 執行需求；仍應依下載套件文件與授權使用。",
+      "downloaded_source_limit_en": "Adds no Library execution requirement; use downloaded material according to its package documentation and license.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": false,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 2
+    },
+    {
+      "id": "missing-accessibility",
+      "stable_id": "missing-accessibility",
+      "name_zh_tw": "原始內容的無障礙要求不完整",
+      "name_en": "Missing Accessibility",
+      "classification": "LIMITATION",
+      "retired": false,
+      "active": true,
+      "scope": "DOWNLOADED_SOURCE_ONLY",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "此標記只說明下載後整合限制，不是瀏覽 Library 的需求或待辦。",
+      "library_behavior_en": "This marker describes a post-download integration limitation, not a Library requirement or unresolved task.",
+      "downloaded_source_limit_zh_tw": "只在使用者下載並主動整合來源後適用；執行前必須閱讀原始內容、套件文件與授權。",
+      "downloaded_source_limit_en": "Applies only after the user downloads and deliberately integrates the source; read the original content, package documentation, and license before acting.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": false,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 848
+    },
+    {
+      "id": "missing-reduced-motion",
+      "stable_id": "missing-reduced-motion",
+      "name_zh_tw": "原始內容的 reduced-motion 契約不完整；Preview 已修復",
+      "name_en": "Missing Reduced Motion",
+      "classification": "LIMITATION",
+      "retired": false,
+      "active": true,
+      "scope": "DOWNLOADED_SOURCE_ONLY",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "標記只描述原始內容契約；正式 Preview 已另行實作並以 prefers-reduced-motion: reduce 驗證。",
+      "library_behavior_en": "The marker describes the original-content contract only; the formal Preview implements and verifies prefers-reduced-motion: reduce separately.",
+      "downloaded_source_limit_zh_tw": "只在使用者下載並主動整合來源後適用；執行前必須閱讀原始內容、套件文件與授權。",
+      "downloaded_source_limit_en": "Applies only after the user downloads and deliberately integrates the source; read the original content, package documentation, and license before acting.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": true,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 363
+    },
+    {
+      "id": "model-weights-not-downloaded",
+      "stable_id": "model-weights-not-downloaded",
+      "name_zh_tw": "模型權重未隨 Library 下載",
+      "name_en": "Model Weights Not Downloaded",
+      "classification": "LIMITATION",
+      "retired": false,
+      "active": true,
+      "scope": "DOWNLOADED_SOURCE_ONLY",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "此標記只說明下載後整合限制，不是瀏覽 Library 的需求或待辦。",
+      "library_behavior_en": "This marker describes a post-download integration limitation, not a Library requirement or unresolved task.",
+      "downloaded_source_limit_zh_tw": "只在使用者下載並主動整合來源後適用；執行前必須閱讀原始內容、套件文件與授權。",
+      "downloaded_source_limit_en": "Applies only after the user downloads and deliberately integrates the source; read the original content, package documentation, and license before acting.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": "possible",
+          "installation": "required-or-possible",
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": false,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 667
+    },
+    {
+      "id": "next-runtime-replaced-in-preview",
+      "stable_id": "next-runtime-replaced-in-preview",
+      "name_zh_tw": "Preview 已以本機適配取代 Next.js runtime",
+      "name_en": "Next Runtime Replaced In Preview",
+      "classification": "FIXED",
+      "retired": false,
+      "active": true,
+      "scope": "PUBLIC_PREVIEW_RUNTIME",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "正式 Preview 已完成隔離、本機化或負載控制；標記保留作驗證追溯。",
+      "library_behavior_en": "The formal Preview is isolated, localized, or load-bounded; the marker remains as verification traceability.",
+      "downloaded_source_limit_zh_tw": "沒有額外 Library 執行需求；仍應依下載套件文件與授權使用。",
+      "downloaded_source_limit_en": "Adds no Library execution requirement; use downloaded material according to its package documentation and license.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": true,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 7
+    },
+    {
+      "id": "no-remote-assets",
+      "stable_id": "no-remote-assets",
+      "name_zh_tw": "正式 Preview 不使用遠端素材",
+      "name_en": "No Remote Assets",
+      "classification": "FIXED",
+      "retired": false,
+      "active": true,
+      "scope": "PUBLIC_PREVIEW_RUNTIME",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "正式 Preview 已完成隔離、本機化或負載控制；標記保留作驗證追溯。",
+      "library_behavior_en": "The formal Preview is isolated, localized, or load-bounded; the marker remains as verification traceability.",
+      "downloaded_source_limit_zh_tw": "沒有額外 Library 執行需求；仍應依下載套件文件與授權使用。",
+      "downloaded_source_limit_en": "Adds no Library execution requirement; use downloaded material according to its package documentation and license.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": "possible",
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": true,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 151
+    },
+    {
+      "id": "not-upstream-original",
+      "stable_id": "not-upstream-original",
+      "name_zh_tw": "成果範例是本機適配，不冒充上游原始作品",
+      "name_en": "Not Upstream Original",
+      "classification": "INFO",
+      "retired": false,
+      "active": true,
+      "scope": "PUBLIC_PREVIEW_RUNTIME",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "此標記是已驗證的技術資訊，不會觸發 Library 行為。",
+      "library_behavior_en": "This marker is verified technical information and triggers no Library action.",
+      "downloaded_source_limit_zh_tw": "沒有額外 Library 執行需求；仍應依下載套件文件與授權使用。",
+      "downloaded_source_limit_en": "Adds no Library execution requirement; use downloaded material according to its package documentation and license.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": false,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 2
+    },
+    {
+      "id": "offline-dependency-free-static-adaptation",
+      "stable_id": "offline-dependency-free-static-adaptation",
+      "name_zh_tw": "Preview 使用免安裝相依套件的離線靜態適配",
+      "name_en": "Offline Dependency Free Static Adaptation",
+      "classification": "FIXED",
+      "retired": false,
+      "active": true,
+      "scope": "PUBLIC_PREVIEW_RUNTIME",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "正式 Preview 已完成隔離、本機化或負載控制；標記保留作驗證追溯。",
+      "library_behavior_en": "The formal Preview is isolated, localized, or load-bounded; the marker remains as verification traceability.",
+      "downloaded_source_limit_zh_tw": "沒有額外 Library 執行需求；仍應依下載套件文件與授權使用。",
+      "downloaded_source_limit_en": "Adds no Library execution requirement; use downloaded material according to its package documentation and license.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": true,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 372
+    },
+    {
+      "id": "offline-preview-is-dependency-free",
+      "stable_id": "offline-preview-is-dependency-free",
+      "name_zh_tw": "離線 Preview 不需安裝相依套件",
+      "name_en": "Offline Preview Is Dependency Free",
+      "classification": "FIXED",
+      "retired": false,
+      "active": true,
+      "scope": "PUBLIC_PREVIEW_RUNTIME",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "正式 Preview 已封裝為免安裝、可斷網開啟的本機版本。",
+      "library_behavior_en": "The formal Preview is packaged as a dependency-free local version verified offline.",
+      "downloaded_source_limit_zh_tw": "沒有額外 Library 執行需求；仍應依下載套件文件與授權使用。",
+      "downloaded_source_limit_en": "Adds no Library execution requirement; use downloaded material according to its package documentation and license.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": true,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 6
+    },
+    {
+      "id": "optional-paid-image-backend-not-called",
+      "stable_id": "optional-paid-image-backend-not-called",
+      "name_zh_tw": "可選付費圖片後端未由 Preview 呼叫",
+      "name_en": "Optional Paid Image Backend Not Called",
+      "classification": "FIXED",
+      "retired": false,
+      "active": true,
+      "scope": "PUBLIC_PREVIEW_RUNTIME",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "正式 Preview 已完成隔離、本機化或負載控制；標記保留作驗證追溯。",
+      "library_behavior_en": "The formal Preview is isolated, localized, or load-bounded; the marker remains as verification traceability.",
+      "downloaded_source_limit_zh_tw": "沒有額外 Library 執行需求；仍應依下載套件文件與授權使用。",
+      "downloaded_source_limit_en": "Adds no Library execution requirement; use downloaded material according to its package documentation and license.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": true,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 1
+    },
+    {
+      "id": "package-install",
+      "stable_id": "package-install",
+      "name_zh_tw": "下載後整合需要安裝套件；瀏覽 Library 不需要",
+      "name_en": "Package Install",
+      "classification": "LIMITATION",
+      "retired": false,
+      "active": true,
+      "scope": "DOWNLOADED_SOURCE_ONLY",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "瀏覽、搜尋、Preview、Copy 與 Download 不需安裝套件；安裝只屬下載後整合步驟。",
+      "library_behavior_en": "Browsing, search, Preview, Copy, and Download require no package installation; installation is a post-download integration step only.",
+      "downloaded_source_limit_zh_tw": "只在使用者下載並主動整合來源後適用；執行前必須閱讀原始內容、套件文件與授權。",
+      "downloaded_source_limit_en": "Applies only after the user downloads and deliberately integrates the source; read the original content, package documentation, and license before acting.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": "required-or-possible",
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": false,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 39
+    },
+    {
+      "id": "package-source-requires-dependency-install",
+      "stable_id": "package-source-requires-dependency-install",
+      "name_zh_tw": "下載後的來源套件需要安裝鎖定相依套件",
+      "name_en": "Package Source Requires Dependency Install",
+      "classification": "LIMITATION",
+      "retired": false,
+      "active": true,
+      "scope": "DOWNLOADED_SOURCE_ONLY",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "Library 與離線 Preview 不安裝套件；只有下載後採用來源套件時，才依 README 與 lockfile 安裝固定版本。",
+      "library_behavior_en": "The Library and offline Preview install nothing. Fixed dependencies are installed from the README and lockfile only after the user adopts the downloaded source package.",
+      "downloaded_source_limit_zh_tw": "只在使用者下載並主動整合來源後適用；執行前必須閱讀原始內容、套件文件與授權。",
+      "downloaded_source_limit_en": "Applies only after the user downloads and deliberately integrates the source; read the original content, package documentation, and license before acting.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": "required-or-possible",
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": true,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 6
+    },
+    {
+      "id": "preview-canvas-capped-72-particles-and-visibility-throttled",
+      "stable_id": "preview-canvas-capped-72-particles-and-visibility-throttled",
+      "name_zh_tw": "Canvas Preview 已限制粒子數並套用可見性節流",
+      "name_en": "Preview Canvas Capped 72 Particles And Visibility Throttled",
+      "classification": "FIXED",
+      "retired": false,
+      "active": true,
+      "scope": "PUBLIC_PREVIEW_RUNTIME",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "正式 Preview 已完成隔離、本機化或負載控制；標記保留作驗證追溯。",
+      "library_behavior_en": "The formal Preview is isolated, localized, or load-bounded; the marker remains as verification traceability.",
+      "downloaded_source_limit_zh_tw": "沒有額外 Library 執行需求；仍應依下載套件文件與授權使用。",
+      "downloaded_source_limit_en": "Adds no Library execution requirement; use downloaded material according to its package documentation and license.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": true,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 1
+    },
+    {
+      "id": "preview-particle-count-downsampled-4000-to-240",
+      "stable_id": "preview-particle-count-downsampled-4000-to-240",
+      "name_zh_tw": "Preview 已降低粒子數以限制效能負載",
+      "name_en": "Preview Particle Count Downsampled 4000 To 240",
+      "classification": "FIXED",
+      "retired": false,
+      "active": true,
+      "scope": "PUBLIC_PREVIEW_RUNTIME",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "正式 Preview 已完成隔離、本機化或負載控制；標記保留作驗證追溯。",
+      "library_behavior_en": "The formal Preview is isolated, localized, or load-bounded; the marker remains as verification traceability.",
+      "downloaded_source_limit_zh_tw": "沒有額外 Library 執行需求；仍應依下載套件文件與授權使用。",
+      "downloaded_source_limit_en": "Adds no Library execution requirement; use downloaded material according to its package documentation and license.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": true,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 1
+    },
+    {
+      "id": "pro-sample-item-removed-in-preview",
+      "stable_id": "pro-sample-item-removed-in-preview",
+      "name_zh_tw": "Preview 已移除 Pro 範例內容",
+      "name_en": "Pro Sample Item Removed In Preview",
+      "classification": "FIXED",
+      "retired": false,
+      "active": true,
+      "scope": "PUBLIC_PREVIEW_RUNTIME",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "正式 Preview 已完成隔離、本機化或負載控制；標記保留作驗證追溯。",
+      "library_behavior_en": "The formal Preview is isolated, localized, or load-bounded; the marker remains as verification traceability.",
+      "downloaded_source_limit_zh_tw": "沒有額外 Library 執行需求；仍應依下載套件文件與授權使用。",
+      "downloaded_source_limit_en": "Adds no Library execution requirement; use downloaded material according to its package documentation and license.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": true,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 1
+    },
+    {
+      "id": "remote-asset",
+      "stable_id": "remote-asset",
+      "name_zh_tw": "原始內容引用遠端素材；Preview 已使用本機替代",
+      "name_en": "Remote Asset",
+      "classification": "LIMITATION",
+      "retired": false,
+      "active": true,
+      "scope": "DOWNLOADED_SOURCE_ONLY",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "標記只描述下載後來源；正式 Preview 使用本機資產或離線替代，且不得發出遠端請求。",
+      "library_behavior_en": "The marker describes downloaded source only; the formal Preview uses local assets or offline substitutes and must make no remote request.",
+      "downloaded_source_limit_zh_tw": "只在使用者下載並主動整合來源後適用；執行前必須閱讀原始內容、套件文件與授權。",
+      "downloaded_source_limit_en": "Applies only after the user downloads and deliberately integrates the source; read the original content, package documentation, and license before acting.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": "possible",
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": true,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 38
+    },
+    {
+      "id": "remote-assets-replaced-in-preview",
+      "stable_id": "remote-assets-replaced-in-preview",
+      "name_zh_tw": "Preview 已以本機素材取代遠端素材",
+      "name_en": "Remote Assets Replaced In Preview",
+      "classification": "FIXED",
+      "retired": false,
+      "active": true,
+      "scope": "PUBLIC_PREVIEW_RUNTIME",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "正式 Preview 已完成隔離、本機化或負載控制；標記保留作驗證追溯。",
+      "library_behavior_en": "The formal Preview is isolated, localized, or load-bounded; the marker remains as verification traceability.",
+      "downloaded_source_limit_zh_tw": "沒有額外 Library 執行需求；仍應依下載套件文件與授權使用。",
+      "downloaded_source_limit_en": "Adds no Library execution requirement; use downloaded material according to its package documentation and license.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": "possible",
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": true,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 4
+    },
+    {
+      "id": "remote-font-excluded-use-system-font",
+      "stable_id": "remote-font-excluded-use-system-font",
+      "name_zh_tw": "遠端字型已排除並改用系統字型",
+      "name_en": "Remote Font Excluded Use System Font",
+      "classification": "FIXED",
+      "retired": false,
+      "active": true,
+      "scope": "PUBLIC_PREVIEW_RUNTIME",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "正式 Preview 已完成隔離、本機化或負載控制；標記保留作驗證追溯。",
+      "library_behavior_en": "The formal Preview is isolated, localized, or load-bounded; the marker remains as verification traceability.",
+      "downloaded_source_limit_zh_tw": "沒有額外 Library 執行需求；仍應依下載套件文件與授權使用。",
+      "downloaded_source_limit_en": "Adds no Library execution requirement; use downloaded material according to its package documentation and license.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": "possible",
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": true,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 10
+    },
+    {
+      "id": "remote-image-excluded-use-synthetic-content",
+      "stable_id": "remote-image-excluded-use-synthetic-content",
+      "name_zh_tw": "遠端圖片已排除並改用本機合成內容",
+      "name_en": "Remote Image Excluded Use Synthetic Content",
+      "classification": "FIXED",
+      "retired": false,
+      "active": true,
+      "scope": "PUBLIC_PREVIEW_RUNTIME",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "正式 Preview 已完成隔離、本機化或負載控制；標記保留作驗證追溯。",
+      "library_behavior_en": "The formal Preview is isolated, localized, or load-bounded; the marker remains as verification traceability.",
+      "downloaded_source_limit_zh_tw": "沒有額外 Library 執行需求；仍應依下載套件文件與授權使用。",
+      "downloaded_source_limit_en": "Adds no Library execution requirement; use downloaded material according to its package documentation and license.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": "possible",
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": true,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 10
+    },
+    {
+      "id": "remote-preview-excluded",
+      "stable_id": "remote-preview-excluded",
+      "name_zh_tw": "遠端 Preview 已排除",
+      "name_en": "Remote Preview Excluded",
+      "classification": "FIXED",
+      "retired": false,
+      "active": true,
+      "scope": "LIBRARY_REMOTE_PREVIEW_EXCLUSION",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "遠端預覽已排除，Library 不會連線載入該內容；此標記不代表提供本機預覽。請使用此筆實際可用的原文、複製或下載操作。",
+      "library_behavior_en": "The remote preview is excluded and the Library does not load that remote content. This marker does not imply a local preview or substitute. Use the original content, copy, or download actions available for this entry.",
+      "downloaded_source_limit_zh_tw": "沒有額外 Library 執行需求；仍應依下載套件文件與授權使用。",
+      "downloaded_source_limit_en": "Adds no Library execution requirement; use downloaded material according to its package documentation and license.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": "possible",
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": false,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 104
+    },
+    {
+      "id": "remote-reference",
+      "stable_id": "remote-reference",
+      "name_zh_tw": "原始內容含下載後才會使用的遠端參照",
+      "name_en": "Remote Reference",
+      "classification": "LIMITATION",
+      "retired": false,
+      "active": true,
+      "scope": "DOWNLOADED_SOURCE_ONLY",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "此標記只說明下載後整合限制，不是瀏覽 Library 的需求或待辦。",
+      "library_behavior_en": "This marker describes a post-download integration limitation, not a Library requirement or unresolved task.",
+      "downloaded_source_limit_zh_tw": "只在使用者下載並主動整合來源後適用；執行前必須閱讀原始內容、套件文件與授權。",
+      "downloaded_source_limit_en": "Applies only after the user downloads and deliberately integrates the source; read the original content, package documentation, and license before acting.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": "possible",
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": false,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 788
+    },
+    {
+      "id": "renderer-design_system_specimen",
+      "stable_id": "renderer-design_system_specimen",
+      "name_zh_tw": "成果呈現器：Design System Specimen",
+      "name_en": "Renderer Design System Specimen",
+      "classification": "FIXED",
+      "retired": false,
+      "active": true,
+      "scope": "PUBLIC_PREVIEW_RUNTIME",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "正式 Preview 已完成隔離、本機化或負載控制；標記保留作驗證追溯。",
+      "library_behavior_en": "The formal Preview is isolated, localized, or load-bounded; the marker remains as verification traceability.",
+      "downloaded_source_limit_zh_tw": "沒有額外 Library 執行需求；仍應依下載套件文件與授權使用。",
+      "downloaded_source_limit_en": "Adds no Library execution requirement; use downloaded material according to its package documentation and license.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": true,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 151
+    },
+    {
+      "id": "renderer-image_artifact",
+      "stable_id": "renderer-image_artifact",
+      "name_zh_tw": "成果呈現器：Image Artifact",
+      "name_en": "Renderer Image Artifact",
+      "classification": "INFO",
+      "retired": true,
+      "active": false,
+      "entry_count": 0,
+      "scope": "RETIRED_GENERIC_PREVIEW_METADATA",
+      "verified_usage_note": true,
+      "preview_offline_substitution": false,
+      "library_behavior_zh_tw": "舊合成預覽的中繼資料標記已停用，只保留原始詞彙供稽核；目前沒有項目使用，不代表存在預覽或功能。",
+      "library_behavior_en": "This metadata label from retired generic previews is inactive and retained only as original audit vocabulary. No current entry uses it; it claims no preview or capability.",
+      "downloaded_source_limit_zh_tw": "此停用標記不對目前來源或下載內容作任何能力宣稱。",
+      "downloaded_source_limit_en": "This retired label makes no capability claim about current source or downloads.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "retirement_evidence": {
+        "original_index_sha256": "46e0c56493569843bea49bf2aef829ee49588466304c5937e6db5ef82b44e580",
+        "original_classification": "INFO",
+        "current_entry_reference_count": 0
+      },
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json"
+      ]
+    },
+    {
+      "id": "renderer-presentation_deck",
+      "stable_id": "renderer-presentation_deck",
+      "name_zh_tw": "成果呈現器：Presentation Deck",
+      "name_en": "Renderer Presentation Deck",
+      "classification": "INFO",
+      "retired": true,
+      "active": false,
+      "entry_count": 0,
+      "scope": "RETIRED_GENERIC_PREVIEW_METADATA",
+      "verified_usage_note": true,
+      "preview_offline_substitution": false,
+      "library_behavior_zh_tw": "舊合成預覽的中繼資料標記已停用，只保留原始詞彙供稽核；目前沒有項目使用，不代表存在預覽或功能。",
+      "library_behavior_en": "This metadata label from retired generic previews is inactive and retained only as original audit vocabulary. No current entry uses it; it claims no preview or capability.",
+      "downloaded_source_limit_zh_tw": "此停用標記不對目前來源或下載內容作任何能力宣稱。",
+      "downloaded_source_limit_en": "This retired label makes no capability claim about current source or downloads.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "retirement_evidence": {
+        "original_index_sha256": "46e0c56493569843bea49bf2aef829ee49588466304c5937e6db5ef82b44e580",
+        "original_classification": "INFO",
+        "current_entry_reference_count": 0
+      },
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json"
+      ]
+    },
+    {
+      "id": "renderer-readme_artifact",
+      "stable_id": "renderer-readme_artifact",
+      "name_zh_tw": "成果呈現器：Readme Artifact",
+      "name_en": "Renderer Readme Artifact",
+      "classification": "INFO",
+      "retired": true,
+      "active": false,
+      "entry_count": 0,
+      "scope": "RETIRED_GENERIC_PREVIEW_METADATA",
+      "verified_usage_note": true,
+      "preview_offline_substitution": false,
+      "library_behavior_zh_tw": "舊合成預覽的中繼資料標記已停用，只保留原始詞彙供稽核；目前沒有項目使用，不代表存在預覽或功能。",
+      "library_behavior_en": "This metadata label from retired generic previews is inactive and retained only as original audit vocabulary. No current entry uses it; it claims no preview or capability.",
+      "downloaded_source_limit_zh_tw": "此停用標記不對目前來源或下載內容作任何能力宣稱。",
+      "downloaded_source_limit_en": "This retired label makes no capability claim about current source or downloads.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "retirement_evidence": {
+        "original_index_sha256": "46e0c56493569843bea49bf2aef829ee49588466304c5937e6db5ef82b44e580",
+        "original_classification": "INFO",
+        "current_entry_reference_count": 0
+      },
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json"
+      ]
+    },
+    {
+      "id": "renderer-structured_sample",
+      "stable_id": "renderer-structured_sample",
+      "name_zh_tw": "成果呈現器：Structured Sample",
+      "name_en": "Renderer Structured Sample",
+      "classification": "INFO",
+      "retired": true,
+      "active": false,
+      "entry_count": 0,
+      "scope": "RETIRED_GENERIC_PREVIEW_METADATA",
+      "verified_usage_note": true,
+      "preview_offline_substitution": false,
+      "library_behavior_zh_tw": "舊合成預覽的中繼資料標記已停用，只保留原始詞彙供稽核；目前沒有項目使用，不代表存在預覽或功能。",
+      "library_behavior_en": "This metadata label from retired generic previews is inactive and retained only as original audit vocabulary. No current entry uses it; it claims no preview or capability.",
+      "downloaded_source_limit_zh_tw": "此停用標記不對目前來源或下載內容作任何能力宣稱。",
+      "downloaded_source_limit_en": "This retired label makes no capability claim about current source or downloads.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "retirement_evidence": {
+        "original_index_sha256": "46e0c56493569843bea49bf2aef829ee49588466304c5937e6db5ef82b44e580",
+        "original_classification": "INFO",
+        "current_entry_reference_count": 0
+      },
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json"
+      ]
+    },
+    {
+      "id": "renderer-text_sample",
+      "stable_id": "renderer-text_sample",
+      "name_zh_tw": "成果呈現器：Text Sample",
+      "name_en": "Renderer Text Sample",
+      "classification": "INFO",
+      "retired": true,
+      "active": false,
+      "entry_count": 0,
+      "scope": "RETIRED_GENERIC_PREVIEW_METADATA",
+      "verified_usage_note": true,
+      "preview_offline_substitution": false,
+      "library_behavior_zh_tw": "舊合成預覽的中繼資料標記已停用，只保留原始詞彙供稽核；目前沒有項目使用，不代表存在預覽或功能。",
+      "library_behavior_en": "This metadata label from retired generic previews is inactive and retained only as original audit vocabulary. No current entry uses it; it claims no preview or capability.",
+      "downloaded_source_limit_zh_tw": "此停用標記不對目前來源或下載內容作任何能力宣稱。",
+      "downloaded_source_limit_en": "This retired label makes no capability claim about current source or downloads.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "retirement_evidence": {
+        "original_index_sha256": "46e0c56493569843bea49bf2aef829ee49588466304c5937e6db5ef82b44e580",
+        "original_classification": "INFO",
+        "current_entry_reference_count": 0
+      },
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json"
+      ]
+    },
+    {
+      "id": "renderer-ui_component",
+      "stable_id": "renderer-ui_component",
+      "name_zh_tw": "成果呈現器：Ui Component",
+      "name_en": "Renderer Ui Component",
+      "classification": "INFO",
+      "retired": true,
+      "active": false,
+      "entry_count": 0,
+      "scope": "RETIRED_GENERIC_PREVIEW_METADATA",
+      "verified_usage_note": true,
+      "preview_offline_substitution": false,
+      "library_behavior_zh_tw": "舊合成預覽的中繼資料標記已停用，只保留原始詞彙供稽核；目前沒有項目使用，不代表存在預覽或功能。",
+      "library_behavior_en": "This metadata label from retired generic previews is inactive and retained only as original audit vocabulary. No current entry uses it; it claims no preview or capability.",
+      "downloaded_source_limit_zh_tw": "此停用標記不對目前來源或下載內容作任何能力宣稱。",
+      "downloaded_source_limit_en": "This retired label makes no capability claim about current source or downloads.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "retirement_evidence": {
+        "original_index_sha256": "46e0c56493569843bea49bf2aef829ee49588466304c5937e6db5ef82b44e580",
+        "original_classification": "INFO",
+        "current_entry_reference_count": 0
+      },
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json"
+      ]
+    },
+    {
+      "id": "renderer-video_artifact",
+      "stable_id": "renderer-video_artifact",
+      "name_zh_tw": "成果呈現器：Video Artifact",
+      "name_en": "Renderer Video Artifact",
+      "classification": "INFO",
+      "retired": true,
+      "active": false,
+      "entry_count": 0,
+      "scope": "RETIRED_GENERIC_PREVIEW_METADATA",
+      "verified_usage_note": true,
+      "preview_offline_substitution": false,
+      "library_behavior_zh_tw": "舊合成預覽的中繼資料標記已停用，只保留原始詞彙供稽核；目前沒有項目使用，不代表存在預覽或功能。",
+      "library_behavior_en": "This metadata label from retired generic previews is inactive and retained only as original audit vocabulary. No current entry uses it; it claims no preview or capability.",
+      "downloaded_source_limit_zh_tw": "此停用標記不對目前來源或下載內容作任何能力宣稱。",
+      "downloaded_source_limit_en": "This retired label makes no capability claim about current source or downloads.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "retirement_evidence": {
+        "original_index_sha256": "46e0c56493569843bea49bf2aef829ee49588466304c5937e6db5ef82b44e580",
+        "original_classification": "INFO",
+        "current_entry_reference_count": 0
+      },
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json"
+      ]
+    },
+    {
+      "id": "renderer-web_artifact",
+      "stable_id": "renderer-web_artifact",
+      "name_zh_tw": "成果呈現器：Web Artifact",
+      "name_en": "Renderer Web Artifact",
+      "classification": "INFO",
+      "retired": true,
+      "active": false,
+      "entry_count": 0,
+      "scope": "RETIRED_GENERIC_PREVIEW_METADATA",
+      "verified_usage_note": true,
+      "preview_offline_substitution": false,
+      "library_behavior_zh_tw": "舊合成預覽的中繼資料標記已停用，只保留原始詞彙供稽核；目前沒有項目使用，不代表存在預覽或功能。",
+      "library_behavior_en": "This metadata label from retired generic previews is inactive and retained only as original audit vocabulary. No current entry uses it; it claims no preview or capability.",
+      "downloaded_source_limit_zh_tw": "此停用標記不對目前來源或下載內容作任何能力宣稱。",
+      "downloaded_source_limit_en": "This retired label makes no capability claim about current source or downloads.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "retirement_evidence": {
+        "original_index_sha256": "46e0c56493569843bea49bf2aef829ee49588466304c5937e6db5ef82b44e580",
+        "original_classification": "INFO",
+        "current_entry_reference_count": 0
+      },
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json"
+      ]
+    },
+    {
+      "id": "scripts-and-remote-assets-removed",
+      "stable_id": "scripts-and-remote-assets-removed",
+      "name_zh_tw": "Preview 已移除來源腳本與遠端素材",
+      "name_en": "Scripts And Remote Assets Removed",
+      "classification": "FIXED",
+      "retired": false,
+      "active": true,
+      "scope": "PUBLIC_PREVIEW_RUNTIME",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "上游程式與遠端載入已停用；需要時由本機適配器提供頁面導覽、尺寸適配與減少動態效果控制。",
+      "library_behavior_en": "Upstream code and remote loading are disabled. Local adapters provide page navigation, fitting and reduced-motion controls where needed.",
+      "downloaded_source_limit_zh_tw": "沒有額外 Library 執行需求；仍應依下載套件文件與授權使用。",
+      "downloaded_source_limit_en": "Adds no Library execution requirement; use downloaded material according to its package documentation and license.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": "possible",
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": true,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 1159
+    },
+    {
+      "id": "scroll-driven-preview",
+      "stable_id": "scroll-driven-preview",
+      "name_zh_tw": "Preview 互動由捲動進度觸發",
+      "name_en": "Scroll Driven Preview",
+      "classification": "FIXED",
+      "retired": false,
+      "active": true,
+      "scope": "PUBLIC_PREVIEW_RUNTIME",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "正式 Preview 已完成隔離、本機化或負載控制；標記保留作驗證追溯。",
+      "library_behavior_en": "The formal Preview is isolated, localized, or load-bounded; the marker remains as verification traceability.",
+      "downloaded_source_limit_zh_tw": "沒有額外 Library 執行需求；仍應依下載套件文件與授權使用。",
+      "downloaded_source_limit_en": "Adds no Library execution requirement; use downloaded material according to its package documentation and license.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": true,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 4
+    },
+    {
+      "id": "secret-placeholder-required",
+      "stable_id": "secret-placeholder-required",
+      "name_zh_tw": "敏感值必須使用安全占位符；Library 不收集憑證",
+      "name_en": "Secret Placeholder Required",
+      "classification": "BLOCKED",
+      "retired": false,
+      "active": true,
+      "scope": "DOWNLOADED_SOURCE_ONLY",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "此內容只供閱讀；Library 與 Preview 不會執行，任何後續動作都需使用者明確確認。",
+      "library_behavior_en": "This content is display-only. The Library and Preview do not execute it, and any follow-up action requires explicit user confirmation.",
+      "downloaded_source_limit_zh_tw": "只在使用者下載並主動整合來源後適用；執行前必須閱讀原始內容、套件文件與授權。",
+      "downloaded_source_limit_en": "Applies only after the user downloads and deliberately integrates the source; read the original content, package documentation, and license before acting.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": false,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 63
+    },
+    {
+      "id": "simulated-voice-ui-no-microphone-access",
+      "stable_id": "simulated-voice-ui-no-microphone-access",
+      "name_zh_tw": "語音介面為本機模擬，不存取麥克風",
+      "name_en": "Simulated Voice Ui No Microphone Access",
+      "classification": "FIXED",
+      "retired": false,
+      "active": true,
+      "scope": "PUBLIC_PREVIEW_RUNTIME",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "正式 Preview 已完成隔離、本機化或負載控制；標記保留作驗證追溯。",
+      "library_behavior_en": "The formal Preview is isolated, localized, or load-bounded; the marker remains as verification traceability.",
+      "downloaded_source_limit_zh_tw": "沒有額外 Library 執行需求；仍應依下載套件文件與授權使用。",
+      "downloaded_source_limit_en": "Adds no Library execution requirement; use downloaded material according to its package documentation and license.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": true,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 1
+    },
+    {
+      "id": "skill-not-installed",
+      "stable_id": "skill-not-installed",
+      "name_zh_tw": "Skill 內容可閱讀，但未安裝到執行環境",
+      "name_en": "Skill Not Installed",
+      "classification": "LIMITATION",
+      "retired": false,
+      "active": true,
+      "scope": "DOWNLOADED_SOURCE_ONLY",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "此標記只說明下載後整合限制，不是瀏覽 Library 的需求或待辦。",
+      "library_behavior_en": "This marker describes a post-download integration limitation, not a Library requirement or unresolved task.",
+      "downloaded_source_limit_zh_tw": "只在使用者下載並主動整合來源後適用；執行前必須閱讀原始內容、套件文件與授權。",
+      "downloaded_source_limit_en": "Applies only after the user downloads and deliberately integrates the source; read the original content, package documentation, and license before acting.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": "required-or-possible",
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": false,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 1
+    },
+    {
+      "id": "source-animation-replaced-with-bounded-css-preview",
+      "stable_id": "source-animation-replaced-with-bounded-css-preview",
+      "name_zh_tw": "來源動畫已改為負載受控的 CSS Preview",
+      "name_en": "Source Animation Replaced With Bounded Css Preview",
+      "classification": "FIXED",
+      "retired": false,
+      "active": true,
+      "scope": "PUBLIC_PREVIEW_RUNTIME",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "正式 Preview 已完成隔離、本機化或負載控制；標記保留作驗證追溯。",
+      "library_behavior_en": "The formal Preview is isolated, localized, or load-bounded; the marker remains as verification traceability.",
+      "downloaded_source_limit_zh_tw": "沒有額外 Library 執行需求；仍應依下載套件文件與授權使用。",
+      "downloaded_source_limit_en": "Adds no Library execution requirement; use downloaded material according to its package documentation and license.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": true,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 1
+    },
+    {
+      "id": "source-html-sanitized",
+      "stable_id": "source-html-sanitized",
+      "name_zh_tw": "來源 HTML 已在 Preview 前完成安全清理",
+      "name_en": "Source Html Sanitized",
+      "classification": "FIXED",
+      "retired": false,
+      "active": true,
+      "scope": "PUBLIC_PREVIEW_RUNTIME",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "正式 Preview 已完成隔離、本機化或負載控制；標記保留作驗證追溯。",
+      "library_behavior_en": "The formal Preview is isolated, localized, or load-bounded; the marker remains as verification traceability.",
+      "downloaded_source_limit_zh_tw": "沒有額外 Library 執行需求；仍應依下載套件文件與授權使用。",
+      "downloaded_source_limit_en": "Adds no Library execution requirement; use downloaded material according to its package documentation and license.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": true,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 1158
+    },
+    {
+      "id": "strict-csp",
+      "stable_id": "strict-csp",
+      "name_zh_tw": "Preview 已套用嚴格內容安全政策",
+      "name_en": "Strict Csp",
+      "classification": "FIXED",
+      "retired": false,
+      "active": true,
+      "scope": "PUBLIC_PREVIEW_RUNTIME",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "正式 Preview 已完成隔離、本機化或負載控制；標記保留作驗證追溯。",
+      "library_behavior_en": "The formal Preview is isolated, localized, or load-bounded; the marker remains as verification traceability.",
+      "downloaded_source_limit_zh_tw": "沒有額外 Library 執行需求；仍應依下載套件文件與授權使用。",
+      "downloaded_source_limit_en": "Adds no Library execution requirement; use downloaded material according to its package documentation and license.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": true,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 1159
+    },
+    {
+      "id": "theme-runtime-replaced-in-preview",
+      "stable_id": "theme-runtime-replaced-in-preview",
+      "name_zh_tw": "主題 runtime 已由本機 Preview 適配取代",
+      "name_en": "Theme Runtime Replaced In Preview",
+      "classification": "FIXED",
+      "retired": false,
+      "active": true,
+      "scope": "PUBLIC_PREVIEW_RUNTIME",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "正式 Preview 已完成隔離、本機化或負載控制；標記保留作驗證追溯。",
+      "library_behavior_en": "The formal Preview is isolated, localized, or load-bounded; the marker remains as verification traceability.",
+      "downloaded_source_limit_zh_tw": "沒有額外 Library 執行需求；仍應依下載套件文件與授權使用。",
+      "downloaded_source_limit_en": "Adds no Library execution requirement; use downloaded material according to its package documentation and license.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": true,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 1
+    },
+    {
+      "id": "untrusted-download",
+      "stable_id": "untrusted-download",
+      "name_zh_tw": "原始內容提及未驗證下載；Library 內禁止執行",
+      "name_en": "Untrusted Download",
+      "classification": "BLOCKED",
+      "retired": false,
+      "active": true,
+      "scope": "DOWNLOADED_SOURCE_ONLY",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "此內容只供閱讀；Library 與 Preview 不會執行，任何後續動作都需使用者明確確認。",
+      "library_behavior_en": "This content is display-only. The Library and Preview do not execute it, and any follow-up action requires explicit user confirmation.",
+      "downloaded_source_limit_zh_tw": "只在使用者下載並主動整合來源後適用；執行前必須閱讀原始內容、套件文件與授權。",
+      "downloaded_source_limit_en": "Applies only after the user downloads and deliberately integrates the source; read the original content, package documentation, and license before acting.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": "possible",
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": false,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 11
+    },
+    {
+      "id": "untrusted-skill-data-not-installed",
+      "stable_id": "untrusted-skill-data-not-installed",
+      "name_zh_tw": "未信任的 Skill 資料只供閱讀，未安裝",
+      "name_en": "Untrusted Skill Data Not Installed",
+      "classification": "LIMITATION",
+      "retired": false,
+      "active": true,
+      "scope": "DOWNLOADED_SOURCE_ONLY",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "此標記只說明下載後整合限制，不是瀏覽 Library 的需求或待辦。",
+      "library_behavior_en": "This marker describes a post-download integration limitation, not a Library requirement or unresolved task.",
+      "downloaded_source_limit_zh_tw": "只在使用者下載並主動整合來源後適用；執行前必須閱讀原始內容、套件文件與授權。",
+      "downloaded_source_limit_en": "Applies only after the user downloads and deliberately integrates the source; read the original content, package documentation, and license before acting.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": "required-or-possible",
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": false,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 217
+    },
+    {
+      "id": "untrusted-template-data",
+      "stable_id": "untrusted-template-data",
+      "name_zh_tw": "範本資料視為不可信輸入，不會自動執行",
+      "name_en": "Untrusted Template Data",
+      "classification": "LIMITATION",
+      "retired": false,
+      "active": true,
+      "scope": "DOWNLOADED_SOURCE_ONLY",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "此標記只說明下載後整合限制，不是瀏覽 Library 的需求或待辦。",
+      "library_behavior_en": "This marker describes a post-download integration limitation, not a Library requirement or unresolved task.",
+      "downloaded_source_limit_zh_tw": "只在使用者下載並主動整合來源後適用；執行前必須閱讀原始內容、套件文件與授權。",
+      "downloaded_source_limit_en": "Applies only after the user downloads and deliberately integrates the source; read the original content, package documentation, and license before acting.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": false,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 535
+    },
+    {
+      "id": "unverified-font-assets-excluded-use-system-font",
+      "stable_id": "unverified-font-assets-excluded-use-system-font",
+      "name_zh_tw": "未驗證字型已排除並改用系統字型",
+      "name_en": "Unverified Font Assets Excluded Use System Font",
+      "classification": "FIXED",
+      "retired": false,
+      "active": true,
+      "scope": "PUBLIC_PREVIEW_RUNTIME",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "正式 Preview 已完成隔離、本機化或負載控制；標記保留作驗證追溯。",
+      "library_behavior_en": "The formal Preview is isolated, localized, or load-bounded; the marker remains as verification traceability.",
+      "downloaded_source_limit_zh_tw": "沒有額外 Library 執行需求；仍應依下載套件文件與授權使用。",
+      "downloaded_source_limit_en": "Adds no Library execution requirement; use downloaded material according to its package documentation and license.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": true,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 23
+    },
+    {
+      "id": "upstream-canvas-or-webgl-represented-by-bounded-adapter",
+      "stable_id": "upstream-canvas-or-webgl-represented-by-bounded-adapter",
+      "name_zh_tw": "上游 Canvas／WebGL 由負載受控的本機適配呈現",
+      "name_en": "Upstream Canvas Or Webgl Represented By Bounded Adapter",
+      "classification": "FIXED",
+      "retired": false,
+      "active": true,
+      "scope": "PUBLIC_PREVIEW_RUNTIME",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "正式 Preview 已完成隔離、本機化或負載控制；標記保留作驗證追溯。",
+      "library_behavior_en": "The formal Preview is isolated, localized, or load-bounded; the marker remains as verification traceability.",
+      "downloaded_source_limit_zh_tw": "沒有額外 Library 執行需求；仍應依下載套件文件與授權使用。",
+      "downloaded_source_limit_en": "Adds no Library execution requirement; use downloaded material according to its package documentation and license.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": true,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 31
+    },
+    {
+      "id": "upstream-framework-dependencies-not-executed-by-adapter",
+      "stable_id": "upstream-framework-dependencies-not-executed-by-adapter",
+      "name_zh_tw": "本機適配不執行上游框架相依套件",
+      "name_en": "Upstream Framework Dependencies Not Executed By Adapter",
+      "classification": "FIXED",
+      "retired": false,
+      "active": true,
+      "scope": "PUBLIC_PREVIEW_RUNTIME",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "正式 Preview 已完成隔離、本機化或負載控制；標記保留作驗證追溯。",
+      "library_behavior_en": "The formal Preview is isolated, localized, or load-bounded; the marker remains as verification traceability.",
+      "downloaded_source_limit_zh_tw": "沒有額外 Library 執行需求；仍應依下載套件文件與授權使用。",
+      "downloaded_source_limit_en": "Adds no Library execution requirement; use downloaded material according to its package documentation and license.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": "required-or-possible",
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": true,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 333
+    },
+    {
+      "id": "upstream-media-replaced-with-local-geometry",
+      "stable_id": "upstream-media-replaced-with-local-geometry",
+      "name_zh_tw": "上游媒體已以本機幾何圖形取代",
+      "name_en": "Upstream Media Replaced With Local Geometry",
+      "classification": "FIXED",
+      "retired": false,
+      "active": true,
+      "scope": "PUBLIC_PREVIEW_RUNTIME",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "正式 Preview 已完成隔離、本機化或負載控制；標記保留作驗證追溯。",
+      "library_behavior_en": "The formal Preview is isolated, localized, or load-bounded; the marker remains as verification traceability.",
+      "downloaded_source_limit_zh_tw": "沒有額外 Library 執行需求；仍應依下載套件文件與授權使用。",
+      "downloaded_source_limit_en": "Adds no Library execution requirement; use downloaded material according to its package documentation and license.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": true,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 36
+    },
+    {
+      "id": "upstream-network-api-not-executed",
+      "stable_id": "upstream-network-api-not-executed",
+      "name_zh_tw": "Preview 不會呼叫上游網路 API",
+      "name_en": "Upstream Network Api Not Executed",
+      "classification": "FIXED",
+      "retired": false,
+      "active": true,
+      "scope": "PUBLIC_PREVIEW_RUNTIME",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "正式 Preview 已完成隔離、本機化或負載控制；標記保留作驗證追溯。",
+      "library_behavior_en": "The formal Preview is isolated, localized, or load-bounded; the marker remains as verification traceability.",
+      "downloaded_source_limit_zh_tw": "沒有額外 Library 執行需求；仍應依下載套件文件與授權使用。",
+      "downloaded_source_limit_en": "Adds no Library execution requirement; use downloaded material according to its package documentation and license.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": "possible-and-optional",
+          "payment": false,
+          "network": "possible",
+          "installation": false,
+          "third_party_service": "named-in-original-content-and-optional"
+        }
+      },
+      "preview_offline_substitution": true,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 1
+    },
+    {
+      "id": "upstream-remote-reference-replaced-with-local-data",
+      "stable_id": "upstream-remote-reference-replaced-with-local-data",
+      "name_zh_tw": "上游遠端參照已以固定本機資料取代",
+      "name_en": "Upstream Remote Reference Replaced With Local Data",
+      "classification": "FIXED",
+      "retired": false,
+      "active": true,
+      "scope": "PUBLIC_PREVIEW_RUNTIME",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "正式 Preview 已完成隔離、本機化或負載控制；標記保留作驗證追溯。",
+      "library_behavior_en": "The formal Preview is isolated, localized, or load-bounded; the marker remains as verification traceability.",
+      "downloaded_source_limit_zh_tw": "沒有額外 Library 執行需求；仍應依下載套件文件與授權使用。",
+      "downloaded_source_limit_en": "Adds no Library execution requirement; use downloaded material according to its package documentation and license.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": "possible",
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": true,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 63
+    },
+    {
+      "id": "visual-archetype-brutalist",
+      "stable_id": "visual-archetype-brutalist",
+      "name_zh_tw": "視覺原型：Brutalist",
+      "name_en": "Visual Archetype Brutalist",
+      "classification": "INFO",
+      "retired": true,
+      "active": false,
+      "entry_count": 0,
+      "scope": "RETIRED_GENERIC_PREVIEW_METADATA",
+      "verified_usage_note": true,
+      "preview_offline_substitution": false,
+      "library_behavior_zh_tw": "舊合成預覽的中繼資料標記已停用，只保留原始詞彙供稽核；目前沒有項目使用，不代表存在預覽或功能。",
+      "library_behavior_en": "This metadata label from retired generic previews is inactive and retained only as original audit vocabulary. No current entry uses it; it claims no preview or capability.",
+      "downloaded_source_limit_zh_tw": "此停用標記不對目前來源或下載內容作任何能力宣稱。",
+      "downloaded_source_limit_en": "This retired label makes no capability claim about current source or downloads.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "retirement_evidence": {
+        "original_index_sha256": "46e0c56493569843bea49bf2aef829ee49588466304c5937e6db5ef82b44e580",
+        "original_classification": "INFO",
+        "current_entry_reference_count": 0
+      },
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json"
+      ]
+    },
+    {
+      "id": "visual-archetype-cinematic",
+      "stable_id": "visual-archetype-cinematic",
+      "name_zh_tw": "視覺原型：Cinematic",
+      "name_en": "Visual Archetype Cinematic",
+      "classification": "INFO",
+      "retired": true,
+      "active": false,
+      "entry_count": 0,
+      "scope": "RETIRED_GENERIC_PREVIEW_METADATA",
+      "verified_usage_note": true,
+      "preview_offline_substitution": false,
+      "library_behavior_zh_tw": "舊合成預覽的中繼資料標記已停用，只保留原始詞彙供稽核；目前沒有項目使用，不代表存在預覽或功能。",
+      "library_behavior_en": "This metadata label from retired generic previews is inactive and retained only as original audit vocabulary. No current entry uses it; it claims no preview or capability.",
+      "downloaded_source_limit_zh_tw": "此停用標記不對目前來源或下載內容作任何能力宣稱。",
+      "downloaded_source_limit_en": "This retired label makes no capability claim about current source or downloads.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "retirement_evidence": {
+        "original_index_sha256": "46e0c56493569843bea49bf2aef829ee49588466304c5937e6db5ef82b44e580",
+        "original_classification": "INFO",
+        "current_entry_reference_count": 0
+      },
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json"
+      ]
+    },
+    {
+      "id": "visual-archetype-dashboard",
+      "stable_id": "visual-archetype-dashboard",
+      "name_zh_tw": "視覺原型：Dashboard",
+      "name_en": "Visual Archetype Dashboard",
+      "classification": "INFO",
+      "retired": true,
+      "active": false,
+      "entry_count": 0,
+      "scope": "RETIRED_GENERIC_PREVIEW_METADATA",
+      "verified_usage_note": true,
+      "preview_offline_substitution": false,
+      "library_behavior_zh_tw": "舊合成預覽的中繼資料標記已停用，只保留原始詞彙供稽核；目前沒有項目使用，不代表存在預覽或功能。",
+      "library_behavior_en": "This metadata label from retired generic previews is inactive and retained only as original audit vocabulary. No current entry uses it; it claims no preview or capability.",
+      "downloaded_source_limit_zh_tw": "此停用標記不對目前來源或下載內容作任何能力宣稱。",
+      "downloaded_source_limit_en": "This retired label makes no capability claim about current source or downloads.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "retirement_evidence": {
+        "original_index_sha256": "46e0c56493569843bea49bf2aef829ee49588466304c5937e6db5ef82b44e580",
+        "original_classification": "INFO",
+        "current_entry_reference_count": 0
+      },
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json"
+      ]
+    },
+    {
+      "id": "visual-archetype-design-system",
+      "stable_id": "visual-archetype-design-system",
+      "name_zh_tw": "視覺原型：Design System",
+      "name_en": "Visual Archetype Design System",
+      "classification": "INFO",
+      "retired": true,
+      "active": false,
+      "entry_count": 0,
+      "scope": "RETIRED_GENERIC_PREVIEW_METADATA",
+      "verified_usage_note": true,
+      "preview_offline_substitution": false,
+      "library_behavior_zh_tw": "舊合成預覽的中繼資料標記已停用，只保留原始詞彙供稽核；目前沒有項目使用，不代表存在預覽或功能。",
+      "library_behavior_en": "This metadata label from retired generic previews is inactive and retained only as original audit vocabulary. No current entry uses it; it claims no preview or capability.",
+      "downloaded_source_limit_zh_tw": "此停用標記不對目前來源或下載內容作任何能力宣稱。",
+      "downloaded_source_limit_en": "This retired label makes no capability claim about current source or downloads.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "retirement_evidence": {
+        "original_index_sha256": "46e0c56493569843bea49bf2aef829ee49588466304c5937e6db5ef82b44e580",
+        "original_classification": "INFO",
+        "current_entry_reference_count": 0
+      },
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json"
+      ]
+    },
+    {
+      "id": "visual-archetype-documentation",
+      "stable_id": "visual-archetype-documentation",
+      "name_zh_tw": "視覺原型：Documentation",
+      "name_en": "Visual Archetype Documentation",
+      "classification": "INFO",
+      "retired": true,
+      "active": false,
+      "entry_count": 0,
+      "scope": "RETIRED_GENERIC_PREVIEW_METADATA",
+      "verified_usage_note": true,
+      "preview_offline_substitution": false,
+      "library_behavior_zh_tw": "舊合成預覽的中繼資料標記已停用，只保留原始詞彙供稽核；目前沒有項目使用，不代表存在預覽或功能。",
+      "library_behavior_en": "This metadata label from retired generic previews is inactive and retained only as original audit vocabulary. No current entry uses it; it claims no preview or capability.",
+      "downloaded_source_limit_zh_tw": "此停用標記不對目前來源或下載內容作任何能力宣稱。",
+      "downloaded_source_limit_en": "This retired label makes no capability claim about current source or downloads.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "retirement_evidence": {
+        "original_index_sha256": "46e0c56493569843bea49bf2aef829ee49588466304c5937e6db5ef82b44e580",
+        "original_classification": "INFO",
+        "current_entry_reference_count": 0
+      },
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json"
+      ]
+    },
+    {
+      "id": "visual-archetype-ecommerce",
+      "stable_id": "visual-archetype-ecommerce",
+      "name_zh_tw": "視覺原型：Ecommerce",
+      "name_en": "Visual Archetype Ecommerce",
+      "classification": "INFO",
+      "retired": true,
+      "active": false,
+      "entry_count": 0,
+      "scope": "RETIRED_GENERIC_PREVIEW_METADATA",
+      "verified_usage_note": true,
+      "preview_offline_substitution": false,
+      "library_behavior_zh_tw": "舊合成預覽的中繼資料標記已停用，只保留原始詞彙供稽核；目前沒有項目使用，不代表存在預覽或功能。",
+      "library_behavior_en": "This metadata label from retired generic previews is inactive and retained only as original audit vocabulary. No current entry uses it; it claims no preview or capability.",
+      "downloaded_source_limit_zh_tw": "此停用標記不對目前來源或下載內容作任何能力宣稱。",
+      "downloaded_source_limit_en": "This retired label makes no capability claim about current source or downloads.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "retirement_evidence": {
+        "original_index_sha256": "46e0c56493569843bea49bf2aef829ee49588466304c5937e6db5ef82b44e580",
+        "original_classification": "INFO",
+        "current_entry_reference_count": 0
+      },
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json"
+      ]
+    },
+    {
+      "id": "visual-archetype-editorial",
+      "stable_id": "visual-archetype-editorial",
+      "name_zh_tw": "視覺原型：Editorial",
+      "name_en": "Visual Archetype Editorial",
+      "classification": "INFO",
+      "retired": true,
+      "active": false,
+      "entry_count": 0,
+      "scope": "RETIRED_GENERIC_PREVIEW_METADATA",
+      "verified_usage_note": true,
+      "preview_offline_substitution": false,
+      "library_behavior_zh_tw": "舊合成預覽的中繼資料標記已停用，只保留原始詞彙供稽核；目前沒有項目使用，不代表存在預覽或功能。",
+      "library_behavior_en": "This metadata label from retired generic previews is inactive and retained only as original audit vocabulary. No current entry uses it; it claims no preview or capability.",
+      "downloaded_source_limit_zh_tw": "此停用標記不對目前來源或下載內容作任何能力宣稱。",
+      "downloaded_source_limit_en": "This retired label makes no capability claim about current source or downloads.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "retirement_evidence": {
+        "original_index_sha256": "46e0c56493569843bea49bf2aef829ee49588466304c5937e6db5ef82b44e580",
+        "original_classification": "INFO",
+        "current_entry_reference_count": 0
+      },
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json"
+      ]
+    },
+    {
+      "id": "visual-archetype-experimental",
+      "stable_id": "visual-archetype-experimental",
+      "name_zh_tw": "視覺原型：Experimental",
+      "name_en": "Visual Archetype Experimental",
+      "classification": "INFO",
+      "retired": true,
+      "active": false,
+      "entry_count": 0,
+      "scope": "RETIRED_GENERIC_PREVIEW_METADATA",
+      "verified_usage_note": true,
+      "preview_offline_substitution": false,
+      "library_behavior_zh_tw": "舊合成預覽的中繼資料標記已停用，只保留原始詞彙供稽核；目前沒有項目使用，不代表存在預覽或功能。",
+      "library_behavior_en": "This metadata label from retired generic previews is inactive and retained only as original audit vocabulary. No current entry uses it; it claims no preview or capability.",
+      "downloaded_source_limit_zh_tw": "此停用標記不對目前來源或下載內容作任何能力宣稱。",
+      "downloaded_source_limit_en": "This retired label makes no capability claim about current source or downloads.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "retirement_evidence": {
+        "original_index_sha256": "46e0c56493569843bea49bf2aef829ee49588466304c5937e6db5ef82b44e580",
+        "original_classification": "INFO",
+        "current_entry_reference_count": 0
+      },
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json"
+      ]
+    },
+    {
+      "id": "visual-archetype-luxury",
+      "stable_id": "visual-archetype-luxury",
+      "name_zh_tw": "視覺原型：Luxury",
+      "name_en": "Visual Archetype Luxury",
+      "classification": "INFO",
+      "retired": true,
+      "active": false,
+      "entry_count": 0,
+      "scope": "RETIRED_GENERIC_PREVIEW_METADATA",
+      "verified_usage_note": true,
+      "preview_offline_substitution": false,
+      "library_behavior_zh_tw": "舊合成預覽的中繼資料標記已停用，只保留原始詞彙供稽核；目前沒有項目使用，不代表存在預覽或功能。",
+      "library_behavior_en": "This metadata label from retired generic previews is inactive and retained only as original audit vocabulary. No current entry uses it; it claims no preview or capability.",
+      "downloaded_source_limit_zh_tw": "此停用標記不對目前來源或下載內容作任何能力宣稱。",
+      "downloaded_source_limit_en": "This retired label makes no capability claim about current source or downloads.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "retirement_evidence": {
+        "original_index_sha256": "46e0c56493569843bea49bf2aef829ee49588466304c5937e6db5ef82b44e580",
+        "original_classification": "INFO",
+        "current_entry_reference_count": 0
+      },
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json"
+      ]
+    },
+    {
+      "id": "visual-archetype-minimal",
+      "stable_id": "visual-archetype-minimal",
+      "name_zh_tw": "視覺原型：Minimal",
+      "name_en": "Visual Archetype Minimal",
+      "classification": "INFO",
+      "retired": true,
+      "active": false,
+      "entry_count": 0,
+      "scope": "RETIRED_GENERIC_PREVIEW_METADATA",
+      "verified_usage_note": true,
+      "preview_offline_substitution": false,
+      "library_behavior_zh_tw": "舊合成預覽的中繼資料標記已停用，只保留原始詞彙供稽核；目前沒有項目使用，不代表存在預覽或功能。",
+      "library_behavior_en": "This metadata label from retired generic previews is inactive and retained only as original audit vocabulary. No current entry uses it; it claims no preview or capability.",
+      "downloaded_source_limit_zh_tw": "此停用標記不對目前來源或下載內容作任何能力宣稱。",
+      "downloaded_source_limit_en": "This retired label makes no capability claim about current source or downloads.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "retirement_evidence": {
+        "original_index_sha256": "46e0c56493569843bea49bf2aef829ee49588466304c5937e6db5ef82b44e580",
+        "original_classification": "INFO",
+        "current_entry_reference_count": 0
+      },
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json"
+      ]
+    },
+    {
+      "id": "visual-archetype-other",
+      "stable_id": "visual-archetype-other",
+      "name_zh_tw": "視覺原型：Other",
+      "name_en": "Visual Archetype Other",
+      "classification": "INFO",
+      "retired": true,
+      "active": false,
+      "entry_count": 0,
+      "scope": "RETIRED_GENERIC_PREVIEW_METADATA",
+      "verified_usage_note": true,
+      "preview_offline_substitution": false,
+      "library_behavior_zh_tw": "舊合成預覽的中繼資料標記已停用，只保留原始詞彙供稽核；目前沒有項目使用，不代表存在預覽或功能。",
+      "library_behavior_en": "This metadata label from retired generic previews is inactive and retained only as original audit vocabulary. No current entry uses it; it claims no preview or capability.",
+      "downloaded_source_limit_zh_tw": "此停用標記不對目前來源或下載內容作任何能力宣稱。",
+      "downloaded_source_limit_en": "This retired label makes no capability claim about current source or downloads.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "retirement_evidence": {
+        "original_index_sha256": "46e0c56493569843bea49bf2aef829ee49588466304c5937e6db5ef82b44e580",
+        "original_classification": "INFO",
+        "current_entry_reference_count": 0
+      },
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json"
+      ]
+    },
+    {
+      "id": "visual-archetype-playful",
+      "stable_id": "visual-archetype-playful",
+      "name_zh_tw": "視覺原型：Playful",
+      "name_en": "Visual Archetype Playful",
+      "classification": "INFO",
+      "retired": true,
+      "active": false,
+      "entry_count": 0,
+      "scope": "RETIRED_GENERIC_PREVIEW_METADATA",
+      "verified_usage_note": true,
+      "preview_offline_substitution": false,
+      "library_behavior_zh_tw": "舊合成預覽的中繼資料標記已停用，只保留原始詞彙供稽核；目前沒有項目使用，不代表存在預覽或功能。",
+      "library_behavior_en": "This metadata label from retired generic previews is inactive and retained only as original audit vocabulary. No current entry uses it; it claims no preview or capability.",
+      "downloaded_source_limit_zh_tw": "此停用標記不對目前來源或下載內容作任何能力宣稱。",
+      "downloaded_source_limit_en": "This retired label makes no capability claim about current source or downloads.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "retirement_evidence": {
+        "original_index_sha256": "46e0c56493569843bea49bf2aef829ee49588466304c5937e6db5ef82b44e580",
+        "original_classification": "INFO",
+        "current_entry_reference_count": 0
+      },
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json"
+      ]
+    },
+    {
+      "id": "visual-archetype-portfolio",
+      "stable_id": "visual-archetype-portfolio",
+      "name_zh_tw": "視覺原型：Portfolio",
+      "name_en": "Visual Archetype Portfolio",
+      "classification": "INFO",
+      "retired": true,
+      "active": false,
+      "entry_count": 0,
+      "scope": "RETIRED_GENERIC_PREVIEW_METADATA",
+      "verified_usage_note": true,
+      "preview_offline_substitution": false,
+      "library_behavior_zh_tw": "舊合成預覽的中繼資料標記已停用，只保留原始詞彙供稽核；目前沒有項目使用，不代表存在預覽或功能。",
+      "library_behavior_en": "This metadata label from retired generic previews is inactive and retained only as original audit vocabulary. No current entry uses it; it claims no preview or capability.",
+      "downloaded_source_limit_zh_tw": "此停用標記不對目前來源或下載內容作任何能力宣稱。",
+      "downloaded_source_limit_en": "This retired label makes no capability claim about current source or downloads.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "retirement_evidence": {
+        "original_index_sha256": "46e0c56493569843bea49bf2aef829ee49588466304c5937e6db5ef82b44e580",
+        "original_classification": "INFO",
+        "current_entry_reference_count": 0
+      },
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json"
+      ]
+    },
+    {
+      "id": "visual-archetype-presentation",
+      "stable_id": "visual-archetype-presentation",
+      "name_zh_tw": "視覺原型：Presentation",
+      "name_en": "Visual Archetype Presentation",
+      "classification": "INFO",
+      "retired": true,
+      "active": false,
+      "entry_count": 0,
+      "scope": "RETIRED_GENERIC_PREVIEW_METADATA",
+      "verified_usage_note": true,
+      "preview_offline_substitution": false,
+      "library_behavior_zh_tw": "舊合成預覽的中繼資料標記已停用，只保留原始詞彙供稽核；目前沒有項目使用，不代表存在預覽或功能。",
+      "library_behavior_en": "This metadata label from retired generic previews is inactive and retained only as original audit vocabulary. No current entry uses it; it claims no preview or capability.",
+      "downloaded_source_limit_zh_tw": "此停用標記不對目前來源或下載內容作任何能力宣稱。",
+      "downloaded_source_limit_en": "This retired label makes no capability claim about current source or downloads.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "retirement_evidence": {
+        "original_index_sha256": "46e0c56493569843bea49bf2aef829ee49588466304c5937e6db5ef82b44e580",
+        "original_classification": "INFO",
+        "current_entry_reference_count": 0
+      },
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json"
+      ]
+    },
+    {
+      "id": "visual-archetype-social",
+      "stable_id": "visual-archetype-social",
+      "name_zh_tw": "視覺原型：Social",
+      "name_en": "Visual Archetype Social",
+      "classification": "INFO",
+      "retired": true,
+      "active": false,
+      "entry_count": 0,
+      "scope": "RETIRED_GENERIC_PREVIEW_METADATA",
+      "verified_usage_note": true,
+      "preview_offline_substitution": false,
+      "library_behavior_zh_tw": "舊合成預覽的中繼資料標記已停用，只保留原始詞彙供稽核；目前沒有項目使用，不代表存在預覽或功能。",
+      "library_behavior_en": "This metadata label from retired generic previews is inactive and retained only as original audit vocabulary. No current entry uses it; it claims no preview or capability.",
+      "downloaded_source_limit_zh_tw": "此停用標記不對目前來源或下載內容作任何能力宣稱。",
+      "downloaded_source_limit_en": "This retired label makes no capability claim about current source or downloads.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "retirement_evidence": {
+        "original_index_sha256": "46e0c56493569843bea49bf2aef829ee49588466304c5937e6db5ef82b44e580",
+        "original_classification": "INFO",
+        "current_entry_reference_count": 0
+      },
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json"
+      ]
+    },
+    {
+      "id": "visual-variant-a",
+      "stable_id": "visual-variant-a",
+      "name_zh_tw": "視覺變體：A",
+      "name_en": "Visual Variant A",
+      "classification": "INFO",
+      "retired": true,
+      "active": false,
+      "entry_count": 0,
+      "scope": "RETIRED_GENERIC_PREVIEW_METADATA",
+      "verified_usage_note": true,
+      "preview_offline_substitution": false,
+      "library_behavior_zh_tw": "舊合成預覽的中繼資料標記已停用，只保留原始詞彙供稽核；目前沒有項目使用，不代表存在預覽或功能。",
+      "library_behavior_en": "This metadata label from retired generic previews is inactive and retained only as original audit vocabulary. No current entry uses it; it claims no preview or capability.",
+      "downloaded_source_limit_zh_tw": "此停用標記不對目前來源或下載內容作任何能力宣稱。",
+      "downloaded_source_limit_en": "This retired label makes no capability claim about current source or downloads.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "retirement_evidence": {
+        "original_index_sha256": "46e0c56493569843bea49bf2aef829ee49588466304c5937e6db5ef82b44e580",
+        "original_classification": "INFO",
+        "current_entry_reference_count": 0
+      },
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json"
+      ]
+    },
+    {
+      "id": "visual-variant-b",
+      "stable_id": "visual-variant-b",
+      "name_zh_tw": "視覺變體：B",
+      "name_en": "Visual Variant B",
+      "classification": "INFO",
+      "retired": true,
+      "active": false,
+      "entry_count": 0,
+      "scope": "RETIRED_GENERIC_PREVIEW_METADATA",
+      "verified_usage_note": true,
+      "preview_offline_substitution": false,
+      "library_behavior_zh_tw": "舊合成預覽的中繼資料標記已停用，只保留原始詞彙供稽核；目前沒有項目使用，不代表存在預覽或功能。",
+      "library_behavior_en": "This metadata label from retired generic previews is inactive and retained only as original audit vocabulary. No current entry uses it; it claims no preview or capability.",
+      "downloaded_source_limit_zh_tw": "此停用標記不對目前來源或下載內容作任何能力宣稱。",
+      "downloaded_source_limit_en": "This retired label makes no capability claim about current source or downloads.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "retirement_evidence": {
+        "original_index_sha256": "46e0c56493569843bea49bf2aef829ee49588466304c5937e6db5ef82b44e580",
+        "original_classification": "INFO",
+        "current_entry_reference_count": 0
+      },
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json"
+      ]
+    },
+    {
+      "id": "visual-variant-c",
+      "stable_id": "visual-variant-c",
+      "name_zh_tw": "視覺變體：C",
+      "name_en": "Visual Variant C",
+      "classification": "INFO",
+      "retired": true,
+      "active": false,
+      "entry_count": 0,
+      "scope": "RETIRED_GENERIC_PREVIEW_METADATA",
+      "verified_usage_note": true,
+      "preview_offline_substitution": false,
+      "library_behavior_zh_tw": "舊合成預覽的中繼資料標記已停用，只保留原始詞彙供稽核；目前沒有項目使用，不代表存在預覽或功能。",
+      "library_behavior_en": "This metadata label from retired generic previews is inactive and retained only as original audit vocabulary. No current entry uses it; it claims no preview or capability.",
+      "downloaded_source_limit_zh_tw": "此停用標記不對目前來源或下載內容作任何能力宣稱。",
+      "downloaded_source_limit_en": "This retired label makes no capability claim about current source or downloads.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "retirement_evidence": {
+        "original_index_sha256": "46e0c56493569843bea49bf2aef829ee49588466304c5937e6db5ef82b44e580",
+        "original_classification": "INFO",
+        "current_entry_reference_count": 0
+      },
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json"
+      ]
+    },
+    {
+      "id": "workflow-json-never-executed",
+      "stable_id": "workflow-json-never-executed",
+      "name_zh_tw": "Workflow JSON 只供檢視與下載，Library 內不執行",
+      "name_en": "Workflow Json Never Executed",
+      "classification": "BLOCKED",
+      "retired": false,
+      "active": true,
+      "scope": "DOWNLOADED_SOURCE_ONLY",
+      "verified_usage_note": true,
+      "library_behavior_zh_tw": "此內容只供閱讀；Library 與 Preview 不會執行，任何後續動作都需使用者明確確認。",
+      "library_behavior_en": "This content is display-only. The Library and Preview do not execute it, and any follow-up action requires explicit user confirmation.",
+      "downloaded_source_limit_zh_tw": "只在使用者下載並主動整合來源後適用；執行前必須閱讀原始內容、套件文件與授權。",
+      "downloaded_source_limit_en": "Applies only after the user downloads and deliberately integrates the source; read the original content, package documentation, and license before acting.",
+      "requirements": {
+        "library": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        },
+        "downloaded_source": {
+          "account": false,
+          "payment": false,
+          "network": false,
+          "installation": false,
+          "third_party_service": false
+        }
+      },
+      "preview_offline_substitution": false,
+      "evidence": [
+        "prompt-library/indexes/license-technical-marker-audit.json",
+        "prompt-library/indexes/license-technical-marker-browser-audit.json",
+        "prompt-library/indexes/public-export-audit.json"
+      ],
+      "entry_count": 667
+    }
+  ],
+  "content_hash": "4b091b7871ff217c9199e8ae351ad4aea056964597487e83a1949b0d5df83898"
+}

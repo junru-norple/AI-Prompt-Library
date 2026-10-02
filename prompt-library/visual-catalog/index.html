@@ -1,0 +1,726 @@
+<!doctype html>
+<!-- SPDX-License-Identifier: MIT -->
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#e7eceb">
+  <title>Visual Prompt Atlas V2</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-atlas-view="explore">
+  <a class="skip-link" href="#results">跳至搜尋結果</a>
+
+  <header class="masthead">
+    <div class="brand-block">
+      <p class="eyebrow">本機參考工具 · FILE:// 已就緒</p>
+      <h1><span>Visual Prompt</span><strong>Atlas</strong></h1>
+    </div>
+    <div class="masthead-note">
+      <div class="status-line">
+        <span class="status-dot" aria-hidden="true"></span>
+        <p><strong>本機索引就緒</strong><span>只讀瀏覽 · 不執行 Prompt</span></p>
+      </div>
+      <p class="masthead-intro">從需求、成果與能力開始搜尋，再用來源、授權、離線與成果證據做選擇。所有操作維持本機唯讀。</p>
+      <dl class="atlas-ledger" aria-label="本機目錄摘要">
+        <div><dt>Unified V2</dt><dd id="header-unified-count">—</dd></div>
+        <div><dt>Prompt 目錄</dt><dd id="header-prompt-count">—</dd></div>
+        <div><dt>Live UI</dt><dd id="header-live-count">—</dd></div>
+      </dl>
+      <p class="offline-notice">
+        <span><strong>離線可用：</strong>搜尋、篩選、查看、複製本機 Prompt、閱讀使用方法及預覽已打包的 Live UI。</span>
+        <span><strong>需要網路：</strong>使用 Codex／Claude 等雲端 AI、開啟上游 GitHub 或更新來源。</span>
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <nav class="atlas-primary-nav" aria-label="Atlas V2 主導覽">
+      <p class="section-number">01 / 選擇探索入口</p>
+      <div class="atlas-nav-list" role="tablist" aria-label="選擇探索入口">
+        <button id="atlas-nav-explore" class="atlas-nav-button is-active" type="button" role="tab" aria-selected="true" aria-controls="unified-view" data-atlas-view="explore">
+          <strong>探索</strong><small><b id="nav-unified-count">—</b> 跨類型條目</small>
+        </button>
+        <button id="atlas-nav-prompt" class="atlas-nav-button" type="button" role="tab" aria-selected="false" aria-controls="prompt-view" data-atlas-view="prompt">
+          <strong>Prompt</strong><small>保留原有深層搜尋</small>
+        </button>
+        <button id="atlas-nav-live" class="atlas-nav-button" type="button" role="tab" aria-selected="false" aria-controls="live-view" data-atlas-view="live">
+          <strong>Live UI / 動效</strong><small>隔離本機預覽</small>
+        </button>
+        <button id="atlas-nav-outcomes" class="atlas-nav-button" type="button" role="tab" aria-selected="false" aria-controls="unified-view" data-atlas-view="outcomes">
+          <strong>成果實例 / Workflow</strong><small>先看可能產出</small>
+        </button>
+        <button id="atlas-nav-systems" class="atlas-nav-button" type="button" role="tab" aria-selected="false" aria-controls="unified-view" data-atlas-view="systems">
+          <strong>Skill / Design System</strong><small>方法、規則與系統</small>
+        </button>
+      </div>
+    </nav>
+
+    <nav class="catalog-mode legacy-mode-bridge" aria-label="舊版目錄模式橋接" hidden>
+      <div class="mode-switch" role="tablist" aria-label="舊版目錄模式">
+        <button id="prompt-mode" class="mode-button is-active" type="button" role="tab" aria-selected="true" aria-controls="prompt-view" data-mode="prompt">
+          <span class="mode-copy"><strong>Prompt 資料庫</strong><small>搜尋、比較與安全改寫</small></span>
+          <span class="mode-total"><b id="prompt-mode-count">—</b><small>筆</small></span>
+        </button>
+        <button id="live-mode" class="mode-button" type="button" role="tab" aria-selected="false" aria-controls="live-view" data-mode="live">
+          <span class="mode-copy"><strong>Live UI 動畫庫</strong><small>隔離、節流的離線預覽</small></span>
+          <span class="mode-total"><b id="live-mode-count">—</b><small>筆</small></span>
+        </button>
+      </div>
+    </nav>
+
+    <section id="unified-view" class="catalog-view unified-view" role="tabpanel" aria-labelledby="atlas-nav-explore">
+      <section class="route-strip" aria-label="需求到證據的目前路徑">
+        <div><span>01</span><p><small>需求</small><strong id="route-need">全部成果</strong></p></div>
+        <i aria-hidden="true">→</i>
+        <div><span>02</span><p><small>能力</small><strong id="route-capability">跨類型搜尋</strong></p></div>
+        <i aria-hidden="true">→</i>
+        <div><span>03</span><p><small>證據</small><strong id="route-evidence">正在建立結果</strong></p></div>
+      </section>
+
+      <section class="unified-search-panel" aria-labelledby="unified-search-title">
+        <div class="search-heading">
+          <div>
+            <p class="section-number">02 / 成果優先探索</p>
+            <h2 id="unified-search-title">你想做出什麼？</h2>
+          </div>
+          <p id="unified-index-meta" class="index-meta">正在載入 unified-index-v2…</p>
+        </div>
+
+        <form id="unified-search-form" class="unified-query" role="search">
+          <label for="unified-query"><span>描述需求</span><input id="unified-query" type="search" autocomplete="off" placeholder="例如：我想做一個有電影感滾動效果的 AI 產品首頁"></label>
+          <button type="submit">搜尋 Atlas</button>
+        </form>
+
+        <div class="outcome-shortcuts" aria-labelledby="outcome-shortcuts-title">
+          <div class="shortcut-heading">
+            <div><p class="section-number">我想做什麼</p><h3 id="outcome-shortcuts-title">從成果形式開始</h3></div>
+            <button id="open-guided-discovery" class="guided-launch" type="button">不確定？開始 4 步導引</button>
+          </div>
+          <div id="outcome-shortcut-list" class="shortcut-list">
+            <button type="button" data-outcome="web-page">網頁 / Landing Page</button>
+            <button type="button" data-outcome="ui-component">UI 元件</button>
+            <button type="button" data-outcome="motion-effect">動畫 / Motion</button>
+            <button type="button" data-outcome="pptx">PPT / 簡報</button>
+            <button type="button" data-outcome="comfy-workflow">圖片 / ComfyUI</button>
+            <button type="button" data-outcome-query="影片 音訊 3D Workflow">影片 / 音訊 / 3D</button>
+            <button type="button" data-outcome-query="GitHub Profile README">GitHub Profile / README</button>
+            <button type="button" data-content-type="design-system">Design System</button>
+            <button type="button" data-content-type="skill">Agent Skill</button>
+            <button type="button" data-outcome="other">其他</button>
+          </div>
+        </div>
+
+        <details id="unified-filter-panel" class="unified-filter-panel">
+          <summary><span>進階篩選</span><small id="unified-filter-summary">11 個可組合篩選維度 · 目前未套用</small></summary>
+          <div class="unified-filter-grid" aria-label="Unified 搜尋篩選器">
+            <label>內容類型<select id="unified-content-type"><option value="">全部內容類型</option></select></label>
+            <label>成果類型<select id="unified-output-type"><option value="">全部成果類型</option></select></label>
+            <label>風格<select id="unified-style"><option value="">全部風格</option></select></label>
+            <label>互動<select id="unified-interaction"><option value="">全部互動</option></select></label>
+            <label>技術<select id="unified-technology"><option value="">全部技術</option></select></label>
+            <label>來源<select id="unified-source"><option value="">全部來源</option></select></label>
+            <label>授權<select id="unified-license"><option value="">全部授權</option></select></label>
+            <label>離線狀態<select id="unified-offline"><option value="">全部離線狀態</option></select></label>
+            <label>預覽<select id="unified-preview"><option value="">全部預覽狀態</option><option value="yes">有可用預覽</option><option value="no">未附成果預覽</option></select></label>
+            <label>執行層級<select id="unified-execution"><option value="">全部執行層級</option></select></label>
+            <label>成果狀態<select id="unified-example-status"><option value="">全部成果狀態</option></select></label>
+          </div>
+        </details>
+
+        <div class="unified-toolbar">
+          <div><strong id="unified-result-count" aria-live="polite">—</strong><span id="unified-active-state">顯示全部可選條目</span></div>
+          <div>
+            <label for="unified-sort">排序<select id="unified-sort"><option value="relevance">相關性</option><option value="title">標題</option><option value="source">來源</option><option value="example">成果狀態</option></select></label>
+            <button id="unified-clear" class="reset-button" type="button">重設</button>
+          </div>
+        </div>
+      </section>
+
+      <p class="artifact-disclaimer"><strong>成果證據說明：</strong>成果預覽是 Prompt／Workflow／Skill 的代表性實例，不保證每次 AI 產出完全相同；請同時核對來源、commit、授權與執行條件。</p>
+      <section id="unified-results" class="unified-results" aria-label="Unified 搜尋結果" tabindex="-1"></section>
+      <section id="unified-empty" class="empty" hidden>
+        <p class="section-number">沒有符合的 Unified 結果</p><h2>找不到符合目前條件的項目</h2>
+        <p>縮短描述、清除部分篩選維度，或改用中英文成果名稱再試一次。</p>
+        <button type="button" data-unified-clear>清除搜尋與篩選</button>
+      </section>
+      <div class="load-more-wrap"><button id="unified-load-more" type="button" hidden>載入更多結果</button></div>
+    </section>
+
+    <section id="prompt-view" class="catalog-view" role="tabpanel" aria-labelledby="atlas-nav-prompt" hidden>
+    <section class="search-panel" aria-labelledby="search-title">
+      <div class="search-heading">
+        <div>
+          <p class="section-number">02 / 搜尋與篩選</p>
+          <h2 id="search-title">找出可用的視覺 Prompt</h2>
+        </div>
+        <p id="index-meta" class="index-meta">正在載入本機索引…</p>
+      </div>
+
+      <label class="query-box" for="query">
+        <span>QUERY</span>
+        <input id="query" type="search" autocomplete="off" placeholder="例如：精品香水、電影感 AI 產品首頁、dashboard 動效">
+        <kbd>Ctrl K</kbd>
+      </label>
+
+      <div class="filters" aria-label="搜尋篩選器">
+        <fieldset class="filter-group filter-group-primary">
+          <legend><span>探索條件</span><small>先縮小主題與形式</small></legend>
+          <div class="filter-grid">
+            <label>來源<select id="source-filter"><option value="">全部來源</option></select></label>
+            <label>頁型<select id="type-filter"><option value="">全部頁型</option></select></label>
+            <label>風格<select id="profile-filter"><option value="">全部風格</option></select></label>
+          </div>
+        </fieldset>
+        <fieldset class="filter-group filter-group-evidence">
+          <legend><span>技術與可信度</span><small>確認相容性與來源條件</small></legend>
+          <div class="filter-grid">
+            <label>技術棧<select id="stack-filter"><option value="">全部技術棧</option></select></label>
+            <label>授權<select id="license-filter"><option value="">全部授權</option></select></label>
+            <label>信任層級<select id="trust-filter"><option value="">全部層級</option></select></label>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="toolbar">
+        <div class="result-status"><p id="result-count" aria-live="polite">—</p><p id="prompt-active-state" class="active-filter-state">顯示全部條目</p></div>
+        <div>
+          <label class="sort-control" for="sort"><span class="sort-label">排序</span>
+            <select id="sort">
+              <option value="relevance">相關性</option>
+              <option value="recent">來源日期</option>
+              <option value="source">來源</option>
+              <option value="profile">設計風格</option>
+            </select>
+          </label>
+          <button id="clear" class="reset-button" type="button" disabled>重設條件</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="results" class="results" aria-label="Prompt 搜尋結果" tabindex="-1"></section>
+    <section id="empty" class="empty" hidden>
+      <p class="section-number">NO MATCH</p>
+      <h2>沒有符合的 Prompt</h2>
+      <p>請改用較短的中英文詞彙，或清除篩選條件後重試。</p>
+      <button type="button" data-clear>清除搜尋</button>
+    </section>
+    </section>
+
+    <section id="live-view" class="catalog-view" role="tabpanel" aria-labelledby="atlas-nav-live" hidden>
+      <section class="search-panel live-search-panel" aria-labelledby="live-search-title">
+        <div class="search-heading">
+          <div>
+            <p class="section-number">02 / 搜尋與篩選</p>
+            <h2 id="live-search-title">瀏覽可執行的本機 UI 動畫</h2>
+          </div>
+          <p id="live-index-meta" class="index-meta">正在載入本機 Live UI 索引…</p>
+        </div>
+
+        <label class="query-box" for="live-query">
+          <span>LIVE QUERY</span>
+          <input id="live-query" type="search" autocomplete="off" placeholder="例如：拖曳輪播、文字動效、React 卡片、scroll animation">
+          <kbd>Ctrl K</kbd>
+        </label>
+        <div class="filters live-filters" aria-label="Live UI 搜尋篩選器">
+          <fieldset class="filter-group filter-group-primary">
+            <legend><span>探索條件</span><small>先找元件與互動模式</small></legend>
+            <div class="filter-grid">
+              <label>來源<select id="live-source-filter"><option value="">全部來源</option></select></label>
+              <label>元件／動畫類型<select id="live-type-filter"><option value="">全部類型</option></select></label>
+              <label>互動方式<select id="live-interaction-filter"><option value="">全部互動</option></select></label>
+            </div>
+          </fieldset>
+          <fieldset class="filter-group filter-group-evidence">
+            <legend><span>整合證據</span><small>確認技術、授權與離線狀態</small></legend>
+            <div class="filter-grid">
+              <label>技術棧<select id="live-stack-filter"><option value="">全部技術棧</option></select></label>
+              <label>授權<select id="live-license-filter"><option value="">全部授權</option></select></label>
+              <label>離線狀態<select id="live-offline-filter"><option value="">全部狀態</option></select></label>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="toolbar">
+          <div class="result-status"><p id="live-result-count" aria-live="polite">—</p><p id="live-active-state" class="active-filter-state">顯示全部條目</p></div>
+          <div>
+            <label class="sort-control" for="live-sort"><span class="sort-label">排序</span>
+              <select id="live-sort">
+                <option value="relevance">相關性</option>
+                <option value="title">標題</option>
+                <option value="source">來源</option>
+                <option value="type">元件／動畫類型</option>
+              </select>
+            </label>
+            <button id="live-clear" class="reset-button" type="button" disabled>重設條件</button>
+          </div>
+        </div>
+      </section>
+
+      <p class="preview-policy-note"><strong>安全預覽：</strong>每張卡片使用 sandbox iframe；只啟動畫面內少量預覽，離開可視範圍即暫停，並尊重 reduced motion。</p>
+      <section id="live-results" class="results live-results" aria-label="Live UI 搜尋結果" tabindex="-1"></section>
+      <section id="live-empty" class="empty" hidden>
+        <p class="section-number">NO LIVE UI MATCH</p>
+        <h2>沒有符合的 Live UI</h2>
+        <p>請改用較短的中英文詞彙，或清除篩選條件後重試。</p>
+        <button type="button" data-live-clear>清除搜尋</button>
+      </section>
+    </section>
+  </main>
+
+  <dialog id="prompt-dialog" class="prompt-dialog" aria-labelledby="detail-title">
+    <div class="detail-shell">
+      <div class="detail-heading">
+        <div>
+          <p class="section-number">03 / 閱讀與複製</p>
+          <h2 id="detail-title"></h2>
+        </div>
+        <button id="dialog-close-icon" class="icon-button" type="button" aria-label="關閉詳情">×</button>
+      </div>
+      <section class="content-summary" aria-labelledby="content-summary-title">
+        <div class="summary-section-heading">
+          <h3 id="content-summary-title">內容摘要</h3>
+          <span id="detail-summary-status" class="summary-status"></span>
+        </div>
+        <dl class="summary-fields">
+          <div><dt>主要功能</dt><dd id="detail-function"></dd></div>
+          <div class="summary-wide"><dt>Prompt 簡介</dt><dd id="detail-prompt-summary"></dd></div>
+          <div class="summary-wide"><dt>適用場景</dt><dd><div id="detail-use-cases" class="chips summary-use-cases"></div></dd></div>
+        </dl>
+        <dl class="detail-meta">
+          <div><dt>類型</dt><dd id="detail-type"></dd></div>
+          <div><dt>風格</dt><dd id="detail-profile"></dd></div>
+          <div><dt>技術棧</dt><dd id="detail-stack"></dd></div>
+          <div><dt>分數</dt><dd id="detail-score"></dd></div>
+        </dl>
+        <div>
+          <h3 class="detail-label">風險標籤</h3>
+          <div id="detail-risks" class="chips"></div>
+        </div>
+      </section>
+      <section class="usage-guide" aria-labelledby="usage-guide-title">
+        <div class="usage-guide-heading">
+          <h3 id="usage-guide-title">使用方法與預期結果</h3>
+          <div class="usage-guide-status">
+            <span id="detail-usage-mode" class="usage-mode"></span>
+            <span id="detail-usage-status" class="usage-status"></span>
+          </div>
+        </div>
+        <ol class="usage-steps">
+          <li class="usage-step">
+            <h4>如何使用</h4>
+            <p id="detail-how-to-use"></p>
+          </li>
+          <li class="usage-step">
+            <h4>預期產出</h4>
+            <p id="detail-expected-output"></p>
+          </li>
+          <li class="usage-step">
+            <h4>如何查看結果</h4>
+            <p id="detail-how-to-view-result"></p>
+          </li>
+        </ol>
+        <div class="tool-compatibility-note">
+          <h4>工具能力提醒</h4>
+          <p id="detail-tool-compatibility"></p>
+        </div>
+      </section>
+      <details id="detail-original" class="original-details" hidden>
+        <summary>查看英文原文 <span lang="en">Original</span></summary>
+        <div id="detail-original-content" class="original-content" lang="en"></div>
+      </details>
+      <div class="raw-heading">
+        <h3>Prompt 來源正文</h3>
+        <span id="detail-access" class="access-state"></span>
+      </div>
+      <div class="detail-actions">
+        <button id="copy-original" class="action-primary" type="button">複製 Prompt 正文</button>
+        <a id="download-original" class="button-link action-primary" download hidden>下載 Prompt 正文</a>
+        <a id="open-local" class="button-link action-tertiary" target="_blank" rel="noreferrer">開啟本機來源檔</a>
+        <a id="open-upstream" class="button-link action-tertiary" target="_blank" rel="noreferrer" hidden>開啟此筆上游來源</a>
+        <span id="prompt-extra-downloads" class="direct-use-extra-actions"></span>
+        <button id="dialog-close" class="action-quiet" type="button">關閉</button>
+      </div>
+      <p id="raw-warning" class="raw-warning"><strong>內容類型：已驗證來源的社群 Prompt 正文。</strong> 授權與來源已另外驗證；若公開版本曾清理本機路徑，會另行標示；正文未經安全指令改寫。Preview、Copy 與 Download 只讀取或傳遞資料，不會執行其中的安裝、部署、登入、付款、上傳或外部下載指令。<br><span lang="en">Content type: verified-source community prompt body. Public local-path adaptations are separately labeled; the body is not safety-rewritten. License and provenance are verified separately. Preview, Copy, and Download do not execute its instructions.</span></p>
+      <pre id="detail-prompt" class="prompt-text" tabindex="0"></pre>
+      <details class="provenance-details">
+        <summary>來源證明與上游資料／Provenance</summary>
+        <dl class="detail-meta source-role-fields">
+          <div><dt>原作者／Creator</dt><dd id="detail-author"></dd></div>
+          <div><dt>上游貢獻者／Contributor</dt><dd id="detail-contributors"></dd></div>
+          <div><dt>發布者／維護者</dt><dd id="detail-publisher"></dd></div>
+          <div><dt>權利人／Rights holder</dt><dd id="detail-rights-holder"></dd></div>
+          <div><dt>本機改作者／Local adapter</dt><dd id="detail-adapter"></dd></div>
+          <div><dt>來源</dt><dd id="detail-source"></dd></div>
+          <div><dt>Commit</dt><dd id="detail-commit"></dd></div>
+          <div><dt>授權</dt><dd id="detail-license"></dd></div>
+          <div><dt>原始路徑</dt><dd id="detail-path"></dd></div>
+        </dl>
+        <p id="prompt-local-source-note" class="direct-use-note" hidden></p>
+        <div class="detail-actions">
+          <a id="open-provenance" class="button-link action-tertiary" target="_blank" rel="noreferrer" hidden>查看單筆來源證明</a>
+          <a id="open-upstream-dataset" class="button-link action-tertiary" target="_blank" rel="noreferrer" hidden>開啟完整上游資料集</a>
+        </div>
+      </details>
+      <details class="provenance-details">
+        <summary>交給 Codex 的安全改寫／安全使用指令</summary>
+        <p>這是協助安全使用的次要指令，與上方的 Prompt 正文分開。<span lang="en">These safety instructions are separate from the prompt body.</span></p>
+        <button id="copy-handoff" class="action-secondary" type="button">複製交給 Codex 的安全改寫指令</button>
+      </details>
+      <p id="copy-status" class="copy-status" aria-live="polite"></p>
+    </div>
+  </dialog>
+
+  <dialog id="live-ui-dialog" class="prompt-dialog live-ui-dialog" aria-labelledby="live-detail-title">
+    <div class="detail-shell">
+      <div class="detail-heading">
+        <div>
+          <p class="section-number">03 / 閱讀與複製</p>
+          <h2 id="live-detail-title"></h2>
+        </div>
+        <button id="live-dialog-close-icon" class="icon-button" type="button" aria-label="關閉 Live UI 詳情">×</button>
+      </div>
+
+      <section class="live-detail-preview-shell" aria-label="放大隔離預覽">
+        <iframe id="live-detail-preview" class="live-detail-preview" sandbox="allow-scripts" title="Live UI 隔離預覽"></iframe>
+        <p>本機安全適配預覽；不會載入遠端素材，也不代表上游原始專案可直接以 file:// 執行。</p>
+      </section>
+
+      <section class="content-summary" aria-labelledby="live-content-summary-title">
+        <div class="summary-section-heading">
+          <h3 id="live-content-summary-title">元件與來源摘要</h3>
+          <span id="live-detail-offline" class="summary-status"></span>
+        </div>
+        <dl class="summary-fields">
+          <div><dt>類型</dt><dd id="live-detail-type"></dd></div>
+          <div class="summary-wide"><dt>功能摘要</dt><dd id="live-detail-summary"></dd></div>
+          <div class="summary-wide"><dt>適用場景</dt><dd><div id="live-detail-use-cases" class="chips summary-use-cases"></div></dd></div>
+        </dl>
+        <dl class="detail-meta">
+          <div><dt>互動</dt><dd id="live-detail-interactions"></dd></div>
+          <div><dt>技術棧</dt><dd id="live-detail-stack"></dd></div>
+        </dl>
+        <div>
+          <h3 class="detail-label">風險與適配標籤</h3>
+          <div id="live-detail-risks" class="chips"></div>
+        </div>
+      </section>
+
+      <section class="usage-guide" aria-labelledby="live-usage-title">
+        <div class="usage-guide-heading"><h3 id="live-usage-title">整合方式與預期結果</h3></div>
+        <ol class="usage-steps">
+          <li class="usage-step"><h4>如何使用</h4><p id="live-detail-how-to-use"></p></li>
+          <li class="usage-step"><h4>預期產出</h4><p id="live-detail-expected-output"></p></li>
+          <li class="usage-step"><h4>如何查看結果</h4><p id="live-detail-how-to-view"></p></li>
+        </ol>
+        <div class="tool-compatibility-note"><h4>工具能力提醒</h4><p id="live-detail-tool-note"></p></div>
+      </section>
+      <details id="live-detail-original" class="original-details" hidden>
+        <summary>查看英文原文 <span lang="en">Original</span></summary>
+        <div id="live-detail-original-content" class="original-content" lang="en"></div>
+      </details>
+
+      <section class="dependency-section" aria-labelledby="live-dependency-title">
+        <h3 id="live-dependency-title">檔案與專案相依</h3>
+        <p id="live-multifile-notice" class="raw-warning"></p>
+        <div class="dependency-grid">
+          <div><h4>來源檔案</h4><ul id="live-detail-files"></ul></div>
+          <div><h4>相依與授權</h4><ul id="live-detail-dependencies"></ul></div>
+        </div>
+      </section>
+
+      <div class="detail-actions">
+        <button id="copy-live-code" class="action-primary" type="button">複製主要程式碼</button>
+        <button id="copy-live-handoff" class="action-secondary" type="button">複製完整 Codex 整合指令</button>
+        <a id="open-live-example" class="button-link action-tertiary" target="_blank" rel="noreferrer">開啟本機可執行範例</a>
+        <a id="open-live-source" class="button-link action-tertiary" target="_blank" rel="noreferrer">開啟本機來源檔</a>
+        <a id="download-live-asset" class="button-link action-tertiary" download>下載可直接使用檔案</a>
+        <a id="open-live-upstream" class="button-link action-tertiary" target="_blank" rel="noreferrer">開啟此筆上游來源</a>
+        <span id="live-extra-downloads" class="direct-use-extra-actions"></span>
+        <button id="live-dialog-close" class="action-quiet" type="button">關閉</button>
+      </div>
+      <details class="provenance-details">
+        <summary>來源證明與上游專案／Provenance</summary>
+        <dl class="detail-meta source-role-fields">
+          <div><dt>原作者／Creator</dt><dd id="live-detail-author"></dd></div>
+          <div><dt>上游貢獻者／Contributor</dt><dd id="live-detail-contributors"></dd></div>
+          <div><dt>發布者／維護者</dt><dd id="live-detail-publisher"></dd></div>
+          <div><dt>權利人／Rights holder</dt><dd id="live-detail-rights-holder"></dd></div>
+          <div><dt>本機改作者／Local adapter</dt><dd id="live-detail-adapter"></dd></div>
+          <div><dt>來源</dt><dd id="live-detail-source"></dd></div>
+          <div><dt>Commit</dt><dd id="live-detail-commit"></dd></div>
+          <div><dt>授權</dt><dd id="live-detail-license"></dd></div>
+          <div><dt>來源定位</dt><dd id="live-detail-position"></dd></div>
+        </dl>
+        <p id="live-local-source-note" class="direct-use-note" hidden></p>
+        <div class="detail-actions">
+          <a id="open-live-provenance" class="button-link action-tertiary" target="_blank" rel="noreferrer" hidden>查看單筆來源證明</a>
+          <a id="open-live-project" class="button-link action-tertiary" target="_blank" rel="noreferrer" hidden>開啟上游專案</a>
+        </div>
+      </details>
+      <p id="live-copy-status" class="copy-status" aria-live="polite"></p>
+    </div>
+  </dialog>
+
+  <dialog id="unified-detail-dialog" class="prompt-dialog unified-detail-dialog" aria-labelledby="unified-detail-title">
+    <div class="detail-shell unified-detail-shell">
+      <div class="detail-heading">
+        <div><p class="section-number">03 / 能力與成果證據</p><h2 id="unified-detail-title"></h2><p id="unified-detail-original-title" class="detail-original-title" lang="en"></p></div>
+        <button id="unified-detail-close-icon" class="icon-button" type="button" aria-label="關閉 Unified 詳情">×</button>
+      </div>
+
+      <section id="unified-preview-shell" class="unified-preview-shell" aria-labelledby="unified-preview-title">
+        <div class="unified-preview-heading">
+          <div><p>代表性成果證據</p><h3 id="unified-preview-title">成果長什麼樣</h3></div>
+          <div class="unified-preview-controls"><span id="unified-preview-status"></span><button id="unified-preview-expand" type="button" aria-pressed="false">放大預覽</button></div>
+        </div>
+        <div id="unified-preview-stage" class="unified-preview-stage"></div>
+        <p>預覽只載入一個本機成果，關閉即卸載；iframe 固定使用 <code>sandbox="allow-scripts"</code>。</p>
+      </section>
+
+      <section class="content-summary unified-summary" aria-labelledby="unified-summary-title">
+        <div class="summary-section-heading"><h3 id="unified-summary-title">這是什麼</h3><span id="unified-detail-example" class="summary-status"></span></div>
+        <p id="unified-detail-summary" class="unified-detail-lead"></p>
+        <div class="unified-evidence-grid">
+          <article><h4>如何使用</h4><p id="unified-detail-how"></p></article>
+          <article><h4>預期產出</h4><p id="unified-detail-output"></p></article>
+        </div>
+      </section>
+
+      <section id="unified-direct-use-panel" class="direct-use-panel" aria-labelledby="unified-direct-use-title" hidden>
+        <div class="direct-use-heading">
+          <div><p class="section-number">DIRECT USE · 直接帶走</p><h3 id="unified-direct-use-title">這個項目現在能直接做什麼</h3></div>
+          <span id="unified-direct-use-count" class="direct-use-count"></span>
+        </div>
+        <p id="unified-direct-use-note" class="direct-use-note"></p>
+        <div class="detail-actions direct-use-actions" aria-label="可直接使用資產">
+          <button id="unified-copy-direct-text" class="action-primary" type="button">複製來源內容</button>
+          <a id="unified-download-prompt" class="button-link action-primary" download>下載 Prompt</a>
+          <a id="unified-download-code" class="button-link action-primary" download>下載程式碼</a>
+          <a id="unified-download-workflow" class="button-link action-primary" download>下載 Workflow</a>
+          <a id="unified-download-pptx" class="button-link action-primary" download>下載 PPTX</a>
+          <a id="unified-download-generic" class="button-link action-primary" download>下載可直接使用檔案</a>
+          <a id="unified-download-manifest" class="button-link action-secondary" download>下載套件 Manifest</a>
+          <a id="unified-download-landscape-template" class="button-link action-secondary" download>下載通用橫式模板</a>
+          <a id="unified-download-portrait-template" class="button-link action-secondary" download>下載通用直式模板</a>
+          <a id="unified-open-local-source" class="button-link action-tertiary" target="_blank" rel="noreferrer">開啟本機來源檔</a>
+          <a id="unified-open-local-executable" class="button-link action-tertiary" target="_blank" rel="noreferrer" hidden>開啟本機可執行範例</a>
+          <a id="unified-open-source" class="button-link action-tertiary" target="_blank" rel="noreferrer" hidden>開啟此筆上游來源</a>
+          <span id="unified-extra-downloads" class="direct-use-extra-actions"></span>
+        </div>
+      </section>
+
+      <section id="unified-prompt-original-panel" class="content-summary unified-prompt-original" aria-labelledby="unified-prompt-original-title" hidden>
+        <div class="summary-section-heading"><h3 id="unified-prompt-original-title">Prompt 來源正文／Prompt source body</h3><span id="unified-prompt-original-status" role="status"></span></div>
+        <p>以下為公開版本的完整來源正文；上方複製與下載使用相同內容。安全改寫指令另列於下方的來源與安全區。</p>
+        <pre id="unified-prompt-original-body" tabindex="0" aria-label="完整 Prompt 來源正文"></pre>
+      </section>
+
+      <section id="unified-ppt-description-panel" class="ppt-description-panel" aria-labelledby="unified-ppt-description-title" hidden>
+        <div class="summary-section-heading"><div><p class="section-number">PPT · 條目專屬說明</p><h3 id="unified-ppt-description-title">這份簡報、模板或規格能怎麼用</h3></div><span id="unified-ppt-entry-kind"></span></div>
+        <div class="ppt-description-grid">
+          <article><h4>1. 這是什麼</h4><p id="unified-ppt-what-is"></p></article>
+          <article><h4>2. 可以做什麼</h4><p id="unified-ppt-can-do"></p></article>
+          <article><h4>3. 適合什麼場景／對象</h4><p id="unified-ppt-suitable-for"></p></article>
+          <article><h4>4. 要怎麼使用</h4><p id="unified-ppt-how-to-use"></p></article>
+          <article><h4>5. 會得到什麼</h4><p id="unified-ppt-expected-output"></p></article>
+          <article><h4>6. 目前可直接下載／複製什麼</h4><p id="unified-ppt-direct-use"></p></article>
+          <article><h4>7. 使用條件</h4><p id="unified-ppt-requirements"></p></article>
+          <article><h4>8. 來源與授權</h4><p id="unified-ppt-source-license"></p></article>
+          <article><h4>9. 版面方向</h4><p id="unified-ppt-orientation"></p></article>
+          <article><h4>10. 投影片數</h4><p id="unified-ppt-slide-count"></p></article>
+        </div>
+      </section>
+
+      <section id="unified-skill-text-panel" class="ppt-description-panel" aria-labelledby="unified-skill-text-title" hidden>
+        <div class="summary-section-heading"><div><p class="section-number">SKILL · TEXT FIRST</p><h3 id="unified-skill-text-title">完整 Skill 使用說明</h3></div><span>PowerPoint 非必需／No PowerPoint required</span></div>
+        <div class="ppt-description-grid">
+          <article><h4>1. 這是什麼／Purpose</h4><p id="unified-skill-purpose"></p></article>
+          <article><h4>2. 何時使用／When to use</h4><p id="unified-skill-when"></p></article>
+          <article><h4>3. 必要輸入／Inputs</h4><p id="unified-skill-inputs"></p></article>
+          <article><h4>4. 如何運作／Process</h4><p id="unified-skill-process"></p></article>
+          <article><h4>5. 具體輸出／Outputs</h4><p id="unified-skill-outputs"></p></article>
+          <article><h4>6. 工具／平台</h4><p id="unified-skill-tools"></p></article>
+          <article><h4>7. 安裝或使用方式</h4><p id="unified-skill-install"></p></article>
+          <article><h4>8. 相依與限制</h4><p id="unified-skill-limitations"></p></article>
+          <article><h4>9. 完整 Skill body／Artifact</h4><p id="unified-skill-body"></p></article>
+          <article><h4>10. 來源、角色與授權</h4><p id="unified-skill-attribution"></p></article>
+        </div>
+      </section>
+
+      <section class="content-summary" aria-labelledby="unified-source-role-title">
+        <div class="summary-section-heading"><h3 id="unified-source-role-title">來源與作者角色／Source &amp; authorship roles</h3><span>角色分開揭露</span></div>
+        <dl class="detail-meta unified-detail-meta">
+          <div><dt>來源專案</dt><dd id="unified-source-project"></dd></div>
+          <div><dt>單筆來源定位</dt><dd id="unified-source-entry-locator"></dd></div>
+          <div><dt>原作者／Creator</dt><dd id="unified-source-creator"></dd></div>
+          <div><dt>上游貢獻者／Contributor</dt><dd id="unified-source-contributors"></dd></div>
+          <div><dt>發布者／維護者</dt><dd id="unified-source-publisher"></dd></div>
+          <div><dt>權利人／Rights holder</dt><dd id="unified-source-rights-holder"></dd></div>
+          <div><dt>本機改作／Adapter</dt><dd id="unified-source-adapter"></dd></div>
+          <div><dt>連結語意與驗證</dt><dd id="unified-source-link-status"></dd></div>
+        </dl>
+        <p id="unified-local-source-note" class="direct-use-note" hidden></p>
+      </section>
+
+      <details class="technical-details">
+        <summary>查看技術、來源與使用條件</summary>
+        <div class="technical-details-body">
+          <dl class="detail-meta unified-detail-meta">
+            <div><dt>內容 / 成果</dt><dd id="unified-detail-types"></dd></div>
+            <div><dt>來源</dt><dd id="unified-detail-source"></dd></div>
+            <div><dt>Commit</dt><dd id="unified-detail-commit"></dd></div>
+            <div><dt>授權</dt><dd id="unified-detail-license"></dd></div>
+            <div><dt>離線狀態</dt><dd id="unified-detail-offline"></dd></div>
+            <div><dt>執行層級</dt><dd id="unified-detail-execution"></dd></div>
+            <div><dt>原始路徑</dt><dd id="unified-detail-path"></dd></div>
+            <div><dt>成果政策</dt><dd id="unified-detail-policy"></dd></div>
+          </dl>
+          <div class="unified-evidence-grid technical-evidence-grid">
+            <article><h4>需求與準備</h4><p id="unified-detail-requirements"></p></article>
+            <article><h4>執行就緒度</h4><p id="unified-detail-readiness"></p></article>
+          </div>
+          <div class="unified-tag-groups">
+            <div><h4>風格 / 互動 / 技術</h4><div id="unified-detail-tags" class="chips"></div></div>
+            <div><h4>相依與風險</h4><div id="unified-detail-risks" class="chips"></div></div>
+          </div>
+        </div>
+      </details>
+
+      <details class="provenance-details">
+        <summary>查看來源證明與成果版本／Provenance</summary>
+        <div class="detail-actions">
+          <a id="unified-open-provenance" class="button-link action-tertiary" target="_blank" rel="noreferrer" hidden>查看單筆來源證明</a>
+          <a id="unified-open-dataset" class="button-link action-tertiary" target="_blank" rel="noreferrer" hidden>開啟上游專案</a>
+        </div>
+        <dl id="unified-detail-provenance" class="provenance-grid"></dl>
+      </details>
+
+      <section class="related-section" aria-labelledby="related-title">
+        <div class="summary-section-heading"><h3 id="related-title">相關能力</h3><span>建置期篩選維度 · 來源多樣性</span></div>
+        <div id="unified-related-list" class="related-list"></div>
+      </section>
+
+      <details class="provenance-details">
+        <summary>交給 Codex 的安全使用指令</summary>
+        <p>這些操作會複製安全使用說明，與 Prompt 正文或來源檔內容分開。<span lang="en">Safety instructions are separate from the prompt body or source files.</span></p>
+        <div class="detail-actions">
+          <button id="unified-copy-handoff" class="action-secondary" type="button">複製 Codex 安全交接</button>
+          <button id="unified-copy-image-handoff" class="action-secondary" type="button">拿圖片問 Codex 找相似效果</button>
+        </div>
+      </details>
+      <div class="detail-actions unified-detail-actions" aria-label="比較、交接與來源操作">
+        <button id="unified-add-compare" class="action-secondary" type="button">加入比較</button>
+        <a id="unified-open-artifact" class="button-link action-tertiary" target="_blank" rel="noreferrer">開啟本機成果</a>
+        <a id="unified-open-original-artifact" class="button-link action-tertiary" target="_blank" rel="noreferrer">開啟來源原檔</a>
+        <button id="unified-detail-close" class="action-quiet" type="button">關閉</button>
+      </div>
+      <p id="unified-copy-status" class="copy-status" aria-live="polite"></p>
+    </div>
+  </dialog>
+
+  <dialog id="guided-dialog" class="prompt-dialog guided-dialog" aria-labelledby="guided-title">
+    <form id="guided-form" class="detail-shell guided-shell" method="dialog">
+      <div class="detail-heading">
+        <div><p class="section-number">導引探索 · 最多 4 步</p><h2 id="guided-title">把模糊需求轉成可重現搜尋</h2></div>
+        <button id="guided-close-icon" class="icon-button" type="button" aria-label="關閉導引搜尋">×</button>
+      </div>
+      <p id="guided-progress" class="guided-progress" aria-live="polite">步驟 1 / 4</p>
+
+      <fieldset class="guided-step" data-guide-step="0">
+        <legend><span>01</span>你想產生什麼？</legend>
+        <div class="guided-options">
+          <label><input type="radio" name="guided-output" value="web" checked><span>Web / 網頁</span></label>
+          <label><input type="radio" name="guided-output" value="ui"><span>UI 元件</span></label>
+          <label><input type="radio" name="guided-output" value="motion"><span>Motion</span></label>
+          <label><input type="radio" name="guided-output" value="ppt"><span>PPT / 簡報</span></label>
+          <label><input type="radio" name="guided-output" value="comfy"><span>ComfyUI Workflow</span></label>
+          <label><input type="radio" name="guided-output" value="github"><span>GitHub / README</span></label>
+          <label><input type="radio" name="guided-output" value="design-system"><span>Design System</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="guided-step" data-guide-step="1" hidden>
+        <legend><span>02</span>你想要什麼風格？</legend>
+        <div class="guided-options">
+          <label><input type="radio" name="guided-style" value="" checked><span>不限風格</span></label>
+          <label><input type="radio" name="guided-style" value="minimal"><span>Minimal / 極簡</span></label>
+          <label><input type="radio" name="guided-style" value="cinematic"><span>Cinematic / 電影感</span></label>
+          <label><input type="radio" name="guided-style" value="luxury"><span>Luxury / 精品</span></label>
+          <label><input type="radio" name="guided-style" value="brutalist"><span>Brutalist / 野獸派</span></label>
+          <label><input type="radio" name="guided-style" value="editorial"><span>Editorial / 編輯感</span></label>
+          <label><input type="radio" name="guided-style" value="professional"><span>Professional / 專業</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="guided-step" data-guide-step="2" hidden>
+        <legend><span>03</span>需要什麼互動或用途？</legend>
+        <div class="guided-options">
+          <label><input type="radio" name="guided-interaction" value="" checked><span>不限互動</span></label>
+          <label><input type="radio" name="guided-interaction" value="scroll"><span>Scroll / 滾動</span></label>
+          <label><input type="radio" name="guided-interaction" value="hover"><span>Hover</span></label>
+          <label><input type="radio" name="guided-interaction" value="text-reveal"><span>Text reveal</span></label>
+          <label><input type="radio" name="guided-interaction" value="drag"><span>Drag / 拖曳</span></label>
+          <label><input type="radio" name="guided-interaction" value="input"><span>Input / 表單</span></label>
+          <label><input type="radio" name="guided-interaction" value="report"><span>Report / 專案報告</span></label>
+          <label><input type="radio" name="guided-interaction" value="upscale"><span>Upscale / 圖片放大</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="guided-step" data-guide-step="3" hidden>
+        <legend><span>04</span>技術或環境限制？</legend>
+        <div class="guided-options">
+          <label><input type="radio" name="guided-technology" value="" checked><span>不限技術</span></label>
+          <label><input type="radio" name="guided-technology" value="react"><span>React</span></label>
+          <label><input type="radio" name="guided-technology" value="CSS"><span>Pure CSS</span></label>
+          <label><input type="radio" name="guided-technology" value="HTML"><span>HTML / JS</span></label>
+          <label><input type="radio" name="guided-technology" value="ComfyUI"><span>ComfyUI</span></label>
+          <label><input type="radio" name="guided-technology" value="PowerPoint"><span>PowerPoint</span></label>
+        </div>
+      </fieldset>
+
+      <div class="guided-actions">
+        <button id="guided-back" type="button" disabled>上一步</button>
+        <button id="guided-next" class="action-primary" type="button">下一步</button>
+        <button id="guided-apply" class="action-primary" type="submit" hidden>套用導引搜尋</button>
+      </div>
+    </form>
+  </dialog>
+
+  <aside id="compare-tray" class="compare-tray" aria-label="比較清單" hidden>
+    <div><span>比較</span><strong id="compare-tray-count">0 / 4</strong><p id="compare-tray-titles">尚未加入項目</p></div>
+    <button id="open-compare" type="button">開啟比較</button>
+    <button id="clear-compare" type="button">清空</button>
+  </aside>
+
+  <dialog id="compare-dialog" class="prompt-dialog compare-dialog" aria-labelledby="compare-title">
+    <div class="detail-shell compare-shell">
+      <div class="detail-heading"><div><p class="section-number">比較 · 最多 4 項</p><h2 id="compare-title">比較成果與使用條件</h2></div><button id="compare-close-icon" class="icon-button" type="button" aria-label="關閉比較">×</button></div>
+      <p id="compare-compatibility" class="compare-compatibility"></p>
+      <div id="compare-grid" class="compare-grid"></div>
+      <div class="detail-actions"><button id="compare-clear-dialog" type="button">清空比較</button><button id="compare-close" class="action-quiet" type="button">關閉</button></div>
+    </div>
+  </dialog>
+
+  <footer>
+    <p>Visual Prompt Atlas V2／本機 Prompt、Artifact、Workflow 與 Skill 目錄</p>
+    <p>唯讀瀏覽 · 確定性本機搜尋 · sandbox 預覽 · 授權閘門</p>
+  </footer>
+
+  <script src="catalog-data.js"></script>
+  <script src="catalog-prompts.js"></script>
+  <script src="catalog-core.js"></script>
+  <script src="live-ui-data.js"></script>
+  <script src="live-ui-code.js"></script>
+  <script src="live-ui-core.js"></script>
+  <script src="technical-marker-registry.js"></script>
+  <script src="localization-zh-TW.js"></script>
+  <script src="download-runtime.js"></script>
+  <script src="app.js"></script>
+  <script src="direct-use-prompt-data.js"></script>
+  <script src="unified-index-v2.js"></script>
+  <script src="unified-search-core-v2.js"></script>
+  <script src="unified-app-v2.js"></script>
+</body>
+</html>

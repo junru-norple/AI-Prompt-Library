@@ -1,0 +1,28 @@
+:root { color-scheme: dark; font-family: Aptos, "Segoe UI Variable", "Microsoft JhengHei", system-ui, sans-serif; color: #e8efee; background: #0c1417; }
+* { box-sizing: border-box; }
+body { min-width: 320px; min-height: 100vh; margin: 0; padding: clamp(.75rem, 2vw, 1.25rem); overflow-x: hidden; background: #0c1417; }
+main { width: min(76rem, 100%); min-width: 0; margin: 0 auto; }
+header { min-width: 0; padding: .65rem .75rem 1rem; display: flex; align-items: end; justify-content: space-between; gap: 1rem; }
+header > * { min-width: 0; }
+header p { margin: 0; color: #76c6d6; font: 700 .68rem/1.4 "Cascadia Mono", Consolas, monospace; letter-spacing: .12em; }
+h1 { margin: .35rem 0 0; color: #fff; font-size: clamp(1.35rem, 4vw, 2.2rem); line-height: 1.1; letter-spacing: -.035em; overflow-wrap: anywhere; word-break: break-word; }
+dl { margin: 0; display: flex; border: 1px solid #33464b; border-radius: .6rem; overflow: hidden; }
+dl div { min-width: 5rem; padding: .45rem .65rem; }
+dl div + div { border-left: 1px solid #33464b; }
+dt { color: #8ca1a5; font: .62rem/1.3 "Cascadia Mono", Consolas, monospace; text-transform: uppercase; }
+dd { margin: .1rem 0 0; color: #a5dce5; font: 700 1rem/1.3 "Cascadia Mono", Consolas, monospace; overflow-wrap: anywhere; }
+.graph-shell { min-height: 32rem; max-height: 68vh; overflow: auto; overscroll-behavior: contain; border: 1px solid #33464b; border-radius: 1rem; background: #111c20; box-shadow: inset 0 0 0 1px rgba(112,148,155,.06); }
+#graph { width: 100%; min-width: 48rem; min-height: 32rem; display: block; }
+.link { fill: none; stroke: #58767d; stroke-width: 2.2; opacity: .6; }
+.node rect { fill: #1d2d32; stroke: #56757b; stroke-width: 1.5; rx: 10; }
+.node { outline: none; }
+.node:focus rect { stroke: #aeeef7; stroke-width: 3; }
+.node foreignObject { overflow: hidden; pointer-events: none; }
+.node-copy { width: 100%; height: 100%; min-width: 0; display: flex; flex-direction: column; justify-content: center; gap: 4px; overflow: hidden; color: #f1f6f5; }
+.node-title, .node-type { min-width: 0; margin: 0; overflow-wrap: anywhere; word-break: break-word; white-space: normal; }
+.node-title { color: #f1f6f5; font: 650 14px/1.22 Aptos, "Segoe UI", sans-serif; }
+.node-type { color: #8fcbd6; font: 11px/1.25 "Cascadia Mono", Consolas, monospace; }
+.node.is-api rect { fill: #3d2b25; stroke: #c17f61; }
+.node.is-output rect { fill: #19362f; stroke: #5fa38f; }
+#graph-note { margin: .65rem .75rem 0; color: #849a9e; font-size: .76rem; line-height: 1.55; overflow-wrap: anywhere; word-break: break-word; }
+@media (max-width: 40rem) { header { align-items: flex-start; flex-direction: column; } .graph-shell { min-height: 27rem; } #graph { min-height: 27rem; } }

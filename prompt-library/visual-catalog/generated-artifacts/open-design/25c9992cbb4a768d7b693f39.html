@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'sha256-4ldFw2J4yhzQndSwYR4ip7Io8KRkZPtyQBBivV5IK4A='; img-src data:; font-src 'none'; media-src 'none'; connect-src 'none'; frame-src 'none'; child-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"><meta name="atlas-source-entry" content="open-design-official:plugin:create-slides-pitch-b725bfa7">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Example Pitch Slides</title>
+  <style>
+    :root {
+      --ink: #101219;
+      --muted: #6d7280;
+      --paper: #f6f2e9;
+      --blue: #264fbb;
+      --green: #08755f;
+      --rose: #b8405a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #ded8cb;
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      display: grid;
+      gap: 18px;
+      padding: 22px;
+    }
+    .slide {
+      width: min(1120px, 100%);
+      min-height: 630px;
+      margin: 0 auto;
+      background: var(--paper);
+      border: 1px solid #cfc7b7;
+      border-radius: 8px;
+      padding: 52px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      box-shadow: 0 18px 45px rgba(35, 31, 24, .12);
+      break-after: page;
+    }
+    .eyebrow {
+      color: var(--blue);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-weight: 850;
+      font-size: 13px;
+    }
+    h1, h2 {
+      margin: 14px 0 0;
+      letter-spacing: 0;
+      line-height: .98;
+    }
+    h1 { font-size: clamp(48px, 8vw, 88px); max-width: 920px; }
+    h2 { font-size: clamp(38px, 5vw, 62px); max-width: 880px; }
+    p {
+      color: var(--muted);
+      font-size: 20px;
+      line-height: 1.45;
+      max-width: 780px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      align-self: center;
+      margin-top: 34px;
+    }
+    .tile {
+      border: 1px solid #d7cfbf;
+      background: #fffaf0;
+      border-radius: 8px;
+      padding: 22px;
+      min-height: 150px;
+    }
+    .num {
+      font-size: 46px;
+      font-weight: 880;
+      color: var(--green);
+      line-height: 1;
+    }
+    .tile span {
+      display: block;
+      color: var(--muted);
+      margin-top: 10px;
+      font-weight: 650;
+    }
+    .diagram {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      align-self: center;
+    }
+    .panel {
+      border-radius: 8px;
+      padding: 28px;
+      min-height: 260px;
+      border: 1px solid #d7cfbf;
+      background: #fffaf0;
+    }
+    .panel strong {
+      display: block;
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+    footer {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 720;
+    }
+    @media print {
+      body { background: white; }
+      main { padding: 0; gap: 0; }
+      .slide { width: 100vw; min-height: 100vh; box-shadow: none; border: 0; border-radius: 0; }
+    }
+    @media (max-width: 760px) {
+      .slide { min-height: auto; padding: 28px; }
+      .grid, .diagram { grid-template-columns: 1fr; }
+    }
+  </style>
+<style data-atlas-owned-adapter>@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:0s!important;transition-delay:0s!important;scroll-behavior:auto!important}}</style></head>
+<body data-atlas-language-policy="ORIGINAL_SOURCE_LABELED">
+  <main>
+    <section class="slide">
+      <div>
+        <div class="eyebrow">Atlas Desk seed deck</div>
+        <h1>The operating layer for design-led customer teams.</h1>
+        <p>Atlas Desk turns messy launch work into one shared, measurable command surface.</p>
+      </div>
+      <footer><span>01</span><span>Confidential</span></footer>
+    </section>
+    <section class="slide">
+      <div>
+        <div class="eyebrow">Problem</div>
+        <h2>Teams ship through scattered tabs, stale docs, and invisible owner drift.</h2>
+      </div>
+      <div class="grid">
+        <div class="tile"><div class="num">37%</div><span>of launch work is duplicated across tools.</span></div>
+        <div class="tile"><div class="num">4.6h</div><span>lost weekly to status reconstruction.</span></div>
+        <div class="tile"><div class="num">2x</div><span>more escalations when owners are unclear.</span></div>
+      </div>
+      <footer><span>02</span><span>Problem</span></footer>
+    </section>
+    <section class="slide">
+      <div>
+        <div class="eyebrow">Solution</div>
+        <h2>A live workspace that converts work signals into launch decisions.</h2>
+      </div>
+      <div class="diagram">
+        <div class="panel"><strong>Before</strong><p>Manual status docs, fragmented charts, and late risk reviews.</p></div>
+        <div class="panel"><strong>After</strong><p>One dashboard for owners, blockers, tasks, customer impact, and next actions.</p></div>
+      </div>
+      <footer><span>03</span><span>Product</span></footer>
+    </section>
+    <section class="slide">
+      <div>
+        <div class="eyebrow">Traction</div>
+        <h2>Early teams use Atlas Desk as their daily launch room.</h2>
+      </div>
+      <div class="grid">
+        <div class="tile"><div class="num">18</div><span>design-partner teams</span></div>
+        <div class="tile"><div class="num">42k</div><span>workflow events processed</span></div>
+        <div class="tile"><div class="num">91%</div><span>weekly active operators</span></div>
+      </div>
+      <footer><span>04</span><span>Traction</span></footer>
+    </section>
+    <section class="slide">
+      <div>
+        <div class="eyebrow">Ask</div>
+        <h2>Raising $2.5M to turn design-partner pull into a repeatable sales motion.</h2>
+        <p>Use of funds: product integrations, enterprise readiness, founder-led sales, and customer success playbooks.</p>
+      </div>
+      <footer><span>05</span><span>Ask</span></footer>
+    </section>
+  </main>
+<aside id="atlas-source-proof" aria-label="Atlas 來源證據 / Source evidence" data-language-exempt="original-source" style="all:initial;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;position:relative;z-index:2147483647;padding:10px 14px;color:#30464d;background:#f8faf9;border-top:1px solid rgba(21,39,45,.22);font:12px/1.4 ui-monospace,Consolas,monospace"><span>來源版式離線適配（保留原文）· 原始程式已停用；本機適配器提供頁面與減動控制<br><span lang="en">Offline source-layout adaptation; original text retained. Source scripts are disabled; local adapters provide page and reduced-motion controls.</span></span><span>bf714528070d · e6b9cebdaa7a</span></aside><script data-atlas-owned-adapter="0" data-atlas-script-sha256="e25745c36278ca1cd09dd4b0611e22a7b228f0a46464fb72401062bd5e482b80">(function reducedMotionRuntime() {
+  'use strict';
+  const media = matchMedia('(prefers-reduced-motion: reduce)');
+  const held = new Map();
+  let scheduled = 0, closed = false;
+  const state = { version: 1, reduced: media.matches, sampled: 0, scheduled: false };
+  Object.defineProperty(window, '__atlasSourceMotion', { value: state });
+  function scan() {
+    scheduled = 0; state.scheduled = false;
+    if (closed) return;
+    state.reduced = media.matches;
+    const current = new Set(document.getAnimations().filter(animation => animation instanceof CSSAnimation));
+    for (const [animation] of held) if (!current.has(animation)) held.delete(animation);
+    if (!media.matches) {
+      for (const [animation, prior] of held) {
+        animation.playbackRate = prior.rate;
+        animation.currentTime = prior.time;
+        if (prior.state === 'running') animation.play();
+        else if (prior.state === 'paused') animation.pause();
+      }
+      held.clear(); return;
+    }
+    for (const animation of current) {
+      if (held.has(animation)) continue;
+      const effect = animation.effect, timing = effect && effect.getTiming();
+      if (!timing || !Number.isFinite(Number(timing.duration)) || Number(timing.duration) <= 0) continue;
+      const prior = { state: animation.playState, time: animation.currentTime, rate: animation.playbackRate };
+      const duration = Number(timing.duration), delay = Number(timing.delay) || 0;
+      const iterations = Number(timing.iterations);
+      const pose = iterations === Infinity ? delay + duration / 2 : delay + duration * iterations;
+      if (!Number.isFinite(pose)) continue;
+      animation.pause(); animation.currentTime = Math.max(0, pose);
+      held.set(animation, prior); state.sampled++;
+    }
+  }
+  function schedule() {
+    if (closed || scheduled || (!media.matches && !held.size)) return;
+    state.scheduled = true; scheduled = requestAnimationFrame(scan);
+  }
+  const resize = new ResizeObserver(() => { if (media.matches) schedule(); });
+  resize.observe(document.documentElement);
+  document.addEventListener('animationstart', schedule, true);
+  document.addEventListener('atlas-source-deck-change', schedule);
+  document.addEventListener('DOMContentLoaded', schedule, { once: true });
+  window.addEventListener('load', schedule, { once: true });
+  media.addEventListener('change', schedule);
+  window.addEventListener('pagehide', () => {
+    closed = true; resize.disconnect(); media.removeEventListener('change', schedule);
+    document.removeEventListener('animationstart', schedule, true);
+    document.removeEventListener('atlas-source-deck-change', schedule);
+    if (scheduled) cancelAnimationFrame(scheduled);
+    // A bfcache page retains the source Animation objects and their original
+    // playback state; discard neither merely because the document is hidden.
+    scheduled = 0; state.scheduled = false;
+  });
+  window.addEventListener('pageshow', () => {
+    if (!closed) return;
+    closed = false; resize.observe(document.documentElement);
+    document.addEventListener('animationstart', schedule, true);
+    document.addEventListener('atlas-source-deck-change', schedule);
+    media.addEventListener('change', schedule);
+    schedule();
+  });
+  schedule();
+})();</script></body>
+</html>

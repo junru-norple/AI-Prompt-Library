@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'sha256-5twXIp16+CQnT3ApX4lRKUK0p4r5WSUJK/tbdSMKrg0=' 'sha256-4ldFw2J4yhzQndSwYR4ip7Io8KRkZPtyQBBivV5IK4A='; img-src data:; font-src 'none'; media-src 'none'; connect-src 'none'; frame-src 'none'; child-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"><meta name="atlas-source-entry" content="open-design-official:plugin:example-frontend-slides-0dea2c59">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Write an AI-Workflow 101 like a Top Technology Explainer - AI literacy</title>
+
+
+
+
+
+
+<style>
+/* ===========================================
+   CSS CUSTOM PROPERTIES (THEME)
+   Bold Signal preset — change these to retheme
+   =========================================== */
+:root {
+    --stage-bg: #0d0d0d;
+    --slide-bg: #1a1a1a;
+    --bg-gradient: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+    --card-bg: #FF5722;
+    --card-bg-soft: rgba(255, 87, 34, 0.12);
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.72);
+    --text-faint: rgba(255, 255, 255, 0.58);
+    --text-on-card: #1a1a1a;
+    --line: rgba(255, 255, 255, 0.14);
+
+    /* Typography — authored at the 1920×1080 stage size */
+    --font-display: 'Archivo Black', sans-serif;
+    --font-body: 'Space Grotesk', sans-serif;
+    --title-size: 128px;
+    --h2-size: 84px;
+    --subtitle-size: 34px;
+    --body-size: 28px;
+
+    /* Spacing — authored at the 1920×1080 stage size */
+    --slide-pad: 96px;
+
+    /* Animation */
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --duration-normal: 0.7s;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ===========================================
+   FIXED 16:9 STAGE: MANDATORY BASE STYLES
+   (full contents of viewport-base.css)
+   Slides are authored at 1920×1080 and scaled as a whole.
+   =========================================== */
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background: var(--stage-bg, #000);
+}
+.deck-viewport {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    background: var(--stage-bg, #000);
+}
+/* Fixed 16:9 design canvas. JavaScript sets transform: translate(...) scale(...). */
+.deck-stage {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    transform-origin: 0 0;
+    background: var(--slide-bg, #fff);
+}
+/* Slides stack inside the fixed stage. Content laid out at 1920×1080, never reflowed per device. */
+.slide {
+    position: absolute;
+    inset: 0;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    background: var(--slide-bg, #fff);
+}
+.slide.active,
+.slide.visible {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 1;
+}
+img, video, canvas, svg {
+    max-width: 100%;
+    max-height: 100%;
+}
+/* Presentation chrome stays outside the slide design system */
+.deck-controls {
+    position: fixed;
+    left: 50%;
+    bottom: 22px;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+@media print {
+    html, body { width: 1920px; height: auto; overflow: visible; background: #fff; }
+    .deck-viewport { position: static; overflow: visible; background: #fff; }
+    .deck-stage { position: static; width: auto; height: auto; transform: none !important; background: none; }
+    .slide {
+        position: relative;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        width: 1920px;
+        height: 1080px;
+        break-after: page;
+        page-break-after: always;
+    }
+    .slide:last-child { break-after: auto; page-break-after: auto; }
+    .deck-controls { display: none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.2s !important;
+        transition-delay: 0s !important;
+    }
+    .reveal { transform: none; }
+    .bar { transform: scaleY(1); }
+}
+
+/* ===========================================
+   SLIDE SHELL — shared chrome inside every slide
+   =========================================== */
+.slide {
+    background: var(--bg-gradient);
+    font-family: var(--font-body);
+    color: var(--text-primary);
+    transition: opacity 0.55s var(--ease-out-expo);
+}
+.slide-inner {
+    position: absolute;
+    inset: 0;
+    padding: var(--slide-pad);
+    display: flex;
+    flex-direction: column;
+}
+/* Slide number, top-left — Bold Signal signature */
+.slide-no {
+    position: absolute;
+    top: 56px;
+    left: var(--slide-pad);
+    font-family: var(--font-display);
+    font-size: 30px;
+    letter-spacing: 0.08em;
+    color: var(--card-bg);
+}
+/* Breadcrumb nav, top-right — active section at full opacity */
+.crumbs {
+    position: absolute;
+    top: 62px;
+    right: var(--slide-pad);
+    display: flex;
+    gap: 36px;
+    font-size: 21px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+}
+.crumbs .on { color: var(--text-primary); }
+/* Baseline rule across the bottom of each slide */
+.baseline {
+    position: absolute;
+    left: var(--slide-pad);
+    right: var(--slide-pad);
+    bottom: 64px;
+    border-top: 1px solid var(--line);
+    padding-top: 18px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 19px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+}
+
+/* ===========================================
+   TYPOGRAPHY
+   =========================================== */
+.display {
+    font-family: var(--font-display);
+    font-size: var(--title-size);
+    line-height: 0.98;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+}
+.h2 {
+    font-family: var(--font-display);
+    font-size: var(--h2-size);
+    line-height: 1.02;
+    text-transform: uppercase;
+}
+.kicker {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--card-bg);
+    margin-bottom: 30px;
+}
+.lede {
+    font-size: var(--subtitle-size);
+    line-height: 1.5;
+    color: var(--text-secondary);
+    max-width: 60ch;
+}
+
+/* ===========================================
+   ANIMATIONS — trigger via .visible on the slide
+   =========================================== */
+.reveal {
+    opacity: 0;
+    transform: translateY(34px);
+    transition: opacity var(--duration-normal) var(--ease-out-expo),
+                transform var(--duration-normal) var(--ease-out-expo);
+}
+.slide.visible .reveal { opacity: 1; transform: translateY(0); }
+.reveal:nth-child(1) { transition-delay: 0.08s; }
+.reveal:nth-child(2) { transition-delay: 0.18s; }
+.reveal:nth-child(3) { transition-delay: 0.28s; }
+.reveal:nth-child(4) { transition-delay: 0.38s; }
+.reveal:nth-child(5) { transition-delay: 0.48s; }
+.reveal:nth-child(6) { transition-delay: 0.58s; }
+/* Nested reveal groups enter after the slide heading, top-down */
+.agenda .reveal:nth-child(1),
+.points .reveal:nth-child(1),
+.compare .reveal:nth-child(1),
+.grid4 .reveal:nth-child(1),
+.chart .reveal:nth-child(1) { transition-delay: 0.46s; }
+.agenda .reveal:nth-child(2),
+.points .reveal:nth-child(2),
+.compare .reveal:nth-child(2),
+.grid4 .reveal:nth-child(2),
+.chart .reveal:nth-child(2) { transition-delay: 0.54s; }
+.agenda .reveal:nth-child(3),
+.points .reveal:nth-child(3),
+.grid4 .reveal:nth-child(3),
+.chart .reveal:nth-child(3) { transition-delay: 0.62s; }
+.agenda .reveal:nth-child(4),
+.grid4 .reveal:nth-child(4),
+.chart .reveal:nth-child(4) { transition-delay: 0.7s; }
+
+/* ===========================================
+   S1 · TITLE — orange card focal point
+   =========================================== */
+.title-card {
+    margin: auto 0;
+    background: var(--card-bg);
+    color: var(--text-on-card);
+    padding: 90px 100px 84px;
+    width: 1300px;
+}
+.title-card .display { color: var(--text-on-card); }
+.title-card .meta {
+    display: flex;
+    gap: 48px;
+    margin-top: 44px;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+/* ===========================================
+   S2 · AGENDA — numbered editorial list
+   =========================================== */
+.agenda { margin-top: 56px; display: flex; flex-direction: column; }
+.agenda-row {
+    display: flex;
+    align-items: baseline;
+    gap: 56px;
+    padding: 34px 0;
+    border-top: 1px solid var(--line);
+    font-size: 44px;
+    font-weight: 500;
+}
+.agenda-row:last-child { border-bottom: 1px solid var(--line); }
+.agenda-row .idx {
+    font-family: var(--font-display);
+    font-size: 30px;
+    color: var(--card-bg);
+    min-width: 90px;
+}
+.agenda-row .hint {
+    margin-left: auto;
+    font-size: 23px;
+    color: var(--text-faint);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+/* ===========================================
+   S3 · SECTION DIVIDER — giant number
+   =========================================== */
+.divider-no {
+    font-family: var(--font-display);
+    font-size: 460px;
+    line-height: 0.9;
+    color: transparent;
+    -webkit-text-stroke: 3px var(--card-bg);
+}
+
+/* ===========================================
+   S4 · BULLETS — one idea, three proofs
+   =========================================== */
+.points { margin-top: 64px; display: grid; gap: 44px; max-width: 1380px; }
+.point { display: flex; gap: 40px; align-items: flex-start; }
+.point .tick {
+    flex: none;
+    width: 56px; height: 56px;
+    background: var(--card-bg-soft);
+    border: 2px solid var(--card-bg);
+    display: grid;
+    place-items: center;
+}
+.point .tick svg { width: 26px; height: 26px; stroke: var(--card-bg); }
+.point h3 { font-size: 35px; font-weight: 700; margin-bottom: 8px; }
+.point p { font-size: 26px; line-height: 1.5; color: var(--text-secondary); }
+
+/* ===========================================
+   S5 · BIG STAT
+   =========================================== */
+.stat-wrap { margin: auto 0; display: flex; align-items: baseline; gap: 72px; }
+.stat-num {
+    font-family: var(--font-display);
+    font-size: 380px;
+    line-height: 0.9;
+    color: var(--card-bg);
+}
+.stat-side { max-width: 560px; }
+.stat-side h3 { font-size: 44px; font-weight: 700; margin-bottom: 20px; line-height: 1.15; }
+.stat-side p { font-size: 26px; line-height: 1.55; color: var(--text-secondary); }
+
+/* ===========================================
+   S6 · QUOTE
+   =========================================== */
+.quote-mark {
+    font-family: var(--font-display);
+    font-size: 200px;
+    line-height: 0.6;
+    color: var(--card-bg);
+}
+.quote-text {
+    font-size: 66px;
+    font-weight: 500;
+    line-height: 1.28;
+    max-width: 1480px;
+    margin-top: 36px;
+}
+.quote-attr { margin-top: 52px; font-size: 26px; color: var(--text-secondary); letter-spacing: 0.1em; text-transform: uppercase; }
+.quote-attr strong { color: var(--card-bg); }
+
+/* ===========================================
+   S7 · TWO-COLUMN COMPARISON
+   =========================================== */
+.compare { margin-top: 60px; margin-bottom: 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; flex: 1; min-height: 0; }
+.compare .col { border: 1px solid var(--line); padding: 56px 60px; display: flex; flex-direction: column; }
+.compare .col.hot { background: var(--card-bg); color: var(--text-on-card); border-color: var(--card-bg); }
+.compare h3 { font-family: var(--font-display); font-size: 40px; text-transform: uppercase; margin-bottom: 36px; }
+.compare ul { list-style: none; display: grid; gap: 24px; font-size: 27px; line-height: 1.45; }
+.compare .col li { padding-left: 40px; position: relative; color: var(--text-secondary); }
+.compare .col.hot li { color: rgba(26, 26, 26, 0.92); }
+.compare li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 16px;
+    width: 18px; height: 3px;
+    background: var(--card-bg);
+}
+.compare .col.hot li::before { background: var(--text-on-card); }
+
+/* ===========================================
+   S8 · PRINCIPLE GRID — 4 cards
+   =========================================== */
+.grid4 { margin-top: 60px; margin-bottom: 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 36px; flex: 1; min-height: 0; }
+.gcard { border: 1px solid var(--line); padding: 48px 52px; position: relative; }
+.gcard .gno {
+    font-family: var(--font-display);
+    font-size: 27px;
+    color: var(--card-bg);
+    margin-bottom: 22px;
+}
+.gcard h3 { font-size: 33px; font-weight: 700; margin-bottom: 12px; }
+.gcard p { font-size: 24px; line-height: 1.5; color: var(--text-secondary); }
+
+/* ===========================================
+   S9 · BAR CHART — pure CSS data viz
+   =========================================== */
+.chart { margin-top: 70px; flex: 1; display: flex; align-items: flex-end; gap: 64px; padding-bottom: 70px; }
+.bar-group { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; height: 100%; gap: 20px; }
+.bar {
+    background: var(--card-bg-soft);
+    border: 2px solid var(--card-bg);
+    position: relative;
+    transform-origin: bottom;
+    transform: scaleY(0);
+    transition: transform 0.9s var(--ease-out-expo);
+}
+.bar.solid { background: var(--card-bg); }
+.slide.visible .bar { transform: scaleY(1); }
+.slide.visible .bar-group:nth-child(1) .bar { transition-delay: 0.5s; }
+.slide.visible .bar-group:nth-child(2) .bar { transition-delay: 0.62s; }
+.slide.visible .bar-group:nth-child(3) .bar { transition-delay: 0.74s; }
+.slide.visible .bar-group:nth-child(4) .bar { transition-delay: 0.86s; }
+.bar-val {
+    position: absolute;
+    top: -52px; left: 0; right: 0;
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: 30px;
+    color: var(--text-primary);
+}
+.bar-label { text-align: center; font-size: 23px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); }
+
+/* ===========================================
+   S10 · CLOSING — inverted card
+   =========================================== */
+.close-card { margin: auto 0; }
+.close-card .display span { color: var(--card-bg); }
+.close-links { display: flex; gap: 56px; margin-top: 64px; font-size: 26px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+.close-links .lk { display: flex; align-items: center; gap: 16px; color: var(--text-secondary); }
+.close-links svg { width: 30px; height: 30px; stroke: var(--card-bg); }
+
+/* ===========================================
+   DECK CHROME — page counter (outside the stage)
+   =========================================== */
+.deck-controls {
+    font-family: var(--font-body);
+    font-size: 14px;
+    letter-spacing: 0.22em;
+    color: rgba(255, 255, 255, 0.72);
+    background: rgba(13, 13, 13, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    padding: 8px 18px;
+    border-radius: 999px;
+    user-select: none;
+}
+.deck-controls .cur { color: var(--card-bg); font-weight: 700; }
+</style>
+<style id="od-no-pager">.deck-controls,#counter,.deck-counter{display:none!important}</style>
+<style data-atlas-owned-adapter>
+[data-atlas-deck-shell]{position:fixed!important;inset:0!important;width:100%!important;height:100%!important;display:grid!important;grid-template-rows:minmax(0,1fr) auto auto!important;gap:0!important;padding:0!important;margin:0!important;box-sizing:border-box!important;overflow:hidden!important;z-index:1}
+[data-atlas-deck-viewport]{position:relative!important;min-width:0!important;min-height:0!important;overflow:hidden!important}
+[data-atlas-deck-root]{position:absolute!important;display:block!important;margin:0!important;padding:0!important;box-sizing:border-box!important;transform-origin:0 0!important;max-width:none!important;max-height:none!important;visibility:visible!important}
+[data-atlas-deck-root][data-atlas-deck-ready="WAITING_FOR_VISIBLE_VIEWPORT"]{visibility:hidden!important}
+[data-atlas-deck-root="STAGE_HORIZONTAL_SECTIONS"]{display:flex!important;flex-direction:column!important}
+[data-atlas-deck-viewport-stage]{position:relative!important;flex:1 1 auto!important;min-height:0!important;width:100%!important;height:auto!important;transform:none!important}
+[data-atlas-deck-replaced-controls]{display:none!important}
+[data-atlas-deck-slide]{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;box-sizing:border-box!important}
+[data-atlas-deck-slide][data-atlas-deck-active="false"]{visibility:hidden!important;opacity:0!important;pointer-events:none!important}
+[data-atlas-deck-slide][data-atlas-deck-active="true"]{visibility:visible!important;opacity:1!important}
+[data-atlas-deck-slide][data-atlas-deck-inner-scroll="true"]{overflow-y:auto!important;overflow-x:hidden!important;justify-content:flex-start!important;scroll-snap-type:none!important;scroll-behavior:auto!important;min-height:0!important}
+[data-atlas-source-content-owner][data-atlas-deck-inner-scroll="true"]:focus-visible{outline:2px solid currentColor!important;outline-offset:-2px!important}
+[data-atlas-source-content-owner][data-atlas-source-scroll-axes="xy"]{overflow-x:auto!important}
+[data-atlas-source-tail-gutter="taste-native-inline-end"]::after{content:""!important;display:block!important;position:static!important;flex:0 0 0!important;align-self:flex-start!important;width:var(--atlas-source-tail-extent)!important;min-width:var(--atlas-source-tail-extent)!important;max-width:none!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important;border:0!important;pointer-events:none!important}
+[data-atlas-deck-controls]{min-width:0!important;position:relative!important;display:block!important;z-index:2}
+[data-atlas-deck-shell]>#atlas-source-proof{position:relative!important;inset:auto!important;width:100%!important;min-width:0!important;min-height:0!important;max-height:32vh!important;overflow:auto!important;margin:0!important;flex-wrap:wrap!important;overflow-wrap:anywhere!important}
+</style><style data-atlas-owned-adapter>@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:0s!important;transition-delay:0s!important;scroll-behavior:auto!important}}</style></head>
+<body data-atlas-language-policy="ORIGINAL_SOURCE_LABELED">
+<div class="deck-viewport">
+    <main class="deck-stage" id="deckStage" aria-label="Slide deck">
+
+        
+        <section class="slide active visible">
+            <div class="slide-inner">
+                <div class="slide-no">01</div>
+                <nav class="crumbs"><span class="on">Intro</span><span>Why</span><span>How</span><span>Next</span></nav>
+                <div class="title-card reveal">
+                    <h1 class="display">AI Workflow<br>101</h1>
+                    <div class="meta"><span>AI Literacy</span><span>·</span><span>For Leadership</span><span>·</span><span>15-Min Brief</span></div>
+                </div>
+                <div class="baseline"><span>AI Workflow 101</span><span>A worked example: Open Design</span></div>
+            </div>
+        </section>
+
+        
+        <section class="slide">
+            <div class="slide-inner">
+                <div class="slide-no">02</div>
+                <nav class="crumbs"><span class="on">Intro</span><span>Why</span><span>How</span><span>Next</span></nav>
+                <h2 class="h2 reveal">Agenda</h2>
+                <div class="agenda">
+                    <div class="agenda-row reveal"><span class="idx">01</span>Why AI agents matter now<span class="hint">Why</span></div>
+                    <div class="agenda-row reveal"><span class="idx">02</span>The workflow map: four steps<span class="hint">How</span></div>
+                    <div class="agenda-row reveal"><span class="idx">03</span>Pilot results &amp; risk controls<span class="hint">How</span></div>
+                    <div class="agenda-row reveal"><span class="idx">04</span>ROI and the 90-day rollout plan<span class="hint">Next</span></div>
+                </div>
+                <div class="baseline"><span>Agenda</span><span>02 / 10</span></div>
+            </div>
+        </section>
+
+        
+        <section class="slide">
+            <div class="slide-inner" style="justify-content: center;">
+                <nav class="crumbs"><span>Intro</span><span class="on">Why</span><span>How</span><span>Next</span></nav>
+                <div class="divider-no reveal">01</div>
+                <h2 class="h2 reveal" style="margin-top: 28px;">Why now:<br>agents on your desktop</h2>
+                <div class="baseline"><span>Section</span><span>03 / 10</span></div>
+            </div>
+        </section>
+
+        
+        <section class="slide">
+            <div class="slide-inner">
+                <div class="slide-no">04</div>
+                <nav class="crumbs"><span>Intro</span><span class="on">Why</span><span>How</span><span>Next</span></nav>
+                <p class="kicker reveal">Three reasons</p>
+                <h2 class="h2 reveal" style="font-size: 64px;">The shift is<br>already at your desk</h2>
+                <div class="points">
+                    <div class="point reveal">
+                        <span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="#FF5722" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></span>
+                        <div><h3>Your files are the interface</h3><p>Local agents read your actual folders, Figma exports, and code — no upload, no re-typing the brief into a chat window.</p></div>
+                    </div>
+                    <div class="point reveal">
+                        <span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="#FF5722" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></span>
+                        <div><h3>Off-the-shelf agents are already strong</h3><p>Claude Code, Codex, and Cursor already sit on employee laptops. The workflow needs wiring, not a new model to train.</p></div>
+                    </div>
+                    <div class="point reveal">
+                        <span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="#FF5722" stroke-width="3"><path d="M4 12l5 5L20 6"/></svg></span>
+                        <div><h3>Every session compounds</h3><p>Preferences and design systems are saved as memory, so the tenth request needs less explaining than the first.</p></div>
+                    </div>
+                </div>
+                <div class="baseline"><span>Why now</span><span>04 / 10</span></div>
+            </div>
+        </section>
+
+        
+        <section class="slide">
+            <div class="slide-inner">
+                <div class="slide-no">05</div>
+                <nav class="crumbs"><span>Intro</span><span class="on">Why</span><span>How</span><span>Next</span></nav>
+                <div class="stat-wrap">
+                    <div class="stat-num reveal">4</div>
+                    <div class="stat-side reveal">
+                        <h3>Steps, not a black box</h3>
+                        <p>Every request runs the same loop: read the brief, propose a change, execute it locally, and log the result for review — repeatable enough to put in a training deck.</p>
+                    </div>
+                </div>
+                <div class="baseline"><span>The workflow map</span><span>05 / 10</span></div>
+            </div>
+        </section>
+
+        
+        <section class="slide">
+            <div class="slide-inner" style="justify-content: center;">
+                <nav class="crumbs"><span>Intro</span><span class="on">Why</span><span>How</span><span>Next</span></nav>
+                <div class="quote-mark reveal">&ldquo;</div>
+                <p class="quote-text reveal">We didn't need a new tool budget — our own coding agent already knew how to open a file. Open Design just gave it the workflow.</p>
+                <p class="quote-attr reveal"><strong>—</strong> Pilot lead, 12-person design team</p>
+                <div class="baseline"><span>Pilot feedback</span><span>06 / 10</span></div>
+            </div>
+        </section>
+
+        
+        <section class="slide">
+            <div class="slide-inner">
+                <div class="slide-no">07</div>
+                <nav class="crumbs"><span>Intro</span><span>Why</span><span class="on">How</span><span>Next</span></nav>
+                <h2 class="h2 reveal" style="font-size: 60px;">Unmanaged pilot vs. Open Design guardrails</h2>
+                <div class="compare">
+                    <div class="col reveal">
+                        <h3>Unmanaged AI pilot</h3>
+                        <ul>
+                            <li>No file audit trail, no version history</li>
+                            <li>Any employee, any model, no key controls</li>
+                            <li>Output lives in someone's chat history</li>
+                            <li>Risk review happens after launch</li>
+                        </ul>
+                    </div>
+                    <div class="col hot reveal">
+                        <h3>Open Design guardrails</h3>
+                        <ul>
+                            <li>Git-diffable changes, fully version controlled</li>
+                            <li>BYOK: your own model keys, your own usage caps</li>
+                            <li>21 supported coding agents, chosen by IT</li>
+                            <li>Local-first: nothing leaves the laptop by default</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="baseline"><span>Risk control</span><span>07 / 10</span></div>
+            </div>
+        </section>
+
+        
+        <section class="slide">
+            <div class="slide-inner">
+                <div class="slide-no">08</div>
+                <nav class="crumbs"><span>Intro</span><span>Why</span><span class="on">How</span><span>Next</span></nav>
+                <h2 class="h2 reveal" style="font-size: 60px;">The workflow map</h2>
+                <div class="grid4">
+                    <div class="gcard reveal"><div class="gno">A</div><h3>Read</h3><p>Agent opens the actual project folder — design files, code, docs — no manual export step.</p></div>
+                    <div class="gcard reveal"><div class="gno">B</div><h3>Propose</h3><p>Drafts a concrete change: a new page, an updated component, a slide deck.</p></div>
+                    <div class="gcard reveal"><div class="gno">C</div><h3>Execute</h3><p>Runs the change locally and shows a diff, exactly like a pull request.</p></div>
+                    <div class="gcard reveal"><div class="gno">D</div><h3>Verify</h3><p>A named reviewer approves or reverts before anything ships.</p></div>
+                </div>
+                <div class="baseline"><span>Workflow map</span><span>08 / 10</span></div>
+            </div>
+        </section>
+
+        
+        <section class="slide">
+            <div class="slide-inner">
+                <div class="slide-no">09</div>
+                <nav class="crumbs"><span>Intro</span><span>Why</span><span class="on">How</span><span>Next</span></nav>
+                <p class="kicker reveal">Pilot data, 6 weeks</p>
+                <h2 class="h2 reveal" style="font-size: 60px;">Where the 40 hours a week went</h2>
+                <div class="chart">
+                    <div class="bar-group reveal">
+                        <div class="bar solid" style="height: 78%;"><span class="bar-val">18h</span></div>
+                        <div class="bar-label">Iteration cycles saved</div>
+                    </div>
+                    <div class="bar-group reveal">
+                        <div class="bar" style="height: 52%;"><span class="bar-val">12h</span></div>
+                        <div class="bar-label">Handoff rework avoided</div>
+                    </div>
+                    <div class="bar-group reveal">
+                        <div class="bar" style="height: 30%;"><span class="bar-val">7h</span></div>
+                        <div class="bar-label">QA &amp; review</div>
+                    </div>
+                    <div class="bar-group reveal">
+                        <div class="bar" style="height: 15%;"><span class="bar-val">3h</span></div>
+                        <div class="bar-label">Onboarding new agents</div>
+                    </div>
+                </div>
+                <div class="baseline"><span>ROI, 12-person pilot</span><span>09 / 10</span></div>
+            </div>
+        </section>
+
+        
+        <section class="slide">
+            <div class="slide-inner">
+                <div class="slide-no">10</div>
+                <nav class="crumbs"><span>Intro</span><span>Why</span><span>How</span><span class="on">Next</span></nav>
+                <div class="close-card">
+                    <h2 class="display reveal" style="font-size: 150px;">Fund the<br><span>rollout.</span></h2>
+                    <div class="close-links reveal">
+                        <span class="lk"><svg viewBox="0 0 24 24" fill="none" stroke="#FF5722" stroke-width="2"><path d="M12 .5C5.7.5.7 5.6.7 11.9c0 5 3.2 9.3 7.7 10.8.6.1.8-.2.8-.5v-2c-3.1.7-3.8-1.3-3.8-1.3-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 1.7 2.6 1.2 3.3.9.1-.7.4-1.2.7-1.5-2.5-.3-5.2-1.3-5.2-5.7 0-1.3.4-2.3 1.2-3.1-.1-.3-.5-1.5.1-3 0 0 1-.3 3.1 1.2a10.7 10.7 0 0 1 5.7 0c2.2-1.5 3.1-1.2 3.1-1.2.6 1.5.2 2.7.1 3 .8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.2 5.7.4.3.7 1 .7 2v3c0 .3.2.6.8.5a11.3 11.3 0 0 0 7.7-10.8C23.3 5.6 18.3.5 12 .5z"/></svg>Weeks 1-2: pick one pilot team</span>
+                        <span class="lk"><svg viewBox="0 0 24 24" fill="none" stroke="#FF5722" stroke-width="2"><path d="M3 8l9 6 9-6M4 19h16a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1z"/></svg>Days 90: review ROI, expand</span>
+                    </div>
+                </div>
+                <div class="baseline"><span>90-day rollout</span><span>10 / 10</span></div>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+
+<div class="deck-controls" aria-hidden="true"><span class="cur" id="pageCur">1</span>&nbsp;/&nbsp;<span id="pageTotal">10</span></div>
+
+
+
+<aside id="atlas-source-proof" aria-label="Atlas 來源證據 / Source evidence" data-language-exempt="original-source" style="all:initial;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;position:relative;z-index:2147483647;padding:10px 14px;color:#30464d;background:#f8faf9;border-top:1px solid rgba(21,39,45,.22);font:12px/1.4 ui-monospace,Consolas,monospace"><span>來源版式離線適配（保留原文）· 原始程式已停用；本機適配器提供頁面與減動控制<br><span lang="en">Offline source-layout adaptation; original text retained. Source scripts are disabled; local adapters provide page and reduced-motion controls.</span></span><span>bf714528070d · a4ffaf424047</span></aside><script data-atlas-owned-adapter="0" data-atlas-script-sha256="e6dc17229d7af824274f70295f89512942b4a78af95925092bfb5b75230aae0d">/* Atlas reviewed source deck adapter: no upstream runtime execution. */
+(function deckRuntime(config) {
+  'use strict';
+  function start() {
+    const roots = [...document.querySelectorAll(config.selector)];
+    if (roots.length !== 1) throw new Error('Source deck root binding changed.');
+    const deck = roots[0];
+    if (deck.dataset.atlasDeckInitialized === 'true') return;
+    const slides = [...deck.children].filter((node) => node.tagName === 'SECTION');
+    if (slides.length !== config.slide_count || [...deck.children].some((node) => !['SECTION', 'STYLE', 'SCRIPT', 'TEMPLATE'].includes(node.tagName)
+      && !(config.source_controls || []).some(selector => node.matches(selector)))) throw new Error('Source deck section binding changed.');
+    const sourceIsActive = config.variant === 'DIV_DECK_IS_ACTIVE_SECTIONS';
+    if ((config.variant === 'STAGE_ACTIVE_SECTIONS' || sourceIsActive) && slides.some((node) => !node.classList.contains('slide'))) throw new Error('Source stage slide grammar changed.');
+    if (sourceIsActive && deck.id !== 'deck') throw new Error('Source div deck identity changed.');
+    deck.dataset.atlasDeckInitialized = 'true';
+    const horizontal = config.variant === 'STAGE_HORIZONTAL_SECTIONS';
+    const scene = horizontal ? deck.parentNode : deck;
+    if (horizontal && (scene.id !== 'deck' || !scene.classList.contains('deck')
+      || [...scene.children].filter(node => node.classList.contains('demo-banner')).length !== 1
+      || [...scene.children].filter(node => node.classList.contains('chrome')).length !== 1)) throw new Error('Source horizontal scene binding changed.');
+    scene.dataset.atlasDeckRoot = config.variant;
+    if (config.source_horizontal_scroll || config.source_readable_scroll) {
+      // The original horizontal keyboard/dot controller is replaced by the
+      // local controls below. Its scroll/snap mechanism must not compete with
+      // the adapter's single active, absolute-positioned source page.
+      deck.style.setProperty('overflow', 'hidden', 'important');
+      deck.style.setProperty('scroll-snap-type', 'none', 'important');
+      deck.style.setProperty('scroll-behavior', 'auto', 'important');
+      deck.scrollLeft = 0; deck.scrollTop = 0;
+    }
+    for (const selector of config.source_controls || []) {
+      for (const control of document.querySelectorAll(selector)) {
+        if (slides.some(slide => slide.contains(control))) throw new Error('Source control selector intersects original slide content.');
+        control.dataset.atlasDeckReplacedControls = 'true'; control.inert = true;
+      }
+    }
+    if (horizontal) {
+      deck.dataset.atlasDeckViewportStage = 'true';
+      const sourceControls = [...scene.children].find(node => node.classList.contains('chrome'));
+      sourceControls.dataset.atlasDeckReplacedControls = 'true'; sourceControls.inert = true;
+    }
+    if (sourceIsActive) {
+      for (const selector of ['#nav-dots', '#slide-counter']) {
+        const sourceControl = document.querySelector(selector);
+        if (!sourceControl || sourceControl.parentNode !== deck.parentNode) throw new Error('Source div deck control binding changed.');
+        sourceControl.dataset.atlasDeckReplacedControls = 'true'; sourceControl.inert = true;
+      }
+    }
+    slides.forEach((slide, index) => { slide.dataset.atlasDeckSlide = String(index); });
+    if (config.variant === 'DECK_STAGE_SECTIONS' && !customElements.get('deck-stage')) customElements.define('deck-stage', class extends HTMLElement {});
+
+    const shell = document.createElement('div'), viewport = document.createElement('div'), controls = document.createElement('div');
+    shell.dataset.atlasDeckShell = 'true'; viewport.dataset.atlasDeckViewport = 'true'; controls.dataset.atlasDeckControls = 'true';
+    scene.parentNode.insertBefore(shell, scene); viewport.append(scene); shell.append(viewport, controls);
+    const proof = document.querySelector('#atlas-source-proof');
+    if (proof) shell.append(proof);
+    const shadow = controls.attachShadow({ mode: 'open' });
+    const style = document.createElement('style');
+    style.textContent = ':host{display:block;background:#f8faf9;color:#172327;font:12px/1.35 system-ui,sans-serif}nav{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:12px;align-items:center;max-width:520px;min-height:52px;margin:auto;padding:4px 8px;box-sizing:border-box}button{font:inherit;min-width:0;min-height:44px;padding:5px 8px;border:1px solid #617176;border-radius:3px;background:white;color:inherit;cursor:pointer;overflow-wrap:anywhere}button:disabled{opacity:.45;cursor:default}button:focus-visible{outline:3px solid #135e67;outline-offset:2px}output{min-width:5em;text-align:center}';
+    const nav = document.createElement('nav'), previous = document.createElement('button'), next = document.createElement('button'), counter = document.createElement('output');
+    nav.setAttribute('aria-label', '投影片導覽／Slide navigation');
+    previous.type = 'button'; next.type = 'button'; previous.textContent = '上一頁／Previous'; next.textContent = '下一頁／Next';
+    previous.setAttribute('aria-label', '上一頁／Previous slide'); next.setAttribute('aria-label', '下一頁／Next slide');
+    counter.setAttribute('aria-live', 'polite'); counter.setAttribute('aria-atomic', 'true');
+    nav.append(previous, counter, next); shadow.append(style, nav);
+    // This reviewed source builds decorative primitives and chart values from
+    // literal source data. Reproduce those primitives, never run its script.
+    // Random positions use the same original distribution, once per document.
+    if (config.source_orbit_data) {
+      const create = (id, count, cls, style) => {
+        const parent = deck.querySelector('#' + id);
+        if (!parent || parent.children.length) throw new Error('Source generated primitive container changed.');
+        for (let i = 0; i < count; i++) { const node = document.createElement('div'); node.className = cls; style(node, i); parent.append(node); }
+      };
+      for (const [id, count] of [['starfield1', 50], ['starfield4', 30], ['starfield7', 35], ['starfield10', 45]]) create(id, count, 'star', node => {
+        node.style.left = Math.random() * 100 + '%'; node.style.top = Math.random() * 100 + '%'; node.style.animationDelay = Math.random() * 3 + 's';
+      });
+      for (const [id, count] of [['particles1', 16], ['particles10', 20]]) create(id, count, 'p', (node, i) => {
+        node.style.background = ['var(--neon-cyan)', 'var(--neon-pink)', 'var(--neon-yellow)'][i % 3];
+        node.style.left = Math.random() * 100 + '%'; node.style.top = Math.random() * 100 + '%';
+        node.style.animationDelay = Math.random() * 5 + 's'; node.style.animationDuration = (6 + Math.random() * 6) + 's';
+      });
+      create('landscape10', 12, 'mountain', (node, i) => {
+        node.style.height = [30, 50, 70, 40, 60, 35, 55, 45, 80, 25, 50, 40][i] + 'px'; node.style.width = (60 + (i % 3) * 20) + 'px';
+      });
+    }
+    const sourceQuoteSizes = new Map();
+    const sourceHeadingSizes = new Map();
+    function sourceHeadingFit(slide) {
+      if (!config.source_heading_fit) return;
+      for (const heading of slide.querySelectorAll('h1.display')) {
+        if (!sourceHeadingSizes.has(heading)) sourceHeadingSizes.set(heading, {
+          value: heading.style.getPropertyValue('font-size'), priority: heading.style.getPropertyPriority('font-size')
+        });
+        const original = sourceHeadingSizes.get(heading);
+        if (original.value) heading.style.setProperty('font-size', original.value, original.priority);
+        else heading.style.removeProperty('font-size');
+        const base = parseFloat(getComputedStyle(heading).fontSize);
+        const fits = () => {
+          const box = heading.getBoundingClientRect(), clip = slide.getBoundingClientRect();
+          if (box.width <= 0 || clip.width <= 0) return false;
+          const walker = document.createTreeWalker(heading, NodeFilter.SHOW_TEXT); let node;
+          while ((node = walker.nextNode())) {
+            let index = 0;
+            for (const character of node.data) {
+              const end = index + character.length;
+              if (character.trim()) {
+                const range = document.createRange(); range.setStart(node, index); range.setEnd(node, end);
+                const rect = range.getBoundingClientRect();
+                if (rect.left < Math.max(box.left, clip.left) || rect.right > Math.min(box.right, clip.right)) return false;
+              }
+              index = end;
+            }
+          }
+          return true;
+        };
+        if (!(base > 0) || heading.getBoundingClientRect().width <= 0) continue;
+        if (!fits()) {
+          let low = Math.min(16, base), high = base;
+          heading.style.setProperty('font-size', low + 'px', 'important');
+          if (fits()) {
+            for (let i = 0; i < 20; i++) {
+              const mid = (low + high) / 2; heading.style.setProperty('font-size', mid + 'px', 'important');
+              if (fits()) low = mid; else high = mid;
+            }
+            heading.style.setProperty('font-size', low + 'px', 'important');
+          }
+        }
+        heading.dataset.atlasSourceHeadingFit = fits() ? 'FITTED_SOURCE_TEXT' : 'READABLE_FLOOR_EXCEEDS_SOURCE_BOX';
+      }
+    }
+    function sourceAutoFit(slide) {
+      if (!config.source_auto_fit) return;
+      for (const node of slide.querySelectorAll('.slide__kpi-val')) {
+        node.style.transform = ''; node.style.transformOrigin = '';
+        if (node.clientWidth > 0 && node.scrollWidth > node.clientWidth) { node.style.transform = 'scale(' + node.clientWidth / node.scrollWidth + ')'; node.style.transformOrigin = 'left top'; }
+      }
+      for (const node of slide.querySelectorAll('blockquote')) {
+        if (!slide.classList.contains('slide--quote')) continue;
+        if (!sourceQuoteSizes.has(node)) sourceQuoteSizes.set(node, parseFloat(getComputedStyle(node).fontSize));
+        const length = node.textContent.trim().length;
+        if (length > 100) node.style.fontSize = Math.max(16, Math.round(sourceQuoteSizes.get(node) * Math.max(0.5, 100 / length))) + 'px';
+      }
+    }
+    function sourceDataEndpoint() {
+      if (!config.source_orbit_data) return;
+      for (const node of deck.querySelectorAll('#barChart .chart-value')) node.textContent = String(parseInt(node.dataset.value, 10));
+      const chart = deck.querySelector('#barChart'), groups = [...chart.children];
+      const px = value => Number.parseFloat(value) || 0;
+      const outerHeight = node => { const style = getComputedStyle(node); return node.offsetHeight + px(style.marginTop) + px(style.marginBottom); };
+      const chartStyle = getComputedStyle(chart);
+      const contentHeight = chart.clientHeight - px(chartStyle.paddingTop) - px(chartStyle.paddingBottom);
+      const overhead = Math.max(...groups.map(group => {
+        const style = getComputedStyle(group);
+        return outerHeight(group.children[0]) + outerHeight(group.children[2]) + 2 * px(style.rowGap);
+      }));
+      // The source percentage's parent is auto-height, so its empty bars used
+      // to resolve to zero. A shared plot, derived from the source chart and
+      // original labels/gaps, preserves all five original percentage ratios.
+      const plotHeight = Math.max(0, contentHeight - overhead);
+      chart.dataset.atlasSourcePlotHeight = String(plotHeight);
+      for (const group of groups) {
+        const bar = group.children[1]; bar.style.flexShrink = '0';
+        const percent = Number(bar.dataset.height);
+        bar.style.height = (current === 3 ? plotHeight * percent / 100 : 0) + 'px';
+        bar.dataset.atlasSourcePercent = String(percent);
+      }
+      for (const node of deck.querySelectorAll('#hbarChart .hbar-fill')) node.style.width = (current === 4 ? node.dataset.width : '0') + '%';
+      for (const node of deck.querySelectorAll('#statsGrid .stat-number')) { const target = parseFloat(node.dataset.target); node.textContent = current === 6 ? (target % 1 !== 0 ? target.toFixed(1) : String(target)) + (node.dataset.suffix || '') : '0'; }
+    }
+    function needsReadableScroll(slide) {
+      if (!config.source_readable_scroll || window.innerWidth > config.source_readable_scroll_max_width) return false;
+      const clip = slide.getBoundingClientRect(), walker = document.createTreeWalker(slide, NodeFilter.SHOW_TEXT); let text;
+      while ((text = walker.nextNode())) {
+        if (!text.data.trim()) continue;
+        let element = text.parentElement || text.parentNode, hidden = false;
+        while (element && element !== slide) {
+          const style = getComputedStyle(element);
+          if (style.display === 'none' || style.visibility === 'hidden' || style.visibility === 'collapse') { hidden = true; break; }
+          element = element.parentElement || element.parentNode;
+        }
+        if (hidden) continue;
+        const range = document.createRange(); range.setStart(text, 0); range.setEnd(text, text.data.length);
+        const bounds = range.getBoundingClientRect();
+        if (bounds.bottom > bounds.top && (bounds.top < clip.top || bounds.bottom > clip.bottom)) return true;
+      }
+      return false;
+    }
+    // Only immutable, reviewed source roles enter this path. It reserves the
+    // source chrome and gives overflowing original content a positive scroll
+    // origin; it does not resize typography, remove text or repaint artwork.
+    const readableStates = new Map();
+    const px = value => Number.parseFloat(value) || 0;
+    function oneRole(slide, selector) {
+      if (selector === ':self') return slide;
+      const nodes = [...slide.querySelectorAll(selector)];
+      if (nodes.length !== 1) throw new Error('Source readable layout role binding changed.');
+      return nodes[0];
+    }
+    const sourceGraphicReleaseState = new Map();
+    function resetSourceGraphicReleases() {
+      for (const [node, values] of sourceGraphicReleaseState) {
+        for (const [key, original] of values) {
+          if (original.value) node.style.setProperty(key, original.value, original.priority);
+          else node.style.removeProperty(key);
+        }
+      }
+      sourceGraphicReleaseState.clear();
+    }
+    function applySourceGraphicReleases(slide) {
+      for (const graphic of config.source_graphic_releases || []) {
+        if (slides[graphic.index] !== slide) continue;
+        const node = oneRole(slide, graphic.selector);
+        if (String(node.tagName).toLowerCase() !== 'svg' || node.namespaceURI !== 'http://www.w3.org/2000/svg'
+          || node.getAttribute('viewBox') !== graphic.view_box || node.getAttribute('width') !== graphic.width
+          || node.getAttribute('height') !== graphic.height) throw new Error('Source graphic release geometry changed.');
+        let parent = node.parentNode;
+        for (const name of graphic.parent_chain) {
+          if (!parent?.classList.contains(name)) throw new Error('Source graphic release parent role changed.');
+          parent = parent.parentNode;
+        }
+        if (parent !== slide) throw new Error('Source graphic release page identity changed.');
+        let values = sourceGraphicReleaseState.get(node);
+        if (!values) { values = new Map(); sourceGraphicReleaseState.set(node, values); }
+        for (const key of ['overflow-x', 'overflow-y']) {
+          if (!values.has(key)) values.set(key, { value: node.style.getPropertyValue(key), priority: node.style.getPropertyPriority(key) });
+          node.style.setProperty(key, 'visible', 'important');
+        }
+      }
+    }
+    function rememberStyle(state, node, key, value) {
+      let values = state.styles.get(node);
+      if (!values) { values = new Map(); state.styles.set(node, values); }
+      if (!values.has(key)) values.set(key, { value: node.style.getPropertyValue(key), priority: node.style.getPropertyPriority(key) });
+      node.style.setProperty(key, value, 'important');
+    }
+    function resetReadableLayout(slide) {
+      const state = readableStates.get(slide);
+      if (!state) return null;
+      const prior = { owner: state.owner, top: state.owner.scrollTop, left: state.owner.scrollLeft,
+        scrolling: state.owner.dataset.atlasDeckInnerScroll === 'true', nested: [] };
+      state.owner.scrollTop = 0; state.owner.scrollLeft = 0;
+      if (state.wrapper) { state.wrapper.parentNode.insertBefore(state.content, state.wrapper); state.wrapper.remove(); state.wrapper = null; }
+      for (const [node, values] of state.styles) for (const [key, original] of values) {
+        if (original.value) node.style.setProperty(key, original.value, original.priority); else node.style.removeProperty(key);
+      }
+      state.styles.clear();
+      for (const [key, value] of state.attributes) {
+        if (value === null) state.owner.removeAttribute(key); else state.owner.setAttribute(key, value);
+      }
+      for (const [node, values] of state.nestedAttributes) {
+        prior.nested.push({ node, top: node.scrollTop, left: node.scrollLeft }); node.scrollTop = 0; node.scrollLeft = 0;
+        for (const [key, value] of values) { if (value === null) node.removeAttribute(key); else node.setAttribute(key, value); }
+        delete node.dataset.atlasSourceContentOwner; delete node.dataset.atlasSourceScrollAxes; delete node.dataset.atlasDeckInnerScroll;
+      }
+      state.nestedAttributes.clear();
+      state.owner.dataset.atlasDeckInnerScroll = 'false';
+      delete state.owner.dataset.atlasSourceContentOwner;
+      delete state.owner.dataset.atlasSourceScrollAxes;
+      return prior;
+    }
+    function localScrollOwner(slide) {
+      const state = readableStates.get(slide);
+      return state?.owner.dataset.atlasDeckInnerScroll === 'true' ? state.owner
+        : slide.dataset.atlasDeckInnerScroll === 'true' ? slide : null;
+    }
+    function applyTasteEndGutter(slide, state, set, scale) {
+      // Exact two source-native Taste editions only. The owned zero-height
+      // pseudo box reserves real horizontal end space, without changing the
+      // original content box widths, fonts, layout order or source pseudo art.
+      if (!config.source_native_flow_viewport) return;
+      if (slide.getAttribute('data-atlas-source-tail-gutter') !== null)
+        throw new Error('Source Taste previous end extent was not restored.');
+      const css = getComputedStyle(slide), pseudo = getComputedStyle(slide, '::after');
+      const px = value => /^(?:[0-9]+(?:\.[0-9]+)?)px$/.test(value) ? Number.parseFloat(value) : NaN;
+      const em = px(css.fontSize), left = px(css.paddingLeft) + px(css.borderLeftWidth), right = px(css.paddingRight) + px(css.borderRightWidth);
+      const box = slide.getBoundingClientRect();
+      if (!Number.isFinite(scale) || !(scale > 0) || !Number.isFinite(em) || !(em > 0)
+        || !Number.isFinite(left) || !Number.isFinite(right) || css.flexDirection !== 'column'
+        || !['none', 'normal'].includes(pseudo.content) || ![box.left, box.right, box.width, box.height].every(Number.isFinite)
+        || !(box.width > 0 && box.height > 0) || slide.scrollLeft !== 0)
+        throw new Error('Source Taste native end extent geometry is not measurable.');
+      const visible = node => {
+        for (let n = node; n && n !== slide; n = n.parentNode) {
+          if (['SCRIPT', 'STYLE', 'NOSCRIPT', 'TEMPLATE'].includes(n.tagName)) return false;
+          const style = getComputedStyle(n); if (style.display === 'none' || style.visibility !== 'visible') return false;
+        }
+        return true;
+      };
+      let maxRight = -Infinity, textCount = 0;
+      const include = rect => {
+        if (![rect.left, rect.right, rect.top, rect.bottom].every(Number.isFinite)) throw new Error('Source Taste end extent contains nonfinite bounds.');
+        if (rect.right > rect.left && rect.bottom > rect.top) maxRight = Math.max(maxRight, rect.right);
+      };
+      for (const node of slide.querySelectorAll('*')) if (visible(node)) include(node.getBoundingClientRect());
+      const walker = document.createTreeWalker(slide, NodeFilter.SHOW_TEXT); let text;
+      while ((text = walker.nextNode())) if (text.data.trim() && visible(text.parentNode)) {
+        const range = document.createRange(); range.setStart(text, 0); range.setEnd(text, text.data.length);
+        const rect = range.getBoundingClientRect(); include(rect);
+        if (rect.right > rect.left && rect.bottom > rect.top) textCount++;
+      }
+      if (!textCount || !Number.isFinite(maxRight)) throw new Error('Source Taste text end extent is missing.');
+      const contentStart = box.left + left * scale, contentEnd = box.right - right * scale;
+      if (maxRight <= contentEnd) return;
+      const width = (maxRight - contentStart) / scale + em;
+      if (!Number.isFinite(width) || !(width > 0)) throw new Error('Source Taste end extent width is invalid.');
+      set(slide, '--atlas-source-tail-extent', width + 'px');
+      slide.setAttribute('data-atlas-source-tail-gutter', 'taste-native-inline-end');
+    }
+    function applyReadableLayout(slide, prior) {
+      const recipe = (config.source_readable_layouts || []).find(item => slides[item.index] === slide);
+      if (!recipe) return;
+      const owner = oneRole(slide, recipe.owner), content = oneRole(slide, recipe.content);
+      const reserves = recipe.reserve.map(selector => oneRole(slide, selector));
+      const bounds = recipe.bounds.map(selector => oneRole(slide, selector));
+      let state = readableStates.get(slide);
+      if (!state) {
+        state = { owner, content, styles: new Map(), attributes: new Map(['tabindex', 'role', 'aria-label', 'data-atlas-source-tail-gutter'].map(key => [key, owner.getAttribute(key)])), nestedAttributes: new Map(), wrapper: null };
+        readableStates.set(slide, state);
+      } else if (state.owner !== owner || state.content !== content) throw new Error('Source readable layout owner identity changed.');
+      const set = (node, key, value) => rememberStyle(state, node, key, value);
+      const scale = Number(scene.dataset.atlasDeckScale);
+      if (!(scale > 0)) throw new Error('Source readable layout scale is invalid.');
+      if (recipe.kind === 'SOURCE_FLOW_CHILDREN') {
+        const graphics = new Map((recipe.definite_graphics || []).map(selector => { const node = oneRole(slide, selector); return [node, node.getBoundingClientRect().height / scale]; }));
+        if (config.source_native_flow_viewport) {
+          // This is an explicit responsive adaptation for the two immutable
+          // Taste editions, not a claimed source breakpoint. Retain the source
+          // gutters unless together they consume more than half the viewport;
+          // then retain one source body em on each edge, without shrinking type.
+          const css = getComputedStyle(slide), px = value => Number.parseFloat(value) || 0;
+          const em = px(css.fontSize), left = px(css.paddingLeft), right = px(css.paddingRight);
+          if (em > 0 && slide.clientWidth < 2 * (left + right)) {
+            for (const [key, value] of [['padding-left', left], ['padding-right', right], ['padding-top', px(css.paddingTop)], ['padding-bottom', px(css.paddingBottom)]]) set(slide, key, Math.min(value, em) + 'px');
+          }
+        }
+        if (recipe.source_block_flow) {
+          const spec = recipe.source_block_flow, children = Array.from(slide.children);
+          if (children.length !== spec.direct_roles.length || children.some((node, at) => !node.matches(spec.direct_roles[at])))
+            throw new Error('Source Block headerless direct role binding changed.');
+          for (const selector of spec.required_roles) oneRole(slide, selector);
+          const safe = node => {
+            const css = getComputedStyle(node);
+            for (const [key, value] of [['justify-content', css.justifyContent], ['align-items', css.alignItems], ['align-content', css.alignContent]])
+              if (['center', 'end', 'flex-end'].includes(value)) set(node, key, 'safe ' + value);
+          };
+          safe(slide);
+          const intrinsic = node => {
+            safe(node); set(node, 'flex-shrink', '0'); set(node, 'min-height', 'max-content'); set(node, 'min-width', 'min-content');
+            for (const child of node.children) if (!['absolute', 'fixed'].includes(getComputedStyle(child).position)) set(child, 'flex-shrink', '0');
+          };
+          const separate = (node, align) => {
+            const sourceFont = getComputedStyle(slide).fontSize, em = Number.parseFloat(sourceFont);
+            if (!/^(?:[0-9]+(?:\.[0-9]+)?)px$/.test(sourceFont) || !Number.isFinite(em) || !(em > 0) || !Number.isFinite(em * 2))
+              throw new Error('Source Block body spacing font is not a positive used pixel size.');
+            const gap = String(em * 2) + 'px';
+            // The source ornament remains painted, with its original size,
+            // rotation and DOM order, but has real space outside the copy.
+            set(node, 'position', 'relative'); set(node, 'inset', 'auto'); set(node, 'flex', '0 0 auto');
+            set(node, 'align-self', align); set(node, 'margin-top', gap); set(node, 'margin-bottom', gap);
+          };
+          if (spec.page_kind === 'intro' || spec.page_kind === 'split') {
+            // Retain the current original media-query column widths and row /
+            // column direction. Read real source boxes before changing flex.
+            const widths = children.map(node => node.getBoundingClientRect().width / scale);
+            if (!widths.every(value => Number.isFinite(value) && value > 0)) throw new Error('Source Block column width is not measurable.');
+            children.forEach((node, at) => { set(node, 'box-sizing', 'border-box'); set(node, 'width', widths[at] + 'px'); intrinsic(node); });
+            if (spec.page_kind === 'split') {
+              const visual = children[0], box = oneRole(slide, '.visual-box'), label = oneRole(slide, '.visual-label');
+              // This exact original panel contains a CSS shape and a text label,
+              // no image. Its former hidden clip loses the rotated label.
+              set(visual, 'overflow', 'visible'); intrinsic(box); separate(label, 'center');
+            }
+          } else {
+            const selector = spec.page_kind === 'hero' ? '.hero-frame' : spec.page_kind === 'quote' ? '.quote-frame' : '.close-frame';
+            const frame = oneRole(slide, selector); intrinsic(frame);
+            set(frame, 'display', 'flex'); set(frame, 'flex-direction', 'column');
+            set(frame, 'align-items', spec.page_kind === 'hero' ? 'flex-start' : 'safe center');
+            if (spec.page_kind === 'hero') {
+              separate(oneRole(slide, '.deco-pink-rect'), 'flex-end');
+              separate(oneRole(slide, '.deco-green-circle'), 'flex-end');
+              separate(oneRole(slide, '.deco-yellow-bar'), 'flex-start');
+            } else if (spec.page_kind === 'quote') {
+              separate(oneRole(slide, '.deco-quote-marks'), 'flex-start');
+              separate(oneRole(slide, '.deco-stripes'), 'flex-end');
+            } else separate(oneRole(slide, '.deco-star'), 'flex-end');
+          }
+        }
+        if (recipe.source_vellum_flow) {
+          const flow = recipe.source_vellum_flow, children = Array.from(slide.children), css = getComputedStyle(slide);
+          if (children.length !== flow.direct_roles.length || children.some((node, at) => !node.matches(flow.direct_roles[at])))
+            throw new Error('Source Vellum direct role binding changed.');
+          let compareLayout = null;
+          if (flow.page_kind === 'compare') {
+            const body = oneRole(slide, '.slide-body'), panels = Array.from(body.children);
+            if (panels.length !== 2 || !panels[0].matches('.compare-panel') || !panels[0].matches('.left')
+              || !panels[1].matches('.compare-panel') || !panels[1].matches('.right'))
+              throw new Error('Source Vellum compare panel binding changed.');
+            // The source body is display:contents. Measure the two real source
+            // panels before changing the parent layout, never its absent box.
+            const boxes = panels.map(node => node.getBoundingClientRect()), widths = boxes.map(box => box.width / scale);
+            const gap = (boxes[1].left - boxes[0].right) / scale;
+            if (!widths.every(value => Number.isFinite(value) && value > 0) || !Number.isFinite(gap) || gap < 0)
+              throw new Error('Source Vellum original compare columns are not measurable.');
+            compareLayout = { body, panels, widths, gap };
+          }
+          // The original source order becomes one reachable vertical flow.
+          // Centering is retained when it fits, with a positive overflow origin.
+          set(slide, 'display', 'flex'); set(slide, 'flex-direction', 'column');
+          set(slide, 'align-items', css.alignItems === 'center' ? 'safe center' : 'stretch');
+          const safe = node => { const style = getComputedStyle(node); for (const [key, value] of [['justify-content', style.justifyContent], ['align-items', style.alignItems], ['align-content', style.alignContent]]) if (value === 'center') set(node, key, 'safe center'); };
+          for (const node of children) safe(node);
+          const annotation = oneRole(slide, '.pin-annotation');
+          set(annotation, 'align-self', 'flex-start'); set(annotation, 'margin-top', 'var(--gap-md)');
+          if (flow.direct_roles.includes('header.slide-chrome')) {
+            const chrome = oneRole(slide, '.slide-chrome'); set(chrome, 'align-self', 'stretch');
+            set(chrome, 'margin-bottom', 'var(--gap-md)');
+          }
+          if (flow.page_kind === 'stats') {
+            const row = oneRole(slide, '.stats-row'), items = row.querySelectorAll('.pin-stat');
+            if (items.length !== 3) throw new Error('Source Vellum stat count changed.');
+            set(row, 'min-width', 'min-content'); set(row, 'align-self', 'safe center');
+            for (const node of items) safe(node);
+          } else if (flow.page_kind === 'compare') {
+            const body = oneRole(slide, '.slide-body'), panels = Array.from(body.children);
+            if (panels.length !== 2 || !panels[0].matches('.compare-panel') || !panels[0].matches('.left')
+              || !panels[1].matches('.compare-panel') || !panels[1].matches('.right'))
+              throw new Error('Source Vellum compare panel binding changed.');
+            const original = compareLayout, width = original.widths[0] + original.widths[1] + original.gap;
+            set(body, 'display', 'grid'); set(body, 'grid-template-columns', original.widths.map(value => value + 'px').join(' '));
+            set(body, 'column-gap', original.gap + 'px'); set(body, 'width', width + 'px'); set(body, 'min-width', width + 'px');
+            for (const panel of panels) { set(panel, 'box-sizing', 'border-box'); set(panel, 'height', 'auto'); safe(panel); }
+          } else if (flow.page_kind === 'chart') {
+            const wrapper = oneRole(slide, '.chart-wrapper'), track = oneRole(slide, '.bar-track');
+            if (track.querySelectorAll('.bar-col').length !== 5 || track.querySelectorAll('.bar-fill').length !== 5
+              || track.querySelectorAll('.bar-x-label').length !== 5)
+              throw new Error('Source Vellum chart role binding changed.');
+            set(wrapper, 'flex', '0 0 auto'); set(wrapper, 'min-height', 'max-content');
+            set(wrapper, 'justify-content', 'safe flex-end');
+            // Keep authored 28vh and each original fill percentage untouched.
+            set(track, 'flex-shrink', '0'); set(track, 'min-width', 'max-content');
+            set(track, 'padding-right', '1em');
+          }
+        }
+        if (recipe.source_cover_flow) {
+          const children = Array.from(slide.children), matches = (node, selector) => !!node && node.matches(selector);
+          if (recipe.source_cover_flow === 'GROVE_FOUR_DIRECT_ROLES') {
+            const [sidebar, watermark, main, footer] = children;
+            if (children.length !== 4 || !matches(sidebar, 'div.grove-sidebar') || !matches(watermark, 'div.grove-num')
+              || !matches(main, 'div') || !matches(footer, 'div') || main.children.length !== 4
+              || !matches(main.children[0], '.kicker') || !matches(main.children[1], '.rule')
+              || !matches(main.children[2], 'h1.h1') || !matches(main.children[3], 'p.lead')
+              || footer.children.length !== 2 || Array.from(footer.children).some(node => !matches(node, 'span.label')))
+              throw new Error('Source cover direct role binding changed.');
+            // The source disabled sidebar and absolute watermark remain as is.
+            set(main, 'justify-content', 'flex-start');
+          } else if (recipe.source_cover_flow === 'MAT_THREE_GRID_ROLES') {
+            const names = ['cover-headline', 'cover-copy', 'cover-bottom'];
+            if (children.length !== 3 || children.some((node, at) => !matches(node, 'div.' + names[at])))
+              throw new Error('Source cover direct role binding changed.');
+            // Preserve the source two-column / spanning-footer grid. The first
+            // row retains spare height when it fits, but cannot compress copy.
+            set(slide, 'grid-template-rows', 'minmax(max-content, 1fr) max-content');
+            set(slide, 'align-content', 'start');
+            set(children[1], 'justify-content', 'safe center');
+          } else throw new Error('Source cover flow kind is not reviewed.');
+        }
+        set(slide, 'justify-content', 'safe center');
+        for (const selector of recipe.flow_chrome || []) { const node = oneRole(slide, selector); set(node, 'position', 'relative'); set(node, 'inset', 'auto'); }
+        for (const node of slide.children) {
+          const css = getComputedStyle(node);
+          if (!['absolute', 'fixed'].includes(css.position) && css.display !== 'none') {
+            set(node, 'flex', '0 0 auto');
+            if (graphics.has(node)) {
+              const height = graphics.get(node);
+              if (!(height > 0)) throw new Error('Source percentage graphic has no definite measured height.');
+              set(node, 'box-sizing', 'border-box'); set(node, 'height', height + 'px'); set(node, 'min-height', height + 'px');
+            } else set(node, 'min-height', 'max-content');
+          }
+        }
+        for (const selector of recipe.intrinsic_containers || []) { const node = oneRole(slide, selector); set(node, 'height', 'auto'); set(node, 'flex', '0 0 auto'); set(node, 'min-height', 'max-content'); }
+        if (recipe.horizontal_table) {
+          const table = oneRole(slide, '.table-scroll');
+          state.nestedAttributes.set(table, new Map(['tabindex', 'role', 'aria-label'].map(key => [key, table.getAttribute(key)])));
+          table.setAttribute('tabindex', '0'); table.setAttribute('role', 'region'); table.setAttribute('aria-label', '表格內容／Table content');
+          table.dataset.atlasSourceContentOwner = 'SOURCE_TABLE_HORIZONTAL'; table.dataset.atlasSourceScrollAxes = 'xy';
+          table.dataset.atlasDeckInnerScroll = 'true';
+          const previous = prior?.nested.find(item => item.node === table);
+          table.scrollLeft = table.scrollWidth > table.clientWidth && previous ? previous.left : 0;
+        }
+      } else if (recipe.kind === 'RESERVED_SOURCE_FRAME' || recipe.kind === 'RESERVED_HEADER_BODY') {
+        set(slide, 'display', 'grid'); set(slide, 'grid-template-rows', recipe.kind === 'RESERVED_HEADER_BODY' ? 'auto minmax(0,1fr)' : 'auto minmax(0,1fr) auto');
+        set(slide, 'justify-content', 'normal'); set(slide, 'align-items', 'stretch');
+        set(owner, 'height', '100%'); set(owner, 'box-sizing', 'border-box'); set(owner, 'align-content', 'safe center');
+        if (recipe.kind === 'RESERVED_HEADER_BODY') { set(owner, 'align-content', 'start'); set(owner, 'grid-auto-rows', 'max-content'); }
+        if (recipe.source_intrinsic_flow) {
+          set(owner, 'max-height', 'none'); set(owner, 'justify-content', 'flex-start');
+          for (const child of owner.children) set(child, 'flex-shrink', '0');
+        }
+        if (recipe.source_svg_canvas) {
+          const canvas = recipe.source_svg_canvas, svg = oneRole(slide, canvas.selector);
+          if (svg.getAttribute('viewBox') !== canvas.view_box) throw new Error('Source SVG viewBox identity changed.');
+          // Explicit source-coordinate canvas: preserve aspect, all primitives
+          // and SVG text, then expose its full extent through the native owner.
+          for (const key of ['width', 'min-width', 'max-width']) set(svg, key, canvas.width + 'px');
+          for (const key of ['height', 'min-height', 'max-height']) set(svg, key, canvas.height + 'px');
+          set(svg, 'flex', '0 0 auto');
+          for (const selector of recipe.intrinsic_containers) {
+            const node = oneRole(slide, selector); set(node, 'flex', '0 0 auto');
+            set(node, 'min-width', 'max-content'); set(node, 'min-height', 'max-content');
+          }
+          set(oneRole(slide, '.chart-body'), 'width', 'max-content');
+          set(oneRole(slide, '.chart-body'), 'height', 'auto');
+        }
+        for (const node of reserves) {
+          set(node, 'position', 'relative'); set(node, 'inset', 'auto');
+          // The source absolute chrome's inline padding matched the slide's.
+          // Its new grid cell is already inside that same slide content edge.
+          set(node, 'padding-left', '0'); set(node, 'padding-right', '0');
+        }
+        for (const selector of recipe.release_clips || []) { const node = oneRole(slide, selector); set(node, 'overflow-x', 'visible'); set(node, 'overflow-y', 'visible'); }
+      } else if (recipe.kind === 'RESERVED_SOURCE_FAMILY_BODY') {
+        const graphics = (recipe.definite_graphics || []).map(selector => oneRole(slide, selector));
+        set(slide, 'display', 'grid'); set(slide, 'grid-template-rows', 'auto minmax(0,1fr) auto');
+        set(slide, 'justify-content', 'normal'); set(slide, 'align-items', 'stretch');
+        set(owner, 'height', '100%'); set(owner, 'box-sizing', 'border-box');
+        // Keep centering where it fits, but never center overflow behind a
+        // negative, unreachable scroll origin. Do not change text metrics.
+        const css = getComputedStyle(owner);
+        for (const [property, value] of [['align-items', css.alignItems], ['align-content', css.alignContent], ['justify-content', css.justifyContent]])
+          if (['center', 'end', 'flex-end'].includes(value)) set(owner, property, 'safe ' + value);
+        for (const node of owner.children) if (getComputedStyle(node).display !== 'none') set(node, 'flex-shrink', '0');
+        for (const node of reserves) { set(node, 'position', 'relative'); set(node, 'inset', 'auto'); }
+        for (const selector of recipe.intrinsic_containers || []) {
+          const node = oneRole(slide, selector); set(node, 'flex', '0 0 auto'); set(node, 'min-height', 'max-content');
+        }
+        for (const node of graphics) {
+          // Only the exact Grove/MAT source .bar-track enters this family branch.
+          // Its authored vh height (Grove 30/42vh; MAT 30/38vh) is definite. Prevent flex shrink
+          // and expose the original nowrap label extent without freezing a
+          // previously compressed used height or replacing the source unit.
+          set(node, 'flex-shrink', '0'); set(node, 'min-width', 'max-content');
+          // Keep a readable end gutter after the original nowrap labels. This
+          // reserves real scrollable layout space; text, bars and vh heights remain.
+          set(node, 'padding-right', '1em');
+        }
+      } else if (recipe.kind === 'RESERVED_CHROME_BODY') {
+        set(slide, 'display', 'grid'); set(slide, 'grid-template-rows', 'auto minmax(0,1fr) auto');
+        set(slide, 'justify-content', 'normal');
+        set(owner, 'align-items', 'start'); set(owner, 'align-content', 'start');
+        for (const node of reserves) set(node, 'position', 'relative');
+      } else if (recipe.kind === 'RESERVED_ATTRIBUTION_BODY') {
+        set(slide, 'display', 'grid'); set(slide, 'grid-template-rows', 'minmax(0,1fr) auto');
+        set(slide, 'justify-content', 'normal'); set(slide, 'justify-items', 'center');
+        set(owner, 'height', '100%'); set(owner, 'box-sizing', 'border-box');
+        set(owner, 'justify-content', 'flex-start');
+        for (const node of owner.children) set(node, 'flex-shrink', '0');
+        for (const node of reserves) {
+          set(node, 'position', 'relative'); set(node, 'inset', 'auto');
+          set(node, 'justify-self', 'start');
+        }
+      } else if (recipe.kind === 'POSITIVE_SOURCE_COMPOSITION') {
+        // Keep the source content's exact used width. The wrapper reserves
+        // transformed semantic labels as real layout space, including their
+        // negative source offsets, so both axes have reachable positive bounds.
+        if (recipe.source_intrinsic_flow) {
+          set(content, 'flex-shrink', '0'); set(content, 'min-height', 'max-content');
+          set(content, 'justify-content', 'flex-start');
+          for (const child of content.children) set(child, 'flex-shrink', '0');
+          for (const chart of content.querySelectorAll('.pixel-bar-chart')) set(chart, 'flex-shrink', '0');
+          for (const group of content.querySelectorAll('.chart-bar-group')) {
+            set(group, 'flex-shrink', '0');
+            for (const child of group.children) set(child, 'flex-shrink', '0');
+          }
+        }
+        if (recipe.source_separated_notes) {
+          const spec = recipe.source_separated_notes, cluster = oneRole(slide, spec.container);
+          const notes = spec.notes.map(selector => oneRole(slide, selector));
+          if (cluster.children.length !== 5 || notes.some((node, index) => cluster.children[index] !== node)) throw new Error('Source closing note order binding changed.');
+          // The five immutable post-its contain meaningful text. Keep their
+          // source fonts, padding, transforms, sizes and DOM order, while
+          // reserving each rotated border box in its own native-scroll row.
+          const used = notes.map(node => {
+            const css = getComputedStyle(node);
+            if (![css.width, css.height].every(value => /^(?:[0-9]+(?:\.[0-9]+)?)px$/.test(value) && parseFloat(value) > 0)) throw new Error('Source closing note used size is not positive.');
+            return { width: css.width, height: css.height };
+          });
+          set(cluster, 'display', 'grid'); set(cluster, 'grid-template-columns', 'max-content');
+          set(cluster, 'justify-content', 'center'); set(cluster, 'align-items', 'center'); set(cluster, 'row-gap', '2em');
+          notes.forEach((node, index) => {
+            set(node, 'position', 'relative'); set(node, 'inset', 'auto'); set(node, 'margin', '0');
+            set(node, 'width', used[index].width); set(node, 'height', used[index].height);
+            set(node, 'justify-self', 'center'); set(node, 'align-self', 'center');
+            set(node, 'grid-column', '1'); set(node, 'grid-row', String(index + 1));
+          });
+          const boxes = notes.map(node => node.getBoundingClientRect());
+          if (boxes.some(box => ![box.width, box.height].every(value => Number.isFinite(value) && value > 0))) throw new Error('Source closing note measured box is not positive.');
+          set(cluster, 'grid-template-rows', boxes.map(box => box.height / scale + 'px').join(' '));
+          set(cluster, 'width', Math.max(...boxes.map(box => box.width / scale)) + 'px');
+          const separated = notes.map(node => node.getBoundingClientRect());
+          for (let a = 0; a < separated.length; a++) for (let b = a + 1; b < separated.length; b++) {
+            const x = separated[a], y = separated[b];
+            if (Math.min(x.right, y.right) > Math.max(x.left, y.left) && Math.min(x.bottom, y.bottom) > Math.max(x.top, y.top)) throw new Error('Source closing note rectangles still overlap.');
+          }
+        }
+        const graphicBounds = (recipe.source_graphic_bounds || []).map(graphic => {
+          const node = oneRole(slide, graphic.selector);
+          if (String(node.tagName).toLowerCase() !== 'svg' || node.getAttribute('viewBox') !== graphic.view_box) throw new Error('Source readable graphic role binding changed.');
+          return node;
+        });
+        // These immutable source roles contain foreground text. Their internal
+        // clip is unnecessary (photo label), or demonstrably cuts SVG legends.
+        // Keep original transforms, viewBox, geometry, fonts and used SVG size.
+        for (const selector of recipe.release_clips || []) { const node = oneRole(slide, selector); set(node, 'overflow-x', 'visible'); set(node, 'overflow-y', 'visible'); }
+        const width = content.getBoundingClientRect().width / scale;
+        if (!(width > 0)) throw new Error('Source readable composition has no measured width.');
+        set(content, 'flex-shrink', '0'); set(content, 'box-sizing', 'border-box'); set(content, 'width', width + 'px');
+        const wrapper = document.createElement('div'); wrapper.dataset.atlasSourceContentExtent = 'true';
+        content.parentNode.insertBefore(wrapper, content); wrapper.append(content); state.wrapper = wrapper;
+        wrapper.style.setProperty('position', 'relative'); wrapper.style.setProperty('flex', '0 0 auto');
+        wrapper.style.setProperty('box-sizing', 'content-box'); wrapper.style.setProperty('width', width + 'px');
+        set(slide, 'justify-content', 'flex-start'); set(slide, 'align-items', 'flex-start');
+        const base = content.getBoundingClientRect();
+        const complete = recipe.complete_content_extent ? [...content.querySelectorAll('*')].filter(node => {
+          const css = getComputedStyle(node); return css.display !== 'none' && css.visibility !== 'hidden' && css.visibility !== 'collapse';
+        }) : [];
+        const union = [base, ...bounds.map(node => node.getBoundingClientRect()), ...complete.map(node => node.getBoundingClientRect()),
+          ...(recipe.source_descendant_bounds ? [...content.querySelectorAll('*')].map(node => node.getBoundingClientRect()) : []),
+          ...graphicBounds.flatMap(node => [...node.children].map(child => child.getBoundingClientRect()))];
+        const left = Math.min(...union.map(rect => rect.left)), right = Math.max(...union.map(rect => rect.right));
+        const top = Math.min(...union.map(rect => rect.top)), bottom = Math.max(...union.map(rect => rect.bottom));
+        const insetLeft = Math.max(0, (base.left - left) / scale), insetTop = Math.max(0, (base.top - top) / scale);
+        const insetRight = Math.max(0, (right - base.right) / scale), insetBottom = Math.max(0, (bottom - base.bottom) / scale);
+        wrapper.style.setProperty('padding', `${insetTop}px ${insetRight}px ${insetBottom}px ${insetLeft}px`);
+        const css = getComputedStyle(slide), availableWidth = slide.clientWidth - px(css.paddingLeft) - px(css.paddingRight);
+        const availableHeight = slide.clientHeight - px(css.paddingTop) - px(css.paddingBottom);
+        const extentWidth = width + insetLeft + insetRight, extentHeight = base.height / scale + insetTop + insetBottom;
+        wrapper.style.setProperty('margin-left', Math.max(0, (availableWidth - extentWidth) / 2) + 'px');
+        wrapper.style.setProperty('margin-top', Math.max(0, (availableHeight - extentHeight) / 2) + 'px');
+        wrapper.dataset.atlasSourceExtentWidth = String(extentWidth); wrapper.dataset.atlasSourceExtentHeight = String(extentHeight);
+      } else throw new Error('Unsupported source readable layout recipe.');
+      applyTasteEndGutter(slide, state, set, scale);
+      set(owner, 'min-height', '0'); set(owner, 'min-width', '0');
+      set(owner, 'overflow-y', 'auto'); set(owner, 'overflow-x', recipe.axes === 'xy' ? 'auto' : 'hidden');
+      set(owner, 'scroll-behavior', 'auto'); set(owner, 'scroll-snap-type', 'none');
+      owner.dataset.atlasSourceContentOwner = recipe.kind; owner.dataset.atlasSourceScrollAxes = recipe.axes;
+      const scrolling = config.source_readable_scroll && owner.dataset.atlasDeckInnerScroll === 'true'
+        || owner.scrollHeight > owner.clientHeight || recipe.axes === 'xy' && owner.scrollWidth > owner.clientWidth;
+      owner.dataset.atlasDeckInnerScroll = String(scrolling);
+      if (scrolling) {
+        owner.setAttribute('tabindex', '0'); owner.setAttribute('role', 'region'); owner.setAttribute('aria-label', '投影片內容／Slide content');
+        owner.scrollTop = prior?.owner === owner && prior.scrolling ? prior.top : 0;
+        owner.scrollLeft = prior?.owner === owner && prior.scrolling ? prior.left : 0;
+      } else { owner.scrollTop = 0; owner.scrollLeft = 0; }
+    }
+    for (const recipe of config.source_readable_layouts || []) {
+      const slide = slides[recipe.index];
+      if (!slide) throw new Error('Source readable layout page binding changed.');
+      for (const selector of new Set([recipe.owner, recipe.content, ...recipe.reserve, ...recipe.bounds, ...(recipe.release_clips || []), ...(recipe.flow_chrome || []), ...(recipe.intrinsic_containers || []), ...(recipe.definite_graphics || []), ...(recipe.source_svg_canvas ? [recipe.source_svg_canvas.selector] : []), ...(recipe.horizontal_table ? ['.table-scroll'] : [])])) oneRole(slide, selector);
+    }
+    let current = config.initial_index;
+    function select(index) {
+      resetSourceGraphicReleases();
+      const innerFocused = slides.some(slide => { const owner = localScrollOwner(slide); return owner && owner.contains(document.activeElement); });
+      slides.forEach(resetReadableLayout);
+      current = Math.max(0, Math.min(slides.length - 1, index));
+      slides.forEach((slide, at) => {
+        const active = at === current;
+        slide.dataset.atlasDeckActive = String(active);
+        slide.setAttribute('aria-hidden', String(!active)); slide.inert = !active;
+        if (config.variant === 'STAGE_ACTIVE_SECTIONS') slide.classList.toggle('active', active);
+        if (sourceIsActive) slide.classList.toggle('is-active', active);
+        for (const state of config.source_states || []) slide.classList.toggle(state, active);
+        if (config.source_readable_scroll) { slide.dataset.atlasDeckInnerScroll = 'false'; slide.scrollTop = 0; }
+      });
+      previous.disabled = current === 0; next.disabled = current === slides.length - 1;
+      counter.textContent = `${current + 1} / ${slides.length}`;
+      deck.dataset.atlasDeckIndex = String(current); deck.dataset.atlasDeckCount = String(slides.length);
+      sourceDataEndpoint(); sourceAutoFit(slides[current]); sourceHeadingFit(slides[current]);
+      fit();
+      if (innerFocused) { const target = localScrollOwner(slides[current]) || slides[current]; target.setAttribute('tabindex', localScrollOwner(slides[current]) ? '0' : '-1'); target.focus({ preventScroll: true }); }
+      deck.dispatchEvent(new CustomEvent('atlas-source-deck-change', { bubbles: true, detail: { index: current, count: slides.length } }));
+    }
+    function fit() {
+      resetSourceGraphicReleases();
+      const rect = viewport.getBoundingClientRect();
+      const width = config.viewport ? window.innerWidth : config.width;
+      if (config.banner_extra) scene.style.setProperty('width', String(width) + 'px', 'important');
+      const bannerHeight = config.banner_extra ? [...scene.children].find(node => node.classList.contains('demo-banner')).offsetHeight : 0;
+      const height = (config.viewport ? window.innerHeight : config.height) + bannerHeight;
+      if (rect.width <= 0 || rect.height <= 0 || width <= 0 || height <= 0) { scene.dataset.atlasDeckReady = 'WAITING_FOR_VISIBLE_VIEWPORT'; return; }
+      const scale = Math.min(rect.width / width, rect.height / height);
+      const previousContentScroll = resetReadableLayout(slides[current]);
+      const previousInnerTop = config.source_readable_scroll && slides[current].dataset.atlasDeckInnerScroll === 'true' ? slides[current].scrollTop : 0;
+      if (config.source_readable_scroll) { slides[current].scrollTop = 0; slides[current].dataset.atlasDeckInnerScroll = 'false'; slides[current].setAttribute('tabindex', '-1'); }
+      scene.style.setProperty('width', `${width}px`, 'important'); scene.style.setProperty('height', `${height}px`, 'important');
+      scene.style.setProperty('left', `${(rect.width - width * scale) / 2}px`, 'important');
+      scene.style.setProperty('top', `${(rect.height - height * scale) / 2}px`, 'important');
+      scene.style.setProperty('transform', `scale(${scale})`, 'important');
+      scene.dataset.atlasDeckScale = String(scale); scene.dataset.atlasDeckReady = 'READY';
+      sourceDataEndpoint(); sourceAutoFit(slides[current]); sourceHeadingFit(slides[current]);
+      if (config.source_native_flow_viewport || needsReadableScroll(slides[current])) {
+        // The source's narrow single-column text is taller than its fixed
+        // slide. Preserve readable source typography and expose all of it in
+        // a real local scroll viewport, rather than shrinking or clipping it.
+        scene.style.setProperty('width', rect.width + 'px', 'important'); scene.style.setProperty('height', rect.height + 'px', 'important');
+        scene.style.setProperty('left', '0px', 'important'); scene.style.setProperty('top', '0px', 'important'); scene.style.setProperty('transform', 'none', 'important');
+        scene.dataset.atlasDeckScale = '1'; slides[current].dataset.atlasDeckInnerScroll = 'true'; slides[current].setAttribute('tabindex', '0');
+        sourceAutoFit(slides[current]);
+        slides[current].scrollTop = previousInnerTop;
+      }
+      applyReadableLayout(slides[current], previousContentScroll);
+      applySourceGraphicReleases(slides[current]);
+      if (config.source_orbit_data) sourceDataEndpoint();
+    }
+    previous.addEventListener('click', () => select(current - 1)); next.addEventListener('click', () => select(current + 1));
+    document.addEventListener('keydown', (event) => {
+      if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey) return;
+      const chain = event.composedPath ? event.composedPath() : [event.target];
+      if (chain.some((node) => node && (node.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT', 'BUTTON'].includes(node.tagName)))) return;
+      if (['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Home', 'End', ' '].includes(event.key)
+        && chain.some(node => node?.dataset?.atlasDeckInnerScroll === 'true')) return;
+      if (['ArrowLeft', 'ArrowRight'].includes(event.key)
+        && chain.some(node => node?.dataset?.atlasDeckInnerScroll === 'true' && node.dataset.atlasSourceScrollAxes === 'xy' && node.scrollWidth > node.clientWidth)) return;
+      const target = { ArrowRight: current + 1, PageDown: current + 1, ' ': current + 1, ArrowLeft: current - 1, PageUp: current - 1, Home: 0, End: slides.length - 1 }[event.key];
+      if (typeof target !== 'number') return;
+      event.preventDefault(); select(target);
+    });
+    const observer = new ResizeObserver(fit); observer.observe(viewport);
+    if (config.banner_extra) observer.observe([...scene.children].find(node => node.classList.contains('demo-banner')));
+    window.addEventListener('resize', fit);
+    window.addEventListener('pageshow', () => { observer.observe(viewport); if (config.banner_extra) observer.observe([...scene.children].find(node => node.classList.contains('demo-banner'))); fit(); });
+    window.addEventListener('pagehide', () => { observer.disconnect(); resetSourceGraphicReleases(); });
+    select(current); fit();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true }); else start();
+})({"variant":"REVIEWED_SOURCE_CLASS_SECTIONS","selector":"#deckStage","slide_count":10,"initial_index":0,"width":1920,"height":1080,"viewport":false,"banner_extra":false,"source_heading_fit":false,"source_readable_layouts":[],"source_native_flow_viewport":false,"source_states":["active","visible"],"source_controls":[".deck-controls"],"source_auto_fit":false,"source_orbit_data":false,"source_horizontal_scroll":false,"source_readable_scroll":false,"source_readable_scroll_max_width":null});
+</script><script data-atlas-owned-adapter="1" data-atlas-script-sha256="e25745c36278ca1cd09dd4b0611e22a7b228f0a46464fb72401062bd5e482b80">(function reducedMotionRuntime() {
+  'use strict';
+  const media = matchMedia('(prefers-reduced-motion: reduce)');
+  const held = new Map();
+  let scheduled = 0, closed = false;
+  const state = { version: 1, reduced: media.matches, sampled: 0, scheduled: false };
+  Object.defineProperty(window, '__atlasSourceMotion', { value: state });
+  function scan() {
+    scheduled = 0; state.scheduled = false;
+    if (closed) return;
+    state.reduced = media.matches;
+    const current = new Set(document.getAnimations().filter(animation => animation instanceof CSSAnimation));
+    for (const [animation] of held) if (!current.has(animation)) held.delete(animation);
+    if (!media.matches) {
+      for (const [animation, prior] of held) {
+        animation.playbackRate = prior.rate;
+        animation.currentTime = prior.time;
+        if (prior.state === 'running') animation.play();
+        else if (prior.state === 'paused') animation.pause();
+      }
+      held.clear(); return;
+    }
+    for (const animation of current) {
+      if (held.has(animation)) continue;
+      const effect = animation.effect, timing = effect && effect.getTiming();
+      if (!timing || !Number.isFinite(Number(timing.duration)) || Number(timing.duration) <= 0) continue;
+      const prior = { state: animation.playState, time: animation.currentTime, rate: animation.playbackRate };
+      const duration = Number(timing.duration), delay = Number(timing.delay) || 0;
+      const iterations = Number(timing.iterations);
+      const pose = iterations === Infinity ? delay + duration / 2 : delay + duration * iterations;
+      if (!Number.isFinite(pose)) continue;
+      animation.pause(); animation.currentTime = Math.max(0, pose);
+      held.set(animation, prior); state.sampled++;
+    }
+  }
+  function schedule() {
+    if (closed || scheduled || (!media.matches && !held.size)) return;
+    state.scheduled = true; scheduled = requestAnimationFrame(scan);
+  }
+  const resize = new ResizeObserver(() => { if (media.matches) schedule(); });
+  resize.observe(document.documentElement);
+  document.addEventListener('animationstart', schedule, true);
+  document.addEventListener('atlas-source-deck-change', schedule);
+  document.addEventListener('DOMContentLoaded', schedule, { once: true });
+  window.addEventListener('load', schedule, { once: true });
+  media.addEventListener('change', schedule);
+  window.addEventListener('pagehide', () => {
+    closed = true; resize.disconnect(); media.removeEventListener('change', schedule);
+    document.removeEventListener('animationstart', schedule, true);
+    document.removeEventListener('atlas-source-deck-change', schedule);
+    if (scheduled) cancelAnimationFrame(scheduled);
+    // A bfcache page retains the source Animation objects and their original
+    // playback state; discard neither merely because the document is hidden.
+    scheduled = 0; state.scheduled = false;
+  });
+  window.addEventListener('pageshow', () => {
+    if (!closed) return;
+    closed = false; resize.observe(document.documentElement);
+    document.addEventListener('animationstart', schedule, true);
+    document.addEventListener('atlas-source-deck-change', schedule);
+    media.addEventListener('change', schedule);
+    schedule();
+  });
+  schedule();
+})();</script></body>
+</html>

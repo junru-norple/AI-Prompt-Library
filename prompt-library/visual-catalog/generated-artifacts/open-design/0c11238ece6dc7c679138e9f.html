@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="en" data-mode="light">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'sha256-4ldFw2J4yhzQndSwYR4ip7Io8KRkZPtyQBBivV5IK4A='; img-src data:; font-src 'none'; media-src 'none'; connect-src 'none'; frame-src 'none'; child-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"><meta name="atlas-source-entry" content="open-design-official:template:tweaks">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Filebase · Tweaks demo</title>
+  
+  
+  
+  <style>
+    :root {
+      --accent: #c96442;
+      --scale: 1;
+      --density: 1;
+      --motion-mult: 1;
+
+      --bg: #f6f4ef;
+      --paper: #ffffff;
+      --ink: #1a1a1c;
+      --muted: #6b6964;
+      --rule: #e2dfd7;
+
+      --serif: 'Source Serif 4', Georgia, serif;
+      --sans: 'Inter', -apple-system, system-ui, sans-serif;
+      --mono: 'IBM Plex Mono', ui-monospace, monospace;
+    }
+    [data-mode="dark"] {
+      --bg: #0e0d0c;
+      --paper: #181715;
+      --ink: #f4f1ea;
+      --muted: #8a857a;
+      --rule: #2a2723;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      :root { --motion-mult: 0; }
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; min-height: 100%; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: calc(16px * var(--scale));
+      line-height: 1.55;
+      transition: background calc(220ms * var(--motion-mult)) ease,
+                  color calc(220ms * var(--motion-mult)) ease;
+    }
+
+    /* ============ Layout ============ */
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: calc(28px * var(--density)) calc(40px * var(--density));
+    }
+
+    /* ============ Header / nav ============ */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: calc(20px * var(--density)) 0;
+      gap: calc(32px * var(--density));
+      border-bottom: 1px solid var(--rule);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: calc(20px * var(--scale));
+      letter-spacing: -0.01em;
+    }
+    .brand-mark {
+      width: 28px; height: 28px;
+      border-radius: 6px;
+      background: var(--accent);
+      transition: background calc(220ms * var(--motion-mult)) ease;
+    }
+    .nav-links {
+      display: flex;
+      gap: calc(28px * var(--density));
+      font-size: calc(14px * var(--scale));
+      color: var(--muted);
+    }
+    .nav-links a {
+      color: inherit;
+      text-decoration: none;
+      transition: color calc(180ms * var(--motion-mult)) ease;
+    }
+    .nav-links a:hover { color: var(--ink); }
+    .cta {
+      display: inline-block;
+      padding: calc(10px * var(--density)) calc(18px * var(--density));
+      background: var(--accent);
+      color: #fff;
+      border-radius: 6px;
+      font-size: calc(13px * var(--scale));
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      transition: background calc(220ms * var(--motion-mult)) ease,
+                  transform calc(220ms * var(--motion-mult)) ease;
+    }
+    .cta:hover { transform: translateY(-1px); }
+
+    /* ============ Hero ============ */
+    .hero {
+      padding: calc(96px * var(--density)) 0 calc(80px * var(--density));
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: calc(64px * var(--density));
+      align-items: center;
+    }
+    @media (max-width: 880px) {
+      .hero { grid-template-columns: 1fr; }
+    }
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: calc(11px * var(--scale));
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: calc(22px * var(--density));
+      transition: color calc(220ms * var(--motion-mult)) ease;
+    }
+    .h1 {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: calc(58px * var(--scale));
+      line-height: 1.04;
+      letter-spacing: -0.02em;
+      margin: 0 0 calc(22px * var(--density));
+    }
+    .h1 em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 600;
+      transition: color calc(220ms * var(--motion-mult)) ease;
+    }
+    .lede {
+      font-size: calc(19px * var(--scale));
+      color: var(--muted);
+      max-width: 38ch;
+      margin: 0 0 calc(36px * var(--density));
+      line-height: 1.5;
+    }
+    .row { display: flex; gap: calc(14px * var(--density)); align-items: center; flex-wrap: wrap; }
+    .secondary {
+      font-size: calc(13px * var(--scale));
+      color: var(--muted);
+      font-family: var(--mono);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    /* Hero card preview */
+    .hero-card {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      padding: calc(20px * var(--density));
+      box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+      font-family: var(--mono);
+      font-size: calc(12px * var(--scale));
+      transition: background calc(220ms * var(--motion-mult)) ease,
+                  border-color calc(220ms * var(--motion-mult)) ease;
+    }
+    [data-mode="dark"] .hero-card { box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+    .hero-card .label {
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: calc(12px * var(--density));
+      font-size: calc(10px * var(--scale));
+    }
+    .hero-card pre {
+      margin: 0;
+      padding: calc(14px * var(--density));
+      background: var(--bg);
+      border-radius: 6px;
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: calc(12px * var(--scale));
+      line-height: 1.55;
+      overflow-x: auto;
+    }
+    .hero-card .k { color: var(--accent); }
+    .hero-card .c { color: var(--muted); }
+    .hero-card .ok { color: #4a7a3f; }
+    [data-mode="dark"] .hero-card .ok { color: #8db876; }
+
+    /* ============ Stats strip ============ */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: calc(32px * var(--density));
+      padding: calc(48px * var(--density)) 0;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+    @media (max-width: 720px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+    }
+    .stat {
+      display: flex;
+      flex-direction: column;
+      gap: calc(6px * var(--density));
+    }
+    .stat .num {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: calc(40px * var(--scale));
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--accent);
+      transition: color calc(220ms * var(--motion-mult)) ease;
+    }
+    .stat .lbl {
+      font-size: calc(13px * var(--scale));
+      color: var(--muted);
+      max-width: 22ch;
+      line-height: 1.45;
+    }
+
+    /* ============ Features grid ============ */
+    .features {
+      padding: calc(80px * var(--density)) 0 calc(40px * var(--density));
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: calc(34px * var(--scale));
+      letter-spacing: -0.015em;
+      margin: 0 0 calc(48px * var(--density));
+      max-width: 22ch;
+    }
+    .feat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: calc(28px * var(--density));
+    }
+    @media (max-width: 880px) {
+      .feat-grid { grid-template-columns: 1fr; }
+    }
+    .feat {
+      padding: calc(28px * var(--density));
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      transition: background calc(220ms * var(--motion-mult)) ease,
+                  border-color calc(220ms * var(--motion-mult)) ease,
+                  transform calc(220ms * var(--motion-mult)) ease;
+    }
+    .feat:hover { transform: translateY(-2px); }
+    .feat .ico {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: color-mix(in oklch, var(--accent) 18%, transparent);
+      color: var(--accent);
+      display: grid;
+      place-items: center;
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: calc(15px * var(--scale));
+      margin-bottom: calc(20px * var(--density));
+    }
+    .feat h3 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: calc(20px * var(--scale));
+      margin: 0 0 calc(8px * var(--density));
+      letter-spacing: -0.01em;
+    }
+    .feat p {
+      color: var(--muted);
+      font-size: calc(15px * var(--scale));
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    /* ============ CTA banner ============ */
+    .banner {
+      margin: calc(60px * var(--density)) 0 calc(40px * var(--density));
+      padding: calc(56px * var(--density)) calc(48px * var(--density));
+      background: var(--ink);
+      color: var(--bg);
+      border-radius: 14px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: calc(40px * var(--density));
+      align-items: center;
+      transition: background calc(220ms * var(--motion-mult)) ease,
+                  color calc(220ms * var(--motion-mult)) ease;
+    }
+    @media (max-width: 720px) {
+      .banner { grid-template-columns: 1fr; }
+    }
+    .banner h2 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: calc(32px * var(--scale));
+      letter-spacing: -0.015em;
+      line-height: 1.15;
+      margin: 0 0 calc(8px * var(--density));
+      max-width: 22ch;
+    }
+    .banner p {
+      color: rgba(244,241,234,0.68);
+      font-size: calc(15px * var(--scale));
+      margin: 0;
+    }
+    [data-mode="dark"] .banner p { color: rgba(26,26,28,0.68); }
+
+    .ft {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding: calc(28px * var(--density)) 0;
+      border-top: 1px solid var(--rule);
+      font-family: var(--mono);
+      font-size: calc(11px * var(--scale));
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* =========================================================
+       PANEL  · same primitives as assets/wrap.html
+       ========================================================= */
+    .tw-panel {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 100;
+      width: 280px;
+      max-width: calc(100vw - 32px);
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+      font-family: var(--sans);
+      transition: transform calc(220ms * var(--motion-mult)) cubic-bezier(.2,.8,.2,1),
+                  opacity calc(220ms * var(--motion-mult)) ease,
+                  background calc(220ms * var(--motion-mult)) ease;
+    }
+    [data-mode="dark"] .tw-panel { box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+    .tw-panel.tw-hidden {
+      transform: translateX(calc(100% + 32px));
+      opacity: 0;
+      pointer-events: none;
+    }
+    .tw-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .tw-head .ttl {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .tw-head .toggle {
+      background: transparent;
+      border: 1px solid var(--rule);
+      color: var(--muted);
+      width: 24px; height: 24px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 0;
+    }
+    .tw-head .toggle:hover { color: var(--ink); }
+    .tw-body { padding: 14px 18px 18px; }
+    .tw-row { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+    .tw-row:last-child { margin-bottom: 0; }
+    .tw-row .lbl {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .tw-seg {
+      display: flex;
+      border: 1px solid var(--rule);
+      border-radius: 5px;
+      overflow: hidden;
+      background: var(--bg);
+    }
+    .tw-seg button {
+      flex: 1;
+      padding: 7px 8px;
+      background: transparent;
+      border: 0;
+      border-left: 1px solid var(--rule);
+      cursor: pointer;
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      transition: color calc(180ms * var(--motion-mult)) ease,
+                  background calc(180ms * var(--motion-mult)) ease;
+    }
+    .tw-seg button:first-child { border-left: 0; }
+    .tw-seg button:hover { color: var(--ink); }
+    .tw-seg button[aria-pressed='true'] {
+      background: var(--paper);
+      color: var(--ink);
+      box-shadow: inset 0 -2px 0 var(--accent);
+    }
+    .tw-swatches { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+    .tw-swatch {
+      width: 100%; aspect-ratio: 1;
+      border: 2px solid transparent;
+      border-radius: 5px;
+      cursor: pointer;
+      padding: 0;
+      transition: transform calc(160ms * var(--motion-mult)) ease,
+                  border-color calc(160ms * var(--motion-mult)) ease;
+    }
+    .tw-swatch:hover { transform: scale(1.06); }
+    .tw-swatch[aria-pressed='true'] { border-color: var(--ink); }
+    .tw-foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 18px;
+      border-top: 1px solid var(--rule);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .tw-foot button {
+      background: transparent;
+      border: 0;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 0;
+      font: inherit;
+      letter-spacing: inherit;
+      text-transform: inherit;
+    }
+    .tw-foot button:hover { color: var(--ink); }
+    kbd {
+      font-family: var(--mono);
+      font-size: 9px;
+      padding: 2px 5px;
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      color: var(--ink);
+    }
+    .tw-restore {
+      position: fixed;
+      top: 16px; right: 16px;
+      z-index: 100;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--rule);
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      transition: transform calc(180ms * var(--motion-mult)) ease;
+    }
+    .tw-restore:hover { transform: scale(1.06); }
+    .tw-restore.tw-show { display: flex; }
+
+    @media (max-width: 720px) {
+      .tw-panel { left: 16px; right: 16px; width: auto; }
+    }
+  </style>
+<style data-atlas-owned-adapter>@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:0s!important;transition-delay:0s!important;scroll-behavior:auto!important}}</style></head>
+<body data-atlas-language-policy="ORIGINAL_SOURCE_LABELED">
+  <div class="wrap">
+    
+    <nav class="nav">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Filebase</span>
+      </div>
+      <div class="nav-links">
+        <a href="#">Product</a>
+        <a href="#">Pricing</a>
+        <a href="#">Docs</a>
+        <a href="#">Changelog</a>
+        <a href="#">Customers</a>
+      </div>
+      <a class="cta" href="#">Start free</a>
+    </nav>
+
+    
+    <header class="hero">
+      <div>
+        <div class="eyebrow">Series B · 2026</div>
+        <h1 class="h1">The bandwidth bill is the <em>bug</em>.</h1>
+        <p class="lede">A sync engine that ships only what changed. 38× less data over the wire on real customer workloads.</p>
+        <div class="row">
+          <a class="cta" href="#">Start free</a>
+          <span class="secondary">no card required</span>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="label">filebase sync — typical run</div>
+<pre><span class="c">// hourly cron · feature/render-pass branch</span>
+$ filebase sync --watch
+<span class="k">→</span> diff:    <span class="ok">12.4 MB</span>  <span class="c">(of 4.7 GB)</span>
+<span class="k">→</span> upload:  <span class="ok">8.2 MB</span>   <span class="c">(deduplicated)</span>
+<span class="k">→</span> latency: <span class="ok">340 ms</span>   <span class="c">p99</span>
+<span class="ok">✓ done in 2.1s</span></pre>
+      </div>
+    </header>
+
+    
+    <section class="stats">
+      <div class="stat">
+        <div class="num">38×</div>
+        <div class="lbl">less data moved over the wire vs naive sync</div>
+      </div>
+      <div class="stat">
+        <div class="num">3,184</div>
+        <div class="lbl">paying teams across post-production, design, ML</div>
+      </div>
+      <div class="stat">
+        <div class="num">99.99%</div>
+        <div class="lbl">uptime over the last 12 rolling months</div>
+      </div>
+      <div class="stat">
+        <div class="num">$2.1M</div>
+        <div class="lbl">aggregate egress savings reported by Q1 cohort</div>
+      </div>
+    </section>
+
+    
+    <section class="features">
+      <h2 class="section-title">Three reasons teams switch in the first month.</h2>
+      <div class="feat-grid">
+        <article class="feat">
+          <div class="ico" aria-hidden="true">∂</div>
+          <h3>Block-level diffs</h3>
+          <p>Edit one frame in a 4 GB Final Cut project; sync 12 MB. The diff doesn't care how big your file is — it cares what changed.</p>
+        </article>
+        <article class="feat">
+          <div class="ico" aria-hidden="true">≈</div>
+          <h3>Cross-region dedup</h3>
+          <p>Your team in Berlin uploads a checkpoint your team in Tokyo already pushed. We notice. Nothing transfers.</p>
+        </article>
+        <article class="feat">
+          <div class="ico" aria-hidden="true">∇</div>
+          <h3>Drop-in for S3 / GCS</h3>
+          <p>Wire one env var, change zero application code. Existing buckets, existing IAM, new bandwidth bill.</p>
+        </article>
+      </div>
+    </section>
+
+    
+    <section class="banner">
+      <div>
+        <h2>Pay for storage. Stop paying for movement.</h2>
+        <p>Start free, no card required. Production teams in 14 days or fewer.</p>
+      </div>
+      <a class="cta" href="#" style="background: var(--accent); color: #fff;">Book a demo</a>
+    </section>
+
+    <footer class="ft">
+      <span>© 2026 Filebase, Inc.</span>
+      <span>Privacy · Terms · Status</span>
+      <span>built with the OD tweaks skill</span>
+    </footer>
+  </div>
+
+  
+  <aside class="tw-panel" id="tw-panel" aria-label="Tweak panel">
+    <header class="tw-head">
+      <span class="ttl">Tweaks · Filebase</span>
+      <button class="toggle" id="tw-close" aria-label="Hide panel" title="Hide (T)">×</button>
+    </header>
+    <div class="tw-body">
+      <div class="tw-row">
+        <span class="lbl">Accent</span>
+        <div class="tw-swatches" id="tw-accent" role="radiogroup" aria-label="Accent color"></div>
+      </div>
+      <div class="tw-row">
+        <span class="lbl">Mode</span>
+        <div class="tw-seg" id="tw-mode" role="radiogroup" aria-label="Color mode">
+          <button data-val="light" aria-pressed="true">Light</button>
+          <button data-val="dark" aria-pressed="false">Dark</button>
+        </div>
+      </div>
+      <div class="tw-row">
+        <span class="lbl">Type scale</span>
+        <div class="tw-seg" id="tw-scale" role="radiogroup" aria-label="Type scale">
+          <button data-val="0.85" aria-pressed="false">Compact</button>
+          <button data-val="1" aria-pressed="true">Normal</button>
+          <button data-val="1.15" aria-pressed="false">Generous</button>
+        </div>
+      </div>
+      <div class="tw-row">
+        <span class="lbl">Density</span>
+        <div class="tw-seg" id="tw-density" role="radiogroup" aria-label="Density">
+          <button data-val="0.75" aria-pressed="false">Tight</button>
+          <button data-val="1" aria-pressed="true">Normal</button>
+          <button data-val="1.4" aria-pressed="false">Roomy</button>
+        </div>
+      </div>
+      <div class="tw-row">
+        <span class="lbl">Motion</span>
+        <div class="tw-seg" id="tw-motion" role="radiogroup" aria-label="Motion">
+          <button data-val="0" aria-pressed="false">Off</button>
+          <button data-val="1" aria-pressed="true">Subtle</button>
+          <button data-val="1.6" aria-pressed="false">Lively</button>
+        </div>
+      </div>
+    </div>
+    <footer class="tw-foot">
+      <span><kbd>T</kbd> hide · <kbd>R</kbd> reset</span>
+      <button id="tw-reset" type="button">Reset</button>
+    </footer>
+  </aside>
+
+  <button class="tw-restore" id="tw-restore" aria-label="Show panel" title="Show panel (T)">T</button>
+
+  
+<aside id="atlas-source-proof" aria-label="Atlas 來源證據 / Source evidence" data-language-exempt="original-source" style="all:initial;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;position:relative;z-index:2147483647;padding:10px 14px;color:#30464d;background:#f8faf9;border-top:1px solid rgba(21,39,45,.22);font:12px/1.4 ui-monospace,Consolas,monospace"><span>來源版式離線適配（保留原文）· 原始程式已停用；本機適配器提供頁面與減動控制<br><span lang="en">Offline source-layout adaptation; original text retained. Source scripts are disabled; local adapters provide page and reduced-motion controls.</span></span><span>bf714528070d · 8982514c3ab1</span></aside><script data-atlas-owned-adapter="0" data-atlas-script-sha256="e25745c36278ca1cd09dd4b0611e22a7b228f0a46464fb72401062bd5e482b80">(function reducedMotionRuntime() {
+  'use strict';
+  const media = matchMedia('(prefers-reduced-motion: reduce)');
+  const held = new Map();
+  let scheduled = 0, closed = false;
+  const state = { version: 1, reduced: media.matches, sampled: 0, scheduled: false };
+  Object.defineProperty(window, '__atlasSourceMotion', { value: state });
+  function scan() {
+    scheduled = 0; state.scheduled = false;
+    if (closed) return;
+    state.reduced = media.matches;
+    const current = new Set(document.getAnimations().filter(animation => animation instanceof CSSAnimation));
+    for (const [animation] of held) if (!current.has(animation)) held.delete(animation);
+    if (!media.matches) {
+      for (const [animation, prior] of held) {
+        animation.playbackRate = prior.rate;
+        animation.currentTime = prior.time;
+        if (prior.state === 'running') animation.play();
+        else if (prior.state === 'paused') animation.pause();
+      }
+      held.clear(); return;
+    }
+    for (const animation of current) {
+      if (held.has(animation)) continue;
+      const effect = animation.effect, timing = effect && effect.getTiming();
+      if (!timing || !Number.isFinite(Number(timing.duration)) || Number(timing.duration) <= 0) continue;
+      const prior = { state: animation.playState, time: animation.currentTime, rate: animation.playbackRate };
+      const duration = Number(timing.duration), delay = Number(timing.delay) || 0;
+      const iterations = Number(timing.iterations);
+      const pose = iterations === Infinity ? delay + duration / 2 : delay + duration * iterations;
+      if (!Number.isFinite(pose)) continue;
+      animation.pause(); animation.currentTime = Math.max(0, pose);
+      held.set(animation, prior); state.sampled++;
+    }
+  }
+  function schedule() {
+    if (closed || scheduled || (!media.matches && !held.size)) return;
+    state.scheduled = true; scheduled = requestAnimationFrame(scan);
+  }
+  const resize = new ResizeObserver(() => { if (media.matches) schedule(); });
+  resize.observe(document.documentElement);
+  document.addEventListener('animationstart', schedule, true);
+  document.addEventListener('atlas-source-deck-change', schedule);
+  document.addEventListener('DOMContentLoaded', schedule, { once: true });
+  window.addEventListener('load', schedule, { once: true });
+  media.addEventListener('change', schedule);
+  window.addEventListener('pagehide', () => {
+    closed = true; resize.disconnect(); media.removeEventListener('change', schedule);
+    document.removeEventListener('animationstart', schedule, true);
+    document.removeEventListener('atlas-source-deck-change', schedule);
+    if (scheduled) cancelAnimationFrame(scheduled);
+    // A bfcache page retains the source Animation objects and their original
+    // playback state; discard neither merely because the document is hidden.
+    scheduled = 0; state.scheduled = false;
+  });
+  window.addEventListener('pageshow', () => {
+    if (!closed) return;
+    closed = false; resize.observe(document.documentElement);
+    document.addEventListener('animationstart', schedule, true);
+    document.addEventListener('atlas-source-deck-change', schedule);
+    media.addEventListener('change', schedule);
+    schedule();
+  });
+  schedule();
+})();</script></body>
+</html>

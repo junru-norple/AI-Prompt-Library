@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'sha256-4ldFw2J4yhzQndSwYR4ip7Io8KRkZPtyQBBivV5IK4A='; img-src data:; font-src 'none'; media-src 'none'; connect-src 'none'; frame-src 'none'; child-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"><meta name="atlas-source-entry" content="open-design-official:plugin:example-frame-macos-notification-97cec4d7">
+<meta charset="UTF-8" />
+<title>macOS Notification · 转换完成</title>
+<style data-atlas-tailwind-source-sha256="cdf292c0d6aaf3db5ed7cb91d2847091c51a7a8056f9da9d326bd9a5666ac079">/*! Tailwind CSS 3.4.19 dependency notice
+MIT License
+
+Copyright (c) Tailwind Labs, Inc.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+*/
+*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/*! tailwindcss v3.4.19 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.ml-1{margin-left:.25rem}.mt-0\.5{margin-top:.125rem}.flex{display:flex}.h-11{height:2.75rem}.w-11{width:2.75rem}.w-\[420px\]{width:420px}.min-w-0{min-width:0}.flex-1{flex:1 1 0%}.shrink-0{flex-shrink:0}.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.flex-col{flex-direction:column}.items-end{align-items:flex-end}.items-center{align-items:center}.justify-start{justify-content:flex-start}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-3{gap:.75rem}.truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rounded-2xl{border-radius:1rem}.rounded-\[10px\]{border-radius:10px}.rounded-full{border-radius:9999px}.border{border-width:1px}.p-12{padding:3rem}.p-3{padding:.75rem}.px-2\.5{padding-left:.625rem;padding-right:.625rem}.py-1{padding-top:.25rem;padding-bottom:.25rem}.text-\[11px\]{font-size:11px}.text-\[12\.5px\]{font-size:12.5px}.text-\[13px\]{font-size:13px}.text-\[14px\]{font-size:14px}.text-xl{font-size:1.25rem;line-height:1.75rem}.font-semibold{font-weight:600}.leading-snug{line-height:1.375}.leading-tight{line-height:1.25}.text-white{--tw-text-opacity:1;color:rgb(255 255 255/var(--tw-text-opacity,1))}.opacity-60{opacity:.6}.opacity-80{opacity:.8}.blur{--tw-blur:blur(8px);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.backdrop-filter{-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}</style>
+
+<style>
+  body {
+    font-family: 'Inter','Noto Sans SC','PingFang SC',system-ui,sans-serif;
+    background:
+      linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%),
+      radial-gradient(circle at 80% 20%, rgba(255,200,150,0.3) 0%, transparent 50%);
+    background-blend-mode: screen;
+    min-height: 100vh;
+  }
+  .frost {
+    background: rgba(28,28,30,0.78);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    backdrop-filter: blur(40px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5), 0 2px 6px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.08);
+  }
+  @keyframes slideIn { from { transform: translateX(120%); opacity:0 } to { transform: translateX(0); opacity:1 } }
+  .notif-1 { animation: slideIn .4s ease-out; }
+  .notif-2 { transform: translateY(-12px) scale(0.96); opacity: 0.7; }
+  .notif-3 { transform: translateY(-24px) scale(0.92); opacity: 0.4; }
+</style>
+<style data-atlas-owned-adapter>@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:0s!important;transition-delay:0s!important;scroll-behavior:auto!important}}</style></head>
+<body class="flex flex-col items-end justify-start gap-3 p-12 text-white" data-atlas-language-policy="ORIGINAL_SOURCE_LABELED">
+  
+  <div class="frost rounded-2xl w-[420px] p-3 flex gap-3 items-center notif-3">
+    <div class="w-11 h-11 rounded-[10px] flex items-center justify-center text-xl" style="background:linear-gradient(135deg,#1DB954,#0d7a35)">🎵</div>
+    <div class="flex-1 min-w-0">
+      <div class="flex items-center justify-between"><span class="text-[13px] font-semibold">Spotify</span><span class="text-[11px] opacity-60">2m ago</span></div>
+      <div class="text-[12.5px] truncate opacity-80">Now Playing — Lo-Fi Essentials</div>
+    </div>
+  </div>
+  <div class="frost rounded-2xl w-[420px] p-3 flex gap-3 items-center notif-2">
+    <div class="w-11 h-11 rounded-[10px] flex items-center justify-center text-xl" style="background:linear-gradient(135deg,#0f0f12,#2a2a35)">⌘</div>
+    <div class="flex-1 min-w-0">
+      <div class="flex items-center justify-between"><span class="text-[13px] font-semibold">Cursor</span><span class="text-[11px] opacity-60">1m ago</span></div>
+      <div class="text-[12.5px] truncate opacity-80">同步完成 · 8 个文件已上传</div>
+    </div>
+  </div>
+  
+  <div class="frost rounded-2xl w-[420px] p-3 flex gap-3 items-center notif-1">
+    <div class="w-11 h-11 rounded-[10px] flex items-center justify-center text-xl shrink-0" style="background:linear-gradient(135deg,#ff7849,#d97757)">H</div>
+    <div class="flex-1 min-w-0">
+      <div class="flex items-center justify-between">
+        <span class="text-[13px] font-semibold">HTML Anything</span>
+        <span class="text-[11px] opacity-60">now</span>
+      </div>
+      <div class="text-[14px] font-semibold leading-tight mt-0.5">转换完成 · 杂志风网页 PPT</div>
+      <div class="text-[12.5px] opacity-80 leading-snug mt-0.5">31.2 KB · 12 帧 · 已在右侧预览面板渲染。点击复制为公众号 / 推特格式。</div>
+    </div>
+    <button class="text-[11px] font-semibold px-2.5 py-1 rounded-full ml-1 shrink-0" style="background:rgba(255,255,255,0.12)">Open</button>
+  </div>
+<aside id="atlas-source-proof" aria-label="Atlas 來源證據 / Source evidence" data-language-exempt="original-source" style="all:initial;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;position:relative;z-index:2147483647;padding:10px 14px;color:#30464d;background:#f8faf9;border-top:1px solid rgba(21,39,45,.22);font:12px/1.4 ui-monospace,Consolas,monospace"><span>來源版式離線適配（保留原文）· 原始程式已停用；本機適配器提供頁面與減動控制<br><span lang="en">Offline source-layout adaptation; original text retained. Source scripts are disabled; local adapters provide page and reduced-motion controls.</span></span><span>bf714528070d · c4878a25d5bf</span><details data-atlas-dependency-license="tailwindcss-3.4.19" data-license-sha256="60e0b68c0f35c078eef3a5d29419d0b03ff84ec1df9c3f9d6e39a519a5ae7985" style="all:initial;display:block;flex-basis:100%;min-width:0;font:12px/1.4 ui-monospace,Consolas,monospace;color:#30464d"><summary style="cursor:pointer">Tailwind CSS 3.4.19 · MIT 授權全文 / Full license notice</summary><pre style="white-space:pre-wrap;overflow-wrap:anywhere;max-height:14rem;overflow:auto;font:inherit">MIT License
+
+Copyright (c) Tailwind Labs, Inc.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &quot;Software&quot;), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+</pre></details></aside><script data-atlas-owned-adapter="0" data-atlas-script-sha256="e25745c36278ca1cd09dd4b0611e22a7b228f0a46464fb72401062bd5e482b80">(function reducedMotionRuntime() {
+  'use strict';
+  const media = matchMedia('(prefers-reduced-motion: reduce)');
+  const held = new Map();
+  let scheduled = 0, closed = false;
+  const state = { version: 1, reduced: media.matches, sampled: 0, scheduled: false };
+  Object.defineProperty(window, '__atlasSourceMotion', { value: state });
+  function scan() {
+    scheduled = 0; state.scheduled = false;
+    if (closed) return;
+    state.reduced = media.matches;
+    const current = new Set(document.getAnimations().filter(animation => animation instanceof CSSAnimation));
+    for (const [animation] of held) if (!current.has(animation)) held.delete(animation);
+    if (!media.matches) {
+      for (const [animation, prior] of held) {
+        animation.playbackRate = prior.rate;
+        animation.currentTime = prior.time;
+        if (prior.state === 'running') animation.play();
+        else if (prior.state === 'paused') animation.pause();
+      }
+      held.clear(); return;
+    }
+    for (const animation of current) {
+      if (held.has(animation)) continue;
+      const effect = animation.effect, timing = effect && effect.getTiming();
+      if (!timing || !Number.isFinite(Number(timing.duration)) || Number(timing.duration) <= 0) continue;
+      const prior = { state: animation.playState, time: animation.currentTime, rate: animation.playbackRate };
+      const duration = Number(timing.duration), delay = Number(timing.delay) || 0;
+      const iterations = Number(timing.iterations);
+      const pose = iterations === Infinity ? delay + duration / 2 : delay + duration * iterations;
+      if (!Number.isFinite(pose)) continue;
+      animation.pause(); animation.currentTime = Math.max(0, pose);
+      held.set(animation, prior); state.sampled++;
+    }
+  }
+  function schedule() {
+    if (closed || scheduled || (!media.matches && !held.size)) return;
+    state.scheduled = true; scheduled = requestAnimationFrame(scan);
+  }
+  const resize = new ResizeObserver(() => { if (media.matches) schedule(); });
+  resize.observe(document.documentElement);
+  document.addEventListener('animationstart', schedule, true);
+  document.addEventListener('atlas-source-deck-change', schedule);
+  document.addEventListener('DOMContentLoaded', schedule, { once: true });
+  window.addEventListener('load', schedule, { once: true });
+  media.addEventListener('change', schedule);
+  window.addEventListener('pagehide', () => {
+    closed = true; resize.disconnect(); media.removeEventListener('change', schedule);
+    document.removeEventListener('animationstart', schedule, true);
+    document.removeEventListener('atlas-source-deck-change', schedule);
+    if (scheduled) cancelAnimationFrame(scheduled);
+    // A bfcache page retains the source Animation objects and their original
+    // playback state; discard neither merely because the document is hidden.
+    scheduled = 0; state.scheduled = false;
+  });
+  window.addEventListener('pageshow', () => {
+    if (!closed) return;
+    closed = false; resize.observe(document.documentElement);
+    document.addEventListener('animationstart', schedule, true);
+    document.addEventListener('atlas-source-deck-change', schedule);
+    media.addEventListener('change', schedule);
+    schedule();
+  });
+  schedule();
+})();</script></body>
+</html>

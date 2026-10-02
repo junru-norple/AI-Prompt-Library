@@ -1,0 +1,12 @@
+授權與來源 / License and provenance
+
+Entry: ppt-master-official:deck:ppt169_kubernetes_blueprint_2026
+Source: https://github.com/hugohe3/ppt-master
+Version: 52e85a0af8e40e61879f17f6c14664ff239bb7e3
+Creator role: UPSTREAM_DID_NOT_SUPPLY_ENTRY_LEVEL_CREATOR
+Rights holder: PPT Master contributors
+Publisher / maintainer: hugohe3 / PPT Master maintainers
+
+本公開版本保留原有投影片、主題與媒體內容，附加完整適用授權通知。
+This public derivative preserves the original slides, themes and media and adds complete applicable license notices.
+python-pptx default OOXML template portions remain under the accompanying MIT notice.

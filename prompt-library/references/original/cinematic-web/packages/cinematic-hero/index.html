@@ -1,0 +1,40 @@
+<!doctype html>
+<!-- SPDX-FileCopyrightText: 2026 junru-norple -->
+<!-- SPDX-License-Identifier: MIT -->
+<html lang="zh-Hant" data-cinematic-id="cinematic-web:cinematic-hero" data-preview-ready="false">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; connect-src 'none'; media-src 'none'; font-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>影院式星圖 Hero</title>
+  <style>
+    :root{color-scheme:dark;--ink:#f4f0e7;--muted:#aaa59b;--paper:#090b10;--accent:#e9b872;--line:rgba(255,255,255,.16);font-family:"Segoe UI",system-ui,sans-serif}
+    *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--paper);color:var(--ink)}body{overflow-x:hidden}
+    button,a{font:inherit}button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .eyebrow{margin:0;font:700 11px/1.2 ui-monospace,Consolas,monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+    .preview-badge{position:fixed;z-index:30;top:12px;right:12px;padding:7px 10px;border:1px solid var(--line);background:rgba(5,7,11,.72);backdrop-filter:blur(10px);font:700 10px/1 ui-monospace,Consolas,monospace;letter-spacing:.12em;color:var(--muted)}
+    :root{--paper:#070a10;--ink:#f2eee5;--muted:#9da8b6;--accent:#d8aa67;--cyan:#83d7de}
+    .hero{min-height:100svh;display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,.9fr);align-items:center;gap:clamp(30px,7vw,110px);padding:clamp(28px,7vw,100px)}.copy{position:relative;z-index:2}.copy h1{margin:.35em 0 .28em;font:500 clamp(52px,8.6vw,138px)/.82 Georgia,serif;letter-spacing:-.065em}.copy h1 em{font-weight:400;color:transparent;-webkit-text-stroke:1px var(--cyan)}.lede{max-width:37rem;font-size:clamp(15px,1.5vw,20px);line-height:1.65;color:var(--muted)}.cta{display:inline-flex;gap:28px;align-items:center;margin-top:28px;padding:15px 18px;border-top:1px solid var(--accent);color:var(--ink);text-decoration:none;font-weight:700}.iris{position:relative;aspect-ratio:1;margin:0;border-radius:50%;border:1px solid rgba(131,215,222,.45);overflow:hidden;background:radial-gradient(circle at 58% 42%,rgba(131,215,222,.18),transparent 18%),radial-gradient(circle,#121b28 0 38%,#05070b 39%);box-shadow:0 0 0 12px #080b11,0 0 0 13px rgba(216,170,103,.35)}.iris:before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle,#fff 0 1px,transparent 1.5px);background-size:47px 53px;opacity:.28}.ring{position:absolute;inset:11%;border:1px solid rgba(255,255,255,.2);border-radius:50%}.r2{inset:24%;border-style:dashed;transform:rotate(28deg)}.horizon{position:absolute;left:-5%;right:-5%;top:50%;height:1px;background:var(--cyan);box-shadow:0 0 20px var(--cyan)}.planet{position:absolute;width:34%;aspect-ratio:1;border-radius:50%;left:38%;top:30%;background:linear-gradient(145deg,#ddc08e,#76522d 47%,#111 49%);box-shadow:-18px -9px 40px rgba(216,170,103,.18)}.planet span{position:absolute;inset:-22%;border:1px solid rgba(216,170,103,.45);border-radius:50%;transform:rotate(70deg) scaleY(.24)}figcaption{position:absolute;bottom:8%;left:50%;transform:translateX(-50%);white-space:nowrap;font:10px ui-monospace,monospace;letter-spacing:.18em;color:var(--muted)}.coordinates{position:absolute;bottom:22px;left:clamp(28px,7vw,100px);font:10px ui-monospace,monospace;color:#667080;letter-spacing:.12em}@media(max-width:760px){.hero{grid-template-columns:1fr;padding-top:80px}.copy h1{font-size:clamp(54px,18vw,88px)}.iris{width:min(88vw,430px);justify-self:center}.coordinates{position:static;grid-column:1}}
+    @media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}
+  </style>
+</head>
+<body>
+  <span class="preview-badge" aria-hidden="true">OFFLINE · ISOLATED</span>
+  <main class="hero"><div class="copy"><p class="eyebrow">ORBITAL ARCHIVE · 01</p><h1>讓光線<br><em>先說故事</em></h1><p class="lede">一個為作品、空間與物件保留呼吸的首屏。移動游標，觀測視差深度。</p><a class="cta" href="#coordinates">進入座標 <span aria-hidden="true">↗</span></a></div><figure class="iris" aria-label="程序式星圖觀測光圈"><div class="ring r1"></div><div class="ring r2"></div><div class="horizon"></div><div class="planet"><span></span></div><figcaption>RA 04H 18M · DEC +22°</figcaption></figure><p id="coordinates" class="coordinates">N 25.03° · LOCAL SIGNAL · NO NETWORK</p></main>
+  <script>
+  (()=>{
+    'use strict';
+    const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const runtime={id:'cinematic-web:cinematic-hero',ready:false,reducedMotion:reduced,activeRaf:0,activeTimers:0,disposed:false,theme:'OBSERVATORY / HERO'};
+    window.__CINEMATIC_PREVIEW_STATE__=runtime;
+    const disposers=[];
+    window.__cinematicDispose=(fn)=>{if(typeof fn==='function')disposers.push(fn)};
+    const finish=()=>{runtime.ready=true;document.documentElement.dataset.previewReady='true'};
+    const iris=document.querySelector('.iris');let queued=0;const move=(event)=>{if(reduced)return;const box=iris.getBoundingClientRect();const x=(event.clientX-box.left)/box.width-.5;const y=(event.clientY-box.top)/box.height-.5;if(queued)return;queued=requestAnimationFrame(()=>{queued=0;iris.style.transform='perspective(900px) rotateX('+(-y*4)+'deg) rotateY('+(x*4)+'deg)';document.querySelector('.planet').style.transform='translate('+(x*10)+'px,'+(y*10)+'px)'})};iris.addEventListener('pointermove',move);iris.addEventListener('pointerleave',()=>{iris.style.transform='';document.querySelector('.planet').style.transform=''});__cinematicDispose(()=>{iris.removeEventListener('pointermove',move);if(queued)cancelAnimationFrame(queued)});
+    finish();
+    addEventListener('pagehide',()=>{for(const dispose of disposers.splice(0)){try{dispose()}catch(_){}}runtime.activeRaf=0;runtime.activeTimers=0;runtime.disposed=true},{once:true});
+  })();
+  </script>
+</body>
+</html>

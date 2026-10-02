@@ -1,0 +1,40 @@
+<!doctype html>
+<!-- SPDX-FileCopyrightText: 2026 junru-norple -->
+<!-- SPDX-License-Identifier: MIT -->
+<html lang="zh-Hant" data-cinematic-id="cinematic-web:three-product-viewer" data-preview-ready="false">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; connect-src 'none'; media-src 'none'; font-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>精密腕錶 3D 產品展示器</title>
+  <style>
+    :root{color-scheme:dark;--ink:#f4f0e7;--muted:#aaa59b;--paper:#090b10;--accent:#e9b872;--line:rgba(255,255,255,.16);font-family:"Segoe UI",system-ui,sans-serif}
+    *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--paper);color:var(--ink)}body{overflow-x:hidden}
+    button,a{font:inherit}button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .eyebrow{margin:0;font:700 11px/1.2 ui-monospace,Consolas,monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+    .preview-badge{position:fixed;z-index:30;top:12px;right:12px;padding:7px 10px;border:1px solid var(--line);background:rgba(5,7,11,.72);backdrop-filter:blur(10px);font:700 10px/1 ui-monospace,Consolas,monospace;letter-spacing:.12em;color:var(--muted)}
+    :root{--paper:#0b0d0e;--ink:#e8ece8;--muted:#8a9695;--accent:#b8dfcf;--line:rgba(232,236,232,.16)}
+    .bench{min-height:100svh;padding:clamp(22px,5vw,70px);display:grid;grid-template-columns:minmax(250px,.7fr) 1.3fr;grid-template-rows:1fr auto;gap:32px}header{align-self:center}h1{font:500 clamp(46px,6vw,88px)/.9 Georgia,serif;letter-spacing:-.045em}.viewer{position:relative;min-height:70svh;border:1px solid var(--line);display:grid;place-items:center;background:radial-gradient(circle at 50% 42%,#263033,transparent 42%)}.poster{display:grid;place-items:center;gap:34px}.watch{width:min(38vw,330px);aspect-ratio:1;border:28px solid #8d9898;border-radius:50%;position:relative;box-shadow:inset 0 0 0 8px #252b2c,0 24px 60px #000}.watch:before,.watch:after{content:"";position:absolute;width:42%;height:72%;background:repeating-linear-gradient(90deg,#4b5353 0 8px,#879090 9px 15px);left:29%;z-index:-1}.watch:before{bottom:95%}.watch:after{top:95%}.watch i,.watch b{position:absolute;left:50%;bottom:50%;width:3px;height:32%;background:var(--accent);transform-origin:bottom}.watch i{transform:rotate(48deg)}.watch b{height:24%;transform:rotate(-78deg);background:#e8ece8}.poster button,footer button{border:1px solid var(--line);background:#101617;color:var(--ink);padding:12px 16px;cursor:pointer}canvas{width:100%;height:70svh;touch-action:none}.cross{position:absolute;background:var(--line);pointer-events:none}.cross.x{height:1px;left:0;right:0;top:50%}.cross.y{width:1px;top:0;bottom:0;left:50%}footer{grid-column:1/3;display:flex;gap:12px;align-items:center}output{margin-left:auto;font:10px ui-monospace,monospace;color:var(--muted)}@media(max-width:760px){.bench{grid-template-columns:1fr;grid-template-rows:auto 1fr auto}.viewer{min-height:56svh}.watch{width:min(60vw,280px)}footer{grid-column:1;flex-wrap:wrap}output{width:100%;margin:0}}
+    @media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}
+  </style>
+</head>
+<body>
+  <span class="preview-badge" aria-hidden="true">OFFLINE · ISOLATED</span>
+  <main class="bench"><header><p class="eyebrow">CALIBRE 09 · PROCEDURAL OBJECT</p><h1>看見重量，<br>再決定材質。</h1></header><section class="viewer"><div class="poster" id="poster"><div class="watch" aria-hidden="true"><i></i><b></b></div><button id="activate" type="button">啟動 3D 檢視</button></div><canvas id="canvas" width="900" height="700" aria-label="可拖曳旋轉的程序式腕錶模型" hidden></canvas><div class="cross x"></div><div class="cross y"></div></section><footer><button id="material" type="button">切換材質</button><button id="reset" type="button">重置角度</button><output id="viewer-status">POSTER MODE · 0 WEBGL CONTEXT</output></footer></main>
+  <script>
+  (()=>{
+    'use strict';
+    const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const runtime={id:'cinematic-web:three-product-viewer',ready:false,reducedMotion:reduced,activeRaf:0,activeTimers:0,disposed:false,theme:'OBJECT / 3D VIEWER'};
+    window.__CINEMATIC_PREVIEW_STATE__=runtime;
+    const disposers=[];
+    window.__cinematicDispose=(fn)=>{if(typeof fn==='function')disposers.push(fn)};
+    const finish=()=>{runtime.ready=true;document.documentElement.dataset.previewReady='true'};
+    const activate=document.querySelector('#activate');const poster=document.querySelector('#poster');const canvas=document.querySelector('#canvas');const status=document.querySelector('#viewer-status');let active=false,frame=0,rotation={x:-.25,y:.35},drag=null,finishColor=0;const draw=()=>{if(!active)return;runtime.activeRaf=1;const ctx=canvas.getContext('2d');const w=canvas.width,h=canvas.height;ctx.clearRect(0,0,w,h);ctx.save();ctx.translate(w/2,h/2);ctx.rotate(rotation.y*.25);const scale=1+Math.sin(rotation.x)*.08;ctx.scale(scale,scale);ctx.strokeStyle=finishColor?'#d9b56d':'#b8dfcf';ctx.fillStyle=finishColor?'#4d3b20':'#313b3b';ctx.lineWidth=28;ctx.beginPath();ctx.ellipse(0,0,205,175,rotation.y,0,Math.PI*2);ctx.fill();ctx.stroke();ctx.lineWidth=4;ctx.strokeStyle='#e8ece8';for(let i=0;i<12;i++){const a=i*Math.PI/6;ctx.beginPath();ctx.moveTo(Math.cos(a)*120,Math.sin(a)*100);ctx.lineTo(Math.cos(a)*150,Math.sin(a)*126);ctx.stroke()}ctx.strokeStyle='#ff6a4c';ctx.lineWidth=6;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(Math.cos(rotation.x)*130,Math.sin(rotation.x)*95);ctx.stroke();ctx.restore();if(!reduced){rotation.y+=.002;frame=requestAnimationFrame(draw)}else{runtime.activeRaf=0}};activate.onclick=()=>{active=true;poster.hidden=true;canvas.hidden=false;status.value='ACTIVE · PROCEDURAL POSTER FALLBACK';draw()};canvas.onpointerdown=(e)=>{drag={x:e.clientX,y:e.clientY};canvas.setPointerCapture(e.pointerId)};canvas.onpointermove=(e)=>{if(!drag)return;rotation.y+=(e.clientX-drag.x)*.01;rotation.x+=(e.clientY-drag.y)*.01;drag={x:e.clientX,y:e.clientY};if(reduced)draw()};canvas.onpointerup=()=>{drag=null};document.querySelector('#material').onclick=()=>{finishColor=1-finishColor;if(reduced&&active)draw()};document.querySelector('#reset').onclick=()=>{rotation={x:-.25,y:.35};if(reduced&&active)draw()};__cinematicDispose(()=>{active=false;if(frame)cancelAnimationFrame(frame);canvas.width=0;canvas.height=0;status.value='DISPOSED · 0 CONTEXT';runtime.activeRaf=0});
+    finish();
+    addEventListener('pagehide',()=>{for(const dispose of disposers.splice(0)){try{dispose()}catch(_){}}runtime.activeRaf=0;runtime.activeTimers=0;runtime.disposed=true},{once:true});
+  })();
+  </script>
+</body>
+</html>

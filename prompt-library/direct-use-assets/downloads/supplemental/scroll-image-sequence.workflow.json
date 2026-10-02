@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "id": "cinematic-web-scroll-image-sequence-workflow",
+  "title": "Scroll-driven Image Sequence production workflow",
+  "entry_id": "cinematic-web:scroll-image-sequence",
+  "format": "ai-prompt-library-native-workflow",
+  "steps": [
+    {
+      "id": "frames",
+      "action": "prepare_frames",
+      "output": "ordered frame source or procedural drawFrame function"
+    },
+    {
+      "id": "poster",
+      "action": "select_static_poster",
+      "output": "reduced-motion and failure fallback"
+    },
+    {
+      "id": "scroll",
+      "action": "bind_native_scroll_progress",
+      "output": "clamped frame index"
+    },
+    {
+      "id": "performance",
+      "action": "apply_windowed_preload_and_single_raf",
+      "output": "bounded memory and work"
+    },
+    {
+      "id": "cleanup",
+      "action": "release_listeners_raf_and_image_resources",
+      "output": "zero residual runtime work"
+    }
+  ],
+  "offline": true,
+  "network_required": false,
+  "license_notice": "Original workflow content © 2026 junru-norple, CC BY 4.0, only to the extent rights are held by junru-norple."
+}

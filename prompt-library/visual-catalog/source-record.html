@@ -1,0 +1,25 @@
+<!doctype html>
+<!-- SPDX-License-Identifier: MIT -->
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>單筆來源證明／Entry source proof</title>
+  <style>
+    [hidden]{display:none!important}a:focus-visible{outline:3px solid #c65335;outline-offset:3px}:root{color-scheme:light;--paper:#f4f1e9;--ink:#172327;--muted:#617176;--line:#c8d0ce;--accent:#135e67}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:"Microsoft JhengHei",system-ui,sans-serif}main{width:min(1060px,calc(100% - 28px));margin:28px auto 60px}header{padding:24px 0;border-bottom:2px solid var(--ink)}.eyebrow{font:700 12px/1.4 ui-monospace,monospace;letter-spacing:.12em;color:var(--accent)}h1{font-size:clamp(28px,5vw,56px);line-height:1.02;margin:10px 0}p{line-height:1.65}.status{color:var(--muted)}dl{display:grid;grid-template-columns:minmax(190px,.45fr) 1fr;border-top:1px solid var(--line);margin:24px 0}dl div{display:contents}dt,dd{margin:0;padding:12px 10px;border-bottom:1px solid var(--line)}dt{font-weight:700}dd{overflow-wrap:anywhere}.actions{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0}.button{display:inline-flex;align-items:center;min-height:44px;padding:10px 14px;border:1px solid var(--ink);color:var(--ink);text-decoration:none;background:#fff}.button.primary{background:var(--ink);color:#fff}.body{white-space:pre-wrap;overflow-wrap:anywhere;background:#fff;border:1px solid var(--line);padding:20px;line-height:1.65;max-height:52vh;overflow:auto}.note{padding:14px;border-left:4px solid var(--accent);background:#e5efed}@media(max-width:620px){dl{grid-template-columns:1fr}dl div{display:block}dt{border-bottom:0;padding-bottom:0}dd{padding-top:5px}}
+  </style>
+</head>
+<body>
+  <main>
+    <header><div class="eyebrow">OFFLINE ENTRY SOURCE PROOF</div><h1 id="title">載入單筆來源證明…</h1><p id="status" class="status"></p></header>
+    <p class="note">本頁是固定版本的離線單筆來源證明，不把 project／dataset URL 冒充單筆定位。外部連結需要網路；即使無法開啟，這裡的 record index、角色、授權與 hash 證據仍可離線閱讀。<br><span lang="en">This is an offline, fixed-version entry proof. A project or dataset URL is never presented as an entry locator. External links require network access; the record, role, license, and hash evidence remains readable offline.</span></p>
+    <div class="actions"><a class="button" href="index.html">返回 Library</a><a id="entry-link" class="button primary" target="_blank" rel="noopener noreferrer" hidden>開啟此筆上游來源</a><a id="dataset-link" class="button" target="_blank" rel="noopener noreferrer" hidden>開啟上游專案</a></div>
+    <dl id="facts"></dl>
+    <section id="body-section" hidden><h2>固定來源正文／Fixed source body</h2><pre id="body" class="body"></pre></section>
+  </main>
+  <script src="source-proof-core.js"></script>
+  <script src="source-proof-manifest.js"></script>
+  <script src="source-record.js"></script>
+</body>
+</html>

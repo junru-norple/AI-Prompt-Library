@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'sha256-4ldFw2J4yhzQndSwYR4ip7Io8KRkZPtyQBBivV5IK4A='; img-src data:; font-src 'none'; media-src 'none'; connect-src 'none'; frame-src 'none'; child-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"><meta name="atlas-source-entry" content="open-design-official:artifact:shadcn:landing">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shadcn - Landing page</title>
+  <style>
+:root {
+    --accent: #000000;
+    --accent-active: color-mix(in oklab, var(--accent), white 18%);
+    --accent-hover: color-mix(in oklab, var(--accent), white 10%);
+    --accent-on: #ffffff;
+    --bg: #ffffff;
+    --border: #e5e7eb;
+    --border-soft: var(--border);
+    --container-gutter-desktop: 24px;
+    --container-gutter-phone: 16px;
+    --container-gutter-tablet: 16px;
+    --container-max: 1280px;
+    --danger: #dc2626;
+    --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+    --elev-flat: none;
+    --elev-raised: 0 1px 2px 0 color-mix(in oklab, var(--fg), transparent 92%), 0 1px 3px 0 color-mix(in oklab, var(--fg), transparent 88%);
+    --elev-ring: 0 0 0 1px var(--border);
+    --fg: #111827;
+    --fg-2: var(--fg);
+    --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+    --font-body: "Geist", "Geist Sans", -apple-system, system-ui, "Segoe UI", Arial, sans-serif;
+    --font-display: "Geist", "Geist Sans", -apple-system, system-ui, "Segoe UI", Arial, sans-serif;
+    --font-mono: "Fira Code", ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Monaco, Consolas, monospace;
+    --leading-body: 1.5;
+    --leading-tight: 1.2;
+    --meta: var(--muted);
+    --motion-base: 200ms;
+    --motion-fast: 150ms;
+    --muted: #64748b;
+    --radius: 0.5rem` (8px) and the
+   * smaller variants compute as `calc(var(--radius) - Npx)`. We bind:
+   *   sm 6px → buttons, inputs (the `calc(--radius - 2px)` tier)
+   *   md 8px → cards, modals (the documented baseline)
+   *   lg 12px → featured containers (the `calc(--radius + 4px)` tier)
+   *   pill 9999px → badges, avatars, capsule chips */
+  --radius-sm: 6px;
+    --radius-lg: 12px;
+    --radius-md: 8px;
+    --radius-pill: 9999px;
+    --radius-sm: 6px;
+    --section-y-desktop: 96px;
+    --section-y-phone: 48px;
+    --section-y-tablet: 64px;
+    --space-1: 4px;
+    --space-12: 48px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --success: #16a34a;
+    --surface: #ffffff;
+    --surface-warm: var(--surface);
+    --text-2xl: 32px;
+    --text-3xl: 40px;
+    --text-4xl: 48px;
+    --text-base: 16px;
+    --text-lg: 20px;
+    --text-sm: 14px;
+    --text-xl: 24px;
+    --text-xs: 12px;
+    --tracking-display: -0.02em;
+    --warn: #d97706;
+}
+:root {
+  --od-page-bg: #ffffff;
+  --od-surface: #ffffff;
+  --od-text: #111827;
+  --od-muted: #64748b;
+  --od-border: #e5e7eb;
+  --od-accent: #000000;
+  --od-radius: 8px;
+  --od-font-body: "Geist", "Geist Sans", -apple-system, system-ui, "Segoe UI", Arial, sans-serif;
+  --od-font-display: "Geist", "Geist Sans", -apple-system, system-ui, "Segoe UI", Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--od-page-bg);
+  color: var(--od-text);
+  font-family: var(--od-font-body);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+.page { width: min(1100px, calc(100vw - 48px)); margin: 0 auto; padding: 72px 0; }
+.eyebrow { color: var(--od-accent); font-size: 12px; font-weight: 750; letter-spacing: 0; text-transform: uppercase; }
+.hero { display: grid; grid-template-columns: 1.05fr .95fr; gap: 32px; align-items: center; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { font-family: var(--od-font-display); letter-spacing: 0; line-height: 1.05; }
+h1 { margin-top: 12px; font-size: 64px; }
+h2 { font-size: 40px; }
+h3 { font-size: 22px; }
+.lead { margin-top: 18px; color: var(--od-muted); font-size: 20px; line-height: 1.55; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.button { display: inline-flex; min-height: 44px; align-items: center; justify-content: center; border-radius: var(--od-radius); padding: 0 18px; font-weight: 750; text-decoration: none; border: 1px solid var(--od-border); }
+.button.primary { background: var(--od-accent); border-color: var(--od-accent); color: #ffffff; }
+.button.secondary { background: var(--od-surface); }
+.panel, .card, .field, .slide, .email, .poster { border: 1px solid var(--od-border); border-radius: var(--od-radius); background: var(--od-surface); }
+.panel { padding: 24px; box-shadow: 0 24px 80px rgba(15, 17, 23, 0.08); }
+.metric-grid, .card-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 22px; }
+.metric, .card { padding: 18px; }
+.metric strong { display: block; font-size: 30px; line-height: 1; }
+.metric span, .card p, .field span { color: var(--od-muted); font-size: 14px; line-height: 1.5; }
+.chip-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.chip { border: 1px solid var(--od-border); border-radius: 999px; padding: 8px 12px; color: var(--od-muted); }
+input, textarea, select { width: 100%; min-height: 44px; border: 1px solid var(--od-border); border-radius: var(--od-radius); background: var(--od-page-bg); color: var(--od-text); font: inherit; padding: 10px 12px; }
+label { display: grid; gap: 8px; color: var(--od-muted); font-size: 13px; font-weight: 700; }
+@media (max-width: 820px) { .hero, .metric-grid, .card-grid { grid-template-columns: 1fr; } .page { width: min(100vw - 28px, 1100px); padding: 40px 0; } h1 { font-size: 42px; } h2 { font-size: 30px; } }
+</style>
+<style data-atlas-owned-adapter>@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:0s!important;transition-delay:0s!important;scroll-behavior:auto!important}}</style></head>
+<body data-atlas-language-policy="ORIGINAL_SOURCE_LABELED">
+  <main class="page">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Landing module</p>
+        <h1>Shadcn Launch narrative</h1>
+        <p class="lead">Hero, proof points, and conversion actions composed from the design system tokens.</p>
+        <div class="actions">
+          <a class="button primary" href="#">Continue</a>
+          <a class="button secondary" href="#">View details</a>
+        </div>
+      </div>
+      <article class="panel">
+        <p class="eyebrow">Preview</p>
+        <h3>Landing page</h3>
+        <p class="lead" style="font-size:16px">Bundled Open Design package for Shadcn, derived from curated DESIGN.md, tokens.css, and components.html fixtures.</p>
+        <div class="card-grid" style="grid-template-columns:1fr 1fr">
+          <div class="field"><label>Primary input<input value="Shadcn" /></label></div>
+          <div class="field"><label>Status<select><option>Ready</option><option>Draft</option></select></label></div>
+        </div>
+      </article>
+    </section>
+  </main>
+<aside id="atlas-source-proof" aria-label="Atlas 來源證據 / Source evidence" data-language-exempt="original-source" style="all:initial;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;position:relative;z-index:2147483647;padding:10px 14px;color:#30464d;background:#f8faf9;border-top:1px solid rgba(21,39,45,.22);font:12px/1.4 ui-monospace,Consolas,monospace"><span>來源版式離線適配（保留原文）· 原始程式已停用；本機適配器提供頁面與減動控制<br><span lang="en">Offline source-layout adaptation; original text retained. Source scripts are disabled; local adapters provide page and reduced-motion controls.</span></span><span>bf714528070d · b65587435428</span></aside><script data-atlas-owned-adapter="0" data-atlas-script-sha256="e25745c36278ca1cd09dd4b0611e22a7b228f0a46464fb72401062bd5e482b80">(function reducedMotionRuntime() {
+  'use strict';
+  const media = matchMedia('(prefers-reduced-motion: reduce)');
+  const held = new Map();
+  let scheduled = 0, closed = false;
+  const state = { version: 1, reduced: media.matches, sampled: 0, scheduled: false };
+  Object.defineProperty(window, '__atlasSourceMotion', { value: state });
+  function scan() {
+    scheduled = 0; state.scheduled = false;
+    if (closed) return;
+    state.reduced = media.matches;
+    const current = new Set(document.getAnimations().filter(animation => animation instanceof CSSAnimation));
+    for (const [animation] of held) if (!current.has(animation)) held.delete(animation);
+    if (!media.matches) {
+      for (const [animation, prior] of held) {
+        animation.playbackRate = prior.rate;
+        animation.currentTime = prior.time;
+        if (prior.state === 'running') animation.play();
+        else if (prior.state === 'paused') animation.pause();
+      }
+      held.clear(); return;
+    }
+    for (const animation of current) {
+      if (held.has(animation)) continue;
+      const effect = animation.effect, timing = effect && effect.getTiming();
+      if (!timing || !Number.isFinite(Number(timing.duration)) || Number(timing.duration) <= 0) continue;
+      const prior = { state: animation.playState, time: animation.currentTime, rate: animation.playbackRate };
+      const duration = Number(timing.duration), delay = Number(timing.delay) || 0;
+      const iterations = Number(timing.iterations);
+      const pose = iterations === Infinity ? delay + duration / 2 : delay + duration * iterations;
+      if (!Number.isFinite(pose)) continue;
+      animation.pause(); animation.currentTime = Math.max(0, pose);
+      held.set(animation, prior); state.sampled++;
+    }
+  }
+  function schedule() {
+    if (closed || scheduled || (!media.matches && !held.size)) return;
+    state.scheduled = true; scheduled = requestAnimationFrame(scan);
+  }
+  const resize = new ResizeObserver(() => { if (media.matches) schedule(); });
+  resize.observe(document.documentElement);
+  document.addEventListener('animationstart', schedule, true);
+  document.addEventListener('atlas-source-deck-change', schedule);
+  document.addEventListener('DOMContentLoaded', schedule, { once: true });
+  window.addEventListener('load', schedule, { once: true });
+  media.addEventListener('change', schedule);
+  window.addEventListener('pagehide', () => {
+    closed = true; resize.disconnect(); media.removeEventListener('change', schedule);
+    document.removeEventListener('animationstart', schedule, true);
+    document.removeEventListener('atlas-source-deck-change', schedule);
+    if (scheduled) cancelAnimationFrame(scheduled);
+    // A bfcache page retains the source Animation objects and their original
+    // playback state; discard neither merely because the document is hidden.
+    scheduled = 0; state.scheduled = false;
+  });
+  window.addEventListener('pageshow', () => {
+    if (!closed) return;
+    closed = false; resize.observe(document.documentElement);
+    document.addEventListener('animationstart', schedule, true);
+    document.addEventListener('atlas-source-deck-change', schedule);
+    media.addEventListener('change', schedule);
+    schedule();
+  });
+  schedule();
+})();</script></body>
+</html>

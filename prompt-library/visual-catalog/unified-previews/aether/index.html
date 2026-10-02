@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src file:; script-src file:; img-src file: data:; connect-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Aether CSS 本機元件標本</title>
+  <link rel="stylesheet" href="../../../references/community/aether-css/aether.css">
+  <link rel="stylesheet" href="adapter.css">
+</head>
+<body>
+  <main>
+    <header id="system">
+      <div><p>AETHER CSS · MIT · 固定版本</p><h1>一套輕量系統，<br>用一致規則完整呈現。</h1></div>
+      <span>零遠端資產元件標本</span>
+    </header>
+    <section id="buttons"><div class="section-title"><p>01</p><h2>按鈕與回饋</h2></div><div class="flex"><button type="button">主要按鈕</button><button type="button" class="secondary">次要按鈕</button><button type="button" disabled>不可使用</button><button id="progress-button" type="button" class="progress-animation in-progress">處理中</button></div></section>
+    <section id="forms"><div class="section-title"><p>02</p><h2>表單</h2></div><form><div class="fieldset"><label for="name">名稱</label><input id="name" type="text" value="陳映安"></div><div class="fieldset"><label for="role">角色</label><select id="role"><option>介面設計</option><option>前端工程</option></select></div><div class="fieldset"><label for="note">需求</label><textarea id="note" placeholder="描述想產生的成果"></textarea></div></form></section>
+    <section id="tags"><div class="section-title"><p>03</p><h2>標籤</h2></div><div class="tags"><span class="tag">已離線</span><span class="tag selected">已選取</span><span class="tag new">新項目</span><span class="tag selectable">可選取</span></div></section>
+    <section id="notifications"><div class="section-title"><p>04</p><h2>通知狀態</h2></div><div class="notification-grid"><div class="notification color-information-bg">資訊：中繼資料已載入</div><div class="notification color-warning-bg">提醒：先檢查相依項目</div><div class="notification color-error-bg">阻擋：授權未驗證</div><div class="notification color-success-bg">完成：離線預覽通過</div></div></section>
+    <section id="toggle"><div class="section-title"><p>05</p><h2>切換</h2></div><div class="fieldset"><span class="toggle-switch"><input id="offline-toggle" type="checkbox" checked><label for="offline-toggle"></label></span><label for="offline-toggle">只顯示離線可用</label></div></section>
+    <section id="progress"><div class="section-title"><p>06</p><h2>進度與脈動</h2></div><div class="flex"><button type="button" class="pulsate-animation">正在聆聽</button><progress max="100" value="68">68%</progress></div></section>
+    <section id="table"><div class="section-title"><p>07</p><h2>資料表格</h2></div><table><thead><tr><th>元件家族</th><th>狀態</th></tr></thead><tbody><tr><td>排版</td><td>可使用</td></tr><tr><td>表單</td><td>可使用</td></tr><tr><td>遠端資產</td><td>已排除</td></tr></tbody></table></section>
+    <section id="typography"><div class="section-title"><p>08</p><h2>排版與內容元素</h2></div><p>用以元素為先的 CSS 建立清楚閱讀起點，再以少量 class 處理標籤、彈性配置與切換狀態。</p><blockquote>「簡單、可互動、有趣，而且好看的 CSS 系統。」</blockquote><pre><code>&lt;button class="secondary"&gt;次要按鈕&lt;/button&gt;</code></pre></section>
+    <section id="layout"><div class="section-title"><p>09</p><h2>彈性配置與導覽</h2></div><div class="flex layout-cards"><article><h3>探索</h3><p>從成果開始。</p></article><article><h3>證據</h3><p>再看來源與授權。</p></article><article><h3>整合</h3><p>最後交給 Agent。</p></article></div></section>
+    <footer>系統字型 · 示例資料 · 無 Google Font · 無 Wikimedia 熱連結</footer>
+  </main>
+  <script src="adapter.js"></script>
+</body>
+</html>

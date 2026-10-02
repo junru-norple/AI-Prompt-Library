@@ -1,0 +1,40 @@
+<!doctype html>
+<!-- SPDX-FileCopyrightText: 2026 junru-norple -->
+<!-- SPDX-License-Identifier: MIT -->
+<html lang="zh-Hant" data-cinematic-id="cinematic-web:staggered-text-reveal" data-preview-ready="false">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; connect-src 'none'; media-src 'none'; font-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>電影片頭分段文字揭示</title>
+  <style>
+    :root{color-scheme:dark;--ink:#f4f0e7;--muted:#aaa59b;--paper:#090b10;--accent:#e9b872;--line:rgba(255,255,255,.16);font-family:"Segoe UI",system-ui,sans-serif}
+    *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--paper);color:var(--ink)}body{overflow-x:hidden}
+    button,a{font:inherit}button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .eyebrow{margin:0;font:700 11px/1.2 ui-monospace,Consolas,monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+    .preview-badge{position:fixed;z-index:30;top:12px;right:12px;padding:7px 10px;border:1px solid var(--line);background:rgba(5,7,11,.72);backdrop-filter:blur(10px);font:700 10px/1 ui-monospace,Consolas,monospace;letter-spacing:.12em;color:var(--muted)}
+    :root{--paper:#eee9dd;--ink:#141414;--muted:#66615a;--accent:#b9362d;--line:rgba(20,20,20,.2);color-scheme:light}
+    .leader{min-height:100svh;padding:clamp(24px,5vw,72px);display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(90deg,transparent 49.8%,rgba(20,20,20,.08) 50%,transparent 50.2%)}header,footer{display:flex;justify-content:space-between;gap:24px;align-items:center;border-top:1px solid var(--ink);padding-top:12px}#timecode{font:700 12px ui-monospace,monospace;letter-spacing:.12em}.title-card{margin:7vh 0}.line{margin:0;overflow:hidden;font:800 clamp(42px,9vw,132px)/.88 Impact,"Arial Narrow",sans-serif;text-transform:uppercase;letter-spacing:-.035em}.line span{display:block;transform:translateY(112%);transition:transform .72s cubic-bezier(.2,.85,.2,1)}.line.outline span{color:transparent;-webkit-text-stroke:1.5px var(--ink)}.line.indent{padding-left:17vw;color:var(--accent)}.leader.is-playing .line:nth-of-type(1) span{transition-delay:.08s}.leader.is-playing .line:nth-of-type(2) span{transition-delay:.2s}.leader.is-playing .line:nth-of-type(3) span{transition-delay:.34s}.leader.is-playing .line span{transform:none}footer p{max-width:42rem;line-height:1.55;color:var(--muted)}button{border:0;border-bottom:2px solid var(--accent);padding:10px 2px;background:none;color:var(--ink);font-weight:800;cursor:pointer}@media(max-width:650px){header,footer{align-items:flex-start;flex-direction:column}.line{font-size:clamp(42px,16vw,76px)}.line.indent{padding-left:8vw}}
+    @media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}
+  </style>
+</head>
+<body>
+  <span class="preview-badge" aria-hidden="true">OFFLINE · ISOLATED</span>
+  <main class="leader"><header><p class="eyebrow">TAKE 04 · TYPOGRAPHY STUDY</p><output id="timecode" aria-label="動畫時間碼">00:00:00</output></header><section class="title-card" aria-labelledby="statement"><h1 id="statement" class="sr-only">城市醒來以前，我們先讓聲音找到形狀。</h1><p class="line" data-line><span>城市醒來以前，</span></p><p class="line outline" data-line><span>我們先讓聲音</span></p><p class="line indent" data-line><span>找到形狀。</span></p></section><footer><p>語意片語保持完整，動畫只是閱讀節拍，不犧牲內容順序。</p><button id="replay" type="button">重新播放 <span aria-hidden="true">↺</span></button></footer></main>
+  <script>
+  (()=>{
+    'use strict';
+    const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const runtime={id:'cinematic-web:staggered-text-reveal',ready:false,reducedMotion:reduced,activeRaf:0,activeTimers:0,disposed:false,theme:'FILM LEADER / TYPE'};
+    window.__CINEMATIC_PREVIEW_STATE__=runtime;
+    const disposers=[];
+    window.__cinematicDispose=(fn)=>{if(typeof fn==='function')disposers.push(fn)};
+    const finish=()=>{runtime.ready=true;document.documentElement.dataset.previewReady='true'};
+    const root=document.querySelector('.leader');const output=document.querySelector('#timecode');let start=0,frame=0;const tick=(time)=>{if(!start)start=time;const elapsed=Math.min(1400,time-start);output.value='00:00:'+String(Math.floor(elapsed/10)).padStart(2,'0');if(elapsed<1400){frame=requestAnimationFrame(tick);runtime.activeRaf=1}else{runtime.activeRaf=0}};const play=()=>{if(frame)cancelAnimationFrame(frame);runtime.activeRaf=0;start=0;root.classList.remove('is-playing');void root.offsetWidth;root.classList.add('is-playing');if(!reduced)frame=requestAnimationFrame(tick);else output.value='00:00:00'};document.querySelector('#replay').addEventListener('click',play);play();__cinematicDispose(()=>{if(frame)cancelAnimationFrame(frame)});
+    finish();
+    addEventListener('pagehide',()=>{for(const dispose of disposers.splice(0)){try{dispose()}catch(_){}}runtime.activeRaf=0;runtime.activeTimers=0;runtime.disposed=true},{once:true});
+  })();
+  </script>
+</body>
+</html>

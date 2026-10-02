@@ -1,0 +1,488 @@
+<!doctype html>
+
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'sha256-4ldFw2J4yhzQndSwYR4ip7Io8KRkZPtyQBBivV5IK4A='; img-src data:; font-src 'none'; media-src 'none'; connect-src 'none'; frame-src 'none'; child-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"><meta name="atlas-source-entry" content="open-design-official:template:replit-deck">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Holm — Series A Pre-Read</title>
+  <style>
+    /* ─── font stacks (system-only; no external fonts) ─────────────── */
+    :root {
+      --font-sans:     -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', system-ui, sans-serif;
+      --font-sans-display: -apple-system, BlinkMacSystemFont, 'Inter Display', 'Inter', 'Segoe UI', system-ui, sans-serif;
+      --font-serif:    'Iowan Old Style', 'Charter', 'Palatino', Georgia, 'Times New Roman', serif;
+      --font-serif-display: 'GT Super', 'Tiempos Headline', 'Iowan Old Style', Georgia, serif;
+      --font-mono:     ui-monospace, 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+    }
+
+    /* ─── theme: helix  (slide-1/4/5 — modern minimal) ─────────────── */
+    body[data-theme="helix"] {
+      --bg:        #fafafa;
+      --surface:   #ffffff;
+      --fg:        #19191c;
+      --muted:     #6e6e73;
+      --border:    #e4e4e7;
+      --accent:    #5889fe;
+      --accent-soft: color-mix(in oklch, #5889fe 14%, transparent);
+      --font-display: var(--font-sans-display);
+      --font-body:    var(--font-sans);
+      --display-weight: 600;
+      --display-tracking: -0.02em;
+    }
+
+    /* ─── theme: holm  (slide-2 — editorial serif memo) ────────────── */
+    body[data-theme="holm"] {
+      --bg:        #e4dfd7;
+      --surface:   #eee9e0;
+      --fg:        #0f0f0e;
+      --muted:     #7c7e84;
+      --border:    #c7c1b7;
+      --accent:    #52311d;
+      --accent-soft: color-mix(in oklch, #52311d 14%, transparent);
+      --font-display: var(--font-serif-display);
+      --font-body:    var(--font-sans);
+      --display-weight: 500;
+      --display-tracking: -0.015em;
+    }
+
+    /* ─── theme: vance  (slide-3/7 — gallery catalog) ──────────────── */
+    body[data-theme="vance"] {
+      --bg:        #f1ede2;
+      --surface:   #e7e2d4;
+      --fg:        #171815;
+      --muted:     #6e6b62;
+      --border:    #d6d2c5;
+      --accent:    #171815;
+      --accent-soft: color-mix(in oklch, #171815 8%, transparent);
+      --bar:       #0a0a0a;  /* top/bottom gallery bar */
+      --bar-fg:    #f1ede2;
+      --font-display: var(--font-serif-display);
+      --font-body:    var(--font-sans);
+      --display-weight: 400;
+      --display-tracking: -0.01em;
+    }
+
+    /* ─── theme: bevel  (slide-6/13 — Y2K editorial) ───────────────── */
+    body[data-theme="bevel"] {
+      --bg:        #0d0d0b;
+      --surface:   #18181a;
+      --fg:        #eae6dd;
+      --muted:     #a29e95;
+      --border:    #2a2a28;
+      --accent:    #c8ff00;      /* neon outline only — sparingly */
+      --accent-soft: color-mix(in oklch, #c8ff00 10%, transparent);
+      --font-display: 'Antonio', 'Bebas Neue', Impact, var(--font-sans-display);
+      --font-body:    var(--font-sans);
+      --display-weight: 700;
+      --display-tracking: 0;
+    }
+
+    /* ─── theme: world-dark  (slide-8/10 — finance dark) ───────────── */
+    body[data-theme="world-dark"] {
+      --bg:        #0d3a2b;
+      --surface:   #124736;
+      --fg:        #bcd6cd;
+      --muted:     #789f91;
+      --border:    #1d4c3c;
+      --accent:    #e8f615;
+      --accent-soft: color-mix(in oklch, #e8f615 18%, transparent);
+      --font-display: var(--font-sans-display);
+      --font-body:    var(--font-sans);
+      --display-weight: 500;
+      --display-tracking: -0.015em;
+    }
+
+    /* ─── theme: world-mint  (slide-9 — finance light sibling) ─────── */
+    body[data-theme="world-mint"] {
+      --bg:        #bcd6cd;
+      --surface:   #c8e0d6;
+      --fg:        #0d3a2b;
+      --muted:     #527567;
+      --border:    #9abbac;
+      --accent:    #e8f615;
+      --accent-soft: color-mix(in oklch, #e8f615 22%, transparent);
+      --font-display: var(--font-sans-display);
+      --font-body:    var(--font-sans);
+      --display-weight: 500;
+      --display-tracking: -0.015em;
+    }
+
+    /* ─── theme: atlas  (slide-11 — museum chapter) ────────────────── */
+    body[data-theme="atlas"] {
+      --bg:        #111010;
+      --surface:   #1a1918;
+      --fg:        #e7e6e2;
+      --muted:     #827d78;
+      --border:    #2a2826;
+      --accent:    #de3f40;
+      --accent-soft: color-mix(in oklch, #de3f40 14%, transparent);
+      --font-display: var(--font-serif-display);
+      --font-body:    var(--font-sans);
+      --display-weight: 500;
+      --display-tracking: -0.02em;
+    }
+
+    /* ─── theme: bluehouse  (slide-12 — consumer card) ─────────────── */
+    body[data-theme="bluehouse"] {
+      --bg:        #0b1524;
+      --surface:   #10203a;
+      --fg:        #ffffff;
+      --muted:     #8ea0b8;
+      --border:    #1a2c46;
+      --accent:    #fb675d;      /* coral */
+      --accent-2:  #ff8f68;      /* peach */
+      --accent-soft: color-mix(in oklch, #fb675d 18%, transparent);
+      --card-peach: #e0af99;
+      --card-lavender: #c7cff0;
+      --font-display: var(--font-sans-display);
+      --font-body:    var(--font-sans);
+      --display-weight: 700;
+      --display-tracking: -0.025em;
+    }
+
+    /* ─── reset / base ────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-body);
+      font-size: 18px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+    }
+    body::-webkit-scrollbar { display: none; }
+    p { text-wrap: pretty; margin: 0; }
+    h1, h2, h3 { text-wrap: balance; margin: 0; font-weight: var(--display-weight); letter-spacing: var(--display-tracking); }
+
+    /* ─── slide surface ───────────────────────────────────────────── */
+    .slide {
+      flex: 0 0 100vw;
+      width: 100vw;
+      height: 100vh;
+      scroll-snap-align: start;
+      padding: clamp(48px, 6vw, 96px) clamp(56px, 7vw, 112px);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+    .slide.center { align-items: center; justify-content: center; text-align: center; }
+
+    /* ─── meta bar (top thin row: brand · meta · page) ────────────── */
+    .meta-bar {
+      position: absolute;
+      top: clamp(32px, 4vw, 56px);
+      left: clamp(56px, 7vw, 112px);
+      right: clamp(56px, 7vw, 112px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    body[data-theme="vance"] .meta-bar { color: var(--bar-fg); }
+
+    /* ─── typography primitives ──────────────────────────────────── */
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .eyebrow.accent { color: var(--accent); }
+    .h-hero { font-family: var(--font-display); font-size: clamp(56px, 8.5vw, 128px); line-height: 1.02; }
+    .h-xl   { font-family: var(--font-display); font-size: clamp(40px, 5vw, 76px);  line-height: 1.08; }
+    .h-lg   { font-family: var(--font-display); font-size: clamp(28px, 3vw, 44px);  line-height: 1.14; }
+    .h-md   { font-family: var(--font-display); font-size: clamp(20px, 1.6vw, 24px); line-height: 1.25; }
+    .lead   { font-size: clamp(16px, 1.2vw, 19px); color: var(--muted); max-width: 56ch; }
+
+    /* Big numeric display — for kpi rows, used by helix / world / atlas */
+    .num { font-family: var(--font-display); font-size: clamp(48px, 5.5vw, 84px); line-height: 1; letter-spacing: -0.03em; }
+    .num-label { font-size: 15px; color: var(--muted); margin-bottom: 8px; }
+    .num-delta { font-family: var(--font-mono); font-size: 13px; color: var(--accent); margin-top: 8px; letter-spacing: 0.02em; }
+
+    /* ─── layout primitives ──────────────────────────────────────── */
+    .hstack { display: flex; gap: var(--gap, 24px); align-items: flex-start; }
+    .vstack { display: flex; flex-direction: column; gap: var(--gap, 16px); }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(24px, 3vw, 48px); }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 4vw, 64px); align-items: center; }
+    .grid-6 { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(32px, 4vw, 56px); row-gap: clamp(48px, 5vw, 80px); }
+    .divider { height: 1px; background: var(--border); margin: clamp(16px, 2vw, 32px) 0; }
+
+    /* ─── surface cards ──────────────────────────────────────────── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: clamp(20px, 2vw, 32px);
+    }
+
+    /* ─── vance gallery bars ─────────────────────────────────────── */
+    body[data-theme="vance"] .slide { padding-top: 0; padding-bottom: 0; }
+    body[data-theme="vance"] .vance-top {
+      background: var(--bar);
+      color: var(--bar-fg);
+      padding: clamp(32px, 4vw, 64px) clamp(56px, 7vw, 112px);
+      margin-left: calc(-1 * clamp(56px, 7vw, 112px));
+      margin-right: calc(-1 * clamp(56px, 7vw, 112px));
+    }
+
+    /* ─── bevel dashed frames ────────────────────────────────────── */
+    body[data-theme="bevel"] .bevel-frame {
+      border: 1px dashed var(--accent);
+      padding: clamp(16px, 2vw, 28px);
+      position: relative;
+    }
+    body[data-theme="bevel"] .bevel-frame::before,
+    body[data-theme="bevel"] .bevel-frame::after {
+      content: "";
+      position: absolute;
+      width: 8px; height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+    body[data-theme="bevel"] .bevel-frame::before { top: -4px; left: -4px; }
+    body[data-theme="bevel"] .bevel-frame::after  { bottom: -4px; right: -4px; }
+
+    /* ─── world yellow square marker ─────────────────────────────── */
+    body[data-theme="world-dark"] .world-marker,
+    body[data-theme="world-mint"] .world-marker {
+      display: inline-block;
+      width: 14px; height: 14px;
+      background: var(--accent);
+      vertical-align: middle;
+    }
+
+    /* ─── atlas chapter dot ──────────────────────────────────────── */
+    body[data-theme="atlas"] .atlas-dot {
+      display: inline-block;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-right: 12px;
+      vertical-align: middle;
+    }
+
+    /* ─── bluehouse gradient card ────────────────────────────────── */
+    body[data-theme="bluehouse"] .bh-card {
+      border-radius: 24px;
+      padding: clamp(28px, 3vw, 48px);
+      aspect-ratio: 4 / 3;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    body[data-theme="bluehouse"] .bh-card.peach {
+      background: var(--card-peach);
+      color: #1a0e08;
+    }
+    body[data-theme="bluehouse"] .bh-card.coral {
+      background: linear-gradient(135deg, var(--accent-2), var(--accent));
+      color: #ffffff;
+    }
+    body[data-theme="bluehouse"] .bh-card.lavender {
+      background: linear-gradient(180deg, var(--card-lavender), #8faad8);
+      color: #0b1524;
+    }
+
+    /* ─── deck chrome (counter, progress, hint) ──────────────────── */
+    .deck-counter {
+      position: fixed;
+      bottom: 24px; right: 32px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 6px 12px;
+      background: color-mix(in oklch, var(--bg) 92%, transparent);
+      border: 1px solid var(--border);
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      z-index: 10;
+    }
+    .deck-hint {
+      position: fixed;
+      bottom: 24px; left: 32px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      z-index: 10;
+    }
+    .deck-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      background: var(--accent);
+      width: 0;
+      z-index: 10;
+      transition: width 0.18s ease;
+    }
+  </style>
+<style data-atlas-owned-adapter>@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:0s!important;transition-delay:0s!important;scroll-behavior:auto!important}}</style></head>
+<body data-theme="holm" data-atlas-language-policy="ORIGINAL_SOURCE_LABELED">
+  
+
+  <section class="slide" data-screen-label="01 Cover">
+    <div class="meta-bar">
+      <span style="font-family: var(--font-serif-display); font-size: 32px; text-transform: none; letter-spacing: 0; color: var(--accent);">Holm</span><span style="color: var(--muted);">&nbsp;&nbsp;EST. 2024</span>
+      <span>MEMO 04 &nbsp;/&nbsp; APR 2026</span>
+    </div>
+    <div style="margin-top: 30vh; max-width: 58vw;">
+      <p class="eyebrow" style="color: var(--accent); margin-bottom: 28px;">—&nbsp;&nbsp;SERIES A — CONFIDENTIAL PRE-READ</p>
+      <h1 class="h-xl" style="max-width: 18ch;">Banking and back-office for the 1.4 million lawyers who were never supposed to be alone.</h1>
+      <p class="lead" style="margin-top: 28px; max-width: 50ch;">Why solo and small-firm legal is the largest unbundled fintech opportunity left in professional services.</p>
+    </div>
+    <div style="position: absolute; bottom: clamp(40px, 5vh, 72px); left: clamp(56px, 7vw, 112px); right: clamp(56px, 7vw, 112px); display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;">
+      <span><b>NAOMI VELEZ</b> — CO-FOUNDER, CEO &nbsp;·&nbsp; <b>DANIEL LIOR</b> — CO-FOUNDER, CTO</span>
+      <span>HOLM.LAW</span>
+    </div>
+  </section>
+
+  <section class="slide" data-screen-label="02 The Problem">
+    <div class="meta-bar">
+      <span style="color: var(--accent);">02 — THE PROBLEM &nbsp;<span style="display: inline-block; width: 40px; height: 1px; background: var(--accent); vertical-align: middle;"></span></span>
+      <span>HOLM · 02 / 03</span>
+    </div>
+    <div style="margin-top: 25vh; max-width: 62vw;">
+      <h2 class="h-xl" style="max-width: 18ch;">The median solo lawyer sends 34% of their billable hours to a bookkeeper, a bank, and a filing service that don't talk to each other.</h2>
+    </div>
+    <div style="position: absolute; bottom: clamp(56px, 7vh, 96px); left: clamp(56px, 7vw, 112px); right: clamp(56px, 7vw, 112px); display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(24px, 3vw, 56px); padding-top: clamp(24px, 3vh, 40px); border-top: 1px solid var(--border);">
+      <div><p class="eyebrow" style="margin-bottom: 8px;">MARKET SIZE</p><div class="num" style="font-size: clamp(36px, 4vw, 56px);">1.4M</div><div style="color: var(--muted); font-size: 13px; margin-top: 4px;">US solo + small-firm lawyers.</div></div>
+      <div><p class="eyebrow" style="margin-bottom: 8px;">TIME LOST</p><div class="num" style="font-size: clamp(36px, 4vw, 56px); color: var(--accent);">34%</div><div style="color: var(--muted); font-size: 13px; margin-top: 4px;">Billable hours on back-office.</div></div>
+      <div><p class="eyebrow" style="margin-bottom: 8px;">TAM</p><div class="num" style="font-size: clamp(36px, 4vw, 56px);">$18B</div><div style="color: var(--muted); font-size: 13px; margin-top: 4px;">Annual, US only.</div></div>
+    </div>
+  </section>
+
+  <section class="slide" data-screen-label="03 The Ask">
+    <div class="meta-bar">
+      <span style="color: var(--accent);">04 — THE ASK &nbsp;<span style="display: inline-block; width: 40px; height: 1px; background: var(--accent); vertical-align: middle;"></span></span>
+      <span>HOLM · 03 / 03</span>
+    </div>
+    <div style="margin-top: clamp(40px, 6vh, 80px);">
+      <h2 class="h-xl" style="max-width: 22ch;">$11.4M Series A, led by Felicis. Closing 6/15.</h2>
+      <p class="lead" style="margin-top: 20px;">Re-up from First Round and Cowboy. Notable angels: Patrick McKenzie, Olympia Hostler (Quaderno), Marshall Kirkpatrick.</p>
+    </div>
+    <div style="margin-top: clamp(32px, 4vh, 48px); display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(32px, 4vw, 64px); align-items: start;">
+      <div>
+        <p class="eyebrow" style="margin-bottom: 20px;">USE OF FUNDS — 24 MONTH PLAN</p>
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div style="display: grid; grid-template-columns: 60px 1fr; gap: 24px; align-items: start;">
+            <span class="num" style="font-size: 28px; color: var(--accent);">52%</span>
+            <div><div style="font-weight: 600;">Engineering &amp; product</div><div style="color: var(--muted); font-size: 14px; margin-bottom: 6px;">Trust accounting, payroll, multi-state filings.</div><div style="height: 3px; background: var(--border); position: relative;"><div style="position: absolute; left: 0; top: 0; height: 100%; width: 52%; background: var(--accent);"></div></div></div>
+          </div>
+          <div style="display: grid; grid-template-columns: 60px 1fr; gap: 24px; align-items: start;">
+            <span class="num" style="font-size: 28px; color: var(--accent);">28%</span>
+            <div><div style="font-weight: 600;">Go-to-market</div><div style="color: var(--muted); font-size: 14px; margin-bottom: 6px;">Direct + state bar partnerships in CA, TX, NY.</div><div style="height: 3px; background: var(--border); position: relative;"><div style="position: absolute; left: 0; top: 0; height: 100%; width: 28%; background: var(--accent);"></div></div></div>
+          </div>
+          <div style="display: grid; grid-template-columns: 60px 1fr; gap: 24px; align-items: start;">
+            <span class="num" style="font-size: 28px; color: var(--accent);">12%</span>
+            <div><div style="font-weight: 600;">Compliance &amp; licensing</div><div style="color: var(--muted); font-size: 14px; margin-bottom: 6px;">MTL, sponsor bank coverage.</div><div style="height: 3px; background: var(--border); position: relative;"><div style="position: absolute; left: 0; top: 0; height: 100%; width: 12%; background: var(--accent);"></div></div></div>
+          </div>
+          <div style="display: grid; grid-template-columns: 60px 1fr; gap: 24px; align-items: start;">
+            <span class="num" style="font-size: 28px; color: var(--accent);">8%</span>
+            <div><div style="font-weight: 600;">Operations</div><div style="color: var(--muted); font-size: 14px; margin-bottom: 6px;">Brand, finance, ops.</div><div style="height: 3px; background: var(--border); position: relative;"><div style="position: absolute; left: 0; top: 0; height: 100%; width: 8%; background: var(--accent);"></div></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="background: var(--surface); border: 1px solid var(--border);">
+        <p class="eyebrow" style="color: var(--accent); margin-bottom: 20px;">THE TEAM</p>
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div style="display: grid; grid-template-columns: 48px 1fr; gap: 16px; align-items: start;">
+            <div style="width: 48px; height: 48px; border-radius: 50%; background: color-mix(in oklch, var(--accent) 22%, var(--surface)); display: flex; align-items: center; justify-content: center; font-family: var(--font-serif-display); color: var(--accent); font-size: 20px;">N</div>
+            <div><div style="font-weight: 600;">Naomi Velez — CEO</div><div style="color: var(--muted); font-size: 14px;">Latham &amp; Watkins associate '14–'19. Solo practice 5 yrs. Cornell Law.</div></div>
+          </div>
+          <div style="display: grid; grid-template-columns: 48px 1fr; gap: 16px; align-items: start;">
+            <div style="width: 48px; height: 48px; border-radius: 50%; background: color-mix(in oklch, var(--muted) 30%, var(--surface)); display: flex; align-items: center; justify-content: center; font-family: var(--font-serif-display); color: var(--fg); font-size: 20px;">D</div>
+            <div><div style="font-weight: 600;">Daniel Lior — CTO</div><div style="color: var(--muted); font-size: 14px;">Ledger infra at Plaid. Built ACH stack at Modern Treasury. Waterloo CS.</div></div>
+          </div>
+        </div>
+        <div style="border-top: 1px solid var(--border); margin-top: 20px; padding-top: 14px;">
+          <p class="eyebrow" style="margin-bottom: 6px;">DIRECT</p>
+          <div style="display: flex; justify-content: space-between; font-size: 14px;"><span style="font-weight: 600;">naomi@holm.law</span><span style="color: var(--muted);">+1 (415) 555-0142</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <div class="deck-progress" id="deck-progress" aria-hidden></div>
+  <div class="deck-counter"  id="deck-counter">1 / 3</div>
+  <div class="deck-hint">← / → · scroll · swipe</div>
+
+    
+
+<aside id="atlas-source-proof" aria-label="Atlas 來源證據 / Source evidence" data-language-exempt="original-source" style="all:initial;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;position:relative;z-index:2147483647;padding:10px 14px;color:#30464d;background:#f8faf9;border-top:1px solid rgba(21,39,45,.22);font:12px/1.4 ui-monospace,Consolas,monospace"><span>來源版式離線適配（保留原文）· 原始程式已停用；本機適配器提供頁面與減動控制<br><span lang="en">Offline source-layout adaptation; original text retained. Source scripts are disabled; local adapters provide page and reduced-motion controls.</span></span><span>bf714528070d · 849000dbd4a4</span></aside><script data-atlas-owned-adapter="0" data-atlas-script-sha256="e25745c36278ca1cd09dd4b0611e22a7b228f0a46464fb72401062bd5e482b80">(function reducedMotionRuntime() {
+  'use strict';
+  const media = matchMedia('(prefers-reduced-motion: reduce)');
+  const held = new Map();
+  let scheduled = 0, closed = false;
+  const state = { version: 1, reduced: media.matches, sampled: 0, scheduled: false };
+  Object.defineProperty(window, '__atlasSourceMotion', { value: state });
+  function scan() {
+    scheduled = 0; state.scheduled = false;
+    if (closed) return;
+    state.reduced = media.matches;
+    const current = new Set(document.getAnimations().filter(animation => animation instanceof CSSAnimation));
+    for (const [animation] of held) if (!current.has(animation)) held.delete(animation);
+    if (!media.matches) {
+      for (const [animation, prior] of held) {
+        animation.playbackRate = prior.rate;
+        animation.currentTime = prior.time;
+        if (prior.state === 'running') animation.play();
+        else if (prior.state === 'paused') animation.pause();
+      }
+      held.clear(); return;
+    }
+    for (const animation of current) {
+      if (held.has(animation)) continue;
+      const effect = animation.effect, timing = effect && effect.getTiming();
+      if (!timing || !Number.isFinite(Number(timing.duration)) || Number(timing.duration) <= 0) continue;
+      const prior = { state: animation.playState, time: animation.currentTime, rate: animation.playbackRate };
+      const duration = Number(timing.duration), delay = Number(timing.delay) || 0;
+      const iterations = Number(timing.iterations);
+      const pose = iterations === Infinity ? delay + duration / 2 : delay + duration * iterations;
+      if (!Number.isFinite(pose)) continue;
+      animation.pause(); animation.currentTime = Math.max(0, pose);
+      held.set(animation, prior); state.sampled++;
+    }
+  }
+  function schedule() {
+    if (closed || scheduled || (!media.matches && !held.size)) return;
+    state.scheduled = true; scheduled = requestAnimationFrame(scan);
+  }
+  const resize = new ResizeObserver(() => { if (media.matches) schedule(); });
+  resize.observe(document.documentElement);
+  document.addEventListener('animationstart', schedule, true);
+  document.addEventListener('atlas-source-deck-change', schedule);
+  document.addEventListener('DOMContentLoaded', schedule, { once: true });
+  window.addEventListener('load', schedule, { once: true });
+  media.addEventListener('change', schedule);
+  window.addEventListener('pagehide', () => {
+    closed = true; resize.disconnect(); media.removeEventListener('change', schedule);
+    document.removeEventListener('animationstart', schedule, true);
+    document.removeEventListener('atlas-source-deck-change', schedule);
+    if (scheduled) cancelAnimationFrame(scheduled);
+    // A bfcache page retains the source Animation objects and their original
+    // playback state; discard neither merely because the document is hidden.
+    scheduled = 0; state.scheduled = false;
+  });
+  window.addEventListener('pageshow', () => {
+    if (!closed) return;
+    closed = false; resize.observe(document.documentElement);
+    document.addEventListener('animationstart', schedule, true);
+    document.addEventListener('atlas-source-deck-change', schedule);
+    media.addEventListener('change', schedule);
+    schedule();
+  });
+  schedule();
+})();</script></body>
+</html>

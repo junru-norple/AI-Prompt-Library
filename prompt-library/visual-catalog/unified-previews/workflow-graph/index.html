@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src file:; script-src file:; img-src file: data:; connect-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>ComfyUI Workflow 靜態 Graph</title>
+  <link rel="stylesheet" href="adapter.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div><p>COMFYUI · 安全靜態圖譜</p><h1 id="graph-title">正在載入工作流…</h1></div>
+      <dl><div><dt>節點</dt><dd id="node-count">—</dd></div><div><dt>連線</dt><dd id="link-count">—</dd></div></dl>
+    </header>
+    <section class="graph-shell" aria-label="工作流節點圖">
+      <svg id="graph" role="img" aria-labelledby="graph-title" viewBox="0 0 1200 720"></svg>
+    </section>
+    <p id="graph-note">只讀取 JSON 的節點名稱、位置與連線；不載入模型、不安裝自訂節點，也不執行工作流。</p>
+  </main>
+  <script src="adapter.js"></script>
+</body>
+</html>

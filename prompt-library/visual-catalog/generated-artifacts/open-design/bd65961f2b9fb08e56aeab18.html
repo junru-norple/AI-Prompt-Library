@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'sha256-7exGM1OL9e/LfMfzTbtO+lpL27ZB22Vo8W36kzxGMLU=' 'sha256-4ldFw2J4yhzQndSwYR4ip7Io8KRkZPtyQBBivV5IK4A='; img-src data:; font-src 'none'; media-src 'none'; connect-src 'none'; frame-src 'none'; child-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"><meta name="atlas-source-entry" content="open-design-official:plugin:example-mobile-onboarding-41c3d393">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lull · Mobile onboarding</title>
+<style>
+  :root {
+    --canvas: #efece4;
+    --ink: #232118;
+    --muted: #76715f;
+    --accent: #c66e3a;
+    --warm: #e8a76e;
+    --display: 'Iowan Old Style', 'Charter', Georgia, serif;
+    --body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--canvas); font-family: var(--body); color: var(--ink); }
+  .stage {
+    min-height: 100vh;
+    padding: 56px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% -10%, rgba(232,167,110,0.35), transparent 70%),
+      radial-gradient(ellipse 80% 50% at 50% 110%, rgba(198,110,58,0.16), transparent 70%),
+      var(--canvas);
+  }
+  .stage h1 {
+    font-family: var(--display);
+    font-size: 28px;
+    margin: 0;
+    letter-spacing: -0.005em;
+  }
+  .stage p.lede { color: var(--muted); margin: 0; max-width: 50ch; text-align: center; }
+
+  .phones {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 36px;
+    align-items: center;
+  }
+  .phone {
+    width: 320px;
+    aspect-ratio: 9 / 19.5;
+    background: #fff;
+    border-radius: 44px;
+    border: 8px solid #1a1814;
+    overflow: hidden;
+    position: relative;
+    box-shadow:
+      0 32px 60px rgba(28,27,26,0.18),
+      0 12px 18px rgba(28,27,26,0.08);
+    display: flex;
+    flex-direction: column;
+  }
+  .phone .notch {
+    position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 100px; height: 22px;
+    background: #1a1814;
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+    z-index: 5;
+  }
+  .statusbar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 24px 4px;
+    font-size: 12.5px; font-weight: 600; color: var(--ink);
+  }
+  .statusbar .right { display: flex; gap: 6px; align-items: center; font-size: 11px; }
+  .status-icon { display: inline-block; width: 14px; height: 8px; background: var(--ink); border-radius: 2px; }
+
+  .phone-body {
+    flex: 1;
+    padding: 18px 24px 24px;
+    display: flex;
+    flex-direction: column;
+  }
+  .phone-top { display: flex; justify-content: flex-end; align-items: center; }
+  .skip { font-size: 13px; color: var(--muted); }
+
+  .hero { flex: 1; display: flex; align-items: center; justify-content: center; padding: 24px 0; }
+  .hero .art { width: 220px; height: 220px; }
+
+  .copy { display: flex; flex-direction: column; gap: 10px; padding: 14px 4px; }
+  .copy h2 { font-family: var(--display); font-size: 30px; line-height: 1.1; margin: 0; letter-spacing: -0.01em; font-weight: 700; }
+  .copy p { color: var(--muted); margin: 0; font-size: 15px; line-height: 1.5; }
+
+  .pager { display: flex; justify-content: center; gap: 6px; padding: 14px 0 8px; }
+  .pager span { width: 6px; height: 6px; border-radius: 50%; background: rgba(35,33,24,0.18); }
+  .pager span.active { width: 22px; background: var(--accent); border-radius: 999px; }
+
+  .cta {
+    background: var(--ink); color: #fef9ee;
+    padding: 16px 22px; border-radius: 999px;
+    text-align: center; font-weight: 600; font-size: 15px;
+  }
+  .alt { text-align: center; color: var(--muted); padding-top: 12px; font-size: 13px; }
+  .alt a { color: var(--accent); font-weight: 600; }
+
+  /* Phone 3 — sign-in */
+  .signin-options { display: flex; flex-direction: column; gap: 10px; }
+  .opt { display: flex; align-items: center; gap: 12px; padding: 14px 18px; border: 1px solid rgba(35,33,24,0.12); border-radius: 14px; font-weight: 500; font-size: 14.5px; }
+  .opt .glyph { width: 22px; height: 22px; border-radius: 50%; background: var(--ink); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; }
+  .opt.apple .glyph { background: #000; }
+  .opt.google .glyph { background: linear-gradient(135deg, #ea4335, #fbbc05, #34a853, #4285f4); }
+  .opt.email .glyph { background: var(--accent); }
+
+  .terms { font-size: 11px; color: var(--muted); text-align: center; padding-top: 14px; line-height: 1.5; }
+  .terms a { color: var(--accent); }
+
+  @media (max-width: 1100px) {
+    .phones { grid-template-columns: 1fr; }
+    .phone { width: 92vw; max-width: 360px; }
+  }
+</style>
+<style data-atlas-owned-adapter>@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:0s!important;transition-delay:0s!important;scroll-behavior:auto!important}}</style></head>
+<body data-atlas-language-policy="ORIGINAL_SOURCE_LABELED">
+<div class="stage">
+  <h1>Lull · onboarding flow</h1>
+  <p class="lede">Three screens, one tone of voice. Designed in the Lull design system — warm canvas, serif headings, single accent.</p>
+
+  <div class="phones">
+    
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="statusbar"><span>9:41</span><div class="right"><span>5G</span><span class="status-icon"></span></div></div>
+      <div class="phone-body">
+        <div class="phone-top"><span class="skip">Skip</span></div>
+        <div class="hero">
+          <svg class="art" viewBox="0 0 220 220">
+            <defs>
+              <radialGradient id="moon1" cx="50%" cy="40%" r="60%">
+                <stop offset="0%" stop-color="#fcebd0"/>
+                <stop offset="100%" stop-color="#e8a76e"/>
+              </radialGradient>
+            </defs>
+            <circle cx="110" cy="110" r="78" fill="url(#moon1)"/>
+            <circle cx="146" cy="92" r="14" fill="#fff" opacity="0.6"/>
+            <circle cx="78" cy="74" r="3" fill="#c66e3a" opacity="0.7"/>
+            <circle cx="60" cy="120" r="2" fill="#c66e3a" opacity="0.5"/>
+            <circle cx="170" cy="140" r="2.5" fill="#c66e3a" opacity="0.6"/>
+            <path d="M 30 200 Q 110 170 200 200 L 200 220 L 30 220 Z" fill="#c66e3a" opacity="0.18"/>
+          </svg>
+        </div>
+        <div class="copy">
+          <h2>Quiet beats noise.</h2>
+          <p>Twelve minutes a day. A practice that fits in a coffee break. No streaks, no badges — just a calmer evening.</p>
+        </div>
+        <div class="pager"><span class="active"></span><span></span><span></span></div>
+        <div class="cta">Continue</div>
+      </div>
+    </div>
+
+    
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="statusbar"><span>9:41</span><div class="right"><span>5G</span><span class="status-icon"></span></div></div>
+      <div class="phone-body">
+        <div class="phone-top"><span class="skip">Skip</span></div>
+        <div class="hero">
+          <svg class="art" viewBox="0 0 220 220">
+            <rect x="38" y="48" width="144" height="100" rx="14" fill="#fff" stroke="#c66e3a" stroke-width="1.5"/>
+            <rect x="56" y="68" width="56" height="6" rx="3" fill="#c66e3a"/>
+            <rect x="56" y="84" width="100" height="4" rx="2" fill="#76715f" opacity="0.4"/>
+            <rect x="56" y="96" width="80" height="4" rx="2" fill="#76715f" opacity="0.4"/>
+            <rect x="56" y="116" width="40" height="20" rx="10" fill="#c66e3a"/>
+            <circle cx="170" cy="160" r="22" fill="#e8a76e"/>
+            <path d="M 162 160 L 168 166 L 178 154" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="copy">
+          <h2>Practice that meets you where you are.</h2>
+          <p>Adaptive sessions that get shorter on busy days, deeper on quiet ones. The kind of routine that survives a Wednesday.</p>
+        </div>
+        <div class="pager"><span></span><span class="active"></span><span></span></div>
+        <div class="cta">Continue</div>
+      </div>
+    </div>
+
+    
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="statusbar"><span>9:41</span><div class="right"><span>5G</span><span class="status-icon"></span></div></div>
+      <div class="phone-body">
+        <div class="phone-top"><span class="skip">Help</span></div>
+        <div style="padding: 24px 0;">
+          <h2 style="font-family: var(--display); font-size: 32px; margin: 0 0 8px; letter-spacing: -0.01em; line-height: 1.05; font-weight: 700;">Make a place for it.</h2>
+          <p style="margin: 0; color: var(--muted); font-size: 15px;">Save your sessions across devices. We don't email, we don't share.</p>
+        </div>
+        <div class="signin-options">
+          <div class="opt apple"><span class="glyph"></span>Continue with Apple</div>
+          <div class="opt google"><span class="glyph"></span>Continue with Google</div>
+          <div class="opt email"><span class="glyph">@</span>Continue with email</div>
+        </div>
+        <div style="flex: 1;"></div>
+        <div class="terms">By continuing, you agree to Lull's <a>Terms</a> and <a>Privacy Policy</a>.</div>
+        <div class="pager"><span></span><span></span><span class="active"></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+<aside id="atlas-source-proof" aria-label="Atlas 來源證據 / Source evidence" data-language-exempt="original-source" style="all:initial;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;position:relative;z-index:2147483647;padding:10px 14px;color:#30464d;background:#f8faf9;border-top:1px solid rgba(21,39,45,.22);font:12px/1.4 ui-monospace,Consolas,monospace"><span>來源版式離線適配（保留原文）· 原始程式已停用；本機適配器提供頁面與減動控制<br><span lang="en">Offline source-layout adaptation; original text retained. Source scripts are disabled; local adapters provide page and reduced-motion controls.</span></span><span>bf714528070d · 43354be4a29b</span></aside><script data-atlas-owned-adapter="0" data-atlas-script-sha256="edec4633538bf5efcb7cc7f34dbb4efa5a4bdbb641db6568f16dfa933c4630b5">(function artboardRuntime(candidates) {
+  'use strict';
+  function start() {
+    const records = [];
+    for (const candidate of candidates) {
+      const nodes = [...document.querySelectorAll(candidate.selector)];
+      if (nodes.length !== candidate.source_count) throw new Error('SOURCE_ARTBOARD_COUNT_MISMATCH');
+      for (const node of nodes) {
+        if (getComputedStyle(node).transform !== 'none') throw new Error('SOURCE_ARTBOARD_TRANSFORM_UNSUPPORTED');
+        const holder = document.createElement('div');
+        holder.setAttribute('data-atlas-source-artboard', '');
+        holder.style.cssText = `position:relative;box-sizing:border-box;min-width:0;width:100%;max-width:${candidate.width}px;flex:none;`;
+        node.before(holder); holder.append(node);
+        node.style.width = `${candidate.width}px`; node.style.maxWidth = 'none';
+        node.style.transformOrigin = 'top left';
+        records.push({ node, holder, width: candidate.width });
+      }
+    }
+    function fit() {
+      for (const { node, holder, width } of records) {
+        const available = holder.clientWidth;
+        if (!(available > 0)) continue;
+        const scale = Math.min(1, available / width);
+        // offsetHeight is the original untransformed layout, including any
+        // legitimate source content which makes an artboard taller.
+        const height = node.offsetHeight * scale;
+        const transform = `scale(${scale})`;
+        if (node.style.transform !== transform) node.style.transform = transform;
+        if (holder.style.height !== `${height}px`) holder.style.height = `${height}px`;
+      }
+    }
+    const observer = new ResizeObserver(fit);
+    for (const { holder, node } of records) { observer.observe(holder); observer.observe(node); }
+    window.addEventListener('resize', fit); fit();
+    window.addEventListener('pagehide', () => { observer.disconnect(); window.removeEventListener('resize', fit); });
+    window.addEventListener('pageshow', () => {
+      for (const { holder, node } of records) { observer.observe(holder); observer.observe(node); }
+      window.addEventListener('resize', fit); fit();
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true }); else start();
+})([{"selector":".phone","width":320,"aspect_ratio":[9,19.5],"source_count":3,"source_css_sha256":"971c6b93dfef194c2fcfe8362a801ca1f2c6e19e7b273cb8a766e731f067571c","declaration_sha256":"21873d108b3b4e820b1206afc9d020f75e9002dcb51d1b1f59351b81f422fbce"}]);</script><script data-atlas-owned-adapter="1" data-atlas-script-sha256="e25745c36278ca1cd09dd4b0611e22a7b228f0a46464fb72401062bd5e482b80">(function reducedMotionRuntime() {
+  'use strict';
+  const media = matchMedia('(prefers-reduced-motion: reduce)');
+  const held = new Map();
+  let scheduled = 0, closed = false;
+  const state = { version: 1, reduced: media.matches, sampled: 0, scheduled: false };
+  Object.defineProperty(window, '__atlasSourceMotion', { value: state });
+  function scan() {
+    scheduled = 0; state.scheduled = false;
+    if (closed) return;
+    state.reduced = media.matches;
+    const current = new Set(document.getAnimations().filter(animation => animation instanceof CSSAnimation));
+    for (const [animation] of held) if (!current.has(animation)) held.delete(animation);
+    if (!media.matches) {
+      for (const [animation, prior] of held) {
+        animation.playbackRate = prior.rate;
+        animation.currentTime = prior.time;
+        if (prior.state === 'running') animation.play();
+        else if (prior.state === 'paused') animation.pause();
+      }
+      held.clear(); return;
+    }
+    for (const animation of current) {
+      if (held.has(animation)) continue;
+      const effect = animation.effect, timing = effect && effect.getTiming();
+      if (!timing || !Number.isFinite(Number(timing.duration)) || Number(timing.duration) <= 0) continue;
+      const prior = { state: animation.playState, time: animation.currentTime, rate: animation.playbackRate };
+      const duration = Number(timing.duration), delay = Number(timing.delay) || 0;
+      const iterations = Number(timing.iterations);
+      const pose = iterations === Infinity ? delay + duration / 2 : delay + duration * iterations;
+      if (!Number.isFinite(pose)) continue;
+      animation.pause(); animation.currentTime = Math.max(0, pose);
+      held.set(animation, prior); state.sampled++;
+    }
+  }
+  function schedule() {
+    if (closed || scheduled || (!media.matches && !held.size)) return;
+    state.scheduled = true; scheduled = requestAnimationFrame(scan);
+  }
+  const resize = new ResizeObserver(() => { if (media.matches) schedule(); });
+  resize.observe(document.documentElement);
+  document.addEventListener('animationstart', schedule, true);
+  document.addEventListener('atlas-source-deck-change', schedule);
+  document.addEventListener('DOMContentLoaded', schedule, { once: true });
+  window.addEventListener('load', schedule, { once: true });
+  media.addEventListener('change', schedule);
+  window.addEventListener('pagehide', () => {
+    closed = true; resize.disconnect(); media.removeEventListener('change', schedule);
+    document.removeEventListener('animationstart', schedule, true);
+    document.removeEventListener('atlas-source-deck-change', schedule);
+    if (scheduled) cancelAnimationFrame(scheduled);
+    // A bfcache page retains the source Animation objects and their original
+    // playback state; discard neither merely because the document is hidden.
+    scheduled = 0; state.scheduled = false;
+  });
+  window.addEventListener('pageshow', () => {
+    if (!closed) return;
+    closed = false; resize.observe(document.documentElement);
+    document.addEventListener('animationstart', schedule, true);
+    document.addEventListener('atlas-source-deck-change', schedule);
+    media.addEventListener('change', schedule);
+    schedule();
+  });
+  schedule();
+})();</script></body>
+</html>

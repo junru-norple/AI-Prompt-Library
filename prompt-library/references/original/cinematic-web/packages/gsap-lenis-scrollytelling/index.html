@@ -1,0 +1,40 @@
+<!doctype html>
+<!-- SPDX-FileCopyrightText: 2026 junru-norple -->
+<!-- SPDX-License-Identifier: MIT -->
+<html lang="zh-Hant" data-cinematic-id="cinematic-web:gsap-lenis-scrollytelling" data-preview-ready="false">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; connect-src 'none'; media-src 'none'; font-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>潮汐研究平滑捲動敘事</title>
+  <style>
+    :root{color-scheme:dark;--ink:#f4f0e7;--muted:#aaa59b;--paper:#090b10;--accent:#e9b872;--line:rgba(255,255,255,.16);font-family:"Segoe UI",system-ui,sans-serif}
+    *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--paper);color:var(--ink)}body{overflow-x:hidden}
+    button,a{font:inherit}button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .eyebrow{margin:0;font:700 11px/1.2 ui-monospace,Consolas,monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+    .preview-badge{position:fixed;z-index:30;top:12px;right:12px;padding:7px 10px;border:1px solid var(--line);background:rgba(5,7,11,.72);backdrop-filter:blur(10px);font:700 10px/1 ui-monospace,Consolas,monospace;letter-spacing:.12em;color:var(--muted)}
+    :root{--paper:#e8eadf;--ink:#12323b;--muted:#63777a;--accent:#e45f42;--line:rgba(18,50,59,.2);color-scheme:light}
+    .report{padding:clamp(28px,6vw,90px);background-image:linear-gradient(var(--line) 1px,transparent 1px);background-size:100% 36px}header{min-height:90svh;display:grid;align-content:center;border-bottom:1px solid var(--ink)}header h1{font:500 clamp(50px,8vw,118px)/.88 Georgia,serif;letter-spacing:-.05em;margin:.3em 0}.layout{display:grid;grid-template-columns:1fr minmax(300px,.72fr);gap:8vw}article section{min-height:92svh;display:grid;align-content:center;border-bottom:1px solid var(--line)}section span,#chapter{font:700 11px ui-monospace,monospace;letter-spacing:.14em;color:var(--accent)}section h2{font:500 clamp(42px,6vw,84px)/.94 Georgia,serif;margin:.25em 0}section p{max-width:34rem;font-size:clamp(16px,1.8vw,22px);line-height:1.7;color:var(--muted)}aside{position:sticky;top:8vh;height:84svh;align-self:start;display:grid;place-items:center;border:1px solid var(--ink);background:rgba(232,234,223,.9)}.gauge{width:min(30vw,290px);aspect-ratio:1;border:2px solid var(--ink);border-radius:50%;display:grid;place-items:center;position:relative}.gauge:before{content:"";position:absolute;inset:12%;border:1px dashed var(--ink);border-radius:50%}.gauge i{position:absolute;width:2px;height:40%;background:var(--accent);bottom:50%;transform-origin:bottom;transform:rotate(var(--needle,-70deg))}.gauge b{font:500 34px Georgia,serif}.wave{position:absolute;left:0;right:0;bottom:0;height:var(--water,16%);background:rgba(49,128,144,.16);border-top:2px solid #318090;transition:height .45s}@media(max-width:760px){.layout{grid-template-columns:1fr}.layout aside{position:sticky;top:12px;height:180px;z-index:4;grid-template-columns:150px 1fr}.gauge{width:130px}.wave{height:var(--water,16%)}article section{min-height:78svh}}
+    @media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}
+  </style>
+</head>
+<body>
+  <span class="preview-badge" aria-hidden="true">OFFLINE · ISOLATED</span>
+  <main class="report"><header><p class="eyebrow">COASTAL STATION 04 · 24H LOG</p><h1>潮汐不是背景，<br>是城市的時鐘。</h1></header><div class="layout"><article><section data-chapter="1"><span>01 · 05:10</span><h2>水線退去</h2><p>清晨的第一筆資料不是高度，而是泥灘重新出現的速度。</p></section><section data-chapter="2"><span>02 · 10:40</span><h2>港口呼吸</h2><p>船隻與堤岸之間，潮差改寫了每一次靠泊的角度。</p></section><section data-chapter="3"><span>03 · 16:20</span><h2>最高水位</h2><p>警戒線並非抽象數字，它與街道、排水和回家的路重疊。</p></section><section data-chapter="4"><span>04 · 22:55</span><h2>夜潮回落</h2><p>儀器歸零以前，紙帶保留了今天完整的一次呼吸。</p></section></article><aside aria-label="潮位儀表"><div class="gauge"><i></i><b id="level">0.8 M</b></div><p id="chapter">CHAPTER 01</p><div class="wave" aria-hidden="true"></div></aside></div></main>
+  <script>
+  (()=>{
+    'use strict';
+    const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const runtime={id:'cinematic-web:gsap-lenis-scrollytelling',ready:false,reducedMotion:reduced,activeRaf:0,activeTimers:0,disposed:false,theme:'TIDAL LOG / SCROLLY'};
+    window.__CINEMATIC_PREVIEW_STATE__=runtime;
+    const disposers=[];
+    window.__cinematicDispose=(fn)=>{if(typeof fn==='function')disposers.push(fn)};
+    const finish=()=>{runtime.ready=true;document.documentElement.dataset.previewReady='true'};
+    const chapters=[...document.querySelectorAll('[data-chapter]')];const aside=document.querySelector('aside');let queued=0;const update=()=>{queued=0;runtime.activeRaf=0;let active=0;let best=Infinity;chapters.forEach((chapter,index)=>{const distance=Math.abs(chapter.getBoundingClientRect().top-innerHeight*.45);if(distance<best){best=distance;active=index}});const levels=[.8,2.1,3.7,1.4];document.querySelector('#level').textContent=levels[active].toFixed(1)+' M';document.querySelector('#chapter').textContent='CHAPTER 0'+(active+1);aside.style.setProperty('--needle',(-70+active*45)+'deg');aside.style.setProperty('--water',(16+active*17)+'%')};const scroll=()=>{if(!queued){queued=requestAnimationFrame(update);runtime.activeRaf=1}};addEventListener('scroll',scroll,{passive:true});update();__cinematicDispose(()=>{removeEventListener('scroll',scroll);if(queued)cancelAnimationFrame(queued)});
+    finish();
+    addEventListener('pagehide',()=>{for(const dispose of disposers.splice(0)){try{dispose()}catch(_){}}runtime.activeRaf=0;runtime.activeTimers=0;runtime.disposed=true},{once:true});
+  })();
+  </script>
+</body>
+</html>

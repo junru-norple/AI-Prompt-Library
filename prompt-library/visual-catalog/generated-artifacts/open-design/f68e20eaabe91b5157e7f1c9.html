@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'sha256-4ldFw2J4yhzQndSwYR4ip7Io8KRkZPtyQBBivV5IK4A='; img-src data:; font-src 'none'; media-src 'none'; connect-src 'none'; frame-src 'none'; child-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"><meta name="atlas-source-entry" content="open-design-official:template:trading-analysis-dashboard-template">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Trading Analysis Dashboard</title>
+  <style>
+    :root{
+      --bg:#0a1220;--panel:#0f1b31;--panel2:#13233e;--line:#294161;--text:#edf3ff;--muted:#94a9c7;
+      --accent:#43b6ff;--accent2:#8f8dff;--good:#4be2ad;--bad:#ff7f9f;--warn:#ffd777;--chip:#162843;
+    }
+    html[data-theme="light"]{
+      --bg:#eaf0f8;--panel:#ffffff;--panel2:#f4f8ff;--line:#d6e0ee;--text:#0d1730;--muted:#5f7392;
+      --accent:#1d87cf;--accent2:#7365ff;--good:#1d9b72;--bad:#c1435f;--warn:#ac7a00;--chip:#edf3fb;
+    }
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(1000px 400px at 15% -10%,rgba(77,153,255,.18),transparent),var(--bg);color:var(--text);}
+    .app{display:grid;grid-template-columns:230px 1fr;height:100%}
+    .side{border-right:1px solid var(--line);padding:16px;background:linear-gradient(180deg,color-mix(in srgb,var(--panel) 90%,transparent),color-mix(in srgb,var(--panel2) 80%,transparent))}
+    .brand{font-weight:800;letter-spacing:.14em;font-size:13px;margin:8px 8px 14px}
+    .nav{display:grid;gap:6px}.nav button{border:0;text-align:left;padding:10px;border-radius:10px;background:transparent;color:var(--muted);font-weight:600;cursor:pointer}
+    .nav button.active,.nav button:hover{background:var(--chip);color:var(--text)}
+    .main{padding:14px;overflow:auto}
+    .top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+    .status{display:flex;gap:8px;align-items:center;padding:7px 10px;border:1px solid var(--line);border-radius:999px;background:var(--chip);font-size:11px;color:var(--muted)}
+    .dot{width:8px;height:8px;border-radius:999px;background:var(--good)}
+    .controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    .seg{display:inline-flex;border:1px solid var(--line);background:var(--chip);border-radius:999px;padding:4px}
+    .seg button{border:0;background:transparent;color:var(--muted);font-size:11px;font-weight:700;padding:7px 10px;border-radius:999px;cursor:pointer}
+    .seg button.active{background:var(--panel);color:var(--text)}
+    .chip{border:1px solid var(--line);background:var(--chip);color:var(--text);padding:7px 10px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer}
+    .danger{color:var(--bad);border-color:color-mix(in srgb,var(--bad) 35%,var(--line))}
+    .hero{margin-top:10px;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:10px}
+    .card{border:1px solid var(--line);background:linear-gradient(140deg,color-mix(in srgb,var(--panel) 96%,transparent),color-mix(in srgb,var(--panel2) 94%,transparent));border-radius:14px;padding:12px;position:relative;overflow:hidden}
+    .k{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+    .v{margin-top:4px;font-size:24px;font-weight:800;font-family:"JetBrains Mono",ui-monospace,monospace}
+    .layout{display:grid;grid-template-columns:1.4fr 1fr;gap:10px;margin-top:10px}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    table{width:100%;border-collapse:collapse;font-size:12px} th,td{padding:8px;border-bottom:1px solid var(--line);text-align:left}
+    th{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+    .badge{font-size:10px;padding:2px 6px;border-radius:999px;border:1px solid var(--line)}
+    .good{color:var(--good)} .bad{color:var(--bad)}
+    .chart-shell{position:relative}
+    .chart{margin-top:8px;height:200px;border:1px solid var(--line);border-radius:10px;background:color-mix(in srgb,var(--chip) 50%,transparent)}
+    .chart svg{width:100%;height:100%}
+    .chart svg .axis-text{font:600 9px "JetBrains Mono",ui-monospace,monospace;fill:var(--muted);letter-spacing:.04em}
+    .chart svg .axis-title{font:700 9px Inter,system-ui,sans-serif;fill:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+    .legend{display:flex;flex-wrap:wrap;gap:10px 14px;margin-top:6px;padding:0 4px;font-size:10px;color:var(--muted);letter-spacing:.04em}
+    .legend .lg{display:inline-flex;align-items:center;gap:6px;font-weight:700}
+    .legend .lg::before{content:"";width:10px;height:2px;background:var(--lg-c,var(--accent));border-radius:2px;display:inline-block}
+    .cursor{position:absolute;inset:0;pointer-events:none;opacity:0}
+    .chart-shell.active .cursor{opacity:1}
+    .cursor .vx,.cursor .hy{position:absolute;background:color-mix(in srgb,var(--accent) 80%,transparent)}
+    .cursor .vx{width:1px;top:0;bottom:0;left:50%}
+    .cursor .hy{height:1px;left:0;right:0;top:50%;background:color-mix(in srgb,var(--accent2) 70%,transparent)}
+    .cursor .lb{position:absolute;right:8px;top:8px;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:4px 6px;font:700 10px "JetBrains Mono",monospace}
+    .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
+    .step{border:1px solid var(--line);border-radius:10px;background:var(--chip);padding:10px}
+    .step h4{margin:0 0 5px;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+    .step p{margin:0;font-size:11px;color:var(--muted)}
+    .risk{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:10px}
+    .bar{height:6px;border-radius:999px;background:color-mix(in srgb,var(--line) 80%,transparent);overflow:hidden;margin-top:6px}
+    .bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:var(--w,50%)}
+    .palette{position:fixed;inset:0;background:rgba(5,10,20,.45);backdrop-filter:blur(6px);display:none;align-items:flex-start;justify-content:center;padding-top:15vh;z-index:40}
+    .palette.open{display:flex}
+    .palette-card{width:min(680px,92vw);border:1px solid var(--line);border-radius:12px;background:var(--panel);overflow:hidden}
+    .palette input{width:100%;border:0;border-bottom:1px solid var(--line);padding:12px;background:var(--chip);color:var(--text);font:12px "JetBrains Mono",monospace}
+    .palette button{width:100%;border:0;border-bottom:1px solid var(--line);padding:10px 12px;background:transparent;color:var(--text);text-align:left;cursor:pointer}
+    .focus{position:fixed;inset:0;background:rgba(4,8,16,.6);backdrop-filter:blur(4px);display:none;z-index:30}
+    .focus.show{display:block}
+    .chart-shell.floating{position:fixed!important;z-index:31!important;box-shadow:0 30px 90px rgba(0,0,0,.45)!important}
+    @media (max-width:1150px){.hero,.risk,.flow,.layout,.grid2{grid-template-columns:1fr}.app{grid-template-columns:84px 1fr}.brand span,.nav button span{display:none}}
+  </style>
+<style data-atlas-owned-adapter>@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:0s!important;transition-delay:0s!important;scroll-behavior:auto!important}}</style></head>
+<body data-atlas-language-policy="ORIGINAL_SOURCE_LABELED">
+  <div class="focus" id="focus"></div>
+  <div class="app">
+    <aside class="side">
+      <div class="brand"><span>PROMETHEUS</span></div>
+      <nav class="nav">
+        <button><span>Home</span></button><button><span>Trade</span></button><button class="active"><span>Analyze</span></button><button><span>Performance</span></button><button><span>Develop</span></button>
+      </nav>
+    </aside>
+    <main class="main">
+      <div class="top">
+        <div class="status"><span class="dot"></span><span>Market Open · NYSE · Source: Cboe One · Latency: <b id="latency">12ms</b></span></div>
+        <div class="controls">
+          <div class="seg" id="mode"><button data-mode="live" class="active">LIVE</button><button data-mode="demo">DEMO</button></div>
+          <select class="chip" id="speed"><option value="0.5">0.5x</option><option value="1" selected>1x</option><option value="2">2x</option></select>
+          <select class="chip" id="scenario"><option value="risk-on" selected>Risk-on</option><option value="vol-crush">Vol Crush</option><option value="panic">Panic</option></select>
+          <button class="chip danger" id="kill">KILL SWITCH</button>
+          <div class="seg" id="theme"><button data-theme="dark" class="active">Dark</button><button data-theme="light">Light</button></div>
+        </div>
+      </div>
+      <div class="hero">
+        <div class="card"><div class="k">Alpha Pulse</div><div class="v" id="alpha">LONG BIAS · 0.78</div><div class="k" id="alpha-sub">Expected Move +1.9% · Horizon 2h</div></div>
+        <div class="card"><div class="k">Confidence</div><div class="v" id="conf">78.00%</div></div>
+        <div class="card"><div class="k">Risk Budget</div><div class="v" id="risk-budget">$42,500.00</div></div>
+        <div class="card"><div class="k">Execution Window</div><div class="v">09:30-11:30 ET</div></div>
+      </div>
+
+      <section class="layout">
+        <article class="card">
+          <div class="k">Option Chain</div>
+          <table>
+            <thead><tr><th>Time</th><th>Symbol</th><th>Contract</th><th>Premium</th><th>Sweep</th></tr></thead>
+            <tbody>
+              <tr class="orow" data-strike="160"><td>07:46:01</td><td>SPY</td><td>375 8/18</td><td>$44,751</td><td><span class="badge good">YES</span></td></tr>
+              <tr class="orow" data-strike="155"><td>07:46:02</td><td>SPY</td><td>370 8/18</td><td>$38,905</td><td><span class="badge">NO</span></td></tr>
+              <tr class="orow" data-strike="150"><td>07:46:03</td><td>QQQ</td><td>452 8/25</td><td>$52,204</td><td><span class="badge good">YES</span></td></tr>
+            </tbody>
+          </table>
+          <div class="flow">
+            <div class="step"><h4>Signal</h4><p id="s1">Flow consensus LONG</p></div>
+            <div class="step"><h4>Risk Check</h4><p id="s2">Exposure within limit</p></div>
+            <div class="step"><h4>Order</h4><p id="s3">AAPL BUY 200 @ 221.30</p></div>
+            <div class="step"><h4>Fill</h4><p id="s4">Waiting...</p></div>
+          </div>
+        </article>
+        <article class="grid2">
+          <div class="card chart-shell">
+            <div class="k">Option Greeks</div>
+            <div class="chart chart-interactive">
+              <svg viewBox="0 0 400 200" role="img" aria-label="Option Greeks: Delta and Gamma vs Strike">
+                <title>Option Greeks vs Strike</title>
+                <g stroke="var(--line)"><line x1="30" y1="170" x2="390" y2="170"/><line x1="30" y1="20" x2="30" y2="170"/></g>
+                <g class="axis-text" text-anchor="middle">
+                  <text x="40" y="186">140</text>
+                  <text x="120" y="186">145</text>
+                  <text x="200" y="186">150</text>
+                  <text x="300" y="186">155</text>
+                  <text x="380" y="186">160</text>
+                </g>
+                <g class="axis-text" text-anchor="end">
+                  <text x="26" y="44">1.0</text>
+                  <text x="26" y="96">0.5</text>
+                  <text x="26" y="148">0.0</text>
+                  <text x="26" y="174">−0.5</text>
+                </g>
+                <text class="axis-title" x="210" y="198" text-anchor="middle">Strike ($)</text>
+                <text class="axis-title" x="-100" y="12" transform="rotate(-90)" text-anchor="middle">Sensitivity (Δ / Γ)</text>
+                <polyline fill="none" stroke="#9b79f4" stroke-width="3" points="40,40 120,62 200,92 300,122 380,146"/>
+                <polyline fill="none" stroke="#67d59b" stroke-width="3" points="40,128 120,124 200,118 300,129 380,126"/>
+                <circle class="link-target strike-150" cx="200" cy="92" r="4" fill="#9b79f4"/>
+                <circle class="link-target strike-155" cx="300" cy="122" r="4" fill="#9b79f4"/>
+                <circle class="link-target strike-160" cx="380" cy="146" r="4" fill="#9b79f4"/>
+              </svg>
+            </div>
+            <div class="legend"><span class="lg" style="--lg-c:#9b79f4">Delta (Δ)</span><span class="lg" style="--lg-c:#67d59b">Gamma (Γ)</span></div>
+            <div class="cursor"><span class="vx"></span><span class="hy"></span><span class="lb">x:0 y:0</span></div>
+          </div>
+          <div class="card chart-shell">
+            <div class="k">Cumulative PnL</div>
+            <div class="chart chart-interactive">
+              <svg viewBox="0 0 400 200" role="img" aria-label="Cumulative PnL by session time">
+                <title>Cumulative PnL by Session Time</title>
+                <g stroke="var(--line)"><line x1="30" y1="170" x2="390" y2="170"/><line x1="30" y1="20" x2="30" y2="170"/></g>
+                <g class="axis-text" text-anchor="middle">
+                  <text x="30" y="186">09:30</text>
+                  <text x="120" y="186">11:00</text>
+                  <text x="210" y="186">12:30</text>
+                  <text x="300" y="186">14:00</text>
+                  <text x="390" y="186">16:00</text>
+                </g>
+                <g class="axis-text" text-anchor="end">
+                  <text x="26" y="62">$24k</text>
+                  <text x="26" y="100">$16k</text>
+                  <text x="26" y="138">$8k</text>
+                  <text x="26" y="174">$0</text>
+                </g>
+                <text class="axis-title" x="210" y="198" text-anchor="middle">Session Time (ET)</text>
+                <text class="axis-title" x="-100" y="12" transform="rotate(-90)" text-anchor="middle">Equity ($, USD)</text>
+                <polyline id="eq" fill="none" stroke="#47cf93" stroke-width="3" points="30,150 90,142 150,130 210,118 270,95 330,78 390,62"/>
+              </svg>
+            </div>
+            <div class="legend"><span class="lg" style="--lg-c:#47cf93">Equity Curve ($)</span></div>
+            <div class="cursor"><span class="vx"></span><span class="hy"></span><span class="lb">x:0 y:0</span></div>
+          </div>
+          <div class="card">
+            <div class="k">Risk Cockpit</div>
+            <div class="risk">
+              <div><div class="k">VaR</div><div class="v" id="var">$12,450.00</div><div class="bar"><i style="--w:64%"></i></div></div>
+              <div><div class="k">Beta</div><div class="v" id="beta">1.18</div><div class="bar"><i style="--w:58%"></i></div></div>
+              <div><div class="k">Exposure</div><div class="v" id="expo">68.20%</div><div class="bar"><i style="--w:68%"></i></div></div>
+              <div><div class="k">Max DD</div><div class="v" id="dd">2.40%</div><div class="bar"><i style="--w:24%"></i></div></div>
+              <div><div class="k">Concentration</div><div class="v" id="conc">41.80%</div><div class="bar"><i style="--w:42%"></i></div></div>
+            </div>
+          </div>
+          <div class="card"><div class="k">Demo Story</div><div class="v" id="story">Idle</div></div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <div class="palette" id="palette">
+    <div class="palette-card">
+      <input id="cmd" value="/" />
+      <button data-cmd="mode demo">mode demo</button>
+      <button data-cmd="scenario panic">scenario panic</button>
+      <button data-cmd="theme light">theme light</button>
+      <button data-cmd="focus chart">focus chart</button>
+    </div>
+  </div>
+
+  
+<aside id="atlas-source-proof" aria-label="Atlas 來源證據 / Source evidence" data-language-exempt="original-source" style="all:initial;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;position:relative;z-index:2147483647;padding:10px 14px;color:#30464d;background:#f8faf9;border-top:1px solid rgba(21,39,45,.22);font:12px/1.4 ui-monospace,Consolas,monospace"><span>來源版式離線適配（保留原文）· 原始程式已停用；本機適配器提供頁面與減動控制<br><span lang="en">Offline source-layout adaptation; original text retained. Source scripts are disabled; local adapters provide page and reduced-motion controls.</span></span><span>bf714528070d · 6f06b8b2f30a</span></aside><script data-atlas-owned-adapter="0" data-atlas-script-sha256="e25745c36278ca1cd09dd4b0611e22a7b228f0a46464fb72401062bd5e482b80">(function reducedMotionRuntime() {
+  'use strict';
+  const media = matchMedia('(prefers-reduced-motion: reduce)');
+  const held = new Map();
+  let scheduled = 0, closed = false;
+  const state = { version: 1, reduced: media.matches, sampled: 0, scheduled: false };
+  Object.defineProperty(window, '__atlasSourceMotion', { value: state });
+  function scan() {
+    scheduled = 0; state.scheduled = false;
+    if (closed) return;
+    state.reduced = media.matches;
+    const current = new Set(document.getAnimations().filter(animation => animation instanceof CSSAnimation));
+    for (const [animation] of held) if (!current.has(animation)) held.delete(animation);
+    if (!media.matches) {
+      for (const [animation, prior] of held) {
+        animation.playbackRate = prior.rate;
+        animation.currentTime = prior.time;
+        if (prior.state === 'running') animation.play();
+        else if (prior.state === 'paused') animation.pause();
+      }
+      held.clear(); return;
+    }
+    for (const animation of current) {
+      if (held.has(animation)) continue;
+      const effect = animation.effect, timing = effect && effect.getTiming();
+      if (!timing || !Number.isFinite(Number(timing.duration)) || Number(timing.duration) <= 0) continue;
+      const prior = { state: animation.playState, time: animation.currentTime, rate: animation.playbackRate };
+      const duration = Number(timing.duration), delay = Number(timing.delay) || 0;
+      const iterations = Number(timing.iterations);
+      const pose = iterations === Infinity ? delay + duration / 2 : delay + duration * iterations;
+      if (!Number.isFinite(pose)) continue;
+      animation.pause(); animation.currentTime = Math.max(0, pose);
+      held.set(animation, prior); state.sampled++;
+    }
+  }
+  function schedule() {
+    if (closed || scheduled || (!media.matches && !held.size)) return;
+    state.scheduled = true; scheduled = requestAnimationFrame(scan);
+  }
+  const resize = new ResizeObserver(() => { if (media.matches) schedule(); });
+  resize.observe(document.documentElement);
+  document.addEventListener('animationstart', schedule, true);
+  document.addEventListener('atlas-source-deck-change', schedule);
+  document.addEventListener('DOMContentLoaded', schedule, { once: true });
+  window.addEventListener('load', schedule, { once: true });
+  media.addEventListener('change', schedule);
+  window.addEventListener('pagehide', () => {
+    closed = true; resize.disconnect(); media.removeEventListener('change', schedule);
+    document.removeEventListener('animationstart', schedule, true);
+    document.removeEventListener('atlas-source-deck-change', schedule);
+    if (scheduled) cancelAnimationFrame(scheduled);
+    // A bfcache page retains the source Animation objects and their original
+    // playback state; discard neither merely because the document is hidden.
+    scheduled = 0; state.scheduled = false;
+  });
+  window.addEventListener('pageshow', () => {
+    if (!closed) return;
+    closed = false; resize.observe(document.documentElement);
+    document.addEventListener('animationstart', schedule, true);
+    document.addEventListener('atlas-source-deck-change', schedule);
+    media.addEventListener('change', schedule);
+    schedule();
+  });
+  schedule();
+})();</script></body>
+</html>

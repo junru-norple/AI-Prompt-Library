@@ -1,0 +1,2070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'sha256-B3U8I9rB6LpsPh7E0IBO+h9CjD+xzZyca+QrHwSFLcI=' 'sha256-4ldFw2J4yhzQndSwYR4ip7Io8KRkZPtyQBBivV5IK4A='; img-src data:; font-src 'none'; media-src 'none'; connect-src 'none'; frame-src 'none'; child-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"><meta name="atlas-source-entry" content="open-design-official:template:html-ppt-zhangzara-scatterbrain">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pitch a Graduation Design Project like a Portfolio-Ready Design Student - Student coursework</title>
+    
+    
+    
+    <style>
+        :root {
+            --yellow: #ffe066;
+            --yellow-deep: #ffd43b;
+            --blue: #a5d8ff;
+            --blue-deep: #74c0fc;
+            --pink: #ffc9c9;
+            --pink-deep: #ff9f9f;
+            --green: #b2f2bb;
+            --green-deep: #8ce99a;
+            --orange: #ffcc80;
+            --purple: #d0bfff;
+            --cream: #faf8f3;
+            --paper: #f7f5f0;
+            --ink: #2d2a26;
+            --ink-light: #5c5750;
+            --shadow: rgba(45, 42, 38, 0.15);
+            --shadow-deep: rgba(45, 42, 38, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Zilla Slab', serif;
+            background: var(--paper);
+            color: var(--ink);
+            /* Switched to overflow: hidden so the deck behaves like a
+               slide-by-slide presentation rather than a long-scroll page. */
+            overflow: hidden;
+            cursor: default;
+            height: 100vh;
+        }
+
+        /* Custom cursor - thumbtack feel */
+        .slide {
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='5' fill='%23ff6b6b'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%23fff'/%3E%3C/svg%3E") 12 12, auto;
+        }
+
+        /* Paper grain overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 200px 200px;
+        }
+
+        .presentation {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* Slides stack on top of each other; only .active is shown.
+           Same visual layout as before — just hidden until activated. */
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 3rem;
+            page-break-after: always;
+        }
+        .slide.active { display: flex; }
+
+        /* Background patterns for different slides */
+        .slide::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        /* Cork board texture */
+        .bg-cork::before {
+            background: 
+                radial-gradient(ellipse at 20% 30%, rgba(210, 170, 120, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgba(190, 150, 100, 0.2) 0%, transparent 40%),
+                linear-gradient(135deg, #e8ddd0 0%, #d4c5b0 50%, #c9b8a0 100%);
+            background-size: 100% 100%, 100% 100%, 100% 100%;
+        }
+
+        .bg-cork::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23b8a088' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        /* Paper desk texture */
+        .bg-paper::before {
+            background: 
+                linear-gradient(180deg, #faf8f3 0%, #f5f2ec 100%);
+        }
+
+        .bg-paper::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(200, 190, 175, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(200, 190, 175, 0.08) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+        }
+
+        /* Warm gradient background */
+        .bg-warm::before {
+            background: 
+                radial-gradient(ellipse at 30% 20%, rgba(255, 224, 102, 0.4) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 80%, rgba(165, 216, 255, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(255, 201, 201, 0.15) 0%, transparent 60%),
+                linear-gradient(160deg, #fdf8f0 0%, #f7f0e6 100%);
+        }
+
+        /* Post-it note base styles */
+        .post-it {
+            position: relative;
+            padding: 2rem;
+            box-shadow: 
+                2px 3px 15px var(--shadow),
+                0 1px 3px var(--shadow-deep);
+            transition: transform 0.3s ease;
+            z-index: 1;
+        }
+
+        .post-it-yellow {
+            background: var(--yellow);
+            background: linear-gradient(135deg, var(--yellow) 0%, var(--yellow-deep) 100%);
+        }
+
+        .post-it-blue {
+            background: var(--blue);
+            background: linear-gradient(135deg, var(--blue) 0%, var(--blue-deep) 100%);
+        }
+
+        .post-it-pink {
+            background: var(--pink);
+            background: linear-gradient(135deg, var(--pink) 0%, var(--pink-deep) 100%);
+        }
+
+        .post-it-green {
+            background: var(--green);
+            background: linear-gradient(135deg, var(--green) 0%, var(--green-deep) 100%);
+        }
+
+        .post-it-orange {
+            background: var(--orange);
+        }
+
+        .post-it-purple {
+            background: var(--purple);
+        }
+
+        .post-it-white {
+            background: #fff;
+            border: 2px solid var(--ink);
+        }
+
+        /* Thumbtack / pin decoration */
+        .pin::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #ff6b6b, #c92a2a);
+            box-shadow: 0 2px 4px var(--shadow-deep), inset -2px -2px 4px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+
+        .pin-blue::before {
+            background: radial-gradient(circle at 30% 30%, #4dabf7, #1864ab);
+        }
+
+        .pin-green::before {
+            background: radial-gradient(circle at 30% 30%, #69db7c, #2f9e44);
+        }
+
+        .pin-gold::before {
+            background: radial-gradient(circle at 30% 30%, #ffd43b, #f59f00);
+        }
+
+        /* Tape decoration */
+        .tape::after {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-2deg);
+            width: 80px;
+            height: 25px;
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Shrikhand', cursive;
+            font-weight: 400;
+            line-height: 1.1;
+            letter-spacing: 0.02em;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            color: var(--ink);
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 3.5vw, 3rem);
+            color: var(--ink);
+        }
+
+        h3 {
+            font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+            color: var(--ink);
+        }
+
+        p {
+            font-family: 'Zilla Slab', serif;
+            font-size: clamp(1rem, 1.5vw, 1.25rem);
+            line-height: 1.7;
+            color: var(--ink-light);
+        }
+
+        .handwritten {
+            font-family: 'Caveat', cursive;
+            font-size: clamp(1.2rem, 2vw, 1.6rem);
+            line-height: 1.4;
+        }
+
+        .label {
+            font-family: 'Caveat', cursive;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--ink-light);
+        }
+
+        /* Slide content containers */
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* ===== SLIDE 1: Title ===== */
+        .slide-title {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .title-cluster {
+            position: relative;
+            display: inline-block;
+        }
+
+        .main-title-postit {
+            display: inline-block;
+            padding: 3rem 4rem;
+            transform: rotate(-2deg);
+        }
+
+        .title-accent-1 {
+            position: absolute;
+            top: -40px;
+            right: -60px;
+            padding: 1.5rem 2rem;
+            transform: rotate(12deg);
+            font-family: 'Caveat', cursive;
+            font-size: 1.5rem;
+            z-index: 2;
+        }
+
+        .title-accent-2 {
+            position: absolute;
+            bottom: -30px;
+            left: -50px;
+            padding: 1.2rem 1.8rem;
+            transform: rotate(-8deg);
+            z-index: 2;
+        }
+
+        .title-accent-3 {
+            position: absolute;
+            top: 20px;
+            left: -80px;
+            width: 80px;
+            height: 80px;
+            padding: 0.5rem;
+            transform: rotate(-15deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Caveat', cursive;
+            font-size: 2rem;
+            z-index: 0;
+        }
+
+        .subtitle-text {
+            margin-top: 3rem;
+            font-family: 'Zilla Slab', serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--ink-light);
+            max-width: 500px;
+            line-height: 1.6;
+        }
+
+        /* ===== SLIDE 2: Big Statement ===== */
+        .statement-layout {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .statement-postit {
+            max-width: 700px;
+            padding: 3.5rem 4rem;
+            transform: rotate(1deg);
+            text-align: center;
+        }
+
+        .statement-postit h2 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .side-note {
+            position: absolute;
+            right: 5%;
+            top: 15%;
+            padding: 1.5rem;
+            max-width: 200px;
+            transform: rotate(8deg);
+        }
+
+        /* ===== SLIDE 3: Two Column ===== */
+        .two-col-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .col-postit {
+            padding: 2.5rem;
+        }
+
+        .col-postit h3 {
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--ink);
+            display: inline-block;
+        }
+
+        .col-postit p {
+            margin-bottom: 1rem;
+        }
+
+        .col-postit ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .col-postit li {
+            font-family: 'Zilla Slab', serif;
+            font-size: 1.1rem;
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .col-postit li::before {
+            content: '\2713';
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* ===== SLIDE 4: Chart Slide ===== */
+        .chart-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .chart-container {
+            background: #fff;
+            padding: 2.5rem;
+            box-shadow: 2px 3px 15px var(--shadow);
+            transform: rotate(-1deg);
+        }
+
+        .chart-legend {
+            padding: 2rem;
+            transform: rotate(2deg);
+        }
+
+        .chart-legend h3 {
+            margin-bottom: 1.5rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+            font-family: 'Zilla Slab', serif;
+            font-size: 1.1rem;
+        }
+
+        .legend-swatch {
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+            flex-shrink: 0;
+        }
+
+        /* Hand-drawn bar chart */
+        .sketch-chart {
+            width: 100%;
+            height: auto;
+        }
+
+        .bar-group {
+            animation: growBar 1s ease-out forwards;
+            transform-origin: bottom;
+        }
+
+        @keyframes growBar {
+            from { transform: scaleY(0); }
+            to { transform: scaleY(1); }
+        }
+
+        /* ===== SLIDE 5: Three Cards ===== */
+        .three-col-layout {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            align-items: start;
+        }
+
+        .feature-postit {
+            padding: 2.5rem 2rem;
+            text-align: center;
+        }
+
+        .feature-postit:nth-child(1) { transform: rotate(-3deg); }
+        .feature-postit:nth-child(2) { transform: rotate(2deg); margin-top: 2rem; }
+        .feature-postit:nth-child(3) { transform: rotate(-1deg); }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem;
+            border: 3px solid var(--ink);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Shrikhand', cursive;
+            font-size: 1.5rem;
+        }
+
+        .feature-postit h3 {
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        /* ===== SLIDE 6: Timeline ===== */
+        .timeline-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .timeline-row {
+            display: flex;
+            align-items: stretch;
+            gap: 2rem;
+        }
+
+        .timeline-row:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-node {
+            padding: 2rem;
+            min-width: 200px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .timeline-connector {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .timeline-connector svg {
+            width: 100%;
+            height: 60px;
+        }
+
+        .timeline-content {
+            padding: 2rem;
+            flex: 1;
+        }
+
+        .timeline-content h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .phase-label {
+            font-family: 'Caveat', cursive;
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+        }
+
+        /* ===== SLIDE 7: Image + Text ===== */
+        .imgtext-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .photo-frame {
+            background: #fff;
+            padding: 1rem;
+            box-shadow: 2px 3px 15px var(--shadow);
+            transform: rotate(-2deg);
+        }
+
+        .photo-frame .photo-inner {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: 
+                linear-gradient(135deg, #e9ecef 0%, #dee2e6 50%, #ced4da 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .photo-inner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 40% 40%, rgba(255,224,102,0.3) 0%, transparent 50%),
+                radial-gradient(circle at 60% 60%, rgba(165,216,255,0.3) 0%, transparent 50%);
+        }
+
+        .photo-placeholder {
+            font-family: 'Shrikhand', cursive;
+            font-size: 1.5rem;
+            color: var(--ink-light);
+            opacity: 0.4;
+            z-index: 1;
+        }
+
+        .text-cluster {
+            position: relative;
+        }
+
+        .main-text-postit {
+            padding: 2.5rem;
+            transform: rotate(1deg);
+            margin-bottom: 1.5rem;
+        }
+
+        .mini-note {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            padding: 1rem 1.5rem;
+            transform: rotate(5deg);
+            font-family: 'Caveat', cursive;
+            font-size: 1.3rem;
+            z-index: 2;
+        }
+
+        /* ===== SLIDE 8: Data Diagram ===== */
+        .diagram-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .diagram-canvas {
+            background: #fff;
+            padding: 2.5rem;
+            box-shadow: 2px 3px 15px var(--shadow);
+            transform: rotate(-1deg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .diagram-canvas h3 {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .diagram-note {
+            padding: 2rem;
+            transform: rotate(2deg);
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px dashed rgba(45, 42, 38, 0.2);
+        }
+
+        .stat-value {
+            font-family: 'Shrikhand', cursive;
+            font-size: 1.8rem;
+            color: var(--ink);
+        }
+
+        .stat-label {
+            font-family: 'Zilla Slab', serif;
+            font-size: 1.1rem;
+            color: var(--ink-light);
+        }
+
+        /* ===== SLIDE 9: Comparison ===== */
+        .compare-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: stretch;
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .compare-postit {
+            padding: 3rem;
+            position: relative;
+        }
+
+        .compare-postit.left {
+            transform: rotate(-2deg);
+        }
+
+        .compare-postit.right {
+            transform: rotate(2deg);
+        }
+
+        .compare-vs {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: var(--ink);
+            color: var(--paper);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Shrikhand', cursive;
+            font-size: 1.2rem;
+            z-index: 10;
+            box-shadow: 0 2px 8px var(--shadow-deep);
+        }
+
+        .compare-postit h3 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 3px solid var(--ink);
+        }
+
+        .compare-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .compare-list li {
+            font-family: 'Zilla Slab', serif;
+            font-size: 1.1rem;
+            padding: 0.8rem 0;
+            line-height: 1.5;
+            border-bottom: 1px solid rgba(45, 42, 38, 0.1);
+        }
+
+        .compare-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* ===== SLIDE 10: Closing ===== */
+        .closing-cluster {
+            position: relative;
+            text-align: center;
+        }
+
+        .closing-main {
+            display: inline-block;
+            padding: 3rem 5rem;
+            transform: rotate(-1deg);
+        }
+
+        .closing-main h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+        }
+
+        .closing-accent-1 {
+            position: absolute;
+            top: -50px;
+            left: -80px;
+            padding: 1.5rem;
+            transform: rotate(-12deg);
+            font-family: 'Caveat', cursive;
+            font-size: 1.4rem;
+            z-index: 2;
+        }
+
+        .closing-accent-2 {
+            position: absolute;
+            bottom: -40px;
+            right: -60px;
+            padding: 1.5rem 2rem;
+            transform: rotate(8deg);
+            z-index: 2;
+        }
+
+        .closing-accent-3 {
+            position: absolute;
+            top: 0;
+            right: -100px;
+            padding: 1rem;
+            transform: rotate(15deg);
+            z-index: 0;
+        }
+
+        .closing-accent-4 {
+            position: absolute;
+            bottom: -20px;
+            left: -60px;
+            padding: 1.2rem;
+            transform: rotate(-6deg);
+            z-index: 0;
+        }
+
+        /* Doodle decorations */
+        .doodle {
+            position: absolute;
+            z-index: 0;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .doodle-circle {
+            border: 3px solid var(--ink);
+            border-radius: 50%;
+        }
+
+        .doodle-line {
+            height: 3px;
+            background: var(--ink);
+            border-radius: 2px;
+        }
+
+        .doodle-squiggle {
+            stroke: var(--ink);
+            stroke-width: 3;
+            fill: none;
+            opacity: 0.15;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .two-col-layout,
+            .chart-layout,
+            .imgtext-layout,
+            .diagram-layout,
+            .compare-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .three-col-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-row,
+            .timeline-row:nth-child(even) {
+                flex-direction: column;
+            }
+
+            .side-note {
+                position: relative;
+                right: auto;
+                top: auto;
+                margin-top: 2rem;
+            }
+
+            .compare-vs {
+                position: relative;
+                left: auto;
+                top: auto;
+                transform: none;
+                margin: 1rem auto;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .slide {
+                page-break-after: always;
+                min-height: 100vh;
+            }
+        }
+    </style>
+<style data-atlas-owned-adapter>
+[data-atlas-deck-shell]{position:fixed!important;inset:0!important;width:100%!important;height:100%!important;display:grid!important;grid-template-rows:minmax(0,1fr) auto auto!important;gap:0!important;padding:0!important;margin:0!important;box-sizing:border-box!important;overflow:hidden!important;z-index:1}
+[data-atlas-deck-viewport]{position:relative!important;min-width:0!important;min-height:0!important;overflow:hidden!important}
+[data-atlas-deck-root]{position:absolute!important;display:block!important;margin:0!important;padding:0!important;box-sizing:border-box!important;transform-origin:0 0!important;max-width:none!important;max-height:none!important;visibility:visible!important}
+[data-atlas-deck-root][data-atlas-deck-ready="WAITING_FOR_VISIBLE_VIEWPORT"]{visibility:hidden!important}
+[data-atlas-deck-root="STAGE_HORIZONTAL_SECTIONS"]{display:flex!important;flex-direction:column!important}
+[data-atlas-deck-viewport-stage]{position:relative!important;flex:1 1 auto!important;min-height:0!important;width:100%!important;height:auto!important;transform:none!important}
+[data-atlas-deck-replaced-controls]{display:none!important}
+[data-atlas-deck-slide]{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;box-sizing:border-box!important}
+[data-atlas-deck-slide][data-atlas-deck-active="false"]{visibility:hidden!important;opacity:0!important;pointer-events:none!important}
+[data-atlas-deck-slide][data-atlas-deck-active="true"]{visibility:visible!important;opacity:1!important}
+[data-atlas-deck-slide][data-atlas-deck-inner-scroll="true"]{overflow-y:auto!important;overflow-x:hidden!important;justify-content:flex-start!important;scroll-snap-type:none!important;scroll-behavior:auto!important;min-height:0!important}
+[data-atlas-source-content-owner][data-atlas-deck-inner-scroll="true"]:focus-visible{outline:2px solid currentColor!important;outline-offset:-2px!important}
+[data-atlas-source-content-owner][data-atlas-source-scroll-axes="xy"]{overflow-x:auto!important}
+[data-atlas-source-tail-gutter="taste-native-inline-end"]::after{content:""!important;display:block!important;position:static!important;flex:0 0 0!important;align-self:flex-start!important;width:var(--atlas-source-tail-extent)!important;min-width:var(--atlas-source-tail-extent)!important;max-width:none!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important;border:0!important;pointer-events:none!important}
+[data-atlas-deck-controls]{min-width:0!important;position:relative!important;display:block!important;z-index:2}
+[data-atlas-deck-shell]>#atlas-source-proof{position:relative!important;inset:auto!important;width:100%!important;min-width:0!important;min-height:0!important;max-height:32vh!important;overflow:auto!important;margin:0!important;flex-wrap:wrap!important;overflow-wrap:anywhere!important}
+</style><style data-atlas-owned-adapter>@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:0s!important;transition-delay:0s!important;scroll-behavior:auto!important}}</style></head>
+<body data-atlas-language-policy="ORIGINAL_SOURCE_LABELED">
+    <div class="presentation">
+
+        
+        <section class="slide bg-cork slide-title active">
+            <div class="slide-content">
+                <div class="title-cluster">
+                    <div class="post-it post-it-yellow main-title-postit pin">
+                        <h1>Meridian Wayfinding</h1>
+                        <p class="handwritten" style="margin-top: 0.5rem; color: var(--ink-light);">A civic wayfinding system for Union Crossing Transit Hub</p>
+                    </div>
+                    <div class="post-it post-it-blue title-accent-1 pin-blue">Thesis Crit — Spring 2026</div>
+                    <div class="post-it post-it-pink title-accent-2 pin">By Mara Lindqvist</div>
+                    <div class="post-it post-it-green title-accent-3">!</div>
+                </div>
+                <p class="subtitle-text">Redesigning how 40,000 daily riders find their way through six transfer levels — from confusion to confidence.</p>
+            </div>
+            <svg class="doodle" style="top: 10%; left: 5%; width: 100px; height: 100px;" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="40" stroke="#2d2a26" stroke-width="3" fill="none" opacity="0.15"/>
+            </svg>
+            <svg class="doodle" style="bottom: 15%; right: 8%; width: 120px; height: 60px;" viewBox="0 0 120 60">
+                <path d="M10 30 Q30 10, 50 30 T90 30" stroke="#2d2a26" stroke-width="3" fill="none" opacity="0.15"/>
+            </svg>
+        </section>
+
+        
+        <section class="slide bg-paper">
+            <div class="slide-content">
+                <div class="statement-layout">
+                    <div class="post-it post-it-yellow statement-postit pin tape">
+                        <h2>"Riders don't get lost because they're careless. They get lost because the signage argues with itself."</h2>
+                        <p style="margin-top: 1.5rem; font-style: italic;">Union Crossing stacks subway, regional rail, and bus rapid transit signage installed by three separate agencies across four decades — each with its own type, color, and arrow logic.</p>
+                        <p class="handwritten" style="margin-top: 1rem; text-align: right;">— Thesis statement</p>
+                    </div>
+                </div>
+                <div class="post-it post-it-blue side-note pin-blue">
+                    <p class="handwritten">6 platforms. 3 agencies. 1 confused rider.</p>
+                </div>
+            </div>
+            <svg class="doodle" style="top: 20%; left: 8%; width: 80px; height: 80px;" viewBox="0 0 80 80">
+                <rect x="10" y="10" width="60" height="60" stroke="#2d2a26" stroke-width="3" fill="none" opacity="0.15" transform="rotate(10 40 40)"/>
+            </svg>
+        </section>
+
+        
+        <section class="slide bg-warm">
+            <div class="slide-content">
+                <div class="two-col-layout">
+                    <div class="post-it post-it-blue col-postit pin-blue" style="transform: rotate(-2deg);">
+                        <span class="label">01 / The Problem</span>
+                        <h3 style="margin-top: 1rem;">Three Signage Systems, Zero Agreement</h3>
+                        <p>Union Crossing merges subway, regional rail, and bus rapid transit signage that was never designed to sit in the same hallway.</p>
+                        <ul style="margin-top: 1rem;">
+                            <li>Conflicting arrow logic per level</li>
+                            <li>Type changes at every agency line</li>
+                            <li>No shared color-coding by direction</li>
+                            <li>Avg. dwell-to-transfer: 11.5 min</li>
+                        </ul>
+                    </div>
+                    <div class="post-it post-it-yellow col-postit pin-gold" style="transform: rotate(1deg); margin-top: 3rem;">
+                        <span class="label">02 / The Answer</span>
+                        <h3 style="margin-top: 1rem;">One Wayfinding Grammar</h3>
+                        <p>Meridian is a single sign family, color-coded by direction of travel instead of agency, tested with riders across three rounds.</p>
+                        <ul style="margin-top: 1rem;">
+                            <li>Unified type + color system</li>
+                            <li>Decision points cut 14 → 6</li>
+                            <li>Tactile + braille at every junction</li>
+                            <li>Piloted on Level 3, Nov 2025</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <svg class="doodle" style="bottom: 10%; right: 5%; width: 150px; height: 80px;" viewBox="0 0 150 80">
+                <path d="M10 40 Q40 20, 75 40 T140 40" stroke="#2d2a26" stroke-width="3" fill="none" opacity="0.15"/>
+                <circle cx="10" cy="40" r="5" fill="#2d2a26" opacity="0.15"/>
+                <circle cx="140" cy="40" r="5" fill="#2d2a26" opacity="0.15"/>
+            </svg>
+        </section>
+
+        
+        <section class="slide bg-cork">
+            <div class="slide-content">
+                <div class="chart-layout">
+                    <div class="chart-container pin tape">
+                        <h3 style="text-align: center; margin-bottom: 2rem;">Where Riders Get Lost</h3>
+                        <svg class="sketch-chart" viewBox="0 0 400 250" style="max-height: 300px;">
+                            
+                            <line x1="50" y1="200" x2="380" y2="200" stroke="#c9b8a0" stroke-width="1" stroke-dasharray="4"/>
+                            <line x1="50" y1="150" x2="380" y2="150" stroke="#c9b8a0" stroke-width="1" stroke-dasharray="4"/>
+                            <line x1="50" y1="100" x2="380" y2="100" stroke="#c9b8a0" stroke-width="1" stroke-dasharray="4"/>
+                            <line x1="50" y1="50" x2="380" y2="50" stroke="#c9b8a0" stroke-width="1" stroke-dasharray="4"/>
+
+                            
+                            <rect class="bar-group" x="70" y="120" width="50" height="80" fill="#ffe066" stroke="#2d2a26" stroke-width="2" rx="4"/>
+                            <rect class="bar-group" x="140" y="90" width="50" height="110" fill="#a5d8ff" stroke="#2d2a26" stroke-width="2" rx="4"/>
+                            <rect class="bar-group" x="210" y="60" width="50" height="140" fill="#ffc9c9" stroke="#2d2a26" stroke-width="2" rx="4"/>
+                            <rect class="bar-group" x="280" y="30" width="50" height="170" fill="#b2f2bb" stroke="#2d2a26" stroke-width="2" rx="4"/>
+
+                            
+                            <text x="95" y="225" text-anchor="middle" font-family="Zilla Slab" font-size="14" fill="#5c5750">L1</text>
+                            <text x="165" y="225" text-anchor="middle" font-family="Zilla Slab" font-size="14" fill="#5c5750">L2</text>
+                            <text x="235" y="225" text-anchor="middle" font-family="Zilla Slab" font-size="14" fill="#5c5750">L3</text>
+                            <text x="305" y="225" text-anchor="middle" font-family="Zilla Slab" font-size="14" fill="#5c5750">L4</text>
+
+                            
+                            <text x="95" y="110" text-anchor="middle" font-family="Caveat" font-size="18" fill="#2d2a26">9/hr</text>
+                            <text x="165" y="80" text-anchor="middle" font-family="Caveat" font-size="18" fill="#2d2a26">15/hr</text>
+                            <text x="235" y="50" text-anchor="middle" font-family="Caveat" font-size="18" fill="#2d2a26">22/hr</text>
+                            <text x="305" y="20" text-anchor="middle" font-family="Caveat" font-size="18" fill="#2d2a26">34/hr</text>
+
+                            
+                            <line x1="50" y1="200" x2="380" y2="200" stroke="#2d2a26" stroke-width="2"/>
+                            <line x1="50" y1="200" x2="50" y2="20" stroke="#2d2a26" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div class="chart-legend post-it post-it-green pin-green">
+                        <h3>Key Metrics</h3>
+                        <div class="legend-item">
+                            <div class="legend-swatch" style="background: var(--yellow);"></div>
+                            <span>34 errors/hr on Level 4</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-swatch" style="background: var(--blue);"></div>
+                            <span>11.5 min avg. dwell-to-transfer</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-swatch" style="background: var(--pink);"></div>
+                            <span>3 overlapping agency systems</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-swatch" style="background: var(--green);"></div>
+                            <span>120 riders shadowed</span>
+                        </div>
+                        <p class="handwritten" style="margin-top: 1.5rem; border-top: 2px solid var(--ink); padding-top: 1rem;">Errors observed during a 40-hour shadow study — Level 4 is the focus of the redesign.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <section class="slide bg-paper">
+            <div class="slide-content">
+                <div class="three-col-layout">
+                    <div class="post-it post-it-yellow feature-postit pin">
+                        <div class="feature-icon">A</div>
+                        <h3>Shadow Research</h3>
+                        <p>Observed 120 riders across two rush-hour shifts, logging every hesitation, backtrack, and staff question at each decision point.</p>
+                    </div>
+                    <div class="post-it post-it-blue feature-postit pin-blue">
+                        <div class="feature-icon">B</div>
+                        <h3>Co-Design Workshops</h3>
+                        <p>Ran sessions with the transit agency's ADA compliance office and three rider advisory groups to test the grammar before it left paper.</p>
+                    </div>
+                    <div class="post-it post-it-pink feature-postit pin">
+                        <div class="feature-icon">C</div>
+                        <h3>Iterative Prototyping</h3>
+                        <p>Cardboard signage mockups were pinned up and tested twice on the Level 3 concourse before the final type spec was locked.</p>
+                    </div>
+                </div>
+            </div>
+            <svg class="doodle" style="top: 8%; right: 10%; width: 60px; height: 60px;" viewBox="0 0 60 60">
+                <polygon points="30,5 55,45 5,45" stroke="#2d2a26" stroke-width="3" fill="none" opacity="0.15"/>
+            </svg>
+            <svg class="doodle" style="bottom: 12%; left: 8%; width: 80px; height: 80px;" viewBox="0 0 80 80">
+                <circle cx="40" cy="40" r="30" stroke="#2d2a26" stroke-width="3" fill="none" opacity="0.15" stroke-dasharray="10 5"/>
+            </svg>
+        </section>
+
+        
+        <section class="slide bg-warm">
+            <div class="slide-content">
+                <div class="timeline-layout">
+                    <div class="timeline-row">
+                        <div class="post-it post-it-yellow timeline-node pin">
+                            <h3>Diagnose</h3>
+                            <p class="phase-label">Research</p>
+                        </div>
+                        <div class="timeline-connector">
+                            <svg viewBox="0 0 200 60" preserveAspectRatio="none">
+                                <path d="M0 30 Q100 10, 200 30" stroke="#2d2a26" stroke-width="3" fill="none" opacity="0.3" stroke-dasharray="8 4"/>
+                                <polygon points="190,25 200,30 190,35" fill="#2d2a26" opacity="0.3"/>
+                            </svg>
+                        </div>
+                        <div class="post-it post-it-white timeline-content" style="border: 2px solid var(--ink);">
+                            <p>Shadowed 120 riders and mapped every existing sign in the hub against the real decision points people actually hesitate at.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-row">
+                        <div class="post-it post-it-blue timeline-node pin-blue">
+                            <h3>Design & Test</h3>
+                            <p class="phase-label">Prototype</p>
+                        </div>
+                        <div class="timeline-connector">
+                            <svg viewBox="0 0 200 60" preserveAspectRatio="none">
+                                <path d="M0 30 Q100 50, 200 30" stroke="#2d2a26" stroke-width="3" fill="none" opacity="0.3" stroke-dasharray="8 4"/>
+                                <polygon points="190,25 200,30 190,35" fill="#2d2a26" opacity="0.3"/>
+                            </svg>
+                        </div>
+                        <div class="post-it post-it-white timeline-content" style="border: 2px solid var(--ink);">
+                            <p>Built the Meridian type and color grammar, then ran it through three prototype rounds with 42 volunteer riders.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-row">
+                        <div class="post-it post-it-green timeline-node pin-green">
+                            <h3>Pilot & Measure</h3>
+                            <p class="phase-label">Validate</p>
+                        </div>
+                        <div class="timeline-connector">
+                            <svg viewBox="0 0 200 60" preserveAspectRatio="none">
+                                <path d="M0 30 Q100 10, 200 30" stroke="#2d2a26" stroke-width="3" fill="none" opacity="0.3" stroke-dasharray="8 4"/>
+                                <polygon points="190,25 200,30 190,35" fill="#2d2a26" opacity="0.3"/>
+                            </svg>
+                        </div>
+                        <div class="post-it post-it-white timeline-content" style="border: 2px solid var(--ink);">
+                            <p>Installed the system across the Level 3 concourse for six weeks and re-measured transfer times against the baseline.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <section class="slide bg-cork">
+            <div class="slide-content">
+                <div class="imgtext-layout">
+                    <div class="photo-frame pin tape">
+                        <div class="photo-inner">
+                            <span class="photo-placeholder">[ Meridian signage manual, page 42 ]</span>
+                        </div>
+                    </div>
+                    <div class="text-cluster">
+                        <div class="post-it post-it-pink main-text-postit pin">
+                            <span class="label">Contribution</span>
+                            <h3 style="margin-top: 1rem;">A Type & Color System Built for Transfers, Not Agencies</h3>
+                            <p>Meridian Sans is hinted for legibility at platform-viewing distance, paired with a four-color directional system keyed to compass heading instead of agency logo.</p>
+                            <p style="margin-top: 1rem;">Delivered as a full handoff manual — 140 sign specs, mounting heights, and a tactile map — ready for facilities to install hub-wide.</p>
+                        </div>
+                        <div class="post-it post-it-yellow mini-note pin-gold">
+                            <p class="handwritten">Manual: 86 pages, ready to hand off</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <svg class="doodle" style="top: 15%; right: 5%; width: 100px; height: 100px;" viewBox="0 0 100 100">
+                <path d="M20 50 Q50 20, 80 50 Q50 80, 20 50" stroke="#2d2a26" stroke-width="3" fill="none" opacity="0.15"/>
+            </svg>
+        </section>
+
+        
+        <section class="slide bg-paper">
+            <div class="slide-content">
+                <div class="diagram-layout">
+                    <div class="diagram-canvas pin tape">
+                        <h3>Pilot Results, Level 3</h3>
+                        <svg viewBox="0 0 280 200" style="max-width: 280px;">
+                            
+                            <circle cx="100" cy="100" r="80" fill="#ffe066" stroke="#2d2a26" stroke-width="2"/>
+                            <path d="M100 100 L100 20 A80 80 0 0 1 180 100 Z" fill="#a5d8ff" stroke="#2d2a26" stroke-width="2"/>
+                            <path d="M100 100 L180 100 A80 80 0 0 1 140 170 Z" fill="#ffc9c9" stroke="#2d2a26" stroke-width="2"/>
+                            <path d="M100 100 L140 170 A80 80 0 0 1 60 170 Z" fill="#b2f2bb" stroke="#2d2a26" stroke-width="2"/>
+                            <path d="M100 100 L60 170 A80 80 0 0 1 20 100 Z" fill="#ffcc80" stroke="#2d2a26" stroke-width="2"/>
+
+                            
+                            <circle cx="100" cy="100" r="25" fill="#fff" stroke="#2d2a26" stroke-width="2"/>
+                            <text x="100" y="105" text-anchor="middle" font-family="Shrikhand" font-size="14" fill="#2d2a26">-38%</text>
+
+                            
+                            <rect x="200" y="40" width="15" height="15" fill="#ffe066" stroke="#2d2a26" stroke-width="1"/>
+                            <text x="225" y="52" font-family="Zilla Slab" font-size="12" fill="#5c5750">No error</text>
+
+                            <rect x="200" y="70" width="15" height="15" fill="#a5d8ff" stroke="#2d2a26" stroke-width="1"/>
+                            <text x="225" y="82" font-family="Zilla Slab" font-size="12" fill="#5c5750">One wrong turn</text>
+
+                            <rect x="200" y="100" width="15" height="15" fill="#ffc9c9" stroke="#2d2a26" stroke-width="1"/>
+                            <text x="225" y="112" font-family="Zilla Slab" font-size="12" fill="#5c5750">Asked staff</text>
+
+                            <rect x="200" y="130" width="15" height="15" fill="#b2f2bb" stroke="#2d2a26" stroke-width="1"/>
+                            <text x="225" y="142" font-family="Zilla Slab" font-size="12" fill="#5c5750">Backtracked</text>
+
+                            <rect x="200" y="160" width="15" height="15" fill="#ffcc80" stroke="#2d2a26" stroke-width="1"/>
+                            <text x="225" y="172" font-family="Zilla Slab" font-size="12" fill="#5c5750">Missed connection</text>
+                        </svg>
+                    </div>
+                    <div class="diagram-note post-it post-it-yellow pin">
+                        <h3>Key Statistics</h3>
+                        <div class="stat-row">
+                            <span class="stat-label">Errors/hr, before</span>
+                            <span class="stat-value">34</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Errors/hr, after</span>
+                            <span class="stat-value">9</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Dwell-to-transfer</span>
+                            <span class="stat-value">7.1 min</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Riders surveyed</span>
+                            <span class="stat-value">142</span>
+                        </div>
+                        <p class="handwritten" style="margin-top: 1.5rem;">Donut shows the outcome mix from 142 pilot riders tracked over six weeks.</p>
+                    </div>
+                </div>
+            </div>
+            <svg class="doodle" style="bottom: 10%; left: 5%; width: 120px; height: 50px;" viewBox="0 0 120 50">
+                <line x1="10" y1="25" x2="110" y2="25" stroke="#2d2a26" stroke-width="3" opacity="0.15" stroke-linecap="round"/>
+            </svg>
+        </section>
+
+        
+        <section class="slide bg-warm">
+            <div class="slide-content">
+                <div class="compare-layout">
+                    <div class="post-it post-it-blue compare-postit left pin-blue">
+                        <h3>Before Meridian</h3>
+                        <ul class="compare-list">
+                            <li>Three uncoordinated sign systems</li>
+                            <li>14 wayfinding decision points</li>
+                            <li>34 errors/hr on Level 4</li>
+                            <li>11.5 min avg. dwell-to-transfer</li>
+                            <li>No consistent tactile path</li>
+                        </ul>
+                    </div>
+                    <div class="compare-vs">vs</div>
+                    <div class="post-it post-it-yellow compare-postit right pin-gold">
+                        <h3>After Meridian</h3>
+                        <ul class="compare-list">
+                            <li>One unified sign family</li>
+                            <li>6 wayfinding decision points</li>
+                            <li>9 errors/hr on Level 4</li>
+                            <li>7.1 min avg. dwell-to-transfer</li>
+                            <li>Tactile path at every junction</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <svg class="doodle" style="top: 12%; left: 50%; width: 100px; height: 100px; transform: translateX(-50%);" viewBox="0 0 100 100">
+                <path d="M50 10 L50 90 M10 50 L90 50" stroke="#2d2a26" stroke-width="3" opacity="0.1" stroke-linecap="round"/>
+            </svg>
+        </section>
+
+        
+        <section class="slide bg-cork slide-title">
+            <div class="slide-content">
+                <div class="closing-cluster">
+                    <div class="post-it post-it-yellow closing-main pin">
+                        <h2>Meridian Cuts Transfer Time by 38%</h2>
+                        <p class="handwritten" style="margin-top: 1rem;">A wayfinding grammar riders don't have to learn twice.</p>
+                    </div>
+                    <div class="post-it post-it-blue closing-accent-1 pin-blue">
+                        <p class="handwritten">Limitation: pilot covered only Level 3</p>
+                    </div>
+                    <div class="post-it post-it-pink closing-accent-2 pin">
+                        <p class="handwritten">Full-hub rollout est. 14 months</p>
+                    </div>
+                    <div class="post-it post-it-green closing-accent-3 pin-green">
+                        <p class="handwritten">142 riders</p>
+                    </div>
+                    <div class="post-it post-it-orange closing-accent-4 pin-gold">
+                        <p class="handwritten">:)</p>
+                    </div>
+                </div>
+                <p style="margin-top: 3rem; font-family: 'Zilla Slab', serif; font-style: italic; color: var(--ink-light); font-size: 1.1rem;">Mara Lindqvist · BFA Thesis, Communication Design · Crit Panel, Spring 2026</p>
+            </div>
+            <svg class="doodle" style="top: 8%; right: 8%; width: 80px; height: 80px;" viewBox="0 0 80 80">
+                <polygon points="40,10 70,70 10,70" stroke="#2d2a26" stroke-width="3" fill="none" opacity="0.15"/>
+            </svg>
+            <svg class="doodle" style="bottom: 12%; left: 10%; width: 100px; height: 60px;" viewBox="0 0 100 60">
+                <path d="M10 30 Q50 10, 90 30" stroke="#2d2a26" stroke-width="3" fill="none" opacity="0.15"/>
+            </svg>
+        </section>
+
+    </div>
+
+    
+
+<aside id="atlas-source-proof" aria-label="Atlas 來源證據 / Source evidence" data-language-exempt="original-source" style="all:initial;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;position:relative;z-index:2147483647;padding:10px 14px;color:#30464d;background:#f8faf9;border-top:1px solid rgba(21,39,45,.22);font:12px/1.4 ui-monospace,Consolas,monospace"><span>來源版式離線適配（保留原文）· 原始程式已停用；本機適配器提供頁面與減動控制<br><span lang="en">Offline source-layout adaptation; original text retained. Source scripts are disabled; local adapters provide page and reduced-motion controls.</span></span><span>bf714528070d · 3b652d7e248e</span></aside><script data-atlas-owned-adapter="0" data-atlas-script-sha256="07753c23dac1e8ba6c3e1ec4d0804efa1f428c3fb1cd9c9c6be42b1f04852dc2">/* Atlas reviewed source deck adapter: no upstream runtime execution. */
+(function deckRuntime(config) {
+  'use strict';
+  function start() {
+    const roots = [...document.querySelectorAll(config.selector)];
+    if (roots.length !== 1) throw new Error('Source deck root binding changed.');
+    const deck = roots[0];
+    if (deck.dataset.atlasDeckInitialized === 'true') return;
+    const slides = [...deck.children].filter((node) => node.tagName === 'SECTION');
+    if (slides.length !== config.slide_count || [...deck.children].some((node) => !['SECTION', 'STYLE', 'SCRIPT', 'TEMPLATE'].includes(node.tagName)
+      && !(config.source_controls || []).some(selector => node.matches(selector)))) throw new Error('Source deck section binding changed.');
+    const sourceIsActive = config.variant === 'DIV_DECK_IS_ACTIVE_SECTIONS';
+    if ((config.variant === 'STAGE_ACTIVE_SECTIONS' || sourceIsActive) && slides.some((node) => !node.classList.contains('slide'))) throw new Error('Source stage slide grammar changed.');
+    if (sourceIsActive && deck.id !== 'deck') throw new Error('Source div deck identity changed.');
+    deck.dataset.atlasDeckInitialized = 'true';
+    const horizontal = config.variant === 'STAGE_HORIZONTAL_SECTIONS';
+    const scene = horizontal ? deck.parentNode : deck;
+    if (horizontal && (scene.id !== 'deck' || !scene.classList.contains('deck')
+      || [...scene.children].filter(node => node.classList.contains('demo-banner')).length !== 1
+      || [...scene.children].filter(node => node.classList.contains('chrome')).length !== 1)) throw new Error('Source horizontal scene binding changed.');
+    scene.dataset.atlasDeckRoot = config.variant;
+    if (config.source_horizontal_scroll || config.source_readable_scroll) {
+      // The original horizontal keyboard/dot controller is replaced by the
+      // local controls below. Its scroll/snap mechanism must not compete with
+      // the adapter's single active, absolute-positioned source page.
+      deck.style.setProperty('overflow', 'hidden', 'important');
+      deck.style.setProperty('scroll-snap-type', 'none', 'important');
+      deck.style.setProperty('scroll-behavior', 'auto', 'important');
+      deck.scrollLeft = 0; deck.scrollTop = 0;
+    }
+    for (const selector of config.source_controls || []) {
+      for (const control of document.querySelectorAll(selector)) {
+        if (slides.some(slide => slide.contains(control))) throw new Error('Source control selector intersects original slide content.');
+        control.dataset.atlasDeckReplacedControls = 'true'; control.inert = true;
+      }
+    }
+    if (horizontal) {
+      deck.dataset.atlasDeckViewportStage = 'true';
+      const sourceControls = [...scene.children].find(node => node.classList.contains('chrome'));
+      sourceControls.dataset.atlasDeckReplacedControls = 'true'; sourceControls.inert = true;
+    }
+    if (sourceIsActive) {
+      for (const selector of ['#nav-dots', '#slide-counter']) {
+        const sourceControl = document.querySelector(selector);
+        if (!sourceControl || sourceControl.parentNode !== deck.parentNode) throw new Error('Source div deck control binding changed.');
+        sourceControl.dataset.atlasDeckReplacedControls = 'true'; sourceControl.inert = true;
+      }
+    }
+    slides.forEach((slide, index) => { slide.dataset.atlasDeckSlide = String(index); });
+    if (config.variant === 'DECK_STAGE_SECTIONS' && !customElements.get('deck-stage')) customElements.define('deck-stage', class extends HTMLElement {});
+
+    const shell = document.createElement('div'), viewport = document.createElement('div'), controls = document.createElement('div');
+    shell.dataset.atlasDeckShell = 'true'; viewport.dataset.atlasDeckViewport = 'true'; controls.dataset.atlasDeckControls = 'true';
+    scene.parentNode.insertBefore(shell, scene); viewport.append(scene); shell.append(viewport, controls);
+    const proof = document.querySelector('#atlas-source-proof');
+    if (proof) shell.append(proof);
+    const shadow = controls.attachShadow({ mode: 'open' });
+    const style = document.createElement('style');
+    style.textContent = ':host{display:block;background:#f8faf9;color:#172327;font:12px/1.35 system-ui,sans-serif}nav{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:12px;align-items:center;max-width:520px;min-height:52px;margin:auto;padding:4px 8px;box-sizing:border-box}button{font:inherit;min-width:0;min-height:44px;padding:5px 8px;border:1px solid #617176;border-radius:3px;background:white;color:inherit;cursor:pointer;overflow-wrap:anywhere}button:disabled{opacity:.45;cursor:default}button:focus-visible{outline:3px solid #135e67;outline-offset:2px}output{min-width:5em;text-align:center}';
+    const nav = document.createElement('nav'), previous = document.createElement('button'), next = document.createElement('button'), counter = document.createElement('output');
+    nav.setAttribute('aria-label', '投影片導覽／Slide navigation');
+    previous.type = 'button'; next.type = 'button'; previous.textContent = '上一頁／Previous'; next.textContent = '下一頁／Next';
+    previous.setAttribute('aria-label', '上一頁／Previous slide'); next.setAttribute('aria-label', '下一頁／Next slide');
+    counter.setAttribute('aria-live', 'polite'); counter.setAttribute('aria-atomic', 'true');
+    nav.append(previous, counter, next); shadow.append(style, nav);
+    // This reviewed source builds decorative primitives and chart values from
+    // literal source data. Reproduce those primitives, never run its script.
+    // Random positions use the same original distribution, once per document.
+    if (config.source_orbit_data) {
+      const create = (id, count, cls, style) => {
+        const parent = deck.querySelector('#' + id);
+        if (!parent || parent.children.length) throw new Error('Source generated primitive container changed.');
+        for (let i = 0; i < count; i++) { const node = document.createElement('div'); node.className = cls; style(node, i); parent.append(node); }
+      };
+      for (const [id, count] of [['starfield1', 50], ['starfield4', 30], ['starfield7', 35], ['starfield10', 45]]) create(id, count, 'star', node => {
+        node.style.left = Math.random() * 100 + '%'; node.style.top = Math.random() * 100 + '%'; node.style.animationDelay = Math.random() * 3 + 's';
+      });
+      for (const [id, count] of [['particles1', 16], ['particles10', 20]]) create(id, count, 'p', (node, i) => {
+        node.style.background = ['var(--neon-cyan)', 'var(--neon-pink)', 'var(--neon-yellow)'][i % 3];
+        node.style.left = Math.random() * 100 + '%'; node.style.top = Math.random() * 100 + '%';
+        node.style.animationDelay = Math.random() * 5 + 's'; node.style.animationDuration = (6 + Math.random() * 6) + 's';
+      });
+      create('landscape10', 12, 'mountain', (node, i) => {
+        node.style.height = [30, 50, 70, 40, 60, 35, 55, 45, 80, 25, 50, 40][i] + 'px'; node.style.width = (60 + (i % 3) * 20) + 'px';
+      });
+    }
+    const sourceQuoteSizes = new Map();
+    const sourceHeadingSizes = new Map();
+    function sourceHeadingFit(slide) {
+      if (!config.source_heading_fit) return;
+      for (const heading of slide.querySelectorAll('h1.display')) {
+        if (!sourceHeadingSizes.has(heading)) sourceHeadingSizes.set(heading, {
+          value: heading.style.getPropertyValue('font-size'), priority: heading.style.getPropertyPriority('font-size')
+        });
+        const original = sourceHeadingSizes.get(heading);
+        if (original.value) heading.style.setProperty('font-size', original.value, original.priority);
+        else heading.style.removeProperty('font-size');
+        const base = parseFloat(getComputedStyle(heading).fontSize);
+        const fits = () => {
+          const box = heading.getBoundingClientRect(), clip = slide.getBoundingClientRect();
+          if (box.width <= 0 || clip.width <= 0) return false;
+          const walker = document.createTreeWalker(heading, NodeFilter.SHOW_TEXT); let node;
+          while ((node = walker.nextNode())) {
+            let index = 0;
+            for (const character of node.data) {
+              const end = index + character.length;
+              if (character.trim()) {
+                const range = document.createRange(); range.setStart(node, index); range.setEnd(node, end);
+                const rect = range.getBoundingClientRect();
+                if (rect.left < Math.max(box.left, clip.left) || rect.right > Math.min(box.right, clip.right)) return false;
+              }
+              index = end;
+            }
+          }
+          return true;
+        };
+        if (!(base > 0) || heading.getBoundingClientRect().width <= 0) continue;
+        if (!fits()) {
+          let low = Math.min(16, base), high = base;
+          heading.style.setProperty('font-size', low + 'px', 'important');
+          if (fits()) {
+            for (let i = 0; i < 20; i++) {
+              const mid = (low + high) / 2; heading.style.setProperty('font-size', mid + 'px', 'important');
+              if (fits()) low = mid; else high = mid;
+            }
+            heading.style.setProperty('font-size', low + 'px', 'important');
+          }
+        }
+        heading.dataset.atlasSourceHeadingFit = fits() ? 'FITTED_SOURCE_TEXT' : 'READABLE_FLOOR_EXCEEDS_SOURCE_BOX';
+      }
+    }
+    function sourceAutoFit(slide) {
+      if (!config.source_auto_fit) return;
+      for (const node of slide.querySelectorAll('.slide__kpi-val')) {
+        node.style.transform = ''; node.style.transformOrigin = '';
+        if (node.clientWidth > 0 && node.scrollWidth > node.clientWidth) { node.style.transform = 'scale(' + node.clientWidth / node.scrollWidth + ')'; node.style.transformOrigin = 'left top'; }
+      }
+      for (const node of slide.querySelectorAll('blockquote')) {
+        if (!slide.classList.contains('slide--quote')) continue;
+        if (!sourceQuoteSizes.has(node)) sourceQuoteSizes.set(node, parseFloat(getComputedStyle(node).fontSize));
+        const length = node.textContent.trim().length;
+        if (length > 100) node.style.fontSize = Math.max(16, Math.round(sourceQuoteSizes.get(node) * Math.max(0.5, 100 / length))) + 'px';
+      }
+    }
+    function sourceDataEndpoint() {
+      if (!config.source_orbit_data) return;
+      for (const node of deck.querySelectorAll('#barChart .chart-value')) node.textContent = String(parseInt(node.dataset.value, 10));
+      const chart = deck.querySelector('#barChart'), groups = [...chart.children];
+      const px = value => Number.parseFloat(value) || 0;
+      const outerHeight = node => { const style = getComputedStyle(node); return node.offsetHeight + px(style.marginTop) + px(style.marginBottom); };
+      const chartStyle = getComputedStyle(chart);
+      const contentHeight = chart.clientHeight - px(chartStyle.paddingTop) - px(chartStyle.paddingBottom);
+      const overhead = Math.max(...groups.map(group => {
+        const style = getComputedStyle(group);
+        return outerHeight(group.children[0]) + outerHeight(group.children[2]) + 2 * px(style.rowGap);
+      }));
+      // The source percentage's parent is auto-height, so its empty bars used
+      // to resolve to zero. A shared plot, derived from the source chart and
+      // original labels/gaps, preserves all five original percentage ratios.
+      const plotHeight = Math.max(0, contentHeight - overhead);
+      chart.dataset.atlasSourcePlotHeight = String(plotHeight);
+      for (const group of groups) {
+        const bar = group.children[1]; bar.style.flexShrink = '0';
+        const percent = Number(bar.dataset.height);
+        bar.style.height = (current === 3 ? plotHeight * percent / 100 : 0) + 'px';
+        bar.dataset.atlasSourcePercent = String(percent);
+      }
+      for (const node of deck.querySelectorAll('#hbarChart .hbar-fill')) node.style.width = (current === 4 ? node.dataset.width : '0') + '%';
+      for (const node of deck.querySelectorAll('#statsGrid .stat-number')) { const target = parseFloat(node.dataset.target); node.textContent = current === 6 ? (target % 1 !== 0 ? target.toFixed(1) : String(target)) + (node.dataset.suffix || '') : '0'; }
+    }
+    function needsReadableScroll(slide) {
+      if (!config.source_readable_scroll || window.innerWidth > config.source_readable_scroll_max_width) return false;
+      const clip = slide.getBoundingClientRect(), walker = document.createTreeWalker(slide, NodeFilter.SHOW_TEXT); let text;
+      while ((text = walker.nextNode())) {
+        if (!text.data.trim()) continue;
+        let element = text.parentElement || text.parentNode, hidden = false;
+        while (element && element !== slide) {
+          const style = getComputedStyle(element);
+          if (style.display === 'none' || style.visibility === 'hidden' || style.visibility === 'collapse') { hidden = true; break; }
+          element = element.parentElement || element.parentNode;
+        }
+        if (hidden) continue;
+        const range = document.createRange(); range.setStart(text, 0); range.setEnd(text, text.data.length);
+        const bounds = range.getBoundingClientRect();
+        if (bounds.bottom > bounds.top && (bounds.top < clip.top || bounds.bottom > clip.bottom)) return true;
+      }
+      return false;
+    }
+    // Only immutable, reviewed source roles enter this path. It reserves the
+    // source chrome and gives overflowing original content a positive scroll
+    // origin; it does not resize typography, remove text or repaint artwork.
+    const readableStates = new Map();
+    const px = value => Number.parseFloat(value) || 0;
+    function oneRole(slide, selector) {
+      if (selector === ':self') return slide;
+      const nodes = [...slide.querySelectorAll(selector)];
+      if (nodes.length !== 1) throw new Error('Source readable layout role binding changed.');
+      return nodes[0];
+    }
+    const sourceGraphicReleaseState = new Map();
+    function resetSourceGraphicReleases() {
+      for (const [node, values] of sourceGraphicReleaseState) {
+        for (const [key, original] of values) {
+          if (original.value) node.style.setProperty(key, original.value, original.priority);
+          else node.style.removeProperty(key);
+        }
+      }
+      sourceGraphicReleaseState.clear();
+    }
+    function applySourceGraphicReleases(slide) {
+      for (const graphic of config.source_graphic_releases || []) {
+        if (slides[graphic.index] !== slide) continue;
+        const node = oneRole(slide, graphic.selector);
+        if (String(node.tagName).toLowerCase() !== 'svg' || node.namespaceURI !== 'http://www.w3.org/2000/svg'
+          || node.getAttribute('viewBox') !== graphic.view_box || node.getAttribute('width') !== graphic.width
+          || node.getAttribute('height') !== graphic.height) throw new Error('Source graphic release geometry changed.');
+        let parent = node.parentNode;
+        for (const name of graphic.parent_chain) {
+          if (!parent?.classList.contains(name)) throw new Error('Source graphic release parent role changed.');
+          parent = parent.parentNode;
+        }
+        if (parent !== slide) throw new Error('Source graphic release page identity changed.');
+        let values = sourceGraphicReleaseState.get(node);
+        if (!values) { values = new Map(); sourceGraphicReleaseState.set(node, values); }
+        for (const key of ['overflow-x', 'overflow-y']) {
+          if (!values.has(key)) values.set(key, { value: node.style.getPropertyValue(key), priority: node.style.getPropertyPriority(key) });
+          node.style.setProperty(key, 'visible', 'important');
+        }
+      }
+    }
+    function rememberStyle(state, node, key, value) {
+      let values = state.styles.get(node);
+      if (!values) { values = new Map(); state.styles.set(node, values); }
+      if (!values.has(key)) values.set(key, { value: node.style.getPropertyValue(key), priority: node.style.getPropertyPriority(key) });
+      node.style.setProperty(key, value, 'important');
+    }
+    function resetReadableLayout(slide) {
+      const state = readableStates.get(slide);
+      if (!state) return null;
+      const prior = { owner: state.owner, top: state.owner.scrollTop, left: state.owner.scrollLeft,
+        scrolling: state.owner.dataset.atlasDeckInnerScroll === 'true', nested: [] };
+      state.owner.scrollTop = 0; state.owner.scrollLeft = 0;
+      if (state.wrapper) { state.wrapper.parentNode.insertBefore(state.content, state.wrapper); state.wrapper.remove(); state.wrapper = null; }
+      for (const [node, values] of state.styles) for (const [key, original] of values) {
+        if (original.value) node.style.setProperty(key, original.value, original.priority); else node.style.removeProperty(key);
+      }
+      state.styles.clear();
+      for (const [key, value] of state.attributes) {
+        if (value === null) state.owner.removeAttribute(key); else state.owner.setAttribute(key, value);
+      }
+      for (const [node, values] of state.nestedAttributes) {
+        prior.nested.push({ node, top: node.scrollTop, left: node.scrollLeft }); node.scrollTop = 0; node.scrollLeft = 0;
+        for (const [key, value] of values) { if (value === null) node.removeAttribute(key); else node.setAttribute(key, value); }
+        delete node.dataset.atlasSourceContentOwner; delete node.dataset.atlasSourceScrollAxes; delete node.dataset.atlasDeckInnerScroll;
+      }
+      state.nestedAttributes.clear();
+      state.owner.dataset.atlasDeckInnerScroll = 'false';
+      delete state.owner.dataset.atlasSourceContentOwner;
+      delete state.owner.dataset.atlasSourceScrollAxes;
+      return prior;
+    }
+    function localScrollOwner(slide) {
+      const state = readableStates.get(slide);
+      return state?.owner.dataset.atlasDeckInnerScroll === 'true' ? state.owner
+        : slide.dataset.atlasDeckInnerScroll === 'true' ? slide : null;
+    }
+    function applyTasteEndGutter(slide, state, set, scale) {
+      // Exact two source-native Taste editions only. The owned zero-height
+      // pseudo box reserves real horizontal end space, without changing the
+      // original content box widths, fonts, layout order or source pseudo art.
+      if (!config.source_native_flow_viewport) return;
+      if (slide.getAttribute('data-atlas-source-tail-gutter') !== null)
+        throw new Error('Source Taste previous end extent was not restored.');
+      const css = getComputedStyle(slide), pseudo = getComputedStyle(slide, '::after');
+      const px = value => /^(?:[0-9]+(?:\.[0-9]+)?)px$/.test(value) ? Number.parseFloat(value) : NaN;
+      const em = px(css.fontSize), left = px(css.paddingLeft) + px(css.borderLeftWidth), right = px(css.paddingRight) + px(css.borderRightWidth);
+      const box = slide.getBoundingClientRect();
+      if (!Number.isFinite(scale) || !(scale > 0) || !Number.isFinite(em) || !(em > 0)
+        || !Number.isFinite(left) || !Number.isFinite(right) || css.flexDirection !== 'column'
+        || !['none', 'normal'].includes(pseudo.content) || ![box.left, box.right, box.width, box.height].every(Number.isFinite)
+        || !(box.width > 0 && box.height > 0) || slide.scrollLeft !== 0)
+        throw new Error('Source Taste native end extent geometry is not measurable.');
+      const visible = node => {
+        for (let n = node; n && n !== slide; n = n.parentNode) {
+          if (['SCRIPT', 'STYLE', 'NOSCRIPT', 'TEMPLATE'].includes(n.tagName)) return false;
+          const style = getComputedStyle(n); if (style.display === 'none' || style.visibility !== 'visible') return false;
+        }
+        return true;
+      };
+      let maxRight = -Infinity, textCount = 0;
+      const include = rect => {
+        if (![rect.left, rect.right, rect.top, rect.bottom].every(Number.isFinite)) throw new Error('Source Taste end extent contains nonfinite bounds.');
+        if (rect.right > rect.left && rect.bottom > rect.top) maxRight = Math.max(maxRight, rect.right);
+      };
+      for (const node of slide.querySelectorAll('*')) if (visible(node)) include(node.getBoundingClientRect());
+      const walker = document.createTreeWalker(slide, NodeFilter.SHOW_TEXT); let text;
+      while ((text = walker.nextNode())) if (text.data.trim() && visible(text.parentNode)) {
+        const range = document.createRange(); range.setStart(text, 0); range.setEnd(text, text.data.length);
+        const rect = range.getBoundingClientRect(); include(rect);
+        if (rect.right > rect.left && rect.bottom > rect.top) textCount++;
+      }
+      if (!textCount || !Number.isFinite(maxRight)) throw new Error('Source Taste text end extent is missing.');
+      const contentStart = box.left + left * scale, contentEnd = box.right - right * scale;
+      if (maxRight <= contentEnd) return;
+      const width = (maxRight - contentStart) / scale + em;
+      if (!Number.isFinite(width) || !(width > 0)) throw new Error('Source Taste end extent width is invalid.');
+      set(slide, '--atlas-source-tail-extent', width + 'px');
+      slide.setAttribute('data-atlas-source-tail-gutter', 'taste-native-inline-end');
+    }
+    function applyReadableLayout(slide, prior) {
+      const recipe = (config.source_readable_layouts || []).find(item => slides[item.index] === slide);
+      if (!recipe) return;
+      const owner = oneRole(slide, recipe.owner), content = oneRole(slide, recipe.content);
+      const reserves = recipe.reserve.map(selector => oneRole(slide, selector));
+      const bounds = recipe.bounds.map(selector => oneRole(slide, selector));
+      let state = readableStates.get(slide);
+      if (!state) {
+        state = { owner, content, styles: new Map(), attributes: new Map(['tabindex', 'role', 'aria-label', 'data-atlas-source-tail-gutter'].map(key => [key, owner.getAttribute(key)])), nestedAttributes: new Map(), wrapper: null };
+        readableStates.set(slide, state);
+      } else if (state.owner !== owner || state.content !== content) throw new Error('Source readable layout owner identity changed.');
+      const set = (node, key, value) => rememberStyle(state, node, key, value);
+      const scale = Number(scene.dataset.atlasDeckScale);
+      if (!(scale > 0)) throw new Error('Source readable layout scale is invalid.');
+      if (recipe.kind === 'SOURCE_FLOW_CHILDREN') {
+        const graphics = new Map((recipe.definite_graphics || []).map(selector => { const node = oneRole(slide, selector); return [node, node.getBoundingClientRect().height / scale]; }));
+        if (config.source_native_flow_viewport) {
+          // This is an explicit responsive adaptation for the two immutable
+          // Taste editions, not a claimed source breakpoint. Retain the source
+          // gutters unless together they consume more than half the viewport;
+          // then retain one source body em on each edge, without shrinking type.
+          const css = getComputedStyle(slide), px = value => Number.parseFloat(value) || 0;
+          const em = px(css.fontSize), left = px(css.paddingLeft), right = px(css.paddingRight);
+          if (em > 0 && slide.clientWidth < 2 * (left + right)) {
+            for (const [key, value] of [['padding-left', left], ['padding-right', right], ['padding-top', px(css.paddingTop)], ['padding-bottom', px(css.paddingBottom)]]) set(slide, key, Math.min(value, em) + 'px');
+          }
+        }
+        if (recipe.source_block_flow) {
+          const spec = recipe.source_block_flow, children = Array.from(slide.children);
+          if (children.length !== spec.direct_roles.length || children.some((node, at) => !node.matches(spec.direct_roles[at])))
+            throw new Error('Source Block headerless direct role binding changed.');
+          for (const selector of spec.required_roles) oneRole(slide, selector);
+          const safe = node => {
+            const css = getComputedStyle(node);
+            for (const [key, value] of [['justify-content', css.justifyContent], ['align-items', css.alignItems], ['align-content', css.alignContent]])
+              if (['center', 'end', 'flex-end'].includes(value)) set(node, key, 'safe ' + value);
+          };
+          safe(slide);
+          const intrinsic = node => {
+            safe(node); set(node, 'flex-shrink', '0'); set(node, 'min-height', 'max-content'); set(node, 'min-width', 'min-content');
+            for (const child of node.children) if (!['absolute', 'fixed'].includes(getComputedStyle(child).position)) set(child, 'flex-shrink', '0');
+          };
+          const separate = (node, align) => {
+            const sourceFont = getComputedStyle(slide).fontSize, em = Number.parseFloat(sourceFont);
+            if (!/^(?:[0-9]+(?:\.[0-9]+)?)px$/.test(sourceFont) || !Number.isFinite(em) || !(em > 0) || !Number.isFinite(em * 2))
+              throw new Error('Source Block body spacing font is not a positive used pixel size.');
+            const gap = String(em * 2) + 'px';
+            // The source ornament remains painted, with its original size,
+            // rotation and DOM order, but has real space outside the copy.
+            set(node, 'position', 'relative'); set(node, 'inset', 'auto'); set(node, 'flex', '0 0 auto');
+            set(node, 'align-self', align); set(node, 'margin-top', gap); set(node, 'margin-bottom', gap);
+          };
+          if (spec.page_kind === 'intro' || spec.page_kind === 'split') {
+            // Retain the current original media-query column widths and row /
+            // column direction. Read real source boxes before changing flex.
+            const widths = children.map(node => node.getBoundingClientRect().width / scale);
+            if (!widths.every(value => Number.isFinite(value) && value > 0)) throw new Error('Source Block column width is not measurable.');
+            children.forEach((node, at) => { set(node, 'box-sizing', 'border-box'); set(node, 'width', widths[at] + 'px'); intrinsic(node); });
+            if (spec.page_kind === 'split') {
+              const visual = children[0], box = oneRole(slide, '.visual-box'), label = oneRole(slide, '.visual-label');
+              // This exact original panel contains a CSS shape and a text label,
+              // no image. Its former hidden clip loses the rotated label.
+              set(visual, 'overflow', 'visible'); intrinsic(box); separate(label, 'center');
+            }
+          } else {
+            const selector = spec.page_kind === 'hero' ? '.hero-frame' : spec.page_kind === 'quote' ? '.quote-frame' : '.close-frame';
+            const frame = oneRole(slide, selector); intrinsic(frame);
+            set(frame, 'display', 'flex'); set(frame, 'flex-direction', 'column');
+            set(frame, 'align-items', spec.page_kind === 'hero' ? 'flex-start' : 'safe center');
+            if (spec.page_kind === 'hero') {
+              separate(oneRole(slide, '.deco-pink-rect'), 'flex-end');
+              separate(oneRole(slide, '.deco-green-circle'), 'flex-end');
+              separate(oneRole(slide, '.deco-yellow-bar'), 'flex-start');
+            } else if (spec.page_kind === 'quote') {
+              separate(oneRole(slide, '.deco-quote-marks'), 'flex-start');
+              separate(oneRole(slide, '.deco-stripes'), 'flex-end');
+            } else separate(oneRole(slide, '.deco-star'), 'flex-end');
+          }
+        }
+        if (recipe.source_vellum_flow) {
+          const flow = recipe.source_vellum_flow, children = Array.from(slide.children), css = getComputedStyle(slide);
+          if (children.length !== flow.direct_roles.length || children.some((node, at) => !node.matches(flow.direct_roles[at])))
+            throw new Error('Source Vellum direct role binding changed.');
+          let compareLayout = null;
+          if (flow.page_kind === 'compare') {
+            const body = oneRole(slide, '.slide-body'), panels = Array.from(body.children);
+            if (panels.length !== 2 || !panels[0].matches('.compare-panel') || !panels[0].matches('.left')
+              || !panels[1].matches('.compare-panel') || !panels[1].matches('.right'))
+              throw new Error('Source Vellum compare panel binding changed.');
+            // The source body is display:contents. Measure the two real source
+            // panels before changing the parent layout, never its absent box.
+            const boxes = panels.map(node => node.getBoundingClientRect()), widths = boxes.map(box => box.width / scale);
+            const gap = (boxes[1].left - boxes[0].right) / scale;
+            if (!widths.every(value => Number.isFinite(value) && value > 0) || !Number.isFinite(gap) || gap < 0)
+              throw new Error('Source Vellum original compare columns are not measurable.');
+            compareLayout = { body, panels, widths, gap };
+          }
+          // The original source order becomes one reachable vertical flow.
+          // Centering is retained when it fits, with a positive overflow origin.
+          set(slide, 'display', 'flex'); set(slide, 'flex-direction', 'column');
+          set(slide, 'align-items', css.alignItems === 'center' ? 'safe center' : 'stretch');
+          const safe = node => { const style = getComputedStyle(node); for (const [key, value] of [['justify-content', style.justifyContent], ['align-items', style.alignItems], ['align-content', style.alignContent]]) if (value === 'center') set(node, key, 'safe center'); };
+          for (const node of children) safe(node);
+          const annotation = oneRole(slide, '.pin-annotation');
+          set(annotation, 'align-self', 'flex-start'); set(annotation, 'margin-top', 'var(--gap-md)');
+          if (flow.direct_roles.includes('header.slide-chrome')) {
+            const chrome = oneRole(slide, '.slide-chrome'); set(chrome, 'align-self', 'stretch');
+            set(chrome, 'margin-bottom', 'var(--gap-md)');
+          }
+          if (flow.page_kind === 'stats') {
+            const row = oneRole(slide, '.stats-row'), items = row.querySelectorAll('.pin-stat');
+            if (items.length !== 3) throw new Error('Source Vellum stat count changed.');
+            set(row, 'min-width', 'min-content'); set(row, 'align-self', 'safe center');
+            for (const node of items) safe(node);
+          } else if (flow.page_kind === 'compare') {
+            const body = oneRole(slide, '.slide-body'), panels = Array.from(body.children);
+            if (panels.length !== 2 || !panels[0].matches('.compare-panel') || !panels[0].matches('.left')
+              || !panels[1].matches('.compare-panel') || !panels[1].matches('.right'))
+              throw new Error('Source Vellum compare panel binding changed.');
+            const original = compareLayout, width = original.widths[0] + original.widths[1] + original.gap;
+            set(body, 'display', 'grid'); set(body, 'grid-template-columns', original.widths.map(value => value + 'px').join(' '));
+            set(body, 'column-gap', original.gap + 'px'); set(body, 'width', width + 'px'); set(body, 'min-width', width + 'px');
+            for (const panel of panels) { set(panel, 'box-sizing', 'border-box'); set(panel, 'height', 'auto'); safe(panel); }
+          } else if (flow.page_kind === 'chart') {
+            const wrapper = oneRole(slide, '.chart-wrapper'), track = oneRole(slide, '.bar-track');
+            if (track.querySelectorAll('.bar-col').length !== 5 || track.querySelectorAll('.bar-fill').length !== 5
+              || track.querySelectorAll('.bar-x-label').length !== 5)
+              throw new Error('Source Vellum chart role binding changed.');
+            set(wrapper, 'flex', '0 0 auto'); set(wrapper, 'min-height', 'max-content');
+            set(wrapper, 'justify-content', 'safe flex-end');
+            // Keep authored 28vh and each original fill percentage untouched.
+            set(track, 'flex-shrink', '0'); set(track, 'min-width', 'max-content');
+            set(track, 'padding-right', '1em');
+          }
+        }
+        if (recipe.source_cover_flow) {
+          const children = Array.from(slide.children), matches = (node, selector) => !!node && node.matches(selector);
+          if (recipe.source_cover_flow === 'GROVE_FOUR_DIRECT_ROLES') {
+            const [sidebar, watermark, main, footer] = children;
+            if (children.length !== 4 || !matches(sidebar, 'div.grove-sidebar') || !matches(watermark, 'div.grove-num')
+              || !matches(main, 'div') || !matches(footer, 'div') || main.children.length !== 4
+              || !matches(main.children[0], '.kicker') || !matches(main.children[1], '.rule')
+              || !matches(main.children[2], 'h1.h1') || !matches(main.children[3], 'p.lead')
+              || footer.children.length !== 2 || Array.from(footer.children).some(node => !matches(node, 'span.label')))
+              throw new Error('Source cover direct role binding changed.');
+            // The source disabled sidebar and absolute watermark remain as is.
+            set(main, 'justify-content', 'flex-start');
+          } else if (recipe.source_cover_flow === 'MAT_THREE_GRID_ROLES') {
+            const names = ['cover-headline', 'cover-copy', 'cover-bottom'];
+            if (children.length !== 3 || children.some((node, at) => !matches(node, 'div.' + names[at])))
+              throw new Error('Source cover direct role binding changed.');
+            // Preserve the source two-column / spanning-footer grid. The first
+            // row retains spare height when it fits, but cannot compress copy.
+            set(slide, 'grid-template-rows', 'minmax(max-content, 1fr) max-content');
+            set(slide, 'align-content', 'start');
+            set(children[1], 'justify-content', 'safe center');
+          } else throw new Error('Source cover flow kind is not reviewed.');
+        }
+        set(slide, 'justify-content', 'safe center');
+        for (const selector of recipe.flow_chrome || []) { const node = oneRole(slide, selector); set(node, 'position', 'relative'); set(node, 'inset', 'auto'); }
+        for (const node of slide.children) {
+          const css = getComputedStyle(node);
+          if (!['absolute', 'fixed'].includes(css.position) && css.display !== 'none') {
+            set(node, 'flex', '0 0 auto');
+            if (graphics.has(node)) {
+              const height = graphics.get(node);
+              if (!(height > 0)) throw new Error('Source percentage graphic has no definite measured height.');
+              set(node, 'box-sizing', 'border-box'); set(node, 'height', height + 'px'); set(node, 'min-height', height + 'px');
+            } else set(node, 'min-height', 'max-content');
+          }
+        }
+        for (const selector of recipe.intrinsic_containers || []) { const node = oneRole(slide, selector); set(node, 'height', 'auto'); set(node, 'flex', '0 0 auto'); set(node, 'min-height', 'max-content'); }
+        if (recipe.horizontal_table) {
+          const table = oneRole(slide, '.table-scroll');
+          state.nestedAttributes.set(table, new Map(['tabindex', 'role', 'aria-label'].map(key => [key, table.getAttribute(key)])));
+          table.setAttribute('tabindex', '0'); table.setAttribute('role', 'region'); table.setAttribute('aria-label', '表格內容／Table content');
+          table.dataset.atlasSourceContentOwner = 'SOURCE_TABLE_HORIZONTAL'; table.dataset.atlasSourceScrollAxes = 'xy';
+          table.dataset.atlasDeckInnerScroll = 'true';
+          const previous = prior?.nested.find(item => item.node === table);
+          table.scrollLeft = table.scrollWidth > table.clientWidth && previous ? previous.left : 0;
+        }
+      } else if (recipe.kind === 'RESERVED_SOURCE_FRAME' || recipe.kind === 'RESERVED_HEADER_BODY') {
+        set(slide, 'display', 'grid'); set(slide, 'grid-template-rows', recipe.kind === 'RESERVED_HEADER_BODY' ? 'auto minmax(0,1fr)' : 'auto minmax(0,1fr) auto');
+        set(slide, 'justify-content', 'normal'); set(slide, 'align-items', 'stretch');
+        set(owner, 'height', '100%'); set(owner, 'box-sizing', 'border-box'); set(owner, 'align-content', 'safe center');
+        if (recipe.kind === 'RESERVED_HEADER_BODY') { set(owner, 'align-content', 'start'); set(owner, 'grid-auto-rows', 'max-content'); }
+        if (recipe.source_intrinsic_flow) {
+          set(owner, 'max-height', 'none'); set(owner, 'justify-content', 'flex-start');
+          for (const child of owner.children) set(child, 'flex-shrink', '0');
+        }
+        if (recipe.source_svg_canvas) {
+          const canvas = recipe.source_svg_canvas, svg = oneRole(slide, canvas.selector);
+          if (svg.getAttribute('viewBox') !== canvas.view_box) throw new Error('Source SVG viewBox identity changed.');
+          // Explicit source-coordinate canvas: preserve aspect, all primitives
+          // and SVG text, then expose its full extent through the native owner.
+          for (const key of ['width', 'min-width', 'max-width']) set(svg, key, canvas.width + 'px');
+          for (const key of ['height', 'min-height', 'max-height']) set(svg, key, canvas.height + 'px');
+          set(svg, 'flex', '0 0 auto');
+          for (const selector of recipe.intrinsic_containers) {
+            const node = oneRole(slide, selector); set(node, 'flex', '0 0 auto');
+            set(node, 'min-width', 'max-content'); set(node, 'min-height', 'max-content');
+          }
+          set(oneRole(slide, '.chart-body'), 'width', 'max-content');
+          set(oneRole(slide, '.chart-body'), 'height', 'auto');
+        }
+        for (const node of reserves) {
+          set(node, 'position', 'relative'); set(node, 'inset', 'auto');
+          // The source absolute chrome's inline padding matched the slide's.
+          // Its new grid cell is already inside that same slide content edge.
+          set(node, 'padding-left', '0'); set(node, 'padding-right', '0');
+        }
+        for (const selector of recipe.release_clips || []) { const node = oneRole(slide, selector); set(node, 'overflow-x', 'visible'); set(node, 'overflow-y', 'visible'); }
+      } else if (recipe.kind === 'RESERVED_SOURCE_FAMILY_BODY') {
+        const graphics = (recipe.definite_graphics || []).map(selector => oneRole(slide, selector));
+        set(slide, 'display', 'grid'); set(slide, 'grid-template-rows', 'auto minmax(0,1fr) auto');
+        set(slide, 'justify-content', 'normal'); set(slide, 'align-items', 'stretch');
+        set(owner, 'height', '100%'); set(owner, 'box-sizing', 'border-box');
+        // Keep centering where it fits, but never center overflow behind a
+        // negative, unreachable scroll origin. Do not change text metrics.
+        const css = getComputedStyle(owner);
+        for (const [property, value] of [['align-items', css.alignItems], ['align-content', css.alignContent], ['justify-content', css.justifyContent]])
+          if (['center', 'end', 'flex-end'].includes(value)) set(owner, property, 'safe ' + value);
+        for (const node of owner.children) if (getComputedStyle(node).display !== 'none') set(node, 'flex-shrink', '0');
+        for (const node of reserves) { set(node, 'position', 'relative'); set(node, 'inset', 'auto'); }
+        for (const selector of recipe.intrinsic_containers || []) {
+          const node = oneRole(slide, selector); set(node, 'flex', '0 0 auto'); set(node, 'min-height', 'max-content');
+        }
+        for (const node of graphics) {
+          // Only the exact Grove/MAT source .bar-track enters this family branch.
+          // Its authored vh height (Grove 30/42vh; MAT 30/38vh) is definite. Prevent flex shrink
+          // and expose the original nowrap label extent without freezing a
+          // previously compressed used height or replacing the source unit.
+          set(node, 'flex-shrink', '0'); set(node, 'min-width', 'max-content');
+          // Keep a readable end gutter after the original nowrap labels. This
+          // reserves real scrollable layout space; text, bars and vh heights remain.
+          set(node, 'padding-right', '1em');
+        }
+      } else if (recipe.kind === 'RESERVED_CHROME_BODY') {
+        set(slide, 'display', 'grid'); set(slide, 'grid-template-rows', 'auto minmax(0,1fr) auto');
+        set(slide, 'justify-content', 'normal');
+        set(owner, 'align-items', 'start'); set(owner, 'align-content', 'start');
+        for (const node of reserves) set(node, 'position', 'relative');
+      } else if (recipe.kind === 'RESERVED_ATTRIBUTION_BODY') {
+        set(slide, 'display', 'grid'); set(slide, 'grid-template-rows', 'minmax(0,1fr) auto');
+        set(slide, 'justify-content', 'normal'); set(slide, 'justify-items', 'center');
+        set(owner, 'height', '100%'); set(owner, 'box-sizing', 'border-box');
+        set(owner, 'justify-content', 'flex-start');
+        for (const node of owner.children) set(node, 'flex-shrink', '0');
+        for (const node of reserves) {
+          set(node, 'position', 'relative'); set(node, 'inset', 'auto');
+          set(node, 'justify-self', 'start');
+        }
+      } else if (recipe.kind === 'POSITIVE_SOURCE_COMPOSITION') {
+        // Keep the source content's exact used width. The wrapper reserves
+        // transformed semantic labels as real layout space, including their
+        // negative source offsets, so both axes have reachable positive bounds.
+        if (recipe.source_intrinsic_flow) {
+          set(content, 'flex-shrink', '0'); set(content, 'min-height', 'max-content');
+          set(content, 'justify-content', 'flex-start');
+          for (const child of content.children) set(child, 'flex-shrink', '0');
+          for (const chart of content.querySelectorAll('.pixel-bar-chart')) set(chart, 'flex-shrink', '0');
+          for (const group of content.querySelectorAll('.chart-bar-group')) {
+            set(group, 'flex-shrink', '0');
+            for (const child of group.children) set(child, 'flex-shrink', '0');
+          }
+        }
+        if (recipe.source_separated_notes) {
+          const spec = recipe.source_separated_notes, cluster = oneRole(slide, spec.container);
+          const notes = spec.notes.map(selector => oneRole(slide, selector));
+          if (cluster.children.length !== 5 || notes.some((node, index) => cluster.children[index] !== node)) throw new Error('Source closing note order binding changed.');
+          // The five immutable post-its contain meaningful text. Keep their
+          // source fonts, padding, transforms, sizes and DOM order, while
+          // reserving each rotated border box in its own native-scroll row.
+          const used = notes.map(node => {
+            const css = getComputedStyle(node);
+            if (![css.width, css.height].every(value => /^(?:[0-9]+(?:\.[0-9]+)?)px$/.test(value) && parseFloat(value) > 0)) throw new Error('Source closing note used size is not positive.');
+            return { width: css.width, height: css.height };
+          });
+          set(cluster, 'display', 'grid'); set(cluster, 'grid-template-columns', 'max-content');
+          set(cluster, 'justify-content', 'center'); set(cluster, 'align-items', 'center'); set(cluster, 'row-gap', '2em');
+          notes.forEach((node, index) => {
+            set(node, 'position', 'relative'); set(node, 'inset', 'auto'); set(node, 'margin', '0');
+            set(node, 'width', used[index].width); set(node, 'height', used[index].height);
+            set(node, 'justify-self', 'center'); set(node, 'align-self', 'center');
+            set(node, 'grid-column', '1'); set(node, 'grid-row', String(index + 1));
+          });
+          const boxes = notes.map(node => node.getBoundingClientRect());
+          if (boxes.some(box => ![box.width, box.height].every(value => Number.isFinite(value) && value > 0))) throw new Error('Source closing note measured box is not positive.');
+          set(cluster, 'grid-template-rows', boxes.map(box => box.height / scale + 'px').join(' '));
+          set(cluster, 'width', Math.max(...boxes.map(box => box.width / scale)) + 'px');
+          const separated = notes.map(node => node.getBoundingClientRect());
+          for (let a = 0; a < separated.length; a++) for (let b = a + 1; b < separated.length; b++) {
+            const x = separated[a], y = separated[b];
+            if (Math.min(x.right, y.right) > Math.max(x.left, y.left) && Math.min(x.bottom, y.bottom) > Math.max(x.top, y.top)) throw new Error('Source closing note rectangles still overlap.');
+          }
+        }
+        const graphicBounds = (recipe.source_graphic_bounds || []).map(graphic => {
+          const node = oneRole(slide, graphic.selector);
+          if (String(node.tagName).toLowerCase() !== 'svg' || node.getAttribute('viewBox') !== graphic.view_box) throw new Error('Source readable graphic role binding changed.');
+          return node;
+        });
+        // These immutable source roles contain foreground text. Their internal
+        // clip is unnecessary (photo label), or demonstrably cuts SVG legends.
+        // Keep original transforms, viewBox, geometry, fonts and used SVG size.
+        for (const selector of recipe.release_clips || []) { const node = oneRole(slide, selector); set(node, 'overflow-x', 'visible'); set(node, 'overflow-y', 'visible'); }
+        const width = content.getBoundingClientRect().width / scale;
+        if (!(width > 0)) throw new Error('Source readable composition has no measured width.');
+        set(content, 'flex-shrink', '0'); set(content, 'box-sizing', 'border-box'); set(content, 'width', width + 'px');
+        const wrapper = document.createElement('div'); wrapper.dataset.atlasSourceContentExtent = 'true';
+        content.parentNode.insertBefore(wrapper, content); wrapper.append(content); state.wrapper = wrapper;
+        wrapper.style.setProperty('position', 'relative'); wrapper.style.setProperty('flex', '0 0 auto');
+        wrapper.style.setProperty('box-sizing', 'content-box'); wrapper.style.setProperty('width', width + 'px');
+        set(slide, 'justify-content', 'flex-start'); set(slide, 'align-items', 'flex-start');
+        const base = content.getBoundingClientRect();
+        const complete = recipe.complete_content_extent ? [...content.querySelectorAll('*')].filter(node => {
+          const css = getComputedStyle(node); return css.display !== 'none' && css.visibility !== 'hidden' && css.visibility !== 'collapse';
+        }) : [];
+        const union = [base, ...bounds.map(node => node.getBoundingClientRect()), ...complete.map(node => node.getBoundingClientRect()),
+          ...(recipe.source_descendant_bounds ? [...content.querySelectorAll('*')].map(node => node.getBoundingClientRect()) : []),
+          ...graphicBounds.flatMap(node => [...node.children].map(child => child.getBoundingClientRect()))];
+        const left = Math.min(...union.map(rect => rect.left)), right = Math.max(...union.map(rect => rect.right));
+        const top = Math.min(...union.map(rect => rect.top)), bottom = Math.max(...union.map(rect => rect.bottom));
+        const insetLeft = Math.max(0, (base.left - left) / scale), insetTop = Math.max(0, (base.top - top) / scale);
+        const insetRight = Math.max(0, (right - base.right) / scale), insetBottom = Math.max(0, (bottom - base.bottom) / scale);
+        wrapper.style.setProperty('padding', `${insetTop}px ${insetRight}px ${insetBottom}px ${insetLeft}px`);
+        const css = getComputedStyle(slide), availableWidth = slide.clientWidth - px(css.paddingLeft) - px(css.paddingRight);
+        const availableHeight = slide.clientHeight - px(css.paddingTop) - px(css.paddingBottom);
+        const extentWidth = width + insetLeft + insetRight, extentHeight = base.height / scale + insetTop + insetBottom;
+        wrapper.style.setProperty('margin-left', Math.max(0, (availableWidth - extentWidth) / 2) + 'px');
+        wrapper.style.setProperty('margin-top', Math.max(0, (availableHeight - extentHeight) / 2) + 'px');
+        wrapper.dataset.atlasSourceExtentWidth = String(extentWidth); wrapper.dataset.atlasSourceExtentHeight = String(extentHeight);
+      } else throw new Error('Unsupported source readable layout recipe.');
+      applyTasteEndGutter(slide, state, set, scale);
+      set(owner, 'min-height', '0'); set(owner, 'min-width', '0');
+      set(owner, 'overflow-y', 'auto'); set(owner, 'overflow-x', recipe.axes === 'xy' ? 'auto' : 'hidden');
+      set(owner, 'scroll-behavior', 'auto'); set(owner, 'scroll-snap-type', 'none');
+      owner.dataset.atlasSourceContentOwner = recipe.kind; owner.dataset.atlasSourceScrollAxes = recipe.axes;
+      const scrolling = config.source_readable_scroll && owner.dataset.atlasDeckInnerScroll === 'true'
+        || owner.scrollHeight > owner.clientHeight || recipe.axes === 'xy' && owner.scrollWidth > owner.clientWidth;
+      owner.dataset.atlasDeckInnerScroll = String(scrolling);
+      if (scrolling) {
+        owner.setAttribute('tabindex', '0'); owner.setAttribute('role', 'region'); owner.setAttribute('aria-label', '投影片內容／Slide content');
+        owner.scrollTop = prior?.owner === owner && prior.scrolling ? prior.top : 0;
+        owner.scrollLeft = prior?.owner === owner && prior.scrolling ? prior.left : 0;
+      } else { owner.scrollTop = 0; owner.scrollLeft = 0; }
+    }
+    for (const recipe of config.source_readable_layouts || []) {
+      const slide = slides[recipe.index];
+      if (!slide) throw new Error('Source readable layout page binding changed.');
+      for (const selector of new Set([recipe.owner, recipe.content, ...recipe.reserve, ...recipe.bounds, ...(recipe.release_clips || []), ...(recipe.flow_chrome || []), ...(recipe.intrinsic_containers || []), ...(recipe.definite_graphics || []), ...(recipe.source_svg_canvas ? [recipe.source_svg_canvas.selector] : []), ...(recipe.horizontal_table ? ['.table-scroll'] : [])])) oneRole(slide, selector);
+    }
+    let current = config.initial_index;
+    function select(index) {
+      resetSourceGraphicReleases();
+      const innerFocused = slides.some(slide => { const owner = localScrollOwner(slide); return owner && owner.contains(document.activeElement); });
+      slides.forEach(resetReadableLayout);
+      current = Math.max(0, Math.min(slides.length - 1, index));
+      slides.forEach((slide, at) => {
+        const active = at === current;
+        slide.dataset.atlasDeckActive = String(active);
+        slide.setAttribute('aria-hidden', String(!active)); slide.inert = !active;
+        if (config.variant === 'STAGE_ACTIVE_SECTIONS') slide.classList.toggle('active', active);
+        if (sourceIsActive) slide.classList.toggle('is-active', active);
+        for (const state of config.source_states || []) slide.classList.toggle(state, active);
+        if (config.source_readable_scroll) { slide.dataset.atlasDeckInnerScroll = 'false'; slide.scrollTop = 0; }
+      });
+      previous.disabled = current === 0; next.disabled = current === slides.length - 1;
+      counter.textContent = `${current + 1} / ${slides.length}`;
+      deck.dataset.atlasDeckIndex = String(current); deck.dataset.atlasDeckCount = String(slides.length);
+      sourceDataEndpoint(); sourceAutoFit(slides[current]); sourceHeadingFit(slides[current]);
+      fit();
+      if (innerFocused) { const target = localScrollOwner(slides[current]) || slides[current]; target.setAttribute('tabindex', localScrollOwner(slides[current]) ? '0' : '-1'); target.focus({ preventScroll: true }); }
+      deck.dispatchEvent(new CustomEvent('atlas-source-deck-change', { bubbles: true, detail: { index: current, count: slides.length } }));
+    }
+    function fit() {
+      resetSourceGraphicReleases();
+      const rect = viewport.getBoundingClientRect();
+      const width = config.viewport ? window.innerWidth : config.width;
+      if (config.banner_extra) scene.style.setProperty('width', String(width) + 'px', 'important');
+      const bannerHeight = config.banner_extra ? [...scene.children].find(node => node.classList.contains('demo-banner')).offsetHeight : 0;
+      const height = (config.viewport ? window.innerHeight : config.height) + bannerHeight;
+      if (rect.width <= 0 || rect.height <= 0 || width <= 0 || height <= 0) { scene.dataset.atlasDeckReady = 'WAITING_FOR_VISIBLE_VIEWPORT'; return; }
+      const scale = Math.min(rect.width / width, rect.height / height);
+      const previousContentScroll = resetReadableLayout(slides[current]);
+      const previousInnerTop = config.source_readable_scroll && slides[current].dataset.atlasDeckInnerScroll === 'true' ? slides[current].scrollTop : 0;
+      if (config.source_readable_scroll) { slides[current].scrollTop = 0; slides[current].dataset.atlasDeckInnerScroll = 'false'; slides[current].setAttribute('tabindex', '-1'); }
+      scene.style.setProperty('width', `${width}px`, 'important'); scene.style.setProperty('height', `${height}px`, 'important');
+      scene.style.setProperty('left', `${(rect.width - width * scale) / 2}px`, 'important');
+      scene.style.setProperty('top', `${(rect.height - height * scale) / 2}px`, 'important');
+      scene.style.setProperty('transform', `scale(${scale})`, 'important');
+      scene.dataset.atlasDeckScale = String(scale); scene.dataset.atlasDeckReady = 'READY';
+      sourceDataEndpoint(); sourceAutoFit(slides[current]); sourceHeadingFit(slides[current]);
+      if (config.source_native_flow_viewport || needsReadableScroll(slides[current])) {
+        // The source's narrow single-column text is taller than its fixed
+        // slide. Preserve readable source typography and expose all of it in
+        // a real local scroll viewport, rather than shrinking or clipping it.
+        scene.style.setProperty('width', rect.width + 'px', 'important'); scene.style.setProperty('height', rect.height + 'px', 'important');
+        scene.style.setProperty('left', '0px', 'important'); scene.style.setProperty('top', '0px', 'important'); scene.style.setProperty('transform', 'none', 'important');
+        scene.dataset.atlasDeckScale = '1'; slides[current].dataset.atlasDeckInnerScroll = 'true'; slides[current].setAttribute('tabindex', '0');
+        sourceAutoFit(slides[current]);
+        slides[current].scrollTop = previousInnerTop;
+      }
+      applyReadableLayout(slides[current], previousContentScroll);
+      applySourceGraphicReleases(slides[current]);
+      if (config.source_orbit_data) sourceDataEndpoint();
+    }
+    previous.addEventListener('click', () => select(current - 1)); next.addEventListener('click', () => select(current + 1));
+    document.addEventListener('keydown', (event) => {
+      if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey) return;
+      const chain = event.composedPath ? event.composedPath() : [event.target];
+      if (chain.some((node) => node && (node.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT', 'BUTTON'].includes(node.tagName)))) return;
+      if (['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Home', 'End', ' '].includes(event.key)
+        && chain.some(node => node?.dataset?.atlasDeckInnerScroll === 'true')) return;
+      if (['ArrowLeft', 'ArrowRight'].includes(event.key)
+        && chain.some(node => node?.dataset?.atlasDeckInnerScroll === 'true' && node.dataset.atlasSourceScrollAxes === 'xy' && node.scrollWidth > node.clientWidth)) return;
+      const target = { ArrowRight: current + 1, PageDown: current + 1, ' ': current + 1, ArrowLeft: current - 1, PageUp: current - 1, Home: 0, End: slides.length - 1 }[event.key];
+      if (typeof target !== 'number') return;
+      event.preventDefault(); select(target);
+    });
+    const observer = new ResizeObserver(fit); observer.observe(viewport);
+    if (config.banner_extra) observer.observe([...scene.children].find(node => node.classList.contains('demo-banner')));
+    window.addEventListener('resize', fit);
+    window.addEventListener('pageshow', () => { observer.observe(viewport); if (config.banner_extra) observer.observe([...scene.children].find(node => node.classList.contains('demo-banner'))); fit(); });
+    window.addEventListener('pagehide', () => { observer.disconnect(); resetSourceGraphicReleases(); });
+    select(current); fit();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true }); else start();
+})({"variant":"REVIEWED_SOURCE_CLASS_SECTIONS","selector":".presentation","slide_count":10,"initial_index":0,"width":null,"height":null,"viewport":true,"banner_extra":false,"source_heading_fit":false,"source_readable_layouts":[{"index":0,"kind":"POSITIVE_SOURCE_COMPOSITION","owner":":self","content":".slide-content","reserve":[],"bounds":[".main-title-postit",".title-accent-1",".title-accent-2",".title-accent-3",".subtitle-text"],"axes":"xy","source_descendant_bounds":true},{"index":1,"kind":"POSITIVE_SOURCE_COMPOSITION","owner":":self","content":".slide-content","reserve":[],"bounds":[".statement-layout"],"axes":"xy","source_descendant_bounds":true},{"index":2,"kind":"POSITIVE_SOURCE_COMPOSITION","owner":":self","content":".slide-content","reserve":[],"bounds":[".two-col-layout"],"axes":"xy","source_descendant_bounds":true},{"index":3,"kind":"POSITIVE_SOURCE_COMPOSITION","owner":":self","content":".slide-content","reserve":[],"bounds":[".chart-layout"],"axes":"xy","source_descendant_bounds":true},{"index":4,"kind":"POSITIVE_SOURCE_COMPOSITION","owner":":self","content":".slide-content","reserve":[],"bounds":[".three-col-layout"],"axes":"xy","source_descendant_bounds":true},{"index":5,"kind":"POSITIVE_SOURCE_COMPOSITION","owner":":self","content":".slide-content","reserve":[],"bounds":[".timeline-layout"],"axes":"xy","source_descendant_bounds":true},{"index":6,"kind":"POSITIVE_SOURCE_COMPOSITION","owner":":self","content":".slide-content","reserve":[],"bounds":[".photo-frame",".photo-placeholder",".main-text-postit",".mini-note"],"axes":"xy","release_clips":[".photo-inner"],"source_descendant_bounds":true},{"index":7,"kind":"POSITIVE_SOURCE_COMPOSITION","owner":":self","content":".slide-content","reserve":[],"bounds":[".diagram-canvas",".diagram-note"],"axes":"xy","release_clips":[".diagram-canvas > svg"],"source_graphic_bounds":[{"selector":".diagram-canvas > svg","view_box":"0 0 280 200"}],"source_descendant_bounds":true},{"index":8,"kind":"POSITIVE_SOURCE_COMPOSITION","owner":":self","content":".slide-content","reserve":[],"bounds":[".compare-layout"],"axes":"xy","source_descendant_bounds":true},{"index":9,"kind":"POSITIVE_SOURCE_COMPOSITION","owner":":self","content":".slide-content","reserve":[],"bounds":[".closing-main",".closing-accent-1",".closing-accent-2",".closing-accent-3",".closing-accent-4"],"axes":"xy","source_separated_notes":{"container":".closing-cluster","notes":[".closing-main",".closing-accent-1",".closing-accent-2",".closing-accent-3",".closing-accent-4"]},"source_descendant_bounds":true}],"source_native_flow_viewport":false,"source_states":["active"],"source_controls":[],"source_auto_fit":false,"source_orbit_data":false,"source_horizontal_scroll":false,"source_readable_scroll":false,"source_readable_scroll_max_width":null});
+</script><script data-atlas-owned-adapter="1" data-atlas-script-sha256="e25745c36278ca1cd09dd4b0611e22a7b228f0a46464fb72401062bd5e482b80">(function reducedMotionRuntime() {
+  'use strict';
+  const media = matchMedia('(prefers-reduced-motion: reduce)');
+  const held = new Map();
+  let scheduled = 0, closed = false;
+  const state = { version: 1, reduced: media.matches, sampled: 0, scheduled: false };
+  Object.defineProperty(window, '__atlasSourceMotion', { value: state });
+  function scan() {
+    scheduled = 0; state.scheduled = false;
+    if (closed) return;
+    state.reduced = media.matches;
+    const current = new Set(document.getAnimations().filter(animation => animation instanceof CSSAnimation));
+    for (const [animation] of held) if (!current.has(animation)) held.delete(animation);
+    if (!media.matches) {
+      for (const [animation, prior] of held) {
+        animation.playbackRate = prior.rate;
+        animation.currentTime = prior.time;
+        if (prior.state === 'running') animation.play();
+        else if (prior.state === 'paused') animation.pause();
+      }
+      held.clear(); return;
+    }
+    for (const animation of current) {
+      if (held.has(animation)) continue;
+      const effect = animation.effect, timing = effect && effect.getTiming();
+      if (!timing || !Number.isFinite(Number(timing.duration)) || Number(timing.duration) <= 0) continue;
+      const prior = { state: animation.playState, time: animation.currentTime, rate: animation.playbackRate };
+      const duration = Number(timing.duration), delay = Number(timing.delay) || 0;
+      const iterations = Number(timing.iterations);
+      const pose = iterations === Infinity ? delay + duration / 2 : delay + duration * iterations;
+      if (!Number.isFinite(pose)) continue;
+      animation.pause(); animation.currentTime = Math.max(0, pose);
+      held.set(animation, prior); state.sampled++;
+    }
+  }
+  function schedule() {
+    if (closed || scheduled || (!media.matches && !held.size)) return;
+    state.scheduled = true; scheduled = requestAnimationFrame(scan);
+  }
+  const resize = new ResizeObserver(() => { if (media.matches) schedule(); });
+  resize.observe(document.documentElement);
+  document.addEventListener('animationstart', schedule, true);
+  document.addEventListener('atlas-source-deck-change', schedule);
+  document.addEventListener('DOMContentLoaded', schedule, { once: true });
+  window.addEventListener('load', schedule, { once: true });
+  media.addEventListener('change', schedule);
+  window.addEventListener('pagehide', () => {
+    closed = true; resize.disconnect(); media.removeEventListener('change', schedule);
+    document.removeEventListener('animationstart', schedule, true);
+    document.removeEventListener('atlas-source-deck-change', schedule);
+    if (scheduled) cancelAnimationFrame(scheduled);
+    // A bfcache page retains the source Animation objects and their original
+    // playback state; discard neither merely because the document is hidden.
+    scheduled = 0; state.scheduled = false;
+  });
+  window.addEventListener('pageshow', () => {
+    if (!closed) return;
+    closed = false; resize.observe(document.documentElement);
+    document.addEventListener('animationstart', schedule, true);
+    document.addEventListener('atlas-source-deck-change', schedule);
+    media.addEventListener('change', schedule);
+    schedule();
+  });
+  schedule();
+})();</script></body>
+</html>

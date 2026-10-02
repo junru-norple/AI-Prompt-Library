@@ -1,0 +1,12 @@
+授權與來源 / License and provenance
+
+Entry: PPT_TEMPLATE_LANDSCAPE
+Source: AI Prompt Library local canonical source／AI Prompt Library 本機 canonical source
+Version: ab931b5cb91effd537146e8c0c98c8cc55d2fb29d3b4d9645f0afb3f7ce2d55d
+Creator role: FIRST_PARTY_PROJECT_CREATOR
+Rights holder: junru-norple
+Publisher / maintainer: junru-norple / AI Prompt Library
+
+本公開版本保留原有投影片、主題與媒體內容，附加完整適用授權通知。
+This public derivative preserves the original slides, themes and media and adds complete applicable license notices.
+python-pptx default OOXML template portions remain under the accompanying MIT notice.

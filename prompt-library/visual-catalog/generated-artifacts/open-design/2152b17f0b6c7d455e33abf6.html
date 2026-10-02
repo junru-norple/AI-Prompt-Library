@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'sha256-ctAR8GjD3g3qTI+7UsvwCJuyv/hpHYzlA+3bWMEYzPQ=' 'sha256-4ldFw2J4yhzQndSwYR4ip7Io8KRkZPtyQBBivV5IK4A='; img-src data:; font-src 'none'; media-src 'none'; connect-src 'none'; frame-src 'none'; child-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"><meta name="atlas-source-entry" content="open-design-official:plugin:example-vfx-text-cursor-3321d7a5">
+<meta charset="UTF-8" />
+<title>VFX Text Cursor · Opening</title>
+<style data-atlas-tailwind-source-sha256="a449cd55573400c55b3fd9df6baa97e8f74ea9a51e2fe4dd1c3a600ac112fd8c">/*! Tailwind CSS 3.4.19 dependency notice
+MIT License
+
+Copyright (c) Tailwind Labs, Inc.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+*/
+*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/*! tailwindcss v3.4.19 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}[data-atlas-source-scene]{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.absolute{position:absolute}.relative{position:relative}.bottom-12{bottom:3rem}.left-12{left:3rem}.right-12{right:3rem}.top-12{top:3rem}.z-10{z-index:10}.mt-10{margin-top:2.5rem}.flex{display:flex}.max-w-\[1280px\]{max-width:1280px}.flex-col{flex-direction:column}.items-center{align-items:center}.items-baseline{align-items:baseline}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.px-12{padding-left:3rem;padding-right:3rem}.text-center{text-align:center}.text-\[22px\]{font-size:22px}.font-black{font-weight:900}.font-medium{font-weight:500}.leading-\[1\.05\]{line-height:1.05}.tracking-\[-0\.02em\]{letter-spacing:-.02em}.opacity-40{opacity:.4}.opacity-50{opacity:.5}.opacity-60{opacity:.6}.blur{--tw-blur:blur(8px)}.blur,.filter{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}</style>
+
+<style>
+  [data-atlas-source-scene] { font-family:'Inter Tight','Noto Sans SC',system-ui,sans-serif; background:#06070a; color:#f5f5f7; margin:0; min-height:1080px; overflow:hidden; position:relative; }
+  .vignette { position:absolute; inset:0; background: radial-gradient(circle at center, transparent 50%, rgba(0,0,0,0.8) 100%); z-index:1; }
+  .grain { position:absolute; inset:0; opacity:0.06; mix-blend-mode:overlay; pointer-events:none; z-index:2;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E"); }
+  .mono { font-family:'JetBrains Mono',ui-monospace,monospace; }
+  .chip { font-size:11px; letter-spacing:0.18em; text-transform:uppercase; }
+  @keyframes blink { 0%, 50% { opacity:1 } 51%, 100% { opacity:0 } }
+  .cursor { display:inline-block; width:18px; height:1.05em; background:#ff3b6f; margin-left:6px; vertical-align:text-bottom; animation: blink 1s steps(1) infinite;
+    box-shadow: 0 0 24px #ff3b6f, 0 0 8px #ff3b6f, 60px 0 80px rgba(255,59,111,0.6); }
+  .chroma {
+    text-shadow:
+      3px 0 #00d4ff,
+      -3px 0 #ff3b6f,
+      0 0 40px rgba(255,59,111,0.3);
+  }
+  .text-line { position:relative; }
+  /* directional light leaks */
+  .ray { position:absolute; mix-blend-mode:screen; pointer-events:none; z-index:1; }
+  .ray-1 { top:30%; left:-10%; width:60%; height:6px; transform:rotate(-12deg); background:linear-gradient(90deg, transparent, rgba(255,59,111,0.6), transparent); filter: blur(8px); }
+  .ray-2 { top:55%; right:-10%; width:50%; height:4px; transform:rotate(15deg); background:linear-gradient(90deg, transparent, rgba(0,212,255,0.5), transparent); filter: blur(6px); }
+  .ray-3 { top:70%; left:10%; width:40%; height:3px; transform:rotate(-8deg); background:linear-gradient(90deg, transparent, rgba(255,181,71,0.5), transparent); filter: blur(5px); }
+</style>
+<style data-atlas-owned-adapter>html:root{height:100%;margin:0;overflow:hidden}body[data-atlas-scene-document]{margin:0!important;padding:0!important;width:100%!important;height:100%!important;min-height:0!important;display:grid!important;grid-template-rows:minmax(0,1fr) auto!important;overflow:hidden!important;background:#111!important}[data-atlas-source-scene-viewport]{position:relative!important;min-width:0;min-height:0;overflow:hidden;isolation:isolate}[data-atlas-source-scene]{position:absolute!important;width:1920px!important;height:1080px!important;min-height:0!important;max-width:none!important;margin:0!important;box-sizing:border-box;transform-origin:0 0;overflow:hidden!important}[data-atlas-scene-document]>#atlas-source-proof{max-height:32vh;overflow:auto;min-width:0;flex:none}</style><style data-atlas-owned-adapter>@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:0s!important;transition-delay:0s!important;scroll-behavior:auto!important}}</style></head>
+<body data-atlas-scene-document data-atlas-language-policy="ORIGINAL_SOURCE_LABELED"><main data-atlas-source-scene-viewport><div class="flex flex-col items-center justify-center relative" data-atlas-source-scene>
+
+  <header class="absolute top-12 left-12 right-12 flex items-baseline justify-between chip opacity-50 z-10 mono">
+    <span>FRAME 01 · OPENING</span>
+    <span>VFX · TEXT CURSOR</span>
+    <span>00:03:21</span>
+  </header>
+
+  
+  <div class="ray ray-1"></div>
+  <div class="ray ray-2"></div>
+  <div class="ray ray-3"></div>
+
+  <main class="relative z-10 text-center max-w-[1280px] px-12">
+    <h1 class="chroma font-black leading-[1.05] tracking-[-0.02em]" style="font-size:clamp(48px,134.4px,108px)">
+      Markdown 是给作者的<br/>
+      中间过程, <span style="color:#ff3b6f">HTML</span> 才是<br/>
+      给读者的最终形态<span class="cursor"></span>
+    </h1>
+    <p class="mt-10 text-[22px] opacity-60 font-medium">
+      — Claude Code 团队, 2026
+    </p>
+  </main>
+
+  <div class="vignette"></div>
+  <div class="grain"></div>
+
+  <footer class="absolute bottom-12 left-12 right-12 flex items-baseline justify-between chip opacity-40 z-10 mono">
+    <span>HTML-ANYTHING · VFX-TEXT-CURSOR</span>
+    <span>HOT PINK × CYAN CHROMATIC</span>
+    <span>REC ●</span>
+  </footer>
+</div></main><aside id="atlas-source-proof" aria-label="Atlas 來源證據 / Source evidence" data-language-exempt="original-source" style="all:initial;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;position:relative;z-index:2147483647;padding:10px 14px;color:#30464d;background:#f8faf9;border-top:1px solid rgba(21,39,45,.22);font:12px/1.4 ui-monospace,Consolas,monospace"><span>來源版式離線適配（保留原文）· 原始程式已停用；本機適配器提供頁面與減動控制<br><span lang="en">Offline source-layout adaptation; original text retained. Source scripts are disabled; local adapters provide page and reduced-motion controls.</span></span><span>bf714528070d · aa1728281d73</span><details data-atlas-dependency-license="tailwindcss-3.4.19" data-license-sha256="60e0b68c0f35c078eef3a5d29419d0b03ff84ec1df9c3f9d6e39a519a5ae7985" style="all:initial;display:block;flex-basis:100%;min-width:0;font:12px/1.4 ui-monospace,Consolas,monospace;color:#30464d"><summary style="cursor:pointer">Tailwind CSS 3.4.19 · MIT 授權全文 / Full license notice</summary><pre style="white-space:pre-wrap;overflow-wrap:anywhere;max-height:14rem;overflow:auto;font:inherit">MIT License
+
+Copyright (c) Tailwind Labs, Inc.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &quot;Software&quot;), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+</pre></details></aside><script data-atlas-owned-adapter="0" data-atlas-script-sha256="72d011f068c3de0dea4c8fbb52cbf0089bb2bff8691d8ce503eddb58c118ccf4">(function vfxSceneRuntime(width, height) {
+  'use strict';
+  const viewport = document.querySelector('[data-atlas-source-scene-viewport]'), scene = document.querySelector('[data-atlas-source-scene]');
+  if (!viewport || !scene || scene.parentElement !== viewport || width !== 1920 || height !== 1080) throw Error('VFX_SCENE_RUNTIME_BINDING_MISSING');
+  function fit() {
+    delete scene.dataset.atlasSceneReady;
+    const box = viewport.getBoundingClientRect(), css = getComputedStyle(viewport);
+    if (![box.left, box.top, box.right, box.bottom, box.width, box.height].every(Number.isFinite)
+      || box.width < 0 || box.height < 0) throw Error('VFX_SCENE_VIEWPORT_RECT_INVALID');
+    if (css.transform !== 'none' || css.zoom !== '1'
+      || ['paddingLeft', 'paddingRight', 'paddingTop', 'paddingBottom', 'borderLeftWidth', 'borderRightWidth', 'borderTopWidth', 'borderBottomWidth'].some(key => css[key] !== '0px')) throw Error('VFX_SCENE_VIEWPORT_CONTENT_BOX_UNPROVEN');
+    const w = box.width, h = box.height;
+    if (!(w > 0 && h > 0)) return;
+    const ratio = Math.min(w / width, h / height);
+    // CSS transforms use a representable scale. Choose its greatest Float32
+    // value not above the available ratio, rather than subtracting an epsilon.
+    const float = new Float32Array(1), bits = new Uint32Array(float.buffer);
+    float[0] = ratio;
+    if (float[0] > ratio) bits[0]--;
+    const scale = float[0];
+    if (!(Number.isFinite(scale) && scale > 0 && scale <= ratio)) throw Error('VFX_SCENE_SCALE_UNREPRESENTABLE');
+    scene.style.transform = `scale(${scale})`;
+    scene.style.left = `${(w - width * scale) / 2}px`; scene.style.top = `${(h - height * scale) / 2}px`;
+    // Keep the actual native geometry as the final fit condition, including
+    // centering and layout-unit quantization in the browser.
+    const placed = scene.getBoundingClientRect();
+    if (![placed.left, placed.top, placed.right, placed.bottom, placed.width, placed.height].every(Number.isFinite)
+      || !(placed.width > 0 && placed.height > 0)
+      || placed.left < box.left || placed.top < box.top || placed.right > box.right || placed.bottom > box.bottom) throw Error('VFX_SCENE_NATIVE_FIT_OUTSIDE_VIEWPORT');
+    scene.dataset.atlasSceneReady = 'READY';
+  }
+  const observer = new ResizeObserver(fit); observer.observe(viewport); fit();
+  window.addEventListener('pagehide', () => observer.disconnect());
+  window.addEventListener('pageshow', () => { observer.observe(viewport); fit(); });
+})(1920,1080);</script><script data-atlas-owned-adapter="1" data-atlas-script-sha256="e25745c36278ca1cd09dd4b0611e22a7b228f0a46464fb72401062bd5e482b80">(function reducedMotionRuntime() {
+  'use strict';
+  const media = matchMedia('(prefers-reduced-motion: reduce)');
+  const held = new Map();
+  let scheduled = 0, closed = false;
+  const state = { version: 1, reduced: media.matches, sampled: 0, scheduled: false };
+  Object.defineProperty(window, '__atlasSourceMotion', { value: state });
+  function scan() {
+    scheduled = 0; state.scheduled = false;
+    if (closed) return;
+    state.reduced = media.matches;
+    const current = new Set(document.getAnimations().filter(animation => animation instanceof CSSAnimation));
+    for (const [animation] of held) if (!current.has(animation)) held.delete(animation);
+    if (!media.matches) {
+      for (const [animation, prior] of held) {
+        animation.playbackRate = prior.rate;
+        animation.currentTime = prior.time;
+        if (prior.state === 'running') animation.play();
+        else if (prior.state === 'paused') animation.pause();
+      }
+      held.clear(); return;
+    }
+    for (const animation of current) {
+      if (held.has(animation)) continue;
+      const effect = animation.effect, timing = effect && effect.getTiming();
+      if (!timing || !Number.isFinite(Number(timing.duration)) || Number(timing.duration) <= 0) continue;
+      const prior = { state: animation.playState, time: animation.currentTime, rate: animation.playbackRate };
+      const duration = Number(timing.duration), delay = Number(timing.delay) || 0;
+      const iterations = Number(timing.iterations);
+      const pose = iterations === Infinity ? delay + duration / 2 : delay + duration * iterations;
+      if (!Number.isFinite(pose)) continue;
+      animation.pause(); animation.currentTime = Math.max(0, pose);
+      held.set(animation, prior); state.sampled++;
+    }
+  }
+  function schedule() {
+    if (closed || scheduled || (!media.matches && !held.size)) return;
+    state.scheduled = true; scheduled = requestAnimationFrame(scan);
+  }
+  const resize = new ResizeObserver(() => { if (media.matches) schedule(); });
+  resize.observe(document.documentElement);
+  document.addEventListener('animationstart', schedule, true);
+  document.addEventListener('atlas-source-deck-change', schedule);
+  document.addEventListener('DOMContentLoaded', schedule, { once: true });
+  window.addEventListener('load', schedule, { once: true });
+  media.addEventListener('change', schedule);
+  window.addEventListener('pagehide', () => {
+    closed = true; resize.disconnect(); media.removeEventListener('change', schedule);
+    document.removeEventListener('animationstart', schedule, true);
+    document.removeEventListener('atlas-source-deck-change', schedule);
+    if (scheduled) cancelAnimationFrame(scheduled);
+    // A bfcache page retains the source Animation objects and their original
+    // playback state; discard neither merely because the document is hidden.
+    scheduled = 0; state.scheduled = false;
+  });
+  window.addEventListener('pageshow', () => {
+    if (!closed) return;
+    closed = false; resize.observe(document.documentElement);
+    document.addEventListener('animationstart', schedule, true);
+    document.addEventListener('atlas-source-deck-change', schedule);
+    media.addEventListener('change', schedule);
+    schedule();
+  });
+  schedule();
+})();</script></body>
+</html>

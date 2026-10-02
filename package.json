@@ -1,0 +1,12 @@
+{
+  "name": "ai-prompt-library-public",
+  "version": "3.0.0",
+  "private": true,
+  "description": "Local-first, offline-capable AI Prompt Library public artifact.",
+  "author": "junru-norple",
+  "license": "SEE LICENSE IN LICENSE_SCOPE.md",
+  "scripts": {
+    "test": "node prompt-library/scripts/Verify_Public_Repository.js --root .",
+    "verify": "node prompt-library/scripts/Verify_Public_Repository.js --root ."
+  }
+}

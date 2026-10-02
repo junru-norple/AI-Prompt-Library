@@ -1,0 +1,942 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-09-21T00:00:00.000Z",
+  "status": "PASS",
+  "source_id": "local-original-cinematic-web",
+  "collection": "高質感網站／Cinematic Web",
+  "entry_count": 10,
+  "collection_hash": "d1916aae55675d510f53bc0a65dddaebb3ec76e3b0be4a4615b8ccb8cbec3a06",
+  "public_export_eligible": true,
+  "originality_declaration": "FIRST_PARTY_ORIGINAL_NO_EXTERNAL_SHOWCASE_CODE_OR_MEDIA",
+  "license_scope": "MIT for original code and CC-BY-4.0 for original content, only to the extent rights are held by junru-norple.",
+  "records": [
+    {
+      "entry_id": "cinematic-web:cinematic-hero",
+      "slug": "cinematic-hero",
+      "title_zh_tw": "影院式星圖 Hero",
+      "title_en": "Cinematic Hero",
+      "purpose_zh_tw": "在八秒內建立主題、尺度與唯一行動",
+      "use_case_zh_tw": "高端產品、文化展演與品牌入口",
+      "avoid_zh_tw": "資訊密集後台或需要立即比較大量資料的頁面",
+      "design_direction_zh_tw": "深空觀測站的黃銅光圈、冷白星圖與大尺度排版",
+      "signature_zh_tw": "由圓形觀測光圈切開標題的入場構圖",
+      "output_type": "web-page",
+      "preview_path": "packages/cinematic-hero/index.html",
+      "prompt_path": "packages/cinematic-hero/PROMPT.md",
+      "source_path": "packages/cinematic-hero/index.html",
+      "package_path": "packages/cinematic-hero",
+      "preview_sha256": "2d2602acfb2b0e68982046e96f00ef748dec2b17d431f693e62758928f81f5af",
+      "prompt_sha256": "ead0fa3cac3d502099f68702ec2b9f504651d3de221656668f4f124a75628d01",
+      "source_sha256": "2d2602acfb2b0e68982046e96f00ef748dec2b17d431f693e62758928f81f5af",
+      "bundle_sha256": "33a3962c5b5107db1ee5f3629e0edc3731a117bacc9eda07e3b0ddce5547495c",
+      "tags": [
+        "Cinematic Hero",
+        "影院式星圖 Hero",
+        "高質感網站",
+        "Cinematic Web",
+        "cinematic",
+        "astronomical",
+        "precision"
+      ],
+      "bilingual_search_terms": [
+        "cinematic web",
+        "cinematic website",
+        "高質感網站",
+        "電影感網站",
+        "Cinematic Hero",
+        "影院式星圖 Hero"
+      ],
+      "use_cases": [
+        "高端產品、文化展演與品牌入口",
+        "在八秒內建立主題、尺度與唯一行動"
+      ],
+      "style_tags": [
+        "cinematic",
+        "astronomical",
+        "precision"
+      ],
+      "interaction_tags": [
+        "pointer",
+        "keyboard",
+        "focus"
+      ],
+      "technology_stack": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "dependencies": [],
+      "files": [
+        {
+          "path": "packages/cinematic-hero/index.html",
+          "bytes": 6400,
+          "sha256": "2d2602acfb2b0e68982046e96f00ef748dec2b17d431f693e62758928f81f5af"
+        },
+        {
+          "path": "packages/cinematic-hero/LICENSE_SCOPE.md",
+          "bytes": 603,
+          "sha256": "a322d9caee3956bc786c25b07f56885e4fb80dc8e05bbc864d5866a2875df44a"
+        },
+        {
+          "path": "packages/cinematic-hero/PROMPT.md",
+          "bytes": 3360,
+          "sha256": "ead0fa3cac3d502099f68702ec2b9f504651d3de221656668f4f124a75628d01"
+        },
+        {
+          "path": "packages/cinematic-hero/README.md",
+          "bytes": 1142,
+          "sha256": "4d93d9e5102cd87a7dc46bf0a94cc1914b8f1b1a5ac99f3ff8e4f4958046dfe5"
+        }
+      ],
+      "validation_status": "PASS"
+    },
+    {
+      "entry_id": "cinematic-web:staggered-text-reveal",
+      "slug": "staggered-text-reveal",
+      "title_zh_tw": "電影片頭分段文字揭示",
+      "title_en": "Staggered Text Reveal",
+      "purpose_zh_tw": "讓一句核心宣言按語意節拍逐段出現",
+      "use_case_zh_tw": "片頭、案例研究段落與品牌宣言",
+      "avoid_zh_tw": "長篇正文或需要快速掃讀的操作介面",
+      "design_direction_zh_tw": "16mm 電影片頭、裁切字窗與可讀 timecode",
+      "signature_zh_tw": "以語意片語而非逐字碎裂的遮罩揭示",
+      "output_type": "motion-effect",
+      "preview_path": "packages/staggered-text-reveal/index.html",
+      "prompt_path": "packages/staggered-text-reveal/PROMPT.md",
+      "source_path": "packages/staggered-text-reveal/index.html",
+      "package_path": "packages/staggered-text-reveal",
+      "preview_sha256": "551c88a7dcb8e5d9748d6366ffa3d4563842892ac2ff7b73aa84c8511bd1b120",
+      "prompt_sha256": "7d63c9609f1e97d87d6aaab4f96a77b374ad5b8e6492a1ffec601d98c8bac80f",
+      "source_sha256": "551c88a7dcb8e5d9748d6366ffa3d4563842892ac2ff7b73aa84c8511bd1b120",
+      "bundle_sha256": "c472f1de35b74ca700bfc0632320a18289ee6e35f97225a6fe71d4fe7fc643df",
+      "tags": [
+        "Staggered Text Reveal",
+        "電影片頭分段文字揭示",
+        "高質感網站",
+        "Cinematic Web",
+        "film-leader",
+        "editorial",
+        "monochrome"
+      ],
+      "bilingual_search_terms": [
+        "cinematic web",
+        "cinematic website",
+        "高質感網站",
+        "電影感網站",
+        "Staggered Text Reveal",
+        "電影片頭分段文字揭示"
+      ],
+      "use_cases": [
+        "片頭、案例研究段落與品牌宣言",
+        "讓一句核心宣言按語意節拍逐段出現"
+      ],
+      "style_tags": [
+        "cinematic",
+        "film-leader",
+        "editorial",
+        "monochrome"
+      ],
+      "interaction_tags": [
+        "click",
+        "keyboard",
+        "intersection"
+      ],
+      "technology_stack": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "dependencies": [],
+      "files": [
+        {
+          "path": "packages/staggered-text-reveal/index.html",
+          "bytes": 5681,
+          "sha256": "551c88a7dcb8e5d9748d6366ffa3d4563842892ac2ff7b73aa84c8511bd1b120"
+        },
+        {
+          "path": "packages/staggered-text-reveal/LICENSE_SCOPE.md",
+          "bytes": 620,
+          "sha256": "9a857359a51ef10b46db2c8df2c5f476faf63dec577aaa717ebf4c432a1bec73"
+        },
+        {
+          "path": "packages/staggered-text-reveal/PROMPT.md",
+          "bytes": 3345,
+          "sha256": "7d63c9609f1e97d87d6aaab4f96a77b374ad5b8e6492a1ffec601d98c8bac80f"
+        },
+        {
+          "path": "packages/staggered-text-reveal/README.md",
+          "bytes": 1166,
+          "sha256": "c560f9027fc69531dd855174e0af8e58ce1c65db202380642e79b5cb8dcff386"
+        }
+      ],
+      "validation_status": "PASS"
+    },
+    {
+      "entry_id": "cinematic-web:parallax-media-gallery",
+      "slug": "parallax-media-gallery",
+      "title_zh_tw": "遠征接觸表視差畫廊",
+      "title_en": "Parallax Media Gallery",
+      "purpose_zh_tw": "讓一組媒體以深度與編目資訊被逐件閱讀",
+      "use_case_zh_tw": "攝影、建築與旅程案例",
+      "avoid_zh_tw": "需要精確比較尺寸或大量表格資料的頁面",
+      "design_direction_zh_tw": "高山遠征接觸表、地形等高線與錯位照片窗",
+      "signature_zh_tw": "三種速度的垂直媒體軌道與固定座標索引",
+      "output_type": "web-page",
+      "preview_path": "packages/parallax-media-gallery/index.html",
+      "prompt_path": "packages/parallax-media-gallery/PROMPT.md",
+      "source_path": "packages/parallax-media-gallery/index.html",
+      "package_path": "packages/parallax-media-gallery",
+      "preview_sha256": "978821cdf7d23170a206cef9dc827b5924118f53c2990118dbf60d30d2c27bff",
+      "prompt_sha256": "41bb16a220ccfe89d0ec2414a3eb72823839bc7a559bd00d928b6c91b87c6a0e",
+      "source_sha256": "978821cdf7d23170a206cef9dc827b5924118f53c2990118dbf60d30d2c27bff",
+      "bundle_sha256": "053ba677873622330187ebcae754b391b705300ed640b6f63acf90a7d18564ae",
+      "tags": [
+        "Parallax Media Gallery",
+        "遠征接觸表視差畫廊",
+        "高質感網站",
+        "Cinematic Web",
+        "expedition",
+        "contact-sheet",
+        "topographic"
+      ],
+      "bilingual_search_terms": [
+        "cinematic web",
+        "cinematic website",
+        "高質感網站",
+        "電影感網站",
+        "Parallax Media Gallery",
+        "遠征接觸表視差畫廊"
+      ],
+      "use_cases": [
+        "攝影、建築與旅程案例",
+        "讓一組媒體以深度與編目資訊被逐件閱讀"
+      ],
+      "style_tags": [
+        "cinematic",
+        "expedition",
+        "contact-sheet",
+        "topographic"
+      ],
+      "interaction_tags": [
+        "scroll",
+        "anchor",
+        "keyboard"
+      ],
+      "technology_stack": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "dependencies": [],
+      "files": [
+        {
+          "path": "packages/parallax-media-gallery/index.html",
+          "bytes": 6409,
+          "sha256": "978821cdf7d23170a206cef9dc827b5924118f53c2990118dbf60d30d2c27bff"
+        },
+        {
+          "path": "packages/parallax-media-gallery/LICENSE_SCOPE.md",
+          "bytes": 618,
+          "sha256": "68dcac606f1301249abbd393f826b9cc2636afac65b4db3dc71993646f6afc18"
+        },
+        {
+          "path": "packages/parallax-media-gallery/PROMPT.md",
+          "bytes": 3345,
+          "sha256": "41bb16a220ccfe89d0ec2414a3eb72823839bc7a559bd00d928b6c91b87c6a0e"
+        },
+        {
+          "path": "packages/parallax-media-gallery/README.md",
+          "bytes": 1171,
+          "sha256": "a2380d95f6398a7ab5543f8cd4fd979bab80e69794628bbdfab56a33dff60c17"
+        }
+      ],
+      "validation_status": "PASS"
+    },
+    {
+      "entry_id": "cinematic-web:gsap-pin-section",
+      "slug": "gsap-pin-section",
+      "title_zh_tw": "軌道工坊捲動釘選敘事",
+      "title_en": "GSAP Pin Section",
+      "purpose_zh_tw": "把四個製造階段固定在同一視窗中依序解說",
+      "use_case_zh_tw": "製程、產品拆解與時間線敘事",
+      "avoid_zh_tw": "內容不足三段或需要快速跳讀的頁面",
+      "design_direction_zh_tw": "太空載具工坊、工程藍圖與琥珀警示標記",
+      "signature_zh_tw": "固定在中央的機體剖面會隨章節逐層組裝",
+      "output_type": "motion-effect",
+      "preview_path": "packages/gsap-pin-section/index.html",
+      "prompt_path": "packages/gsap-pin-section/PROMPT.md",
+      "source_path": "packages/gsap-pin-section/src/main.js",
+      "package_path": "packages/gsap-pin-section",
+      "preview_sha256": "540af966c9fbf0b5746d902c3f6067e1f363082d94c31d59d86e48dd74b6e717",
+      "prompt_sha256": "c9b6377a3efddfc32dc8c68e5417178544b605aa90de6e7a9c259feee3750bc8",
+      "source_sha256": "b607e70e6c7ba0a070d3c9fa04f9556974b9fba94f1be31650582f90f25d8a55",
+      "bundle_sha256": "294608159fbd45d43e412e07e7e52e60eb9e0571fdae11e4a079b9b886eb1d90",
+      "tags": [
+        "GSAP Pin Section",
+        "軌道工坊捲動釘選敘事",
+        "高質感網站",
+        "Cinematic Web",
+        "industrial",
+        "blueprint",
+        "orbital"
+      ],
+      "bilingual_search_terms": [
+        "cinematic web",
+        "cinematic website",
+        "高質感網站",
+        "電影感網站",
+        "GSAP Pin Section",
+        "軌道工坊捲動釘選敘事"
+      ],
+      "use_cases": [
+        "製程、產品拆解與時間線敘事",
+        "把四個製造階段固定在同一視窗中依序解說"
+      ],
+      "style_tags": [
+        "cinematic",
+        "industrial",
+        "blueprint",
+        "orbital"
+      ],
+      "interaction_tags": [
+        "scroll",
+        "pin",
+        "keyboard"
+      ],
+      "technology_stack": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "GSAP 3.15.0",
+        "ScrollTrigger"
+      ],
+      "dependencies": [
+        "gsap@3.15.0"
+      ],
+      "files": [
+        {
+          "path": "packages/gsap-pin-section/index.html",
+          "bytes": 6793,
+          "sha256": "540af966c9fbf0b5746d902c3f6067e1f363082d94c31d59d86e48dd74b6e717"
+        },
+        {
+          "path": "packages/gsap-pin-section/LICENSE_SCOPE.md",
+          "bytes": 615,
+          "sha256": "acdbf04b5e507be59cd8c11f0b7e8e1f65cf20886de33a0e1b539d1517cd29b8"
+        },
+        {
+          "path": "packages/gsap-pin-section/package.json",
+          "bytes": 226,
+          "sha256": "fd19c0a307b65247be8a503963cd90cd68d766d2a6ccadab45cf0aee01f3d00f"
+        },
+        {
+          "path": "packages/gsap-pin-section/PROMPT.md",
+          "bytes": 3401,
+          "sha256": "c9b6377a3efddfc32dc8c68e5417178544b605aa90de6e7a9c259feee3750bc8"
+        },
+        {
+          "path": "packages/gsap-pin-section/README.md",
+          "bytes": 1240,
+          "sha256": "23c9e32d1fd5fdfa01e39e8a0a8e843d47bbab5959a417b474b5b7d1c0c479ab"
+        },
+        {
+          "path": "packages/gsap-pin-section/src/main.js",
+          "bytes": 833,
+          "sha256": "b607e70e6c7ba0a070d3c9fa04f9556974b9fba94f1be31650582f90f25d8a55"
+        }
+      ],
+      "validation_status": "PASS"
+    },
+    {
+      "entry_id": "cinematic-web:magnetic-cta",
+      "slug": "magnetic-cta",
+      "title_zh_tw": "售票亭磁吸行動按鈕",
+      "title_en": "Magnetic CTA",
+      "purpose_zh_tw": "讓唯一行動在保持可預測的前提下產生觸覺吸引",
+      "use_case_zh_tw": "高價值單一 CTA、展演售票與產品預約",
+      "avoid_zh_tw": "密集工具列、危險操作或需要像素精準點擊的介面",
+      "design_direction_zh_tw": "老影院售票窗口、壓印紙票與同心磁力線",
+      "signature_zh_tw": "指標靠近時按鈕與磁力線分層移動，但文字仍保持可讀",
+      "output_type": "ui-component",
+      "preview_path": "packages/magnetic-cta/index.html",
+      "prompt_path": "packages/magnetic-cta/PROMPT.md",
+      "source_path": "packages/magnetic-cta/src/magnetic-cta.js",
+      "package_path": "packages/magnetic-cta",
+      "preview_sha256": "7a6c86f7b24019fc101c398f556de157b4600cb3bafd29e55ca8a10ffac5336b",
+      "prompt_sha256": "6b94cc18d6c360e3f4345c8385af274094bd20b912c492770c1a4c6cfe977907",
+      "source_sha256": "3dc36ef74409eb9b5dc1f34efaf1d6b5b59e831f63ff7a3b1fb09bc99b5ad05c",
+      "bundle_sha256": "96f278e88a7ad83bb6d4e2e6fcf360d5fc6ce2ec186b5802259eb2af12e55df4",
+      "tags": [
+        "Magnetic CTA",
+        "售票亭磁吸行動按鈕",
+        "高質感網站",
+        "Cinematic Web",
+        "ticket-booth",
+        "tactile",
+        "graphic"
+      ],
+      "bilingual_search_terms": [
+        "cinematic web",
+        "cinematic website",
+        "高質感網站",
+        "電影感網站",
+        "Magnetic CTA",
+        "售票亭磁吸行動按鈕"
+      ],
+      "use_cases": [
+        "高價值單一 CTA、展演售票與產品預約",
+        "讓唯一行動在保持可預測的前提下產生觸覺吸引"
+      ],
+      "style_tags": [
+        "cinematic",
+        "ticket-booth",
+        "tactile",
+        "graphic"
+      ],
+      "interaction_tags": [
+        "pointer",
+        "click",
+        "keyboard",
+        "touch"
+      ],
+      "technology_stack": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "dependencies": [],
+      "files": [
+        {
+          "path": "packages/magnetic-cta/index.html",
+          "bytes": 5964,
+          "sha256": "7a6c86f7b24019fc101c398f556de157b4600cb3bafd29e55ca8a10ffac5336b"
+        },
+        {
+          "path": "packages/magnetic-cta/LICENSE_SCOPE.md",
+          "bytes": 608,
+          "sha256": "d6e03eeddc332c4ef228beb5dfe5143a1be886fecf83b2d1c40d640ebad4e5fd"
+        },
+        {
+          "path": "packages/magnetic-cta/PROMPT.md",
+          "bytes": 3364,
+          "sha256": "6b94cc18d6c360e3f4345c8385af274094bd20b912c492770c1a4c6cfe977907"
+        },
+        {
+          "path": "packages/magnetic-cta/README.md",
+          "bytes": 1178,
+          "sha256": "24e0eb0a1f5c1e6d12af1c11a38af517054095724b1bd6060d357021d5f334aa"
+        },
+        {
+          "path": "packages/magnetic-cta/src/magnetic-cta.js",
+          "bytes": 991,
+          "sha256": "3dc36ef74409eb9b5dc1f34efaf1d6b5b59e831f63ff7a3b1fb09bc99b5ad05c"
+        }
+      ],
+      "validation_status": "PASS"
+    },
+    {
+      "entry_id": "cinematic-web:cinematic-page-transition",
+      "slug": "cinematic-page-transition",
+      "title_zh_tw": "典藏室影院式頁面轉場",
+      "title_en": "Cinematic Page Transition",
+      "purpose_zh_tw": "在內容路由切換時保留位置感與敘事連續性",
+      "use_case_zh_tw": "作品集、展覽典藏與品牌章節",
+      "avoid_zh_tw": "高頻率資料操作或每次切換都需要立即回應的工具",
+      "design_direction_zh_tw": "博物館典藏卡、深藍簾幕與編目印章",
+      "signature_zh_tw": "雙扇簾幕先遮蔽、中央編號換檔後再揭開新內容",
+      "output_type": "web-page",
+      "preview_path": "packages/cinematic-page-transition/index.html",
+      "prompt_path": "packages/cinematic-page-transition/PROMPT.md",
+      "source_path": "packages/cinematic-page-transition/src/App.tsx",
+      "package_path": "packages/cinematic-page-transition",
+      "preview_sha256": "1a4cb12f41f261cb77732fa8241fa96b7d59fbe5178e50427e5e447bf25150aa",
+      "prompt_sha256": "c561f0669879d2db48b30eab37958b9f5198c93386f9826caf7443729d10591d",
+      "source_sha256": "9fefbbee2eaea7d871e52d686511fdcd5ee280245a1fdfa3350886f10d7fac9a",
+      "bundle_sha256": "45f951f852850efe5659ab4d424d00409264049c17655e3cfd623c419950647a",
+      "tags": [
+        "Cinematic Page Transition",
+        "典藏室影院式頁面轉場",
+        "高質感網站",
+        "Cinematic Web",
+        "museum",
+        "archive",
+        "curtain"
+      ],
+      "bilingual_search_terms": [
+        "cinematic web",
+        "cinematic website",
+        "高質感網站",
+        "電影感網站",
+        "Cinematic Page Transition",
+        "典藏室影院式頁面轉場"
+      ],
+      "use_cases": [
+        "作品集、展覽典藏與品牌章節",
+        "在內容路由切換時保留位置感與敘事連續性"
+      ],
+      "style_tags": [
+        "cinematic",
+        "museum",
+        "archive",
+        "curtain"
+      ],
+      "interaction_tags": [
+        "click",
+        "keyboard",
+        "route-transition"
+      ],
+      "technology_stack": [
+        "React",
+        "TypeScript",
+        "Motion 13.1.1"
+      ],
+      "dependencies": [
+        "motion@13.1.1",
+        "react@19.3.0",
+        "react-dom@19.3.0"
+      ],
+      "files": [
+        {
+          "path": "packages/cinematic-page-transition/index.html",
+          "bytes": 7211,
+          "sha256": "1a4cb12f41f261cb77732fa8241fa96b7d59fbe5178e50427e5e447bf25150aa"
+        },
+        {
+          "path": "packages/cinematic-page-transition/LICENSE_SCOPE.md",
+          "bytes": 624,
+          "sha256": "f7688f9dc0b90ee80cabbe51cada3574193313860a472fdcde169672bf8e9257"
+        },
+        {
+          "path": "packages/cinematic-page-transition/package.json",
+          "bytes": 257,
+          "sha256": "fd2edcae969ed58b92d822f17e7ebbad11bbb5a36b1001244ac951b1de113679"
+        },
+        {
+          "path": "packages/cinematic-page-transition/PROMPT.md",
+          "bytes": 3397,
+          "sha256": "c561f0669879d2db48b30eab37958b9f5198c93386f9826caf7443729d10591d"
+        },
+        {
+          "path": "packages/cinematic-page-transition/README.md",
+          "bytes": 1292,
+          "sha256": "0fc205af6a848f85f2a62e04ffcc6d4e001048c0b397e3f6c2892d9146bcda4c"
+        },
+        {
+          "path": "packages/cinematic-page-transition/src/App.tsx",
+          "bytes": 1208,
+          "sha256": "9fefbbee2eaea7d871e52d686511fdcd5ee280245a1fdfa3350886f10d7fac9a"
+        }
+      ],
+      "validation_status": "PASS"
+    },
+    {
+      "entry_id": "cinematic-web:scroll-image-sequence",
+      "slug": "scroll-image-sequence",
+      "title_zh_tw": "植物顯影捲動影格序列",
+      "title_en": "Scroll-driven Image Sequence",
+      "purpose_zh_tw": "讓使用者以捲動逐格觀察一個形態變化",
+      "use_case_zh_tw": "產品拆解、生物過程與技術示意",
+      "avoid_zh_tw": "低效能裝置優先、沒有靜態 poster 或只有裝飾需求的頁面",
+      "design_direction_zh_tw": "暗房植物顯影、紙張纖維與程序式花朵切片",
+      "signature_zh_tw": "Canvas 由種子到花冠的 72 格程序式形態，不使用外部影像",
+      "output_type": "motion-effect",
+      "preview_path": "packages/scroll-image-sequence/index.html",
+      "prompt_path": "packages/scroll-image-sequence/PROMPT.md",
+      "source_path": "packages/scroll-image-sequence/src/sequence.js",
+      "package_path": "packages/scroll-image-sequence",
+      "preview_sha256": "1730033d17a8d7de9a66ac7fc9e0f5ca7037a8dc312e8161002a2dc8f96cb49a",
+      "prompt_sha256": "82fbfe50e0ebe1db89744741ca63dbd025c6291db263060078f2acf96feb1f82",
+      "source_sha256": "531d9d00173b711a50db1170eb04b1ad1b9803e836f8bb4b63d33ce6967f92ed",
+      "bundle_sha256": "346fb39f7f4b84c02ed953d7ce4da02e9563fa6fcf486e999991b1c30b7b9998",
+      "tags": [
+        "Scroll-driven Image Sequence",
+        "植物顯影捲動影格序列",
+        "高質感網站",
+        "Cinematic Web",
+        "botanical",
+        "darkroom",
+        "procedural"
+      ],
+      "bilingual_search_terms": [
+        "cinematic web",
+        "cinematic website",
+        "高質感網站",
+        "電影感網站",
+        "Scroll-driven Image Sequence",
+        "植物顯影捲動影格序列"
+      ],
+      "use_cases": [
+        "產品拆解、生物過程與技術示意",
+        "讓使用者以捲動逐格觀察一個形態變化"
+      ],
+      "style_tags": [
+        "cinematic",
+        "botanical",
+        "darkroom",
+        "procedural"
+      ],
+      "interaction_tags": [
+        "scroll",
+        "canvas",
+        "keyboard"
+      ],
+      "technology_stack": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Canvas",
+        "GSAP 3.15.0 optional"
+      ],
+      "dependencies": [
+        "gsap@3.15.0 (source option)"
+      ],
+      "files": [
+        {
+          "path": "packages/scroll-image-sequence/index.html",
+          "bytes": 6051,
+          "sha256": "1730033d17a8d7de9a66ac7fc9e0f5ca7037a8dc312e8161002a2dc8f96cb49a"
+        },
+        {
+          "path": "packages/scroll-image-sequence/LICENSE_SCOPE.md",
+          "bytes": 627,
+          "sha256": "74241a5d66a9a538e463a6346616b01c5e430b77c64e775ed20436af9b144614"
+        },
+        {
+          "path": "packages/scroll-image-sequence/package.json",
+          "bytes": 231,
+          "sha256": "5e54da8b5f7ee4da69006858ddf3103f561c5ea11daf6d6084a09bbc0c10584d"
+        },
+        {
+          "path": "packages/scroll-image-sequence/PROMPT.md",
+          "bytes": 3407,
+          "sha256": "82fbfe50e0ebe1db89744741ca63dbd025c6291db263060078f2acf96feb1f82"
+        },
+        {
+          "path": "packages/scroll-image-sequence/README.md",
+          "bytes": 1302,
+          "sha256": "33463485a7923cb66eb767f64a535f51faede0a74bd92a30d0253747519928cc"
+        },
+        {
+          "path": "packages/scroll-image-sequence/src/sequence.js",
+          "bytes": 748,
+          "sha256": "531d9d00173b711a50db1170eb04b1ad1b9803e836f8bb4b63d33ce6967f92ed"
+        }
+      ],
+      "validation_status": "PASS"
+    },
+    {
+      "entry_id": "cinematic-web:gsap-lenis-scrollytelling",
+      "slug": "gsap-lenis-scrollytelling",
+      "title_zh_tw": "潮汐研究平滑捲動敘事",
+      "title_en": "GSAP + Lenis Scrollytelling",
+      "purpose_zh_tw": "把長篇資料敘事拆成可控節奏並保持原生可達性",
+      "use_case_zh_tw": "研究報告、氣候故事與長篇案例",
+      "avoid_zh_tw": "Atlas host 外殼、表單流程或使用者需要原生精確捲動的工具",
+      "design_direction_zh_tw": "海岸研究站、潮位紙帶與科學儀表",
+      "signature_zh_tw": "左側長文與右側潮位儀表以同一進度同步，但控制只存在 iframe 內",
+      "output_type": "web-page",
+      "preview_path": "packages/gsap-lenis-scrollytelling/index.html",
+      "prompt_path": "packages/gsap-lenis-scrollytelling/PROMPT.md",
+      "source_path": "packages/gsap-lenis-scrollytelling/src/main.js",
+      "package_path": "packages/gsap-lenis-scrollytelling",
+      "preview_sha256": "68141c6356b77b0a74f1a85ce6d5371cbcc355507a6aa6ee435a23c9b8ed1296",
+      "prompt_sha256": "36fda26e1c9c0c115bc7387fed83208b7da00b6578eb85f883f8b451d1bdcdff",
+      "source_sha256": "e415b31b555cf0fcd7be6be26c0f4d45fb0e13344fcc52272b85007cf5c9979f",
+      "bundle_sha256": "53fc27bbe7d2ca0936c05049693d54cb525e2f6bb24ee67fb6cfc3e4640d6cbd",
+      "tags": [
+        "GSAP + Lenis Scrollytelling",
+        "潮汐研究平滑捲動敘事",
+        "高質感網站",
+        "Cinematic Web",
+        "oceanographic",
+        "scientific",
+        "paper-strip"
+      ],
+      "bilingual_search_terms": [
+        "cinematic web",
+        "cinematic website",
+        "高質感網站",
+        "電影感網站",
+        "GSAP + Lenis Scrollytelling",
+        "潮汐研究平滑捲動敘事"
+      ],
+      "use_cases": [
+        "研究報告、氣候故事與長篇案例",
+        "把長篇資料敘事拆成可控節奏並保持原生可達性"
+      ],
+      "style_tags": [
+        "cinematic",
+        "oceanographic",
+        "scientific",
+        "paper-strip"
+      ],
+      "interaction_tags": [
+        "scroll",
+        "sticky",
+        "anchor"
+      ],
+      "technology_stack": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "GSAP 3.15.0",
+        "Lenis 1.3.26"
+      ],
+      "dependencies": [
+        "gsap@3.15.0",
+        "lenis@1.3.26"
+      ],
+      "files": [
+        {
+          "path": "packages/gsap-lenis-scrollytelling/index.html",
+          "bytes": 6449,
+          "sha256": "68141c6356b77b0a74f1a85ce6d5371cbcc355507a6aa6ee435a23c9b8ed1296"
+        },
+        {
+          "path": "packages/gsap-lenis-scrollytelling/LICENSE_SCOPE.md",
+          "bytes": 626,
+          "sha256": "ab9d0e219a11d894e1b0e26bd7b00b280a99496ec328f6b9fdde6fe6a2d89bd5"
+        },
+        {
+          "path": "packages/gsap-lenis-scrollytelling/package.json",
+          "bytes": 253,
+          "sha256": "7a89bb9488de2c3d224c0c9bcf50fb1a1709a4647503ff020f58343f8c78af56"
+        },
+        {
+          "path": "packages/gsap-lenis-scrollytelling/PROMPT.md",
+          "bytes": 3490,
+          "sha256": "36fda26e1c9c0c115bc7387fed83208b7da00b6578eb85f883f8b451d1bdcdff"
+        },
+        {
+          "path": "packages/gsap-lenis-scrollytelling/README.md",
+          "bytes": 1295,
+          "sha256": "76375ecb77d22c13202b1fafd11631f1dd8f515bf3bf3690cca34531696f60db"
+        },
+        {
+          "path": "packages/gsap-lenis-scrollytelling/src/main.js",
+          "bytes": 949,
+          "sha256": "e415b31b555cf0fcd7be6be26c0f4d45fb0e13344fcc52272b85007cf5c9979f"
+        }
+      ],
+      "validation_status": "PASS"
+    },
+    {
+      "entry_id": "cinematic-web:three-product-viewer",
+      "slug": "three-product-viewer",
+      "title_zh_tw": "精密腕錶 3D 產品展示器",
+      "title_en": "Three.js 3D Product Viewer",
+      "purpose_zh_tw": "讓使用者在不載入外部模型的前提下檢視產品形體與材質方向",
+      "use_case_zh_tw": "產品概念、材質提案與電商高價物件",
+      "avoid_zh_tw": "必須呈現工程級精確尺寸或授權不明模型的場景",
+      "design_direction_zh_tw": "精密製錶台、霧面鈦金屬與測量十字線",
+      "signature_zh_tw": "poster-first 啟動後才建立程序式腕錶，拖曳旋轉並可一鍵重置",
+      "output_type": "3d",
+      "preview_path": "packages/three-product-viewer/index.html",
+      "prompt_path": "packages/three-product-viewer/PROMPT.md",
+      "source_path": "packages/three-product-viewer/src/viewer.js",
+      "package_path": "packages/three-product-viewer",
+      "preview_sha256": "0bb1b828e6b52b340e6871b685d57718069bab54451168b5a6ebbb6bf9084295",
+      "prompt_sha256": "fc34d462451c09945d71e96335b3f8a0136127e59c18fae35838c064f6ede6f7",
+      "source_sha256": "09ab7c5b33f78729ca46bf009b8ea10a2c29cf28ca86df1c5192e9e7bc04a18b",
+      "bundle_sha256": "dd89c6869f25a682b8aae24a8045b8ab9a9455db9b74de8f164a9338efa5bb07",
+      "tags": [
+        "Three.js 3D Product Viewer",
+        "精密腕錶 3D 產品展示器",
+        "高質感網站",
+        "Cinematic Web",
+        "precision",
+        "product",
+        "titanium"
+      ],
+      "bilingual_search_terms": [
+        "cinematic web",
+        "cinematic website",
+        "高質感網站",
+        "電影感網站",
+        "Three.js 3D Product Viewer",
+        "精密腕錶 3D 產品展示器"
+      ],
+      "use_cases": [
+        "產品概念、材質提案與電商高價物件",
+        "讓使用者在不載入外部模型的前提下檢視產品形體與材質方向"
+      ],
+      "style_tags": [
+        "cinematic",
+        "precision",
+        "product",
+        "titanium"
+      ],
+      "interaction_tags": [
+        "pointer",
+        "drag",
+        "keyboard",
+        "lazy-activation"
+      ],
+      "technology_stack": [
+        "JavaScript",
+        "Three.js 0.186.0",
+        "WebGL"
+      ],
+      "dependencies": [
+        "three@0.186.0"
+      ],
+      "files": [
+        {
+          "path": "packages/three-product-viewer/index.html",
+          "bytes": 7230,
+          "sha256": "0bb1b828e6b52b340e6871b685d57718069bab54451168b5a6ebbb6bf9084295"
+        },
+        {
+          "path": "packages/three-product-viewer/LICENSE_SCOPE.md",
+          "bytes": 626,
+          "sha256": "f6e6952b8261b23f85afc057eb53ce504ad04fa2d7426b04427cfb65a64cb336"
+        },
+        {
+          "path": "packages/three-product-viewer/package.json",
+          "bytes": 232,
+          "sha256": "aea9ec2b089cadfc0732661d1b04562ef5262a80f2ca29da017d7bd7ca7d2feb"
+        },
+        {
+          "path": "packages/three-product-viewer/PROMPT.md",
+          "bytes": 3517,
+          "sha256": "fc34d462451c09945d71e96335b3f8a0136127e59c18fae35838c064f6ede6f7"
+        },
+        {
+          "path": "packages/three-product-viewer/README.md",
+          "bytes": 1263,
+          "sha256": "f3f4ef41d3847f2f20bb1729b7cc0285b9bc6726fc747a67a74aec881b0dc574"
+        },
+        {
+          "path": "packages/three-product-viewer/src/viewer.js",
+          "bytes": 1264,
+          "sha256": "09ab7c5b33f78729ca46bf009b8ea10a2c29cf28ca86df1c5192e9e7bc04a18b"
+        }
+      ],
+      "validation_status": "PASS"
+    },
+    {
+      "entry_id": "cinematic-web:nextjs-cinematic-starter",
+      "slug": "nextjs-cinematic-starter",
+      "title_zh_tw": "建築編輯式 Next.js 高質感網站起始套件",
+      "title_en": "Next.js + React + TypeScript Cinematic Starter",
+      "purpose_zh_tw": "提供可直接換內容、可 static export、並有明確動效邊界的網站骨架",
+      "use_case_zh_tw": "設計工作室、文化品牌與高質感作品集",
+      "avoid_zh_tw": "需要 Server Actions、登入、Cookies、ISR 或 request-dependent route 的產品",
+      "design_direction_zh_tw": "建築競圖冊、鈷藍印刷網格與不對稱圖版",
+      "signature_zh_tw": "可重排的建築圖版與沿網格切換的 Motion 章節",
+      "output_type": "code-project",
+      "preview_path": "packages/nextjs-cinematic-starter/index.html",
+      "prompt_path": "packages/nextjs-cinematic-starter/PROMPT.md",
+      "source_path": "packages/nextjs-cinematic-starter/starter/app/page.tsx",
+      "package_path": "packages/nextjs-cinematic-starter",
+      "preview_sha256": "d0f3e4ca7e1cd5181d51c7df987860e38e9922f6e7b5649aa9c9fff366d4cbe4",
+      "prompt_sha256": "5432a13f923305ea61e6e9b266074a96e7e4d1700b9c0877d880f14349444f04",
+      "source_sha256": "dc2175f328d881568387eab2777e9912cb187d44fc1412a030f625c43a96f963",
+      "bundle_sha256": "cb4ae04314da3cff306c23d73ca2babf82113c93d7f07b0707fda9498ac0e429",
+      "tags": [
+        "Next.js + React + TypeScript Cinematic Starter",
+        "建築編輯式 Next.js 高質感網站起始套件",
+        "高質感網站",
+        "Cinematic Web",
+        "architectural",
+        "editorial",
+        "cobalt-grid"
+      ],
+      "bilingual_search_terms": [
+        "cinematic web",
+        "cinematic website",
+        "高質感網站",
+        "電影感網站",
+        "Next.js + React + TypeScript Cinematic Starter",
+        "建築編輯式 Next.js 高質感網站起始套件"
+      ],
+      "use_cases": [
+        "設計工作室、文化品牌與高質感作品集",
+        "提供可直接換內容、可 static export、並有明確動效邊界的網站骨架"
+      ],
+      "style_tags": [
+        "cinematic",
+        "architectural",
+        "editorial",
+        "cobalt-grid"
+      ],
+      "interaction_tags": [
+        "navigation",
+        "keyboard",
+        "responsive"
+      ],
+      "technology_stack": [
+        "Next.js 16.3.5",
+        "React 19.3.0",
+        "TypeScript 5.9.3",
+        "Motion 13.1.1"
+      ],
+      "dependencies": [
+        "next@16.3.5",
+        "react@19.3.0",
+        "react-dom@19.3.0",
+        "motion@13.1.1",
+        "typescript@5.9.3"
+      ],
+      "files": [
+        {
+          "path": "packages/nextjs-cinematic-starter/index.html",
+          "bytes": 6104,
+          "sha256": "d0f3e4ca7e1cd5181d51c7df987860e38e9922f6e7b5649aa9c9fff366d4cbe4"
+        },
+        {
+          "path": "packages/nextjs-cinematic-starter/LICENSE_SCOPE.md",
+          "bytes": 666,
+          "sha256": "c6c9ce390d09dc23c992751cf7cbb6d26b0ff71c24317e7421eeaaebe4824c6b"
+        },
+        {
+          "path": "packages/nextjs-cinematic-starter/PROMPT.md",
+          "bytes": 3652,
+          "sha256": "5432a13f923305ea61e6e9b266074a96e7e4d1700b9c0877d880f14349444f04"
+        },
+        {
+          "path": "packages/nextjs-cinematic-starter/README.md",
+          "bytes": 1525,
+          "sha256": "eb582d7769711b6addc2b23579938928c19401da7a143172dd2971dedb5ce877"
+        },
+        {
+          "path": "packages/nextjs-cinematic-starter/starter/app/globals.css",
+          "bytes": 1196,
+          "sha256": "595aab0d99c299c2e45b7afeb7ca0a4b680bc5373c85768bbdce3c0992c8fb39"
+        },
+        {
+          "path": "packages/nextjs-cinematic-starter/starter/app/layout.tsx",
+          "bytes": 401,
+          "sha256": "1b5586474b8cdd1e20d445cf11d9a708db191a0f52d413b158b7950a5a769cce"
+        },
+        {
+          "path": "packages/nextjs-cinematic-starter/starter/app/page.tsx",
+          "bytes": 1037,
+          "sha256": "dc2175f328d881568387eab2777e9912cb187d44fc1412a030f625c43a96f963"
+        },
+        {
+          "path": "packages/nextjs-cinematic-starter/starter/next.config.ts",
+          "bytes": 241,
+          "sha256": "6626631962109a38caecb7619a253a3eed213163fdf245f13ac21c522682da14"
+        },
+        {
+          "path": "packages/nextjs-cinematic-starter/starter/package-lock.json",
+          "bytes": 34432,
+          "sha256": "7d46eed636957c3fffbce670baa60dc440690e7fd125156a35bd299c69d3da19"
+        },
+        {
+          "path": "packages/nextjs-cinematic-starter/starter/package.json",
+          "bytes": 426,
+          "sha256": "37e0204284c6e31cbb9115a5ace433b0fe10977c6fd75b2dcdb9b8b942444fb5"
+        },
+        {
+          "path": "packages/nextjs-cinematic-starter/starter/tsconfig.json",
+          "bytes": 471,
+          "sha256": "01455a49d4d1275b45454c9cf41835b07518ea373ad79d8ff305e6f879adb2c2"
+        }
+      ],
+      "validation_status": "PASS"
+    }
+  ],
+  "failures": []
+}

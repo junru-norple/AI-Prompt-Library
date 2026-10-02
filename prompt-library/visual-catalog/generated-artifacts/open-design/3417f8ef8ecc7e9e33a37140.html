@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'sha256-4ldFw2J4yhzQndSwYR4ip7Io8KRkZPtyQBBivV5IK4A='; img-src data:; font-src 'none'; media-src 'none'; connect-src 'none'; frame-src 'none'; child-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"><meta name="atlas-source-entry" content="open-design-official:plugin:example-blog-post-cd09beb0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Why we rewrote our sync engine in Rust — Filebase</title>
+  <style>
+    :root {
+      --bg: #fafaf9; --fg: #1c1b1a; --muted: #6b6964; --border: #e6e4e0;
+      --accent: #c96442; --surface: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--fg); font: 18px/1.65 Georgia, 'Iowan Old Style', serif; }
+    .wrap { max-width: 680px; margin: 0 auto; padding: 56px 28px 96px; }
+    nav.top { font-family: -apple-system, system-ui, sans-serif; font-size: 13px; color: var(--muted); margin-bottom: 56px; }
+    nav.top a { color: inherit; text-decoration: none; }
+    .eyebrow { font-family: -apple-system, system-ui, sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 14px; }
+    h1 { font-size: clamp(36px, 5vw, 52px); line-height: 1.1; letter-spacing: -0.015em; margin: 0 0 20px; }
+    .byline { font-family: -apple-system, system-ui, sans-serif; font-size: 14px; color: var(--muted); margin: 0 0 40px; display: flex; align-items: center; gap: 12px; }
+    .avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--accent); opacity: 0.18; }
+    .lede { font-size: 22px; line-height: 1.5; color: var(--fg); margin: 0 0 40px; font-style: italic; }
+    .hero-figure { aspect-ratio: 16/9; background: linear-gradient(135deg, var(--accent), #6b6964); border-radius: 8px; margin-bottom: 48px; opacity: 0.85; }
+    p { margin: 24px 0; }
+    p:first-of-type::first-letter { float: left; font-size: 64px; line-height: 0.9; padding: 6px 10px 0 0; font-weight: 600; color: var(--accent); }
+    h2 { font-size: 28px; letter-spacing: -0.01em; margin: 56px 0 12px; line-height: 1.2; }
+    blockquote { margin: 40px 0; padding: 0 32px; font-size: 24px; line-height: 1.4; color: var(--fg); border-left: 3px solid var(--accent); font-style: italic; }
+    code { font-family: ui-monospace, monospace; background: var(--surface); border: 1px solid var(--border); padding: 1px 5px; border-radius: 4px; font-size: 0.85em; }
+    pre { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px 18px; overflow-x: auto; font: 14px/1.55 ui-monospace, monospace; }
+    figure.numbers { font-family: -apple-system, system-ui, sans-serif; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 40px -24px; padding: 28px 24px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    figure.numbers .stat .value { font-family: Georgia, serif; font-size: 38px; letter-spacing: -0.01em; line-height: 1; }
+    figure.numbers .stat .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 6px; }
+    .endnote { font-family: -apple-system, system-ui, sans-serif; font-size: 13px; color: var(--muted); margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border); }
+    .endnote a { color: var(--accent); text-decoration: none; }
+  </style>
+<style data-atlas-owned-adapter>@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:0s!important;transition-delay:0s!important;scroll-behavior:auto!important}}</style></head>
+<body data-atlas-language-policy="ORIGINAL_SOURCE_LABELED">
+  <article class="wrap" data-od-id="article">
+    <nav class="top"><a href="#">← Filebase blog</a></nav>
+    <div class="eyebrow">Engineering</div>
+    <h1>Why we rewrote our sync engine in Rust</h1>
+    <div class="byline">
+      <div class="avatar"></div>
+      <span>By Mira Hassan · April 22, 2026 · 8 min read</span>
+    </div>
+    <p class="lede">For two years our Go sync engine was good enough. Then video editors started joining the customer list, and the GC pauses we'd been politely ignoring turned into bug reports we couldn't ignore.</p>
+    <div class="hero-figure" data-od-id="hero-figure"></div>
+
+    <p>The decision wasn't sudden. We'd been watching the GC pause distribution shift for six months before we admitted what the data was telling us. P50 latency was great. P99 was a horror movie. Customers syncing 30 GB of <code>.psd</code> files in active editing sessions were the ones writing in.</p>
+
+    <p>Rewriting an entire sync engine sounds like the kind of project a startup is told never to do. We did it anyway. Here's how it went, what surprised us, and the parts I'd do differently.</p>
+
+    <h2>The trigger: GC pauses we couldn't fix</h2>
+    <p>Go's garbage collector is brilliant. It is also, fundamentally, a tradeoff. Our hot path allocated short-lived buffer slices on every block diff — and at our scale, on a heavy uploader, the collector ran often enough that the P99 pause crept past 50ms.</p>
+
+    <p>We tried the usual fixes: pooling buffers with <code>sync.Pool</code>, tuning <code>GOGC</code>, reducing allocations in the merge path. They each helped a little. None of them got us under 20ms, and the customers we cared about needed under 5.</p>
+
+    <blockquote>"We can't fix this in Go. We can fix it in something without a GC."</blockquote>
+
+    <p>Our staff engineer Sasha said this in a meeting in October. He was right. The question wasn't whether to leave Go. It was what to leave it for, and how much we could keep.</p>
+
+    <h2>What we kept; what we threw out</h2>
+    <p>The CLI stayed in Go. The control plane stayed in Go. The bit that does block-level diffing in a hot loop on a customer's laptop — that became Rust. The boundary became a single FFI surface with a small, opinionated protocol.</p>
+
+    <figure class="numbers">
+      <div class="stat"><div class="value">38ms → 4ms</div><div class="label">P99 sync latency</div></div>
+      <div class="stat"><div class="value">62%</div><div class="label">Memory drop</div></div>
+      <div class="stat"><div class="value">11 weeks</div><div class="label">From RFC to ship</div></div>
+    </figure>
+
+    <p>The numbers above are real and from production. They are also misleading without context: the Rust port doesn't just remove the GC, it also removes a layer of abstraction we'd been carrying since the Go MVP.</p>
+
+    <h2>What I'd do differently</h2>
+    <p>One thing: the FFI boundary. We chose <code>cgo</code> for symmetry — Go calling Rust feels right when you already have Go everywhere. But the binding ceremony is brittle, and we ate two production incidents from string lifetime mistakes before we wrote a wrapper layer that handled them once.</p>
+
+    <p>If I were starting today, I'd reach for <code>uniffi</code> or generate the bindings from a schema. The lessons isn't <em>don't use cgo</em>; it's <em>treat the boundary like an external API the moment you cross language families</em>.</p>
+
+    <div class="endnote">Filebase is hiring engineers who like writing this kind of post. <a href="#">See open roles →</a></div>
+  </article>
+<aside id="atlas-source-proof" aria-label="Atlas 來源證據 / Source evidence" data-language-exempt="original-source" style="all:initial;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;position:relative;z-index:2147483647;padding:10px 14px;color:#30464d;background:#f8faf9;border-top:1px solid rgba(21,39,45,.22);font:12px/1.4 ui-monospace,Consolas,monospace"><span>來源版式離線適配（保留原文）· 原始程式已停用；本機適配器提供頁面與減動控制<br><span lang="en">Offline source-layout adaptation; original text retained. Source scripts are disabled; local adapters provide page and reduced-motion controls.</span></span><span>bf714528070d · 365a48d2a090</span></aside><script data-atlas-owned-adapter="0" data-atlas-script-sha256="e25745c36278ca1cd09dd4b0611e22a7b228f0a46464fb72401062bd5e482b80">(function reducedMotionRuntime() {
+  'use strict';
+  const media = matchMedia('(prefers-reduced-motion: reduce)');
+  const held = new Map();
+  let scheduled = 0, closed = false;
+  const state = { version: 1, reduced: media.matches, sampled: 0, scheduled: false };
+  Object.defineProperty(window, '__atlasSourceMotion', { value: state });
+  function scan() {
+    scheduled = 0; state.scheduled = false;
+    if (closed) return;
+    state.reduced = media.matches;
+    const current = new Set(document.getAnimations().filter(animation => animation instanceof CSSAnimation));
+    for (const [animation] of held) if (!current.has(animation)) held.delete(animation);
+    if (!media.matches) {
+      for (const [animation, prior] of held) {
+        animation.playbackRate = prior.rate;
+        animation.currentTime = prior.time;
+        if (prior.state === 'running') animation.play();
+        else if (prior.state === 'paused') animation.pause();
+      }
+      held.clear(); return;
+    }
+    for (const animation of current) {
+      if (held.has(animation)) continue;
+      const effect = animation.effect, timing = effect && effect.getTiming();
+      if (!timing || !Number.isFinite(Number(timing.duration)) || Number(timing.duration) <= 0) continue;
+      const prior = { state: animation.playState, time: animation.currentTime, rate: animation.playbackRate };
+      const duration = Number(timing.duration), delay = Number(timing.delay) || 0;
+      const iterations = Number(timing.iterations);
+      const pose = iterations === Infinity ? delay + duration / 2 : delay + duration * iterations;
+      if (!Number.isFinite(pose)) continue;
+      animation.pause(); animation.currentTime = Math.max(0, pose);
+      held.set(animation, prior); state.sampled++;
+    }
+  }
+  function schedule() {
+    if (closed || scheduled || (!media.matches && !held.size)) return;
+    state.scheduled = true; scheduled = requestAnimationFrame(scan);
+  }
+  const resize = new ResizeObserver(() => { if (media.matches) schedule(); });
+  resize.observe(document.documentElement);
+  document.addEventListener('animationstart', schedule, true);
+  document.addEventListener('atlas-source-deck-change', schedule);
+  document.addEventListener('DOMContentLoaded', schedule, { once: true });
+  window.addEventListener('load', schedule, { once: true });
+  media.addEventListener('change', schedule);
+  window.addEventListener('pagehide', () => {
+    closed = true; resize.disconnect(); media.removeEventListener('change', schedule);
+    document.removeEventListener('animationstart', schedule, true);
+    document.removeEventListener('atlas-source-deck-change', schedule);
+    if (scheduled) cancelAnimationFrame(scheduled);
+    // A bfcache page retains the source Animation objects and their original
+    // playback state; discard neither merely because the document is hidden.
+    scheduled = 0; state.scheduled = false;
+  });
+  window.addEventListener('pageshow', () => {
+    if (!closed) return;
+    closed = false; resize.observe(document.documentElement);
+    document.addEventListener('animationstart', schedule, true);
+    document.addEventListener('atlas-source-deck-change', schedule);
+    media.addEventListener('change', schedule);
+    schedule();
+  });
+  schedule();
+})();</script></body>
+</html>

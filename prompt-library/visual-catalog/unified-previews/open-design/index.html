@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src file:; script-src file:; img-src file: data:; connect-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Open Design 本機設計樣本</title>
+  <link rel="stylesheet" href="adapter.css">
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">OPEN DESIGN · 本機 TOKEN 設計樣本</p>
+      <h1 id="specimen-title">正在載入設計系統…</h1>
+      <p id="specimen-description"></p>
+      <span id="specimen-category"></span>
+    </header>
+    <section aria-labelledby="color-title">
+      <div class="section-heading"><p>色彩依據</p><h2 id="color-title">色彩 token</h2></div>
+      <div id="color-grid" class="color-grid"></div>
+    </section>
+    <section class="two-column" aria-label="字體與間距">
+      <div><div class="section-heading"><p>字體</p><h2>字體角色</h2></div><ul id="font-list"></ul></div>
+      <div><div class="section-heading"><p>間距</p><h2>間距證據</h2></div><div id="spacing-list" class="spacing-list"></div></div>
+    </section>
+    <section aria-labelledby="component-title">
+      <div class="section-heading"><p>元件</p><h2 id="component-title">元件清單</h2></div>
+      <div id="component-list" class="component-list"></div>
+    </section>
+    <p class="note">此 specimen 由固定 commit 的 DESIGN／manifest／token 檔建置；不載入上游遠端字型或素材，也不代表原品牌官方授權。</p>
+  </main>
+  <script src="../../open-design-specimen-data.js"></script>
+  <script src="adapter.js"></script>
+</body>
+</html>

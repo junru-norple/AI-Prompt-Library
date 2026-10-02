@@ -1,0 +1,242 @@
+{
+  "schema_version": "3.0-public",
+  "generated_at": "2026-09-21T00:00:00.000Z",
+  "default_policy": "DENY",
+  "sources": [
+    {
+      "id": "prompts-chat",
+      "publication_mode": "full_prompt_content",
+      "source_url": "https://github.com/f/prompts.chat",
+      "local_path": "references/community/prompts.chat",
+      "fixed_commit": "b97de294af7678444b9a238108a8ba36e3b9007a",
+      "rights_holder": "prompts.chat contributors",
+      "license_ids": [
+        "CC0-1.0",
+        "MIT"
+      ],
+      "license_files": [
+        "LICENSE-CC0",
+        "LICENSE-MIT"
+      ],
+      "full_prompt_text_bundled": true
+    },
+    {
+      "id": "website-prompts-tencent",
+      "publication_mode": "full_fixed_source_content",
+      "source_url": "https://github.com/TencentEdgeOne/awesome-website-prompts-and-skills",
+      "local_path": "references/community/website-prompts-tencent",
+      "fixed_commit": "e3f25bd20d371d9a64613306a6a48da15671a35b",
+      "rights_holder": "TencentEdgeOne repository contributors",
+      "license_ids": [
+        "MIT"
+      ],
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "id": "motion-site-builder",
+      "publication_mode": "full_fixed_source_content",
+      "source_url": "https://github.com/olbboy/motion-site-builder",
+      "local_path": "references/community/motion-site-builder",
+      "fixed_commit": "a0e1cad6aeac73283400df791869a5c7443e49c7",
+      "rights_holder": "Motion Site Builder contributors",
+      "license_ids": [
+        "MIT"
+      ],
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "id": "ui-prompt-library",
+      "publication_mode": "full_fixed_source_content",
+      "source_url": "https://github.com/P-r-e-m-i-u-m/ui-prompt-library",
+      "local_path": "references/community/ui-prompt-library",
+      "fixed_commit": "482a321eec515911b11f83a753f4eb633827472b",
+      "rights_holder": "UI Prompt Library contributors",
+      "license_ids": [
+        "MIT"
+      ],
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "id": "gsap-official-skills",
+      "publication_mode": "full_fixed_skill_content",
+      "source_url": "https://github.com/greensock/gsap-skills",
+      "local_path": "references/community/gsap-official-skills",
+      "fixed_commit": "aed9cfd3277740755f6bfc1155c7aa645403b760",
+      "rights_holder": "GreenSock contributors",
+      "license_ids": [
+        "MIT"
+      ],
+      "license_files": [
+        "LICENSE"
+      ],
+      "runtime_not_bundled": "GSAP runtime remains under the GreenSock Standard No-Charge License"
+    },
+    {
+      "id": "animejs-live-ui",
+      "publication_mode": "full_fixed_source_with_offline_adaptation",
+      "source_url": "https://github.com/juliangarnier/anime",
+      "local_path": "references/community/animejs-live-ui",
+      "fixed_commit": "2c9cf8ea00329f6768c7d7902252ed977d75ce42",
+      "rights_holder": "Anime.js contributors",
+      "license_ids": [
+        "MIT"
+      ],
+      "license_files": [
+        "LICENSE.md"
+      ]
+    },
+    {
+      "id": "kokonut-ui-oss",
+      "publication_mode": "full_fixed_source_with_offline_adaptation",
+      "source_url": "https://github.com/kokonut-labs/kokonutui",
+      "local_path": "references/community/kokonut-ui-oss",
+      "fixed_commit": "13f3d666c008a868ef2b9af371e6c6003fe4ee80",
+      "rights_holder": "Kokonut UI contributors",
+      "license_ids": [
+        "MIT"
+      ],
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "id": "retro-ui-oss",
+      "publication_mode": "full_fixed_source_with_offline_adaptation",
+      "source_url": "https://github.com/neobrutalism/neobrutalism",
+      "local_path": "references/community/retro-ui-oss",
+      "fixed_commit": "d5fbc0e823bb66575f5372c3df03ee43be45c91b",
+      "rights_holder": "NeoBrutalism repository contributors",
+      "license_ids": [
+        "MIT"
+      ],
+      "license_files": [
+        "LICENCE.md"
+      ]
+    },
+    {
+      "id": "magic-ui-oss",
+      "publication_mode": "full_fixed_source_with_offline_adaptation",
+      "source_url": "https://github.com/magicuidesign/magicui",
+      "local_path": "references/community/magic-ui-oss",
+      "fixed_commit": "0bd8b9fe0e15c4697c8d22dee1d35d88b5152c25",
+      "rights_holder": "Magic UI contributors",
+      "license_ids": [
+        "MIT"
+      ],
+      "license_files": [
+        "LICENSE.md"
+      ]
+    },
+    {
+      "id": "smooth-ui-oss",
+      "publication_mode": "full_fixed_source_with_offline_adaptation",
+      "source_url": "https://github.com/educlopez/smoothui",
+      "local_path": "references/community/smooth-ui-oss",
+      "fixed_commit": "0a4120bb41b4d85ac796c7885552de6d0a5d7308",
+      "rights_holder": "SmoothUI contributors",
+      "license_ids": [
+        "MIT"
+      ],
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "id": "open-design-official",
+      "publication_mode": "full_fixed_source_per_entry_license",
+      "source_url": "https://github.com/nexu-io/open-design",
+      "local_path": "references/community/open-design",
+      "fixed_commit": "bf714528070d5cf1cfcdd25bdc7c9efc7e129d0b",
+      "rights_holder": "Open Design contributors and identified item authors",
+      "license_ids": [
+        "Apache-2.0",
+        "MIT",
+        "CC-BY-4.0"
+      ],
+      "license_files": [
+        "LICENSE"
+      ],
+      "excluded_entry_licenses": [
+        "Original X post"
+      ]
+    },
+    {
+      "id": "comfyui-workflow-templates",
+      "publication_mode": "full_fixed_workflow_content",
+      "source_url": "https://github.com/Comfy-Org/workflow_templates",
+      "local_path": "references/community/comfyui-workflow-templates",
+      "fixed_commit": "1206ea94470a5b66948f1758a8feea5b00801ed1",
+      "rights_holder": "ComfyUI workflow template contributors",
+      "license_ids": [
+        "MIT"
+      ],
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "id": "ppt-master-official",
+      "publication_mode": "full_fixed_source_and_artifacts",
+      "source_url": "https://github.com/hugohe3/ppt-master",
+      "local_path": "references/community/ppt-master",
+      "fixed_commit": "52e85a0af8e40e61879f17f6c14664ff239bb7e3",
+      "rights_holder": "PPT Master contributors",
+      "license_ids": [
+        "MIT"
+      ],
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "id": "aether-css-official",
+      "publication_mode": "full_fixed_source_with_offline_adaptation",
+      "source_url": "https://github.com/tomsoderlund/aether-css",
+      "local_path": "references/community/aether-css",
+      "fixed_commit": "7653acfdf22d645cb67fb128feac3ac5859e9f1d",
+      "rights_holder": "Aether CSS contributors",
+      "license_ids": [
+        "MIT"
+      ],
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "id": "local-original-cinematic-web",
+      "publication_mode": "full_first_party_original",
+      "source_url": "https://github.com/junru-norple/AI-Prompt-Library",
+      "local_path": "references/original/cinematic-web",
+      "fixed_version_source": "cinematic_manifest_collection_hash",
+      "rights_holder": "junru-norple",
+      "license_ids": [
+        "MIT",
+        "CC-BY-4.0"
+      ],
+      "license_files": [
+        "LICENSE_SCOPE.md",
+        "PROVENANCE.md",
+        "THIRD_PARTY.md"
+      ]
+    },
+    {
+      "id": "local-project-assets",
+      "publication_mode": "full_first_party_original_artifacts",
+      "source_url": "https://github.com/junru-norple/AI-Prompt-Library",
+      "local_path": "direct-use-assets/ppt-templates",
+      "fixed_version_source": "entry_content_hash",
+      "rights_holder": "junru-norple",
+      "license_ids": [
+        "MIT",
+        "CC-BY-4.0"
+      ],
+      "bundled_tool_notice": "python-pptx MIT"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+<!doctype html>
+<!-- SPDX-FileCopyrightText: 2026 junru-norple -->
+<!-- SPDX-License-Identifier: MIT -->
+<html lang="zh-Hant" data-cinematic-id="cinematic-web:gsap-pin-section" data-preview-ready="false">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; connect-src 'none'; media-src 'none'; font-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>軌道工坊捲動釘選敘事</title>
+  <style>
+    :root{color-scheme:dark;--ink:#f4f0e7;--muted:#aaa59b;--paper:#090b10;--accent:#e9b872;--line:rgba(255,255,255,.16);font-family:"Segoe UI",system-ui,sans-serif}
+    *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--paper);color:var(--ink)}body{overflow-x:hidden}
+    button,a{font:inherit}button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .eyebrow{margin:0;font:700 11px/1.2 ui-monospace,Consolas,monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+    .preview-badge{position:fixed;z-index:30;top:12px;right:12px;padding:7px 10px;border:1px solid var(--line);background:rgba(5,7,11,.72);backdrop-filter:blur(10px);font:700 10px/1 ui-monospace,Consolas,monospace;letter-spacing:.12em;color:var(--muted)}
+    :root{--paper:#10171a;--ink:#e8e7dc;--muted:#8c9b9d;--accent:#f0a72e;--line:rgba(232,231,220,.16)}
+    .intro,.outro{min-height:100svh;padding:clamp(70px,10vw,150px);display:grid;align-content:center}.intro h1,.outro h2{font:600 clamp(48px,8vw,120px)/.88 "Arial Narrow",sans-serif;letter-spacing:-.055em;margin:.3em 0}.intro>p:last-child{color:var(--muted)}.story{position:relative;height:400svh}.stage{position:sticky;top:0;height:100svh;display:grid;grid-template-columns:90px 1fr minmax(260px,.8fr);align-items:center;gap:4vw;padding:clamp(24px,6vw,80px);overflow:hidden}.progress{height:64vh;width:2px;background:var(--line);position:relative}.progress i{position:absolute;inset:0 0 auto;height:var(--p,5%);background:var(--accent)}.assembly{position:relative;aspect-ratio:1;max-height:70vh;filter:drop-shadow(0 20px 40px #000)}.assembly span{position:absolute;display:block;border:1px solid var(--accent);transition:opacity .35s,transform .55s}.core{width:24%;height:46%;left:38%;top:27%;border-radius:48%;background:radial-gradient(circle,#fff 0 3%,#f0a72e 4% 12%,transparent 13%)}.hull{width:24%;height:54%;top:23%;background:#1d2b2f;opacity:0}.hull.left{left:18%;clip-path:polygon(100% 0,100% 100%,0 75%,15% 18%)}.hull.right{right:18%;clip-path:polygon(0 0,0 100%,100% 75%,85% 18%)}.wing{width:35%;height:18%;top:42%;background:#26383c;opacity:0}.wing.a{left:0;clip-path:polygon(100% 0,100% 100%,0 75%)}.wing.b{right:0;clip-path:polygon(0 0,0 100%,100% 75%)}.readout h2{font:500 clamp(34px,5vw,72px)/.95 Georgia,serif;margin:.3em 0}.readout>p:last-child{max-width:28rem;color:var(--muted);line-height:1.6}.stage[data-step="2"] .hull{opacity:1}.stage[data-step="3"] .hull,.stage[data-step="3"] .wing,.stage[data-step="4"] .hull,.stage[data-step="4"] .wing{opacity:1}.stage[data-step="4"] .assembly{transform:scale(.9) rotate(-8deg)}.scroll-space{height:300svh}@media(max-width:720px){.stage{grid-template-columns:20px 1fr;grid-template-rows:1fr auto}.assembly{max-height:48vh}.readout{grid-column:2}.progress{grid-row:1/3}.intro,.outro{padding:42px}}
+    @media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}
+  </style>
+</head>
+<body>
+  <span class="preview-badge" aria-hidden="true">OFFLINE · ISOLATED</span>
+  <main><section class="intro"><p class="eyebrow">ORBITAL WORKS · UNIT 07</p><h1>一段捲動，<br>組起一艘船。</h1><p>向下捲動查看四個組裝階段。</p></section><section class="story" aria-label="四階段組裝故事"><div class="stage"><div class="progress"><i></i></div><div class="assembly" aria-hidden="true"><span class="core"></span><span class="hull left"></span><span class="hull right"></span><span class="wing a"></span><span class="wing b"></span></div><div class="readout"><p class="eyebrow" id="step-label">01 / 核心</p><h2 id="step-title">點亮反應核心</h2><p id="step-copy">先建立能量與資料的共同軸線。</p></div></div><div class="scroll-space" aria-hidden="true"></div></section><section class="outro"><p class="eyebrow">ASSEMBLY COMPLETE</p><h2>結構完成，動能留白。</h2></section></main>
+  <script>
+  (()=>{
+    'use strict';
+    const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const runtime={id:'cinematic-web:gsap-pin-section',ready:false,reducedMotion:reduced,activeRaf:0,activeTimers:0,disposed:false,theme:'ASSEMBLY / PIN STORY'};
+    window.__CINEMATIC_PREVIEW_STATE__=runtime;
+    const disposers=[];
+    window.__cinematicDispose=(fn)=>{if(typeof fn==='function')disposers.push(fn)};
+    const finish=()=>{runtime.ready=true;document.documentElement.dataset.previewReady='true'};
+    const stage=document.querySelector('.stage');const labels=[['01 / 核心','點亮反應核心','先建立能量與資料的共同軸線。'],['02 / 船殼','閉合壓力船殼','兩片外殼沿中心線校準。'],['03 / 翼面','展開穩定翼面','把導航與散熱面積帶入真空。'],['04 / 校準','完成軌道校準','所有結構回到單一飛行姿態。']];let queued=0;const update=()=>{queued=0;runtime.activeRaf=0;const story=document.querySelector('.story');const span=Math.max(1,story.offsetHeight-innerHeight);const p=Math.max(0,Math.min(1,-story.getBoundingClientRect().top/span));const step=reduced?4:Math.min(4,Math.floor(p*4)+1);stage.dataset.step=String(step);stage.style.setProperty('--p',(Math.max(.05,p)*100)+'%');document.querySelector('#step-label').textContent=labels[step-1][0];document.querySelector('#step-title').textContent=labels[step-1][1];document.querySelector('#step-copy').textContent=labels[step-1][2]};const scroll=()=>{if(!queued){queued=requestAnimationFrame(update);runtime.activeRaf=1}};addEventListener('scroll',scroll,{passive:true});update();__cinematicDispose(()=>{removeEventListener('scroll',scroll);if(queued)cancelAnimationFrame(queued)});
+    finish();
+    addEventListener('pagehide',()=>{for(const dispose of disposers.splice(0)){try{dispose()}catch(_){}}runtime.activeRaf=0;runtime.activeTimers=0;runtime.disposed=true},{once:true});
+  })();
+  </script>
+</body>
+</html>

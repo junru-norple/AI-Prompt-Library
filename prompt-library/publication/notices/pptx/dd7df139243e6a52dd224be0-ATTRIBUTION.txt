@@ -1,0 +1,12 @@
+授權與來源 / License and provenance
+
+Entry: PPT_TEMPLATE_PORTRAIT
+Source: AI Prompt Library local canonical source／AI Prompt Library 本機 canonical source
+Version: f382470be8fb3afcb81a0c9085bee0b7e899f99e490303a4bfc805cc51b541df
+Creator role: FIRST_PARTY_PROJECT_CREATOR
+Rights holder: junru-norple
+Publisher / maintainer: junru-norple / AI Prompt Library
+
+本公開版本保留原有投影片、主題與媒體內容，附加完整適用授權通知。
+This public derivative preserves the original slides, themes and media and adds complete applicable license notices.
+python-pptx default OOXML template portions remain under the accompanying MIT notice.

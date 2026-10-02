@@ -1,0 +1,40 @@
+<!doctype html>
+<!-- SPDX-FileCopyrightText: 2026 junru-norple -->
+<!-- SPDX-License-Identifier: MIT -->
+<html lang="zh-Hant" data-cinematic-id="cinematic-web:scroll-image-sequence" data-preview-ready="false">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; connect-src 'none'; media-src 'none'; font-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>植物顯影捲動影格序列</title>
+  <style>
+    :root{color-scheme:dark;--ink:#f4f0e7;--muted:#aaa59b;--paper:#090b10;--accent:#e9b872;--line:rgba(255,255,255,.16);font-family:"Segoe UI",system-ui,sans-serif}
+    *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--paper);color:var(--ink)}body{overflow-x:hidden}
+    button,a{font:inherit}button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .eyebrow{margin:0;font:700 11px/1.2 ui-monospace,Consolas,monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+    .preview-badge{position:fixed;z-index:30;top:12px;right:12px;padding:7px 10px;border:1px solid var(--line);background:rgba(5,7,11,.72);backdrop-filter:blur(10px);font:700 10px/1 ui-monospace,Consolas,monospace;letter-spacing:.12em;color:var(--muted)}
+    :root{--paper:#17120e;--ink:#ede6d4;--muted:#a79b85;--accent:#a9c78e;--line:rgba(237,230,212,.18)}
+    .sequence{height:420svh}.sticky{position:sticky;top:0;height:100svh;overflow:hidden;padding:clamp(22px,4vw,54px);display:grid;grid-template-columns:1.1fr .9fr;grid-template-rows:auto 1fr auto;gap:20px;background-image:radial-gradient(circle at 30% 40%,rgba(169,199,142,.08),transparent 30%)}header{grid-column:1/3;display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:10px}#frame-label{font:11px ui-monospace,monospace;color:var(--muted)}canvas{width:min(68vh,55vw);height:min(68vh,55vw);align-self:center;justify-self:center}.copy{align-self:center}.copy h1{font:400 clamp(44px,6.5vw,96px)/.9 Georgia,serif;margin:0 0 .35em}.copy p{color:var(--muted);line-height:1.6}.meter{grid-column:1/3;height:2px;background:var(--line)}.meter i{display:block;width:var(--p,0%);height:100%;background:var(--accent)}@media(max-width:720px){.sticky{grid-template-columns:1fr;grid-template-rows:auto 48vh auto auto}header,.meter{grid-column:1}canvas{width:min(78vw,44vh);height:min(78vw,44vh)}.copy h1{font-size:clamp(42px,12vw,70px)}}
+    @media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}
+  </style>
+</head>
+<body>
+  <span class="preview-badge" aria-hidden="true">OFFLINE · ISOLATED</span>
+  <main class="sequence" data-sequence><div class="sticky"><header><p class="eyebrow">BOTANICAL EXPOSURE · 72 FRAMES</p><output id="frame-label">FRAME 00 / 71</output></header><canvas id="canvas" width="900" height="900" aria-label="程序式花朵由種子逐格綻放"></canvas><div class="copy"><h1>一朵花，<br>不跳過任何一格。</h1><p id="phase">種子正在吸收第一道光。</p></div><div class="meter"><i></i></div></div></main>
+  <script>
+  (()=>{
+    'use strict';
+    const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const runtime={id:'cinematic-web:scroll-image-sequence',ready:false,reducedMotion:reduced,activeRaf:0,activeTimers:0,disposed:false,theme:'FRAME STUDY / CANVAS'};
+    window.__CINEMATIC_PREVIEW_STATE__=runtime;
+    const disposers=[];
+    window.__cinematicDispose=(fn)=>{if(typeof fn==='function')disposers.push(fn)};
+    const finish=()=>{runtime.ready=true;document.documentElement.dataset.previewReady='true'};
+    const canvas=document.querySelector('#canvas');const context=canvas.getContext('2d');const phase=document.querySelector('#phase');let queued=0;const draw=(frame)=>{const w=canvas.width,h=canvas.height,p=frame/71;context.clearRect(0,0,w,h);context.fillStyle='#17120e';context.fillRect(0,0,w,h);context.save();context.translate(w/2,h/2);context.strokeStyle='#a9c78e';context.fillStyle='rgba(169,199,142,.12)';context.lineWidth=3;const petals=12;for(let i=0;i<petals;i++){const angle=i*Math.PI*2/petals+p*.35;const reach=45+p*250;context.save();context.rotate(angle);context.beginPath();context.ellipse(reach*.45,0,Math.max(3,p*115),Math.max(2,p*36),0,0,Math.PI*2);context.fill();context.stroke();context.restore()}context.fillStyle='#ede6d4';context.beginPath();context.arc(0,0,12+p*42,0,Math.PI*2);context.fill();context.restore();document.querySelector('#frame-label').value='FRAME '+String(frame).padStart(2,'0')+' / 71';document.querySelector('.meter').style.setProperty('--p',(p*100)+'%');phase.textContent=p<.25?'種子正在吸收第一道光。':p<.55?'葉脈沿著幾何方向展開。':p<.82?'花瓣進入可辨識的節奏。':'花冠完成，畫面停在可讀狀態。'};const update=()=>{queued=0;runtime.activeRaf=0;const box=document.querySelector('.sequence').getBoundingClientRect();const max=document.querySelector('.sequence').offsetHeight-innerHeight;const p=reduced?.72:Math.max(0,Math.min(1,-box.top/Math.max(1,max)));draw(Math.round(p*71))};const scroll=()=>{if(!queued){queued=requestAnimationFrame(update);runtime.activeRaf=1}};addEventListener('scroll',scroll,{passive:true});update();__cinematicDispose(()=>{removeEventListener('scroll',scroll);if(queued)cancelAnimationFrame(queued);canvas.width=0;canvas.height=0});
+    finish();
+    addEventListener('pagehide',()=>{for(const dispose of disposers.splice(0)){try{dispose()}catch(_){}}runtime.activeRaf=0;runtime.activeTimers=0;runtime.disposed=true},{once:true});
+  })();
+  </script>
+</body>
+</html>

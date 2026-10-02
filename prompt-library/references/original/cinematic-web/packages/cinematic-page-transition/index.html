@@ -1,0 +1,40 @@
+<!doctype html>
+<!-- SPDX-FileCopyrightText: 2026 junru-norple -->
+<!-- SPDX-License-Identifier: MIT -->
+<html lang="zh-Hant" data-cinematic-id="cinematic-web:cinematic-page-transition" data-preview-ready="false">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; connect-src 'none'; media-src 'none'; font-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>典藏室影院式頁面轉場</title>
+  <style>
+    :root{color-scheme:dark;--ink:#f4f0e7;--muted:#aaa59b;--paper:#090b10;--accent:#e9b872;--line:rgba(255,255,255,.16);font-family:"Segoe UI",system-ui,sans-serif}
+    *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--paper);color:var(--ink)}body{overflow-x:hidden}
+    button,a{font:inherit}button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .eyebrow{margin:0;font:700 11px/1.2 ui-monospace,Consolas,monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+    .preview-badge{position:fixed;z-index:30;top:12px;right:12px;padding:7px 10px;border:1px solid var(--line);background:rgba(5,7,11,.72);backdrop-filter:blur(10px);font:700 10px/1 ui-monospace,Consolas,monospace;letter-spacing:.12em;color:var(--muted)}
+    :root{--paper:#07141f;--ink:#e9e2d4;--muted:#8ba0ac;--accent:#d2684d;--line:rgba(233,226,212,.18)}
+    .archive{min-height:100svh;padding:clamp(22px,4vw,54px);display:grid;grid-template-rows:auto 1fr;gap:28px}header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:12px}nav{display:flex;align-items:center;gap:14px}nav button{width:38px;height:38px;border:1px solid var(--line);background:none;color:var(--ink);cursor:pointer}#counter{font:11px ui-monospace,monospace}.viewport{position:relative;overflow:hidden;min-height:72svh;border:1px solid var(--line);background:#0a1a27}.viewport article{min-height:72svh;padding:clamp(28px,6vw,82px);display:grid;grid-template-columns:1fr minmax(260px,.75fr);grid-template-rows:auto 1fr auto;gap:24px}.catalog{font:11px ui-monospace,monospace;letter-spacing:.15em;color:var(--accent)}h1{align-self:center;margin:0;font:400 clamp(52px,9vw,130px)/.86 Georgia,serif;letter-spacing:-.055em}#description{max-width:32rem;line-height:1.6;color:var(--muted)}.specimen{grid-column:2;grid-row:1/4;position:relative;min-height:420px;background:radial-gradient(ellipse at 50% 65%,#607e83 0 10%,transparent 11%),linear-gradient(150deg,#14354a,#07111a)}.specimen:before,.specimen:after,.specimen i{content:"";position:absolute;border:1px solid rgba(233,226,212,.35);border-radius:50%;inset:18% 9%}.specimen:after{inset:28% 20%;transform:rotate(22deg)}.specimen i{inset:38% 31%;background:rgba(210,104,77,.32)}.curtain{position:absolute;z-index:5;top:0;bottom:0;width:51%;background:#d9d1c3;transform:scaleX(0);transition:transform .36s cubic-bezier(.7,0,.3,1)}.curtain.left{left:0;transform-origin:left}.curtain.right{right:0;transform-origin:right}.viewport.is-changing .curtain{transform:scaleX(1)}.stamp{position:absolute;z-index:6;left:50%;top:50%;transform:translate(-50%,-50%) scale(.8);opacity:0;color:#07141f;font:900 clamp(52px,10vw,150px) ui-monospace,monospace}.viewport.is-changing .stamp{opacity:1;transform:translate(-50%,-50%) scale(1);transition:.2s .16s}.viewport.is-changing article{opacity:.2}@media(max-width:720px){.viewport article{grid-template-columns:1fr;grid-template-rows:auto auto auto 1fr}.specimen{grid-column:1;grid-row:4;min-height:280px}h1{font-size:clamp(50px,16vw,88px)}}
+    @media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}
+  </style>
+</head>
+<body>
+  <span class="preview-badge" aria-hidden="true">OFFLINE · ISOLATED</span>
+  <main class="archive"><header><p class="eyebrow">NIGHT COLLECTION · ROOM 2</p><nav><button id="prev" type="button" aria-label="上一件">←</button><span id="counter">01 / 03</span><button id="next" type="button" aria-label="下一件">→</button></nav></header><section class="viewport"><article tabindex="-1"><p class="catalog" id="catalog">A–17 / TIDAL STUDY</p><h1 id="art-title" tabindex="-1">潮汐標本</h1><p id="description">記錄一天內水線留下的三種形狀。</p><div class="specimen" aria-hidden="true"><i></i></div></article><div class="curtain left" aria-hidden="true"></div><div class="curtain right" aria-hidden="true"></div><strong class="stamp" aria-hidden="true">A–17</strong></section></main>
+  <script>
+  (()=>{
+    'use strict';
+    const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const runtime={id:'cinematic-web:cinematic-page-transition',ready:false,reducedMotion:reduced,activeRaf:0,activeTimers:0,disposed:false,theme:'ARCHIVE / TRANSITION'};
+    window.__CINEMATIC_PREVIEW_STATE__=runtime;
+    const disposers=[];
+    window.__cinematicDispose=(fn)=>{if(typeof fn==='function')disposers.push(fn)};
+    const finish=()=>{runtime.ready=true;document.documentElement.dataset.previewReady='true'};
+    const records=[['A–17 / TIDAL STUDY','潮汐標本','記錄一天內水線留下的三種形狀。'],['B–04 / SILENT ENGINE','無聲機械','拆開轉動以前，先留下它的寂靜。'],['C–29 / NIGHT SURVEY','夜間測繪','用三道光標記城市不睡的邊界。']];let index=0;const viewport=document.querySelector('.viewport');const render=()=>{const item=records[index];document.querySelector('#catalog').textContent=item[0];document.querySelector('#art-title').textContent=item[1];document.querySelector('#description').textContent=item[2];document.querySelector('.stamp').textContent=item[0].slice(0,4);document.querySelector('#counter').textContent=String(index+1).padStart(2,'0')+' / 03'};let timer=0;const change=(delta)=>{if(timer)return;if(reduced){index=(index+delta+records.length)%records.length;render();document.querySelector('#art-title').focus();return}viewport.classList.add('is-changing');runtime.activeTimers=1;timer=setTimeout(()=>{index=(index+delta+records.length)%records.length;render();setTimeout(()=>{viewport.classList.remove('is-changing');document.querySelector('#art-title').focus();runtime.activeTimers=0;timer=0},410)},380)};document.querySelector('#prev').onclick=()=>change(-1);document.querySelector('#next').onclick=()=>change(1);const key=(e)=>{if(e.key==='ArrowLeft')change(-1);if(e.key==='ArrowRight')change(1)};addEventListener('keydown',key);__cinematicDispose(()=>{removeEventListener('keydown',key);clearTimeout(timer)});
+    finish();
+    addEventListener('pagehide',()=>{for(const dispose of disposers.splice(0)){try{dispose()}catch(_){}}runtime.activeRaf=0;runtime.activeTimers=0;runtime.disposed=true},{once:true});
+  })();
+  </script>
+</body>
+</html>

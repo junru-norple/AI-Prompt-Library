@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Aether CSS</title>
+  <meta name="description" content="aether-css"/>
+  <meta charSet="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta property="og:title" content="Aether CSS"/>
+  <meta property="og:description" content="aether-css"/>
+  <meta property="og:locale" content="en_US"/>
+  <link rel="shortcut icon" type="image/x-icon" href="./icon.png"/>
+  <link rel="stylesheet" href="./aether.css"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+
+<body style="transition: all 1s;">
+
+<!--   
+  <header>Header – Aether CSS</header>
+ -->
+
+  <main>
+    <h1>Aether CSS</h1>
+
+    <p>
+      <a onClick="changeBackground()">Change background</a>
+      |
+      <a href="https://github.com/tomsoderlund/aether-css" target="_blank" rel="noopener noreferrer">Get the source code</a>
+    </p>
+
+    <h2>Buttons in a Flexbox</h2>
+    <div class="flex">
+      <button>Primary</button>
+      <button class="secondary">Secondary</button>
+      <button disabled>Disabled</button>
+    </div>
+
+    <button class="secondary autosize">Autosize</button>
+
+    <h2>Links</h2>
+    <p>Did you know that <a href="https://github.com/tomsoderlund/aether-css" target="_blank" rel="noopener noreferrer">this is a link</a>?</p>
+
+    <hr/>
+
+    <h2>Forms</h2>
+    <form>
+      <div class="fieldset">
+        <label for="textField">Placeholder:</label>
+        <input id="textField" type="text" autocomplete="name" placeholder="Your name" required />
+      </div>
+
+      <div class="fieldset">
+        <label for="textField">Text:</label>
+        <input id="textField" type="text" autocomplete="name" value="Your name" />
+      </div>
+
+      <div class="fieldset">
+        <label for="readonlyField">Read only:</label>
+        <input id="readonlyField" type="text" value="Read only" readonly />
+      </div>
+
+      <div class="fieldset">
+        <label for="disabledField">Disabled:</label>
+        <input id="disabledField" type="text" value="Disabled" disabled />
+      </div>
+
+      <div class="fieldset">
+        <label for="textareaField">Textarea:</label>
+        <textarea id="textareaField" placeholder="Description"></textarea>
+      </div>
+
+      <div class="fieldset">
+        <label for="selectField">Select:</label>
+        <select id="selectField">
+          <option value="sam">Sam Lowry</option>
+          <option value="harry" selected>Harry Tuttle</option>
+          <option value="ida" disabled>Ida Lowry</option>
+        </select>
+      </div>
+
+      <div class="fieldset">
+        <label>Fruit:</label>
+        <div>
+          <span class="radio-wrapper">
+            <input type="radio" name="fruit" id="apple" value="apple" checked>
+            <label for="apple">Apple</label>
+          </span>
+          <span class="radio-wrapper">
+            <input type="radio" name="fruit" id="banana" value="banana">
+            <label for="banana">Banana</label>
+          </span>
+        </div>
+      </div>
+
+      <div class="fieldset">
+        <label>Vegetables:</label>
+        <div>
+          <span class="checkbox-wrapper">
+            <input type="checkbox" name="avocado" id="avocado" value="Avocado" checked>
+            <label for="avocado">Avocado</label>
+          </span>
+          <span class="checkbox-wrapper">
+            <input type="checkbox" name="broccoli" id="broccoli" value="Broccoli">
+            <label for="broccoli">Broccoli</label>
+          </span>
+        </div>
+      </div>
+
+      <div class="fieldset">
+        <span></span>
+        <button type="submit">Submit</button>
+      </div>    
+    </form>
+
+    <h2>Simple form</h2>
+    <form><input type="text" placeholder="Enter a value"><button type="button">Create</button></form>
+
+    <h2>Progress Button</h2>
+    <button class="progress-animation in-progress" onClick="toggleClass(this, 'done')">Progress Button</button>
+
+    <h2>Pulsate animation</h2>
+    <button class="pulsate-animation">Pulsate</button>
+
+    <h2>no-button button</h2>
+    <button class="no-button">no-button</button>
+
+    <h2>Table</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Month</th>
+          <th>Savings</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>January</td>
+          <td>$100</td>
+        </tr>
+        <tr>
+          <td>February</td>
+          <td>$80</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>Sum</td>
+          <td>$180</td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <h2>Tags</h2>
+    <div class="tags">
+      <span class="tag">Apple</span>
+      <span class="tag">Banana</span>
+      <span class="tag">Citrus</span>
+      <span class="tag new">New</span>
+      <span class="tag selectable">Selectable</span>
+      <span class="tag selected">Selected</span>
+      <span class="tag">With x-button <span class="x-button"></span></span>
+    </div>
+
+    <h2>Notifications</h2>
+    <div class="notification color-information-bg">information</div>
+    <div class="notification color-warning-bg">warning</div>
+    <div class="notification color-error-bg">error</div>
+    <div class="notification color-success-bg">success</div>
+
+    <hr/>
+
+    <h2>Text</h2>
+
+    <p>A beautiful golden sun is setting. The sky is on fire. A large neon sign rises into shot. It rests on top of a skyscraper and fills the frame. The building is neither past nor future in design but a bit of both.</p>
+    <p>Slowly we pan downwards revealing the city that spreads below.</p>
+
+    <h2>Heading 2</h2>
+    <p>A glittering conglomeration of elevated transport tubes, smaller square buildings which are merely huge, with, here and there, the comparatively minuscule relics of previous ages of architecture, pavement level awnings suggesting restaurants and shops.</p>
+
+    <h2>Heading 2</h2>
+
+    <p>Flexbox:</p>
+
+    <div class="flex">
+      <div>
+        <h3>Heading 3</h3>
+        <p>Transparent tubes carry whizzing transport cages past us. An elevated highway carrying traffic composed primarily of large transport lorries passes through frame. As we descend, the sunlight is blocked out and street lights & neon signs take over as illumination. Eventually we reach the upper levels of a plush shopping precinct.</p>
+      </div>
+      <div>
+        <h3>Heading 3</h3>
+        <p>An elevated highway carrying traffic composed primarily of large transport lorries passes through frame. As we descend, the sunlight is blocked out and street lights & neon signs take over as illumination. Eventually we reach the upper levels of a plush shopping precinct.</p>
+      </div>
+      <div>
+        <h3>Heading 3</h3>
+        <p>As we descend, the sunlight is blocked out and street lights & neon signs take over as illumination. Eventually we reach the upper levels of a plush shopping precinct.</p>
+      </div>
+    </div>
+
+    <hr/>
+
+    <h2>Lists</h2>
+
+    <p>Unordered:</p>
+
+    <ul>
+      <li>Transparent tubes carry whizzing transport cages past us</li>
+      <li>An elevated highway carrying traffic composed primarily of large transport lorries passes through frame</li>
+      <li>As we descend, the sunlight is blocked out and street lights & neon signs take over as illumination</li>
+    </ul>
+
+    <p>Ordered:</p>
+
+    <ol>
+      <li>Transparent tubes carry whizzing transport cages past us</li>
+      <li>An elevated highway carrying traffic composed primarily of large transport lorries passes through frame</li>
+      <li>As we descend, the sunlight is blocked out and street lights & neon signs take over as illumination</li>
+    </ol>
+
+    <hr/>
+
+    <h2>Quote</h2>
+
+    <blockquote>“A beautiful golden sun is setting. The sky is on fire.”</blockquote>
+
+    <h2>Code</h2>
+
+    How to use the package <code>aether-css-framework</code>
+
+    <pre>
+      <code>Install
+
+      yarn add aether-css-framework
+
+  Import in JavaScript
+
+      import '../node_modules/aether-css-framework/dist/aether.min.css'</code>
+    </pre>
+
+    <hr/>
+
+    <h2>Toggle Switch (checkbox)</h2>
+    <div class="fieldset">
+      <span class="toggle-switch">
+        <input id="toggle-switch-1" type="checkbox" />
+        <label for="toggle-switch-1" />
+      </span>
+    </div>
+
+    <h2>All Regular Input Types</h2>
+    <div class="fieldset"><label>checkbox:</label><input type="checkbox"></div>
+    <div class="fieldset"><label>radio:</label><input type="radio"></div>
+    <div class="fieldset"><label>range:</label><input type="range"></div>
+    <div class="fieldset"><label>color:</label><input type="color"></div>
+
+    <div class="fieldset"><label>text:</label><input type="text"></div>
+    <div class="fieldset"><label>number:</label><input type="number"></div>
+    <div class="fieldset"><label>password:</label><input type="password"></div>
+    <div class="fieldset"><label>search:</label><input type="search"></div>
+
+    <div class="fieldset"><label>tel:</label><input type="tel"></div>
+    <div class="fieldset"><label>email:</label><input type="email"></div>
+    <div class="fieldset"><label>url:</label><input type="url"></div>
+
+    <div class="fieldset"><label>datetime-local:</label><input type="datetime-local"></div>
+    <div class="fieldset"><label>date:</label><input type="date"></div>
+    <div class="fieldset"><label>time:</label><input type="time"></div>
+    <div class="fieldset"><label>month:</label><input type="month"></div>
+    <div class="fieldset"><label>week:</label><input type="week"></div>
+
+    <div class="fieldset"><label>hidden:</label><input type="hidden"></div>
+
+    <div class="fieldset"><label>file:</label><input type="file"></div>
+    <div class="fieldset"><label>image:</label><input type="image" src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Like_button.png" style="width: 3em;"></div>
+
+    <div class="fieldset"><label>button:</label><input type="button" value="Button"></div>
+    <div class="fieldset"><label>reset:</label><input type="reset"></div>
+    <div class="fieldset"><label>submit:</label><input type="submit"></div>
+
+  </main>
+
+  <a class="button circle-menu-button" href="index.html"><img src="./icons/menu.svg" /></a>
+  <button class="circle-menu-button right"><img src="./icons/person.svg" /></button>
+  <button class="circle-menu-button bottom right"><img src="./icons/help.svg" /></button>
+  <button class="circle-menu-button bottom" style="x-background-image: url('docs/demo.png')">TS</button>
+
+<!-- 
+  <footer>Footer – Made by @tomsoderlund</footer>
+-->
+</body>
+
+<script type="application/javascript">
+  const COLORS = ['', 'darkturquoise', 'salmon', 'rebeccapurple']
+
+  function changeBackground () {
+    const currentColor = document.querySelector('body').style.backgroundColor
+    const nextColor = COLORS[(COLORS.indexOf(currentColor) + 1) % COLORS.length]
+    document.querySelector('body').style.backgroundColor = nextColor
+  }
+
+  function toggleClass (target, className) {
+    const classStr = ' ' + className
+     target.className =  target.className.includes(classStr) ?  target.className.replace(classStr, '') :  target.className + classStr
+  }
+
+  document.querySelectorAll('.tag').forEach(
+    element => element.addEventListener(
+      'click',
+      event => toggleClass(event.target, 'selected')
+    )
+  )
+</script>
+
+</html>

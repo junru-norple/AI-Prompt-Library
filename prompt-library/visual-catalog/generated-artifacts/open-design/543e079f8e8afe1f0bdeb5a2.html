@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'sha256-4ldFw2J4yhzQndSwYR4ip7Io8KRkZPtyQBBivV5IK4A='; img-src data:; font-src 'none'; media-src 'none'; connect-src 'none'; frame-src 'none'; child-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"><meta name="atlas-source-entry" content="open-design-official:plugin:example-audio-jingle-849c6116">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Audio jingle — example</title>
+    <style>
+      :root {
+        --bg: #f5efe5;
+        --panel: #ffffff;
+        --ink: #1c1b1a;
+        --muted: #8b8579;
+        --accent: #c96442;
+        --grid: #e6dfd1;
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink);
+        font-family: 'Iowan Old Style', 'Charter', Georgia, serif; }
+      body { min-height: 100dvh; display: grid; place-items: center; padding: 32px; }
+      .card {
+        width: min(640px, 92vw);
+        background: var(--panel);
+        border-radius: 8px;
+        padding: 26px 28px 22px;
+        box-shadow: 0 16px 40px rgba(28,27,26,0.10), 0 1px 2px rgba(28,27,26,0.05);
+        border: 1px solid rgba(28,27,26,0.06);
+      }
+      .row1 { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+      .icon {
+        width: 44px; height: 44px; border-radius: 50%;
+        background: var(--accent); color: #fff;
+        display: grid; place-items: center;
+        box-shadow: 0 6px 18px rgba(201, 100, 66, 0.35);
+      }
+      .icon svg { width: 22px; height: 22px; }
+      .title { margin: 0; font-size: 20px; line-height: 1.2; }
+      .sub { font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+        font-size: 11px; color: var(--muted); letter-spacing: 0.14em; text-transform: uppercase; margin-top: 2px; }
+
+      .wave {
+        display: flex; align-items: end; gap: 3px;
+        height: 96px; padding: 0 4px;
+        border-top: 1px dashed var(--grid);
+        border-bottom: 1px dashed var(--grid);
+      }
+      .wave span {
+        flex: 1; background: linear-gradient(180deg, var(--accent), #a4502f);
+        border-radius: 2px;
+        animation: bob 2s ease-in-out infinite;
+        animation-delay: var(--d, 0s);
+      }
+      @keyframes bob {
+        0%, 100% { height: var(--h, 30%); }
+        50% { height: calc(var(--h, 30%) * 1.6); }
+      }
+
+      .transport {
+        margin-top: 14px;
+        display: grid; grid-template-columns: auto 1fr auto auto; gap: 12px;
+        align-items: center;
+      }
+      .play {
+        width: 36px; height: 36px; border-radius: 50%;
+        background: var(--ink); color: #fff;
+        display: grid; place-items: center;
+      }
+      .timeline {
+        height: 4px; border-radius: 2px;
+        background: linear-gradient(90deg, var(--accent) 0 32%, var(--grid) 32% 100%);
+      }
+      .time {
+        font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+        font-size: 11px; color: var(--muted);
+        letter-spacing: 0.08em;
+      }
+      .badge {
+        font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+        font-size: 10px; color: var(--accent);
+        letter-spacing: 0.18em; text-transform: uppercase;
+        padding: 4px 8px; border-radius: 999px;
+        background: rgba(201, 100, 66, 0.1);
+      }
+    </style>
+  <style data-atlas-owned-adapter>@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:0s!important;transition-delay:0s!important;scroll-behavior:auto!important}}</style></head>
+  <body data-atlas-language-policy="ORIGINAL_SOURCE_LABELED">
+    <div class="card">
+      <div class="row1">
+        <div class="icon" aria-hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        </div>
+        <div>
+          <h1 class="title">A 30s coffee-shop launch jingle.</h1>
+          <div class="sub">suno-v5 · 92 BPM · loop-friendly tail</div>
+        </div>
+      </div>
+      <div class="wave" aria-hidden>
+        <span style="--h:24%;--d:0s"></span>
+        <span style="--h:38%;--d:.05s"></span>
+        <span style="--h:52%;--d:.1s"></span>
+        <span style="--h:64%;--d:.15s"></span>
+        <span style="--h:48%;--d:.2s"></span>
+        <span style="--h:70%;--d:.25s"></span>
+        <span style="--h:42%;--d:.3s"></span>
+        <span style="--h:58%;--d:.35s"></span>
+        <span style="--h:36%;--d:.4s"></span>
+        <span style="--h:62%;--d:.45s"></span>
+        <span style="--h:26%;--d:.5s"></span>
+        <span style="--h:50%;--d:.55s"></span>
+        <span style="--h:34%;--d:.6s"></span>
+        <span style="--h:46%;--d:.65s"></span>
+        <span style="--h:58%;--d:.7s"></span>
+        <span style="--h:30%;--d:.75s"></span>
+        <span style="--h:44%;--d:.8s"></span>
+        <span style="--h:54%;--d:.85s"></span>
+        <span style="--h:28%;--d:.9s"></span>
+        <span style="--h:48%;--d:.95s"></span>
+      </div>
+      <div class="transport">
+        <div class="play" aria-hidden>
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M6 4v16l14-8z"/></svg>
+        </div>
+        <div class="timeline" aria-hidden></div>
+        <span class="time">00:09 / 00:30</span>
+        <span class="badge">MP3</span>
+      </div>
+    </div>
+  <aside id="atlas-source-proof" aria-label="Atlas 來源證據 / Source evidence" data-language-exempt="original-source" style="all:initial;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;position:relative;z-index:2147483647;padding:10px 14px;color:#30464d;background:#f8faf9;border-top:1px solid rgba(21,39,45,.22);font:12px/1.4 ui-monospace,Consolas,monospace"><span>來源版式離線適配（保留原文）· 原始程式已停用；本機適配器提供頁面與減動控制<br><span lang="en">Offline source-layout adaptation; original text retained. Source scripts are disabled; local adapters provide page and reduced-motion controls.</span></span><span>bf714528070d · 78512100cc6c</span></aside><script data-atlas-owned-adapter="0" data-atlas-script-sha256="e25745c36278ca1cd09dd4b0611e22a7b228f0a46464fb72401062bd5e482b80">(function reducedMotionRuntime() {
+  'use strict';
+  const media = matchMedia('(prefers-reduced-motion: reduce)');
+  const held = new Map();
+  let scheduled = 0, closed = false;
+  const state = { version: 1, reduced: media.matches, sampled: 0, scheduled: false };
+  Object.defineProperty(window, '__atlasSourceMotion', { value: state });
+  function scan() {
+    scheduled = 0; state.scheduled = false;
+    if (closed) return;
+    state.reduced = media.matches;
+    const current = new Set(document.getAnimations().filter(animation => animation instanceof CSSAnimation));
+    for (const [animation] of held) if (!current.has(animation)) held.delete(animation);
+    if (!media.matches) {
+      for (const [animation, prior] of held) {
+        animation.playbackRate = prior.rate;
+        animation.currentTime = prior.time;
+        if (prior.state === 'running') animation.play();
+        else if (prior.state === 'paused') animation.pause();
+      }
+      held.clear(); return;
+    }
+    for (const animation of current) {
+      if (held.has(animation)) continue;
+      const effect = animation.effect, timing = effect && effect.getTiming();
+      if (!timing || !Number.isFinite(Number(timing.duration)) || Number(timing.duration) <= 0) continue;
+      const prior = { state: animation.playState, time: animation.currentTime, rate: animation.playbackRate };
+      const duration = Number(timing.duration), delay = Number(timing.delay) || 0;
+      const iterations = Number(timing.iterations);
+      const pose = iterations === Infinity ? delay + duration / 2 : delay + duration * iterations;
+      if (!Number.isFinite(pose)) continue;
+      animation.pause(); animation.currentTime = Math.max(0, pose);
+      held.set(animation, prior); state.sampled++;
+    }
+  }
+  function schedule() {
+    if (closed || scheduled || (!media.matches && !held.size)) return;
+    state.scheduled = true; scheduled = requestAnimationFrame(scan);
+  }
+  const resize = new ResizeObserver(() => { if (media.matches) schedule(); });
+  resize.observe(document.documentElement);
+  document.addEventListener('animationstart', schedule, true);
+  document.addEventListener('atlas-source-deck-change', schedule);
+  document.addEventListener('DOMContentLoaded', schedule, { once: true });
+  window.addEventListener('load', schedule, { once: true });
+  media.addEventListener('change', schedule);
+  window.addEventListener('pagehide', () => {
+    closed = true; resize.disconnect(); media.removeEventListener('change', schedule);
+    document.removeEventListener('animationstart', schedule, true);
+    document.removeEventListener('atlas-source-deck-change', schedule);
+    if (scheduled) cancelAnimationFrame(scheduled);
+    // A bfcache page retains the source Animation objects and their original
+    // playback state; discard neither merely because the document is hidden.
+    scheduled = 0; state.scheduled = false;
+  });
+  window.addEventListener('pageshow', () => {
+    if (!closed) return;
+    closed = false; resize.observe(document.documentElement);
+    document.addEventListener('animationstart', schedule, true);
+    document.addEventListener('atlas-source-deck-change', schedule);
+    media.addEventListener('change', schedule);
+    schedule();
+  });
+  schedule();
+})();</script></body>
+</html>

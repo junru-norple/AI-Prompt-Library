@@ -1,0 +1,1645 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'sha256-2WEvMLMhaFYhEu9RiXE9bRLbefou/wQtFH59TLJPs7s=' 'sha256-4ldFw2J4yhzQndSwYR4ip7Io8KRkZPtyQBBivV5IK4A='; img-src data:; font-src 'none'; media-src 'none'; connect-src 'none'; frame-src 'none'; child-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"><meta name="atlas-source-entry" content="open-design-official:plugin:example-html-ppt-zhangzara-neo-grid-bold-2d34d2b5">
+<meta charset="utf-8" />
+<title>Build a Designer Portfolio Narrative like a Hiring Bar-Raiser - Career</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+
+<style>
+  :root {
+    --bg: #ECECE8;
+    --ink: #0A0A0A;
+    --paper: #F5F4EF;
+    --accent: #E6FF3D;        /* signature neon yellow */
+  }
+  html, body { margin: 0; padding: 0; background: #1a1a1a; }
+  body { font-family: "Space Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif; color: var(--ink); }
+  deck-stage { background: #1a1a1a; }
+
+  /* --- shared slide chrome ------------------------------------------ */
+  section.slide {
+    background: var(--bg);
+    color: var(--ink);
+    overflow: hidden;
+  }
+  .frame {
+    position: absolute; inset: 40px;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    gap: 12px;
+  }
+  .card {
+    background: var(--paper);
+    position: relative;
+    overflow: hidden;
+  }
+  .card.ink   { background: var(--ink);   color: var(--paper); }
+  .card.lemon { background: var(--accent); color: var(--ink); }
+
+  /* slide number tag, bottom-left of every slide */
+  .pagenum {
+    position: absolute;
+    left: 0; bottom: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 24px;
+    padding: 14px 22px;
+    letter-spacing: 0.04em;
+  }
+  .pagenum.invert { background: var(--ink); color: var(--paper); }
+  .pagenum.lemon  { background: var(--accent); color: var(--ink); }
+
+  .corner-mark {
+    position: absolute;
+    top: 22px; right: 22px;
+    width: 36px; height: 36px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 4px;
+  }
+  .corner-mark span { background: currentColor; }
+  .corner-mark span:nth-child(2) { background: transparent; }
+
+  .arrow {
+    width: 64px; height: 64px;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .arrow svg { width: 100%; height: 100%; }
+
+  /* --- typography utilities ---------------------------------------- */
+  h1, h2, h3, p { margin: 0; }
+  .title {
+    font-weight: 700;
+    font-size: 88px;
+    line-height: 0.95;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+  }
+  .label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 24px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.7;
+  }
+  .stat-num {
+    font-weight: 700;
+    font-size: 156px;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+  }
+  .stat-num.sm { font-size: 96px; }
+
+  /* --- slide 1: COVER ---------------------------------------------- */
+  .s-cover .panel-photo-l { grid-column: 1 / span 3; grid-row: 1 / span 8; background: #0a0a0a; position: relative; overflow: hidden; }
+  /* Placeholders are flat near-black + a diagonal hatch. No soft radial
+     glows: the family is hard-edged, so even the photo stand-ins stay flat. */
+  .s-cover .panel-photo-l .ph { position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(135deg, rgba(255,255,255,.06) 0 2px, transparent 2px 9px),
+      #101010;
+  }
+  .s-cover .panel-photo-l::after {
+    content: "PORTRAIT / B&W";
+    position: absolute; left: 16px; bottom: 56px;
+    font-family: "JetBrains Mono", monospace; font-size: 13px;
+    color: rgba(255,255,255,.55); letter-spacing: .12em;
+  }
+  .s-cover .panel-mid  { grid-column: 4 / span 5; grid-row: 1 / span 5; background: var(--accent); position: relative; }
+  .s-cover .panel-titletile { grid-column: 4 / span 5; grid-row: 6 / span 3; background: var(--accent); position: relative; }
+  .s-cover .panel-photo-r { grid-column: 9 / span 4; grid-row: 1 / span 5; background:#111; position: relative; overflow: hidden; }
+  .s-cover .panel-photo-r .ph { position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(45deg, rgba(255,255,255,.06) 0 2px, transparent 2px 9px),
+      #0e0e0e;
+  }
+  .s-cover .panel-photo-r::after {
+    content: "PORTRAIT / B&W";
+    position: absolute; left: 16px; bottom: 16px;
+    font-family: "JetBrains Mono", monospace; font-size: 13px;
+    color: rgba(255,255,255,.55); letter-spacing: .12em;
+  }
+  .s-cover .panel-cap   { grid-column: 9 / span 4; grid-row: 6 / span 3; background: var(--paper); position: relative; }
+  .s-cover .qr {
+    position: absolute; top: 28px; left: 28px;
+    width: 90px; height: 90px; background: var(--ink);
+    display: grid; grid-template-columns: repeat(5, 1fr); grid-template-rows: repeat(5, 1fr); gap: 0;
+  }
+  .s-cover .qr i { background: var(--ink); }
+  .s-cover .qr i.k { background: var(--accent); }
+  .s-cover .title-block {
+    position: absolute; left: 40px; right: 40px; bottom: 40px;
+  }
+  .s-cover .meta-l {
+    position: absolute; left: 40px; bottom: 40px;
+    font-family: "JetBrains Mono", monospace; font-size: 24px; line-height: 1.4;
+    letter-spacing: .04em;
+  }
+  .s-cover .blockmark {
+    position: absolute; right: 40px; bottom: 40px;
+    width: 56px; height: 56px;
+    display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 4px;
+  }
+  .s-cover .blockmark span:nth-child(1) { background: var(--ink); }
+  .s-cover .blockmark span:nth-child(2) { background: transparent; }
+  .s-cover .blockmark span:nth-child(3) { background: transparent; }
+  .s-cover .blockmark span:nth-child(4) { background: var(--ink); }
+
+  /* --- slide 2: CONTENTS -------------------------------------------
+     head spans the top 2 grid rows, then 6 cards in a 3x2 grid,
+     each spanning 3 rows: 2 + 3 + 3 = the full 8-row frame. */
+  .s-toc .frame   { gap: 18px; }
+  .s-toc .head    { grid-column: 1 / span 12; grid-row: 1 / span 2; padding: 36px 44px; display: flex; align-items: center; justify-content: space-between; }
+  .s-toc .head h1 { font-size: 92px; font-weight: 700; text-transform: uppercase; letter-spacing: -.015em; line-height: .95; }
+  .s-toc .row     { grid-column: span 4; grid-row: span 3; padding: 40px 44px; display: flex; flex-direction: column; justify-content: center; gap: 22px; min-height: 0; }
+  .s-toc .row .num{ font-family: "JetBrains Mono", monospace; font-size: 22px; letter-spacing: .08em; }
+  .s-toc .row h3  { font-size: 36px; font-weight: 700; text-transform: uppercase; letter-spacing: -.01em; line-height: 1.05; }
+  .s-toc .row p   { font-size: 20px; line-height: 1.5; opacity: .82; }
+
+  /* --- slide 3: BY THE NUMBERS -------------------------------------- */
+  .s-stats .accent-l    { grid-column: 1 / span 2; grid-row: 1 / span 8; background: var(--accent); position: relative; }
+  /* "21" is a stat, not a footnote: set it at display scale so the accent
+     column participates in the slide's number hierarchy. */
+  .s-stats .accent-l .plus { position: absolute; top: 24px; left: 28px; font-weight: 700; font-size: 96px; line-height: .9; letter-spacing: -.03em; }
+  .s-stats .accent-l .lab  { position: absolute; bottom: 24px; left: 28px; font-family: "JetBrains Mono", monospace; font-size: 24px; letter-spacing: .08em; text-transform: uppercase; }
+  .s-stats .copy        { grid-column: 3 / span 4; grid-row: 1 / span 8; padding: 36px 32px; background: var(--paper); position: relative; display: flex; flex-direction: column; }
+  .s-stats .copy h2     { font-size: 76px; font-weight: 700; text-transform: uppercase; letter-spacing: -.015em; line-height: .95; }
+  .s-stats .copy h2 mark{ background: var(--accent); color: var(--ink); padding: 0 6px; }
+  .s-stats .copy p      { font-size: 24px; line-height: 1.45; margin-top: 24px; max-width: 36ch; }
+  /* Stat cells: number top, label pushed to the bottom edge so each tile
+     reads as a composed block instead of pooling empty space below. */
+  .s-stats .stat-a      { grid-column: 7 / span 3; grid-row: 1 / span 2; background: var(--paper); padding: 24px 28px; display: flex; flex-direction: column; justify-content: space-between; }
+  .s-stats .stat-b      { grid-column: 10 / span 3; grid-row: 1 / span 2; background: var(--paper); padding: 24px 28px; display: flex; flex-direction: column; justify-content: space-between; }
+  .s-stats .stat-c      { grid-column: 7 / span 6; grid-row: 3 / span 2; background: var(--paper); padding: 24px 28px; display: flex; flex-direction: column; justify-content: space-between; }
+  .s-stats .stat-big    { grid-column: 7 / span 6; grid-row: 5 / span 4; background: var(--accent); padding: 28px 36px; position: relative; display: flex; flex-direction: column; justify-content: space-between; }
+  .s-stats .stat-big .v { font-size: 240px; font-weight: 700; line-height: .85; letter-spacing: -.04em; }
+  .s-stats .stat-big .arrow-out { position: absolute; right: 28px; bottom: 28px; }
+
+  /* --- slide 4: KEY FEATURES --------------------------------------- */
+  .s-features .head { grid-column: 1 / span 12; grid-row: 1 / span 2; padding: 28px 32px; display: flex; align-items: center; justify-content: space-between; background: var(--paper); }
+  .s-features .head h2 { font-size: 88px; font-weight: 700; text-transform: uppercase; letter-spacing: -.015em; }
+  .s-features .feat { grid-column: span 4; grid-row: span 6; background: var(--paper); padding: 28px; display: flex; flex-direction: column; gap: 18px; position: relative; }
+  /* pic fills the leftover card height (flex: 1) so the tall feature cards
+     read edge-to-edge instead of leaving a dead band under the copy. */
+  .s-features .feat .pic { flex: 1; min-height: 0; background:#111; position: relative; overflow: hidden; }
+  .s-features .feat .pic .ph { position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(45deg, rgba(255,255,255,.06) 0 2px, transparent 2px 9px),
+      #0e0e0e;
+  }
+  .s-features .feat .pic .tag { position: absolute; left: 8px; top: 8px; background: var(--accent); color: var(--ink); font-family: "JetBrains Mono", monospace; font-size: 24px; padding: 4px 10px; letter-spacing: .08em; }
+  .s-features .feat h3 { font-size: 30px; font-weight: 700; text-transform: uppercase; letter-spacing: -.005em; }
+  .s-features .feat p  { font-size: 24px; line-height: 1.4; }
+
+  /* --- slide 5: PLUGIN GROWTH (chart) ------------------------------ */
+  .s-chart .pane-l { grid-column: 1 / span 5; grid-row: 1 / span 8; background: var(--ink); color: var(--paper); padding: 36px 32px; position: relative; display: flex; flex-direction: column; justify-content: space-between; }
+  .s-chart .pane-l h2 { font-size: 84px; font-weight: 700; text-transform: uppercase; letter-spacing: -.015em; line-height: .95; }
+  .s-chart .pane-l h2 em { font-style: normal; color: var(--accent); }
+  .s-chart .pane-l p  { font-size: 22px; line-height: 1.45; max-width: 32ch; opacity: .9; }
+  .s-chart .pane-l .yearlabel { font-family: "JetBrains Mono", monospace; font-size: 16px; letter-spacing: .08em; opacity: .7; }
+  .s-chart .pane-r { grid-column: 6 / span 7; grid-row: 1 / span 8; background: var(--paper); padding: 36px 32px; position: relative; display: flex; flex-direction: column; }
+  .s-chart .legend { display: flex; gap: 28px; margin-bottom: 18px; }
+  .s-chart .legend .li { display: flex; align-items: center; gap: 8px; font-family: "JetBrains Mono", monospace; font-size: 14px; letter-spacing: .08em; text-transform: uppercase; }
+  .s-chart .legend .li i { width: 18px; height: 12px; background: var(--ink); display: inline-block; }
+  .s-chart .legend .li.b i { background: var(--accent); border: 1.5px solid var(--ink); }
+  .s-chart .bars { flex: 1; display: grid; grid-template-columns: repeat(6, 1fr); gap: 24px; align-items: end; padding: 16px 0 0 0; border-bottom: 2px solid var(--ink); }
+  /* Grouped pairs, side by side: stacking 2025 above 2026 in one column let
+     flexbox compress the percentage heights (42% + 78% > 100%), so every
+     category rendered nearly identical. Side-by-side keeps the encoded
+     heights honest and the year-over-year doubling actually visible. */
+  .s-chart .bar  { display: flex; flex-direction: row; gap: 6px; align-items: flex-end; height: 100%; }
+  .s-chart .bar .a { background: var(--ink); flex: 1; }
+  .s-chart .bar .b { background: var(--accent); border: 1.5px solid var(--ink); flex: 1; }
+  .s-chart .xaxis{ display: grid; grid-template-columns: repeat(6, 1fr); gap: 18px; padding-top: 8px; }
+  .s-chart .xaxis span { font-family: "JetBrains Mono", monospace; font-size: 14px; text-align: center; letter-spacing: .08em; }
+
+  /* --- slide 6: SECTION DIVIDER ------------------------------------ */
+  .s-section { background: var(--ink); color: var(--paper); }
+  .s-section .frame { gap: 12px; }
+  .s-section .pane-num { grid-column: 1 / span 4; grid-row: 1 / span 8; background: var(--accent); color: var(--ink); padding: 36px 32px; position: relative; display: flex; flex-direction: column; justify-content: space-between; }
+  .s-section .pane-num .n { font-size: 320px; font-weight: 700; line-height: .85; letter-spacing: -.05em; }
+  .s-section .pane-num .lab { font-family: "JetBrains Mono", monospace; font-size: 18px; letter-spacing: .12em; text-transform: uppercase; }
+  .s-section .pane-title { grid-column: 5 / span 8; grid-row: 1 / span 8; background: var(--ink); color: var(--paper); padding: 36px 32px; position: relative; display: flex; flex-direction: column; justify-content: space-between; }
+  .s-section .pane-title h2 { font-size: 132px; font-weight: 700; text-transform: uppercase; letter-spacing: -.02em; line-height: .9; }
+  .s-section .pane-title h2 mark { background: var(--accent); color: var(--ink); padding: 0 8px; }
+  .s-section .pane-title p { font-size: 24px; line-height: 1.45; max-width: 48ch; opacity: .85; }
+
+  /* --- slide 7: QUOTE ---------------------------------------------- */
+  .s-quote .photo { grid-column: 1 / span 5; grid-row: 1 / span 8; background:#111; position: relative; overflow: hidden; }
+  .s-quote .photo .ph { position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(135deg, rgba(255,255,255,.06) 0 2px, transparent 2px 9px),
+      #101010;
+  }
+  .s-quote .photo .tag { position: absolute; left: 16px; bottom: 16px; font-family: "JetBrains Mono", monospace; font-size: 13px; color: rgba(255,255,255,.55); letter-spacing: .12em; }
+  /* Quote: breathing room around the headline; the mark is set solid in
+     the display weight (no outline stroke) so it reads as a deliberate
+     graphic gesture instead of two hollow slabs. */
+  .s-quote .copy  { grid-column: 6 / span 7; grid-row: 1 / span 5; background: var(--paper); padding: 48px 52px; display: flex; flex-direction: column; justify-content: center; gap: 28px; }
+  .s-quote .copy .qmark { font-size: 120px; line-height: .5; font-weight: 700; color: var(--ink); }
+  .s-quote .copy blockquote { font-size: 46px; font-weight: 500; line-height: 1.24; letter-spacing: -.01em; margin: 0; max-width: 32ch; }
+  .s-quote .attr  { grid-column: 6 / span 4; grid-row: 6 / span 3; background: var(--accent); padding: 36px 40px; display: flex; flex-direction: column; justify-content: space-between; gap: 8px; }
+  .s-quote .attr .who { font-size: 30px; font-weight: 700; text-transform: uppercase; letter-spacing: -.005em; }
+  .s-quote .attr .role { font-family: "JetBrains Mono", monospace; font-size: 14px; letter-spacing: .08em; text-transform: uppercase; }
+  .s-quote .mark  { grid-column: 10 / span 3; grid-row: 6 / span 3; background: var(--ink); color: var(--paper); padding: 28px 32px; display: flex; align-items: center; justify-content: center; }
+  .s-quote .mark .blockmark { width: 96px; height: 96px; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 6px; }
+  .s-quote .mark .blockmark span { background: var(--accent); }
+  .s-quote .mark .blockmark span:nth-child(2) { background: transparent; }
+  .s-quote .mark .blockmark span:nth-child(3) { background: transparent; }
+
+  /* --- slide 8: NEXT STEPS ----------------------------------------- */
+  .s-cta .head    { grid-column: 1 / span 8; grid-row: 1 / span 3; background: var(--accent); padding: 36px 32px; display: flex; flex-direction: column; justify-content: space-between; }
+  .s-cta .head h2 { font-size: 124px; font-weight: 700; text-transform: uppercase; letter-spacing: -.02em; line-height: .9; }
+  .s-cta .head .lab { font-family: "JetBrains Mono", monospace; font-size: 16px; letter-spacing: .08em; text-transform: uppercase; }
+  .s-cta .qr      { grid-column: 9 / span 4; grid-row: 1 / span 3; background: var(--ink); display: flex; align-items: center; justify-content: center; }
+  .s-cta .qr svg  { width: 60%; height: auto; }
+  .s-cta .step    { padding: 28px 32px; display: flex; flex-direction: column; justify-content: space-between; gap: 12px; background: var(--paper); }
+  .s-cta .step.a  { grid-column: 1 / span 4; grid-row: 4 / span 5; }
+  .s-cta .step.b  { grid-column: 5 / span 4; grid-row: 4 / span 5; }
+  .s-cta .step.c  { grid-column: 9 / span 4; grid-row: 4 / span 5; background: var(--ink); color: var(--paper); }
+  .s-cta .step .num { font-family: "JetBrains Mono", monospace; font-size: 16px; letter-spacing: .08em; }
+  .s-cta .step h3 { font-size: 44px; font-weight: 700; text-transform: uppercase; letter-spacing: -.01em; line-height: 1; }
+  .s-cta .step p  { font-size: 20px; line-height: 1.45; }
+  .s-cta .step.c .arrow svg path { stroke: var(--accent); }
+
+  /* --- CONSULT (text-dense) ----------------------------------------- */
+  /* Findings · Detail (action-title + 3 cols) — content vertically
+     distributed across each column so the colored boxes feel populated.
+     Typography lifted a notch + an extra line per column for density. */
+  .s-consult .frame { gap: 16px; }
+  .s-consult .head    { grid-column: 1 / span 12; grid-row: 1 / span 1; padding: 30px 36px; background: var(--ink); color: var(--paper); display: flex; align-items: center; gap: 32px; }
+  .s-consult .head .tag { font-family: "JetBrains Mono", monospace; font-size: 16px; letter-spacing: .12em; text-transform: uppercase; opacity: .7; flex-shrink: 0; border-right: 1px solid rgba(245,244,239,.25); padding-right: 32px; }
+  .s-consult .head h2 { font-weight: 700; font-size: 28px; line-height: 1.25; text-transform: uppercase; letter-spacing: -.005em; }
+  .s-consult .head h2 mark { background: var(--accent); color: var(--ink); padding: 0 6px; }
+  .s-consult .col     { grid-row: 2 / span 7; padding: 40px 40px; background: var(--paper); display: flex; flex-direction: column; gap: 24px; }
+  .s-consult .col.a   { grid-column: 1 / span 4; }
+  .s-consult .col.b   { grid-column: 5 / span 4; background: var(--accent); }
+  .s-consult .col.c   { grid-column: 9 / span 4; }
+  .s-consult .col h3  { font-size: 24px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; border-bottom: 2px solid var(--ink); padding-bottom: 14px; margin-bottom: 0; flex-shrink: 0; }
+  /* col-body: a flex-grow wrapper around the variable middle content.
+     Content flows at its natural rhythm; any leftover height pools above
+     the source footer, matching how the stat tiles elsewhere in the deck
+     handle whitespace (composed block, not stretched text). */
+  .s-consult .col-body { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 22px; }
+  .s-consult .col .meta { font-size: 32px; font-weight: 700; line-height: 1.1; letter-spacing: -.005em; }
+  .s-consult .col p   { font-size: 18px; line-height: 1.45; }
+  .s-consult .col ul  { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 14px; }
+  .s-consult .col ul li { font-size: 18px; line-height: 1.5; }
+  .s-consult .col ul li strong { font-weight: 700; text-transform: uppercase; letter-spacing: .02em; }
+  .s-consult .col .src { font-family: "JetBrains Mono", monospace; font-size: 14px; letter-spacing: .08em; text-transform: uppercase; opacity: .65; padding-top: 16px; border-top: 1px dashed rgba(10,10,10,.25); flex-shrink: 0; margin-top: auto; }
+
+  /* --- CHART -------------------------------------------------------- */
+  .s-chart2 .pane-l { grid-column: 1 / span 5; grid-row: 1 / span 8; background: var(--accent); padding: 32px 28px; display: flex; flex-direction: column; justify-content: space-between; }
+  .s-chart2 .pane-l .label { font-family: "JetBrains Mono", monospace; font-size: 14px; letter-spacing: .12em; text-transform: uppercase; }
+  .s-chart2 .pane-l h2 { font-weight: 700; font-size: 76px; line-height: .95; text-transform: uppercase; letter-spacing: -.015em; }
+  .s-chart2 .pane-l p { font-size: 20px; line-height: 1.45; max-width: 32ch; }
+  .s-chart2 .pane-l .legend { display: flex; flex-direction: column; gap: 10px; }
+  .s-chart2 .pane-l .legend .li { display: flex; align-items: center; gap: 12px; font-family: "JetBrains Mono", monospace; font-size: 14px; letter-spacing: .08em; text-transform: uppercase; }
+  .s-chart2 .pane-l .legend .li i { width: 24px; height: 4px; background: var(--ink); }
+  .s-chart2 .pane-r { grid-column: 6 / span 7; grid-row: 1 / span 8; background: var(--paper); padding: 32px 28px 28px 80px; position: relative; display: flex; flex-direction: column; overflow: hidden; }
+  .s-chart2 .pane-r .yhead { font-family: "JetBrains Mono", monospace; font-size: 14px; letter-spacing: .12em; text-transform: uppercase; opacity: .7; margin-bottom: 8px; }
+  .s-chart2 .plot { flex: 1; min-height: 0; position: relative; border-left: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
+  .s-chart2 .plot .gline { position: absolute; left: 0; right: 0; border-top: 1px dashed rgba(10,10,10,.18); }
+  .s-chart2 .plot .yticks { position: absolute; left: -56px; top: 0; bottom: 0; display: flex; flex-direction: column; justify-content: space-between; font-family: "JetBrains Mono", monospace; font-size: 14px; }
+  .s-chart2 .plot svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; overflow: visible; }
+  .s-chart2 .pane-r .xticks { display: flex; justify-content: space-between; padding-top: 10px; font-family: "JetBrains Mono", monospace; font-size: 14px; letter-spacing: .08em; }
+
+  /* --- PROCESS DIAGRAM --------------------------------------------- */
+  /* Process — head h2 dropped from 76 to 56 so the headline sits beside the
+     supporting line cleanly. Each node centers its content vertically and
+     uses larger typography so the column feels populated edge-to-edge. */
+  .s-process2 .head { grid-column: 1 / span 12; grid-row: 1 / span 2; padding: 36px 40px; display: flex; align-items: flex-start; justify-content: space-between; gap: 48px; background: var(--paper); }
+  .s-process2 .head h2 { font-weight: 700; font-size: 56px; line-height: 1; text-transform: uppercase; letter-spacing: -.015em; }
+  .s-process2 .head .sub { font-family: "JetBrains Mono", monospace; font-size: 15px; letter-spacing: .08em; text-transform: uppercase; max-width: 46ch; line-height: 1.55; opacity: .75; flex-shrink: 0; }
+  .s-process2 .node { padding: 32px 26px; background: var(--paper); display: flex; flex-direction: column; justify-content: center; gap: 18px; position: relative; }
+  .s-process2 .node.n1 { grid-column: 1 / span 2; grid-row: 3 / span 5; }
+  .s-process2 .node.n2 { grid-column: 3 / span 2; grid-row: 3 / span 5; background: var(--accent); }
+  .s-process2 .node.n3 { grid-column: 5 / span 2; grid-row: 3 / span 5; }
+  .s-process2 .node.n4 { grid-column: 7 / span 2; grid-row: 3 / span 5; background: var(--accent); }
+  .s-process2 .node.n5 { grid-column: 9 / span 2; grid-row: 3 / span 5; }
+  .s-process2 .node.out{ grid-column: 11 / span 2; grid-row: 3 / span 5; background: var(--ink); color: var(--paper); }
+  .s-process2 .node .n { font-family: "JetBrains Mono", monospace; font-size: 15px; letter-spacing: .12em; }
+  .s-process2 .node h3 { font-weight: 700; font-size: 26px; line-height: 1; text-transform: uppercase; letter-spacing: -.005em; }
+  .s-process2 .node p  { font-size: 17px; line-height: 1.4; }
+  .s-process2 .node .arr { position: absolute; right: -10px; top: 50%; transform: translateY(-50%); width: 24px; height: 24px; z-index: 2; color: var(--ink); pointer-events: none; }
+  .s-process2 .node.out .arr { display: none; }
+  .s-process2 .timeline { grid-column: 1 / span 12; grid-row: 8 / span 1; background: var(--paper); padding: 16px 28px; display: grid; grid-template-columns: repeat(6, 1fr); align-items: center; font-family: "JetBrains Mono", monospace; font-size: 14px; letter-spacing: .1em; text-transform: uppercase; }
+  .s-process2 .timeline span { border-right: 1px dashed rgba(10,10,10,.25); padding-right: 12px; }
+  .s-process2 .timeline span:last-child { border-right: 0; }
+
+  /* --- COMPARISON MATRIX ------------------------------------------ */
+  .s-matrix2 .head { grid-column: 1 / span 12; grid-row: 1 / span 2; padding: 26px 32px; background: var(--paper); display: flex; align-items: flex-start; justify-content: space-between; gap: 40px; }
+  .s-matrix2 .head h2 { font-weight: 700; font-size: 76px; line-height: .95; text-transform: uppercase; letter-spacing: -.015em; }
+  .s-matrix2 .head .sub { font-family: "JetBrains Mono", monospace; font-size: 16px; letter-spacing: .08em; text-transform: uppercase; max-width: 46ch; line-height: 1.5; opacity: .75; flex-shrink: 0; }
+  /* Table spans down to the frame's bottom edge (rows 3-8): the markup has
+     no .footrow element, so stopping at row 7 left a dead transparent band
+     under the matrix. */
+  .s-matrix2 .table { grid-column: 1 / span 12; grid-row: 3 / span 6; background: var(--paper); display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; grid-auto-rows: 1fr; }
+  .s-matrix2 .table .cell { padding: 18px 22px; border-bottom: 1.5px solid var(--ink); border-right: 1.5px solid var(--ink); display: flex; align-items: center; font-size: 24px; line-height: 1.35; }
+  .s-matrix2 .table .cell:nth-child(4n) { border-right: 0; }
+  .s-matrix2 .table .last { border-bottom: 0; }
+  .s-matrix2 .table .head-row { background: var(--ink); color: var(--paper); font-family: "JetBrains Mono", monospace; font-size: 14px; letter-spacing: .12em; text-transform: uppercase; }
+  .s-matrix2 .table .row-label { font-weight: 700; font-size: 22px; text-transform: uppercase; letter-spacing: -.005em; }
+  .s-matrix2 .pill { display: inline-block; padding: 6px 14px; font-family: "JetBrains Mono", monospace; font-size: 16px; letter-spacing: .08em; text-transform: uppercase; font-weight: 500; line-height: 1.3; }
+  .s-matrix2 .pill.yes  { background: var(--accent); color: var(--ink); }
+  .s-matrix2 .pill.part { background: var(--paper); color: var(--ink); border: 1.5px solid var(--ink); }
+  .s-matrix2 .pill.no   { background: var(--ink); color: var(--paper); }
+  .s-matrix2 .pill.note { background: transparent; color: var(--ink); opacity: .7; padding-left: 0; }
+
+  /* --- motion: staggered rise on slide entry ------------------------ */
+  @keyframes ngb-rise {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: none; }
+  }
+  section.slide[data-deck-active] .frame > * {
+    animation: ngb-rise .55s cubic-bezier(.16,1,.3,1) both;
+  }
+  section.slide[data-deck-active] .frame > *:nth-child(2) { animation-delay: .06s; }
+  section.slide[data-deck-active] .frame > *:nth-child(3) { animation-delay: .12s; }
+  section.slide[data-deck-active] .frame > *:nth-child(4) { animation-delay: .18s; }
+  section.slide[data-deck-active] .frame > *:nth-child(5) { animation-delay: .24s; }
+  section.slide[data-deck-active] .frame > *:nth-child(n+6) { animation-delay: .3s; }
+  @media (prefers-reduced-motion: reduce) {
+    section.slide[data-deck-active] .frame > * { animation: none; }
+  }
+</style>
+<style data-atlas-owned-adapter>
+[data-atlas-deck-shell]{position:fixed!important;inset:0!important;width:100%!important;height:100%!important;display:grid!important;grid-template-rows:minmax(0,1fr) auto auto!important;gap:0!important;padding:0!important;margin:0!important;box-sizing:border-box!important;overflow:hidden!important;z-index:1}
+[data-atlas-deck-viewport]{position:relative!important;min-width:0!important;min-height:0!important;overflow:hidden!important}
+[data-atlas-deck-root]{position:absolute!important;display:block!important;margin:0!important;padding:0!important;box-sizing:border-box!important;transform-origin:0 0!important;max-width:none!important;max-height:none!important;visibility:visible!important}
+[data-atlas-deck-root][data-atlas-deck-ready="WAITING_FOR_VISIBLE_VIEWPORT"]{visibility:hidden!important}
+[data-atlas-deck-root="STAGE_HORIZONTAL_SECTIONS"]{display:flex!important;flex-direction:column!important}
+[data-atlas-deck-viewport-stage]{position:relative!important;flex:1 1 auto!important;min-height:0!important;width:100%!important;height:auto!important;transform:none!important}
+[data-atlas-deck-replaced-controls]{display:none!important}
+[data-atlas-deck-slide]{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;box-sizing:border-box!important}
+[data-atlas-deck-slide][data-atlas-deck-active="false"]{visibility:hidden!important;opacity:0!important;pointer-events:none!important}
+[data-atlas-deck-slide][data-atlas-deck-active="true"]{visibility:visible!important;opacity:1!important}
+[data-atlas-deck-slide][data-atlas-deck-inner-scroll="true"]{overflow-y:auto!important;overflow-x:hidden!important;justify-content:flex-start!important;scroll-snap-type:none!important;scroll-behavior:auto!important;min-height:0!important}
+[data-atlas-source-content-owner][data-atlas-deck-inner-scroll="true"]:focus-visible{outline:2px solid currentColor!important;outline-offset:-2px!important}
+[data-atlas-source-content-owner][data-atlas-source-scroll-axes="xy"]{overflow-x:auto!important}
+[data-atlas-source-tail-gutter="taste-native-inline-end"]::after{content:""!important;display:block!important;position:static!important;flex:0 0 0!important;align-self:flex-start!important;width:var(--atlas-source-tail-extent)!important;min-width:var(--atlas-source-tail-extent)!important;max-width:none!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important;border:0!important;pointer-events:none!important}
+[data-atlas-deck-controls]{min-width:0!important;position:relative!important;display:block!important;z-index:2}
+[data-atlas-deck-shell]>#atlas-source-proof{position:relative!important;inset:auto!important;width:100%!important;min-width:0!important;min-height:0!important;max-height:32vh!important;overflow:auto!important;margin:0!important;flex-wrap:wrap!important;overflow-wrap:anywhere!important}
+</style><style data-atlas-owned-adapter>@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:0s!important;transition-delay:0s!important;scroll-behavior:auto!important}}</style></head>
+<body data-atlas-language-policy="ORIGINAL_SOURCE_LABELED">
+
+<deck-stage width="1920" height="1080">
+
+  
+  <section class="slide s-cover" data-label="01 Cover" data-om-validate="false">
+    <div class="frame">
+      <div class="panel-photo-l">
+        <div class="ph"></div>
+      </div>
+      <div class="panel-mid">
+        <div class="qr" aria-hidden="true">
+          <i></i><i class="k"></i><i></i><i class="k"></i><i></i>
+          <i class="k"></i><i></i><i class="k"></i><i></i><i class="k"></i>
+          <i></i><i class="k"></i><i></i><i class="k"></i><i></i>
+          <i class="k"></i><i></i><i class="k"></i><i></i><i class="k"></i>
+          <i></i><i class="k"></i><i></i><i class="k"></i><i></i>
+        </div>
+      </div>
+      <div class="panel-titletile">
+        <div class="title-block">
+          <h1 class="title">Three cases.<br />One line of<br />judgment.</h1>
+        </div>
+        <div class="blockmark" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+      </div>
+      <div class="panel-photo-r">
+        <div class="ph"></div>
+      </div>
+      <div class="panel-cap">
+        <div class="meta-l">
+          CAREER · PORTFOLIO REVIEW<br />Maya Chen — Senior Product Designer
+        </div>
+      </div>
+    </div>
+    <div class="pagenum">01 / 12</div>
+  </section>
+
+  
+  <section class="slide s-toc" data-label="02 Contents" data-om-validate="false">
+    <div class="frame">
+      <div class="head card">
+        <h1>Contents</h1>
+        <div class="corner-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+      </div>
+      <div class="row card">
+        <div class="num">01 / Context</div>
+        <div>
+          <h3>Who I am, what I own</h3>
+          <p>Role scope, the team, and the problems I was hired to solve.</p>
+        </div>
+      </div>
+      <div class="row card lemon">
+        <div class="num">02 / Proof</div>
+        <div>
+          <h3>Three proof moments</h3>
+          <p>The decisions that separated okay work from earned trust.</p>
+        </div>
+      </div>
+      <div class="row card">
+        <div class="num">03 / Artifacts</div>
+        <div>
+          <h3>The artifacts</h3>
+          <p>Flows, prototypes, and the system decisions that shipped.</p>
+        </div>
+      </div>
+      <div class="row card">
+        <div class="num">04 / Impact</div>
+        <div>
+          <h3>Impact, measured</h3>
+          <p>What moved after launch, in the panel's own metrics.</p>
+        </div>
+      </div>
+      <div class="row card ink">
+        <div class="num" style="opacity:.75">05 / Learning</div>
+        <div>
+          <h3>What my team said</h3>
+          <p style="opacity:.85">Feedback from the people who reviewed the work.</p>
+        </div>
+      </div>
+      <div class="row card lemon">
+        <div class="num">06 / Ask</div>
+        <div>
+          <h3>The ask</h3>
+          <p>The role I want, and why I'm ready for it now.</p>
+        </div>
+      </div>
+    </div>
+    <div class="pagenum">02 / 12</div>
+  </section>
+
+  
+  <section class="slide s-stats" data-label="03 Career in Numbers" data-om-validate="false">
+    <div class="frame">
+      <div class="accent-l">
+        <div class="plus">42%</div>
+        <div class="lab">Best checkout lift</div>
+        <div class="corner-mark" style="top:auto; bottom:22px; right:22px; color:var(--ink)" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+      </div>
+      <div class="copy">
+        <h2>Career<br />in <mark>numbers</mark></h2>
+        <p>Eight years designing checkout, risk, and onboarding flows for fintech products used by millions. Three case studies, one throughline: earn trust before you ask for money.</p>
+        <div style="margin-top:auto" class="label">Snapshot · Portfolio 2026</div>
+      </div>
+      <div class="stat-a">
+        <div class="stat-num sm">3</div>
+        <div class="label" style="margin-top:8px">Case studies presented</div>
+      </div>
+      <div class="stat-b">
+        <div class="stat-num sm">8</div>
+        <div class="label" style="margin-top:8px">Years in product design</div>
+      </div>
+      <div class="stat-c">
+        <div class="stat-num sm">6</div>
+        <div class="label" style="margin-top:8px">Cross-functional teams led</div>
+      </div>
+      <div class="stat-big">
+        <div class="label">Users touched by shipped work</div>
+        <div class="v">18M+</div>
+        <div class="arrow-out arrow" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"><path d="M8 32 H56 M40 16 L56 32 L40 48"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="pagenum lemon">03 / 12</div>
+  </section>
+
+  
+  <section class="slide s-features" data-label="04 Key Features" data-om-validate="false">
+    <div class="frame">
+      <div class="head">
+        <h2>What I own</h2>
+        <div class="label">How I work</div>
+      </div>
+      <div class="feat">
+        <div class="pic"><div class="ph"></div><div class="tag">01</div></div>
+        <h3>Own the ambiguity</h3>
+        <p>I take briefs before they have a clean spec — fraud, compliance, and edge-case-heavy flows — and turn them into a shippable point of view.</p>
+      </div>
+      <div class="feat">
+        <div class="pic"><div class="ph"></div><div class="tag">02</div></div>
+        <h3>Evidence over opinion</h3>
+        <p>Every direction I ship is backed by a usability read, a funnel number, or a support-ticket pattern — not a hunch.</p>
+      </div>
+      <div class="feat">
+        <div class="pic"><div class="ph"></div><div class="tag">03</div></div>
+        <h3>Ship, then defend it</h3>
+        <p>I sit in the review room. Every claim on these slides can be traced to a number, a quote, or a screen.</p>
+      </div>
+    </div>
+    <div class="pagenum">04 / 12</div>
+  </section>
+
+  
+  <section class="slide s-chart" data-label="05 Case Study Lift" data-om-validate="false">
+    <div class="frame">
+      <div class="pane-l">
+        <div>
+          <div class="label" style="opacity:.7; color:var(--paper); margin-bottom:24px">Section 02 / Proof moments</div>
+          <h2>Three cases.<br />One <em>consistent</em><br />lift.</h2>
+        </div>
+        <p>Completion and satisfaction lift across the three case studies presented here, measured against each product's own baseline before my redesign shipped.</p>
+        <div class="yearlabel">Baseline vs shipped · indexed (baseline = 100)</div>
+      </div>
+      <div class="pane-r">
+        <div class="legend">
+          <div class="li"><i></i> Baseline</div>
+          <div class="li b"><i></i> Shipped</div>
+        </div>
+        <div class="bars">
+          <div class="bar"><div class="a" style="height:42%"></div><div class="b" style="height:78%"></div></div>
+          <div class="bar"><div class="a" style="height:55%"></div><div class="b" style="height:88%"></div></div>
+          <div class="bar"><div class="a" style="height:36%"></div><div class="b" style="height:62%"></div></div>
+          <div class="bar"><div class="a" style="height:64%"></div><div class="b" style="height:94%"></div></div>
+          <div class="bar"><div class="a" style="height:48%"></div><div class="b" style="height:72%"></div></div>
+          <div class="bar"><div class="a" style="height:30%"></div><div class="b" style="height:54%"></div></div>
+        </div>
+        <div class="xaxis">
+          <span>CHECKOUT</span><span>CHECKOUT NPS</span><span>RISK ALERTS</span><span>RISK NPS</span><span>ONBOARD</span><span>ONBOARD NPS</span>
+        </div>
+      </div>
+    </div>
+    <div class="pagenum invert">05 / 12</div>
+  </section>
+
+  
+  <section class="slide s-section" data-label="06 Section · Artifacts" data-om-validate="false">
+    <div class="frame">
+      <div class="pane-num">
+        <div class="lab">Section · Artifacts</div>
+        <div class="n">03</div>
+        <div class="corner-mark" style="top:auto; bottom:22px; right:22px;" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+      </div>
+      <div class="pane-title">
+        <div class="label" style="color:var(--paper); opacity:.7">The work, not the words</div>
+        <h2>See the<br />flow, not<br /><mark>the&nbsp;pitch.</mark></h2>
+        <p>The next slides walk through the flows, prototypes, and system decisions behind the top-performing case study — the checkout redesign.</p>
+      </div>
+    </div>
+    <div class="pagenum lemon">06 / 12</div>
+  </section>
+
+  
+  <section class="slide s-quote" data-label="07 What My Team Said" data-om-validate="false">
+    <div class="frame">
+      <div class="photo">
+        <div class="ph"></div>
+        <div class="tag">PORTRAIT / B&amp;W</div>
+      </div>
+      <div class="copy">
+        <div class="qmark">"</div>
+        <blockquote>Maya was the first designer on our team to turn a fraud-ops complaint into a shipped fix within a sprint. The checkout numbers moved because she asked support the right question, not because she guessed better.</blockquote>
+      </div>
+      <div class="attr">
+        <div class="role">VP Product · Payments startup, 2023–2025</div>
+        <div class="who">David Okafor</div>
+      </div>
+      <div class="mark">
+        <div class="blockmark" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+      </div>
+    </div>
+    <div class="pagenum">07 / 12</div>
+  </section>
+
+  
+  <section class="slide s-cta" data-label="08 The Ask" data-om-validate="false">
+    <div class="frame">
+      <div class="head">
+        <div class="lab">Three things I'm asking for</div>
+        <h2>The<br />ask</h2>
+      </div>
+      <div class="qr">
+        <svg viewBox="0 0 9 9" shape-rendering="crispEdges" aria-hidden="true">
+          <rect width="9" height="9" fill="#0a0a0a"/>
+          <g fill="#E6FF3D">
+            <rect x="1" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/>
+            <rect x="2" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/>
+            <rect x="1" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/>
+            <rect x="2" y="4" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/>
+            <rect x="1" y="5" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="5" y="5" width="1" height="1"/><rect x="7" y="5" width="1" height="1"/>
+            <rect x="2" y="6" width="1" height="1"/><rect x="4" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/>
+            <rect x="1" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/><rect x="7" y="7" width="1" height="1"/>
+          </g>
+        </svg>
+      </div>
+      <div class="step a">
+        <div class="num">01 · This round</div>
+        <h3>A technical deep dive</h3>
+        <p>Walk the panel through the Figma file and the decision log behind the checkout case study, screen by screen.</p>
+        <div class="label">45 min</div>
+      </div>
+      <div class="step b">
+        <div class="num">02 · If we move forward</div>
+        <h3>A paired exercise</h3>
+        <p>Pair with one of your designers on a live constraint from your roadmap — I want to see how your team actually works.</p>
+        <div class="label">Half day</div>
+      </div>
+      <div class="step c">
+        <div class="num" style="opacity:.7">03 · What I'm looking for</div>
+        <h3>Senior IC or lead</h3>
+        <p style="opacity:.85">A team shipping fintech or trust-heavy products, where design sits in the room when risk and growth disagree.</p>
+        <div class="arrow" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none" stroke="#E6FF3D" stroke-width="4"><path d="M8 32 H56 M40 16 L56 32 L40 48"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="pagenum">08 / 12</div>
+  </section>
+
+  
+  <section class="slide s-consult" data-label="09 Findings · Detail" data-om-validate="false">
+    <div class="frame">
+      <div class="head">
+        <div class="tag">Case study · 02</div>
+        <h2>Checkout drop-off was a trust problem, not a UI problem — and the fix cut abandonment by 42% in six weeks.</h2>
+      </div>
+      <div class="col a">
+        <h3>What I found</h3>
+        <div class="col-body">
+          <p><strong>Session recordings and support tickets</strong> showed users abandoning at the card-entry step for a reason no funnel metric had captured before.</p>
+          <ul>
+            <li><strong>Redundant re-entry</strong> — users retyped a card number three screens after they'd already confirmed it.</li>
+            <li><strong>No visible security cue</strong> — the padlock and processor logos sat below the fold on mobile.</li>
+            <li><strong>Error copy blamed the user</strong> — "invalid card" fired even when the real issue was a network timeout.</li>
+            <li><strong>Save-for-later friction</strong> — returning users had no faster path than a first-time buyer.</li>
+          </ul>
+        </div>
+        <div class="src">N = 1,140 sessions · usability panel</div>
+      </div>
+      <div class="col b">
+        <h3>Why it matters</h3>
+        <div class="col-body">
+          <div class="meta">$2.3M recovered checkout revenue — modelled, first quarter post-launch.</div>
+          <p>Checkout is the one screen where a user's trust and a company's revenue sit on the same pixel. Every extra second of doubt costs more here than anywhere else in the funnel.</p>
+          <p>The team had tried three copy tweaks before I joined. None worked, because the problem was never the words — it was the sequence of trust signals.</p>
+          <p>Replicated on two later launches with the same pattern. The lift held both times.</p>
+        </div>
+        <div class="src">Modelled on Q3 2025 cohort</div>
+      </div>
+      <div class="col c">
+        <h3>What I did</h3>
+        <div class="col-body">
+          <ul>
+            <li><strong>Redesigned the card-entry step</strong> to save state and never re-ask for a confirmed number. Shipped: Sprint 14.</li>
+            <li><strong>Moved trust marks above the fold</strong> and added a real-time save indicator. Shipped: Sprint 15.</li>
+            <li><strong>Rewrote every error state</strong> with the actual cause and a one-tap fix. Shipped: Sprint 15.</li>
+            <li><strong>Built a returning-buyer fast path</strong> using saved payment tokens. Shipped: Sprint 17.</li>
+          </ul>
+        </div>
+        <div class="src">Case study 02 of 3 · full flow in appendix</div>
+      </div>
+    </div>
+    <div class="pagenum">09 / 12</div>
+  </section>
+
+  
+  <section class="slide s-chart2" data-label="10 Impact, Measured" data-om-validate="false">
+    <div class="frame">
+      <div class="pane-l">
+        <div>
+          <div class="label" style="margin-bottom:18px">Section · Impact</div>
+          <h2>Completion<br/>climbs, and<br/>holds.</h2>
+        </div>
+        <p>Checkout completion rate by week, indexed against the six weeks before my redesign shipped. The lift is not a launch spike — it holds through the full quarter.</p>
+        <div class="legend">
+          <div class="li"><i style="background:var(--ink); height:2px"></i> Pre-redesign (control)</div>
+          <div class="li"><i style="background:var(--ink); height:5px"></i> Redesign, week 1</div>
+          <div class="li"><i style="background:var(--ink); height:8px"></i> Redesign, full quarter</div>
+        </div>
+      </div>
+      <div class="pane-r">
+        <div class="yhead">% of sessions completing checkout, by week</div>
+        <div class="plot">
+          <div class="yticks">
+            <span>100</span><span>75</span><span>50</span><span>25</span><span>0</span>
+          </div>
+          <div class="gline" style="top:0%"></div>
+          <div class="gline" style="top:25%"></div>
+          <div class="gline" style="top:50%"></div>
+          <div class="gline" style="top:75%"></div>
+          <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <polyline fill="none" stroke="#0a0a0a" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2,1.5"
+              points="0,4 16,30 32,50 48,64 64,76 80,84 100,90" />
+            <polyline fill="none" stroke="#0a0a0a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"
+              points="0,4 16,18 32,28 48,38 64,46 80,52 100,56" />
+            <polyline fill="none" stroke="#0a0a0a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+              points="0,4 16,10 32,16 48,22 64,28 80,32 100,36" />
+            <circle cx="100" cy="36" r="2" fill="#E6FF3D" stroke="#0a0a0a" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="xticks">
+          <span>W-6</span><span>W-3</span><span>Launch</span><span>W+3</span><span>W+6</span><span>W+9</span><span>W+12</span>
+        </div>
+      </div>
+    </div>
+    <div class="pagenum lemon">10 / 12</div>
+  </section>
+
+  
+  <section class="slide s-process2" data-label="11 Process" data-om-validate="false">
+    <div class="frame">
+      <div class="head">
+        <h2>From brief<br/>to shipped,<br/>in five moves.</h2>
+        <div class="sub">The same process behind all three case studies — repeatable enough that my team could run it without me by the third time.</div>
+      </div>
+      <div class="node n1">
+        <div class="n">01 · Listen</div>
+        <h3>Sit with support</h3>
+        <p>Read raw tickets and watch three real sessions before opening Figma.</p>
+        <svg class="arr" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 16 H26 M20 9 L26 16 L20 23"/></svg>
+      </div>
+      <div class="node n2">
+        <div class="n">02 · Frame</div>
+        <h3>Name the real problem</h3>
+        <p>Turn the pattern into one sentence a PM and an engineer would both sign off on.</p>
+        <svg class="arr" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 16 H26 M20 9 L26 16 L20 23"/></svg>
+      </div>
+      <div class="node n3">
+        <div class="n">03 · Prototype</div>
+        <h3>Build the smallest test</h3>
+        <p>A clickable flow that isolates the one variable we're actually testing.</p>
+        <svg class="arr" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 16 H26 M20 9 L26 16 L20 23"/></svg>
+      </div>
+      <div class="node n4">
+        <div class="n">04 · Validate</div>
+        <h3>Read it against a number</h3>
+        <p>Usability panel plus the funnel metric it's meant to move — never one alone.</p>
+        <svg class="arr" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 16 H26 M20 9 L26 16 L20 23"/></svg>
+      </div>
+      <div class="node n5">
+        <div class="n">05 · Ship</div>
+        <h3>Land it in production</h3>
+        <p>Pair with engineering through launch — I don't hand off a spec and disappear.</p>
+        <svg class="arr" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 16 H26 M20 9 L26 16 L20 23"/></svg>
+      </div>
+      <div class="node out">
+        <div class="n" style="opacity:.7">Outcome</div>
+        <h3>A case worth presenting</h3>
+        <p style="opacity:.85">Three of these, back to back, is what's on the table today.</p>
+      </div>
+      <div class="timeline">
+        <span>Week 1 · Listen</span>
+        <span>Week 2 · Frame</span>
+        <span>Week 3–4 · Prototype</span>
+        <span>Week 5 · Validate</span>
+        <span>Week 6 · Ship</span>
+        <span style="border-right:0">Total · 6 weeks</span>
+      </div>
+    </div>
+    <div class="pagenum">11 / 12</div>
+  </section>
+
+  
+  <section class="slide s-matrix2" data-label="12 Comparison" data-om-validate="false">
+    <div class="frame">
+      <div class="head">
+        <h2>Why each<br/>case earns<br/>its seat.</h2>
+        <div class="sub">Scored against the four things a senior portfolio review actually tests. All three case studies clear the bar on ambiguity and ownership.</div>
+      </div>
+      <div class="table">
+        <div class="cell head-row">Lever</div>
+        <div class="cell head-row">Checkout redesign</div>
+        <div class="cell head-row">Risk-alert redesign</div>
+        <div class="cell head-row">Onboarding rebuild</div>
+
+        <div class="cell row-label">Time-to-impact</div>
+        <div class="cell"><span class="pill yes">6 weeks</span></div>
+        <div class="cell"><span class="pill part">10 weeks</span></div>
+        <div class="cell"><span class="pill yes">6 weeks</span></div>
+
+        <div class="cell row-label">Ambiguity owned</div>
+        <div class="cell"><span class="pill yes">High</span></div>
+        <div class="cell"><span class="pill yes">High</span></div>
+        <div class="cell"><span class="pill part">Medium</span></div>
+
+        <div class="cell row-label">Cross-functional leadership</div>
+        <div class="cell"><span class="pill yes">Design + eng + support</span></div>
+        <div class="cell"><span class="pill yes">Design + fraud ops</span></div>
+        <div class="cell"><span class="pill no">Design only</span></div>
+
+        <div class="cell row-label last">Measured impact</div>
+        <div class="cell last"><span class="pill yes">+42% completion</span></div>
+        <div class="cell last"><span class="pill yes">-61% alert fatigue</span></div>
+        <div class="cell last"><span class="pill note">+18% completion</span></div>
+      </div>
+    </div>
+    <div class="pagenum lemon">12 / 12</div>
+  </section>
+
+  
+
+</deck-stage>
+
+<aside id="atlas-source-proof" aria-label="Atlas 來源證據 / Source evidence" data-language-exempt="original-source" style="all:initial;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;position:relative;z-index:2147483647;padding:10px 14px;color:#30464d;background:#f8faf9;border-top:1px solid rgba(21,39,45,.22);font:12px/1.4 ui-monospace,Consolas,monospace"><span>來源版式離線適配（保留原文）· 原始程式已停用；本機適配器提供頁面與減動控制<br><span lang="en">Offline source-layout adaptation; original text retained. Source scripts are disabled; local adapters provide page and reduced-motion controls.</span></span><span>bf714528070d · 41f41aac97e6</span></aside><script data-atlas-owned-adapter="0" data-atlas-script-sha256="d9612f30b32168562112ef5189713d6d12db79fa2eff042d147e7d4cb24fb3bb">/* Atlas reviewed source deck adapter: no upstream runtime execution. */
+(function deckRuntime(config) {
+  'use strict';
+  function start() {
+    const roots = [...document.querySelectorAll(config.selector)];
+    if (roots.length !== 1) throw new Error('Source deck root binding changed.');
+    const deck = roots[0];
+    if (deck.dataset.atlasDeckInitialized === 'true') return;
+    const slides = [...deck.children].filter((node) => node.tagName === 'SECTION');
+    if (slides.length !== config.slide_count || [...deck.children].some((node) => !['SECTION', 'STYLE', 'SCRIPT', 'TEMPLATE'].includes(node.tagName)
+      && !(config.source_controls || []).some(selector => node.matches(selector)))) throw new Error('Source deck section binding changed.');
+    const sourceIsActive = config.variant === 'DIV_DECK_IS_ACTIVE_SECTIONS';
+    if ((config.variant === 'STAGE_ACTIVE_SECTIONS' || sourceIsActive) && slides.some((node) => !node.classList.contains('slide'))) throw new Error('Source stage slide grammar changed.');
+    if (sourceIsActive && deck.id !== 'deck') throw new Error('Source div deck identity changed.');
+    deck.dataset.atlasDeckInitialized = 'true';
+    const horizontal = config.variant === 'STAGE_HORIZONTAL_SECTIONS';
+    const scene = horizontal ? deck.parentNode : deck;
+    if (horizontal && (scene.id !== 'deck' || !scene.classList.contains('deck')
+      || [...scene.children].filter(node => node.classList.contains('demo-banner')).length !== 1
+      || [...scene.children].filter(node => node.classList.contains('chrome')).length !== 1)) throw new Error('Source horizontal scene binding changed.');
+    scene.dataset.atlasDeckRoot = config.variant;
+    if (config.source_horizontal_scroll || config.source_readable_scroll) {
+      // The original horizontal keyboard/dot controller is replaced by the
+      // local controls below. Its scroll/snap mechanism must not compete with
+      // the adapter's single active, absolute-positioned source page.
+      deck.style.setProperty('overflow', 'hidden', 'important');
+      deck.style.setProperty('scroll-snap-type', 'none', 'important');
+      deck.style.setProperty('scroll-behavior', 'auto', 'important');
+      deck.scrollLeft = 0; deck.scrollTop = 0;
+    }
+    for (const selector of config.source_controls || []) {
+      for (const control of document.querySelectorAll(selector)) {
+        if (slides.some(slide => slide.contains(control))) throw new Error('Source control selector intersects original slide content.');
+        control.dataset.atlasDeckReplacedControls = 'true'; control.inert = true;
+      }
+    }
+    if (horizontal) {
+      deck.dataset.atlasDeckViewportStage = 'true';
+      const sourceControls = [...scene.children].find(node => node.classList.contains('chrome'));
+      sourceControls.dataset.atlasDeckReplacedControls = 'true'; sourceControls.inert = true;
+    }
+    if (sourceIsActive) {
+      for (const selector of ['#nav-dots', '#slide-counter']) {
+        const sourceControl = document.querySelector(selector);
+        if (!sourceControl || sourceControl.parentNode !== deck.parentNode) throw new Error('Source div deck control binding changed.');
+        sourceControl.dataset.atlasDeckReplacedControls = 'true'; sourceControl.inert = true;
+      }
+    }
+    slides.forEach((slide, index) => { slide.dataset.atlasDeckSlide = String(index); });
+    if (config.variant === 'DECK_STAGE_SECTIONS' && !customElements.get('deck-stage')) customElements.define('deck-stage', class extends HTMLElement {});
+
+    const shell = document.createElement('div'), viewport = document.createElement('div'), controls = document.createElement('div');
+    shell.dataset.atlasDeckShell = 'true'; viewport.dataset.atlasDeckViewport = 'true'; controls.dataset.atlasDeckControls = 'true';
+    scene.parentNode.insertBefore(shell, scene); viewport.append(scene); shell.append(viewport, controls);
+    const proof = document.querySelector('#atlas-source-proof');
+    if (proof) shell.append(proof);
+    const shadow = controls.attachShadow({ mode: 'open' });
+    const style = document.createElement('style');
+    style.textContent = ':host{display:block;background:#f8faf9;color:#172327;font:12px/1.35 system-ui,sans-serif}nav{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:12px;align-items:center;max-width:520px;min-height:52px;margin:auto;padding:4px 8px;box-sizing:border-box}button{font:inherit;min-width:0;min-height:44px;padding:5px 8px;border:1px solid #617176;border-radius:3px;background:white;color:inherit;cursor:pointer;overflow-wrap:anywhere}button:disabled{opacity:.45;cursor:default}button:focus-visible{outline:3px solid #135e67;outline-offset:2px}output{min-width:5em;text-align:center}';
+    const nav = document.createElement('nav'), previous = document.createElement('button'), next = document.createElement('button'), counter = document.createElement('output');
+    nav.setAttribute('aria-label', '投影片導覽／Slide navigation');
+    previous.type = 'button'; next.type = 'button'; previous.textContent = '上一頁／Previous'; next.textContent = '下一頁／Next';
+    previous.setAttribute('aria-label', '上一頁／Previous slide'); next.setAttribute('aria-label', '下一頁／Next slide');
+    counter.setAttribute('aria-live', 'polite'); counter.setAttribute('aria-atomic', 'true');
+    nav.append(previous, counter, next); shadow.append(style, nav);
+    // This reviewed source builds decorative primitives and chart values from
+    // literal source data. Reproduce those primitives, never run its script.
+    // Random positions use the same original distribution, once per document.
+    if (config.source_orbit_data) {
+      const create = (id, count, cls, style) => {
+        const parent = deck.querySelector('#' + id);
+        if (!parent || parent.children.length) throw new Error('Source generated primitive container changed.');
+        for (let i = 0; i < count; i++) { const node = document.createElement('div'); node.className = cls; style(node, i); parent.append(node); }
+      };
+      for (const [id, count] of [['starfield1', 50], ['starfield4', 30], ['starfield7', 35], ['starfield10', 45]]) create(id, count, 'star', node => {
+        node.style.left = Math.random() * 100 + '%'; node.style.top = Math.random() * 100 + '%'; node.style.animationDelay = Math.random() * 3 + 's';
+      });
+      for (const [id, count] of [['particles1', 16], ['particles10', 20]]) create(id, count, 'p', (node, i) => {
+        node.style.background = ['var(--neon-cyan)', 'var(--neon-pink)', 'var(--neon-yellow)'][i % 3];
+        node.style.left = Math.random() * 100 + '%'; node.style.top = Math.random() * 100 + '%';
+        node.style.animationDelay = Math.random() * 5 + 's'; node.style.animationDuration = (6 + Math.random() * 6) + 's';
+      });
+      create('landscape10', 12, 'mountain', (node, i) => {
+        node.style.height = [30, 50, 70, 40, 60, 35, 55, 45, 80, 25, 50, 40][i] + 'px'; node.style.width = (60 + (i % 3) * 20) + 'px';
+      });
+    }
+    const sourceQuoteSizes = new Map();
+    const sourceHeadingSizes = new Map();
+    function sourceHeadingFit(slide) {
+      if (!config.source_heading_fit) return;
+      for (const heading of slide.querySelectorAll('h1.display')) {
+        if (!sourceHeadingSizes.has(heading)) sourceHeadingSizes.set(heading, {
+          value: heading.style.getPropertyValue('font-size'), priority: heading.style.getPropertyPriority('font-size')
+        });
+        const original = sourceHeadingSizes.get(heading);
+        if (original.value) heading.style.setProperty('font-size', original.value, original.priority);
+        else heading.style.removeProperty('font-size');
+        const base = parseFloat(getComputedStyle(heading).fontSize);
+        const fits = () => {
+          const box = heading.getBoundingClientRect(), clip = slide.getBoundingClientRect();
+          if (box.width <= 0 || clip.width <= 0) return false;
+          const walker = document.createTreeWalker(heading, NodeFilter.SHOW_TEXT); let node;
+          while ((node = walker.nextNode())) {
+            let index = 0;
+            for (const character of node.data) {
+              const end = index + character.length;
+              if (character.trim()) {
+                const range = document.createRange(); range.setStart(node, index); range.setEnd(node, end);
+                const rect = range.getBoundingClientRect();
+                if (rect.left < Math.max(box.left, clip.left) || rect.right > Math.min(box.right, clip.right)) return false;
+              }
+              index = end;
+            }
+          }
+          return true;
+        };
+        if (!(base > 0) || heading.getBoundingClientRect().width <= 0) continue;
+        if (!fits()) {
+          let low = Math.min(16, base), high = base;
+          heading.style.setProperty('font-size', low + 'px', 'important');
+          if (fits()) {
+            for (let i = 0; i < 20; i++) {
+              const mid = (low + high) / 2; heading.style.setProperty('font-size', mid + 'px', 'important');
+              if (fits()) low = mid; else high = mid;
+            }
+            heading.style.setProperty('font-size', low + 'px', 'important');
+          }
+        }
+        heading.dataset.atlasSourceHeadingFit = fits() ? 'FITTED_SOURCE_TEXT' : 'READABLE_FLOOR_EXCEEDS_SOURCE_BOX';
+      }
+    }
+    function sourceAutoFit(slide) {
+      if (!config.source_auto_fit) return;
+      for (const node of slide.querySelectorAll('.slide__kpi-val')) {
+        node.style.transform = ''; node.style.transformOrigin = '';
+        if (node.clientWidth > 0 && node.scrollWidth > node.clientWidth) { node.style.transform = 'scale(' + node.clientWidth / node.scrollWidth + ')'; node.style.transformOrigin = 'left top'; }
+      }
+      for (const node of slide.querySelectorAll('blockquote')) {
+        if (!slide.classList.contains('slide--quote')) continue;
+        if (!sourceQuoteSizes.has(node)) sourceQuoteSizes.set(node, parseFloat(getComputedStyle(node).fontSize));
+        const length = node.textContent.trim().length;
+        if (length > 100) node.style.fontSize = Math.max(16, Math.round(sourceQuoteSizes.get(node) * Math.max(0.5, 100 / length))) + 'px';
+      }
+    }
+    function sourceDataEndpoint() {
+      if (!config.source_orbit_data) return;
+      for (const node of deck.querySelectorAll('#barChart .chart-value')) node.textContent = String(parseInt(node.dataset.value, 10));
+      const chart = deck.querySelector('#barChart'), groups = [...chart.children];
+      const px = value => Number.parseFloat(value) || 0;
+      const outerHeight = node => { const style = getComputedStyle(node); return node.offsetHeight + px(style.marginTop) + px(style.marginBottom); };
+      const chartStyle = getComputedStyle(chart);
+      const contentHeight = chart.clientHeight - px(chartStyle.paddingTop) - px(chartStyle.paddingBottom);
+      const overhead = Math.max(...groups.map(group => {
+        const style = getComputedStyle(group);
+        return outerHeight(group.children[0]) + outerHeight(group.children[2]) + 2 * px(style.rowGap);
+      }));
+      // The source percentage's parent is auto-height, so its empty bars used
+      // to resolve to zero. A shared plot, derived from the source chart and
+      // original labels/gaps, preserves all five original percentage ratios.
+      const plotHeight = Math.max(0, contentHeight - overhead);
+      chart.dataset.atlasSourcePlotHeight = String(plotHeight);
+      for (const group of groups) {
+        const bar = group.children[1]; bar.style.flexShrink = '0';
+        const percent = Number(bar.dataset.height);
+        bar.style.height = (current === 3 ? plotHeight * percent / 100 : 0) + 'px';
+        bar.dataset.atlasSourcePercent = String(percent);
+      }
+      for (const node of deck.querySelectorAll('#hbarChart .hbar-fill')) node.style.width = (current === 4 ? node.dataset.width : '0') + '%';
+      for (const node of deck.querySelectorAll('#statsGrid .stat-number')) { const target = parseFloat(node.dataset.target); node.textContent = current === 6 ? (target % 1 !== 0 ? target.toFixed(1) : String(target)) + (node.dataset.suffix || '') : '0'; }
+    }
+    function needsReadableScroll(slide) {
+      if (!config.source_readable_scroll || window.innerWidth > config.source_readable_scroll_max_width) return false;
+      const clip = slide.getBoundingClientRect(), walker = document.createTreeWalker(slide, NodeFilter.SHOW_TEXT); let text;
+      while ((text = walker.nextNode())) {
+        if (!text.data.trim()) continue;
+        let element = text.parentElement || text.parentNode, hidden = false;
+        while (element && element !== slide) {
+          const style = getComputedStyle(element);
+          if (style.display === 'none' || style.visibility === 'hidden' || style.visibility === 'collapse') { hidden = true; break; }
+          element = element.parentElement || element.parentNode;
+        }
+        if (hidden) continue;
+        const range = document.createRange(); range.setStart(text, 0); range.setEnd(text, text.data.length);
+        const bounds = range.getBoundingClientRect();
+        if (bounds.bottom > bounds.top && (bounds.top < clip.top || bounds.bottom > clip.bottom)) return true;
+      }
+      return false;
+    }
+    // Only immutable, reviewed source roles enter this path. It reserves the
+    // source chrome and gives overflowing original content a positive scroll
+    // origin; it does not resize typography, remove text or repaint artwork.
+    const readableStates = new Map();
+    const px = value => Number.parseFloat(value) || 0;
+    function oneRole(slide, selector) {
+      if (selector === ':self') return slide;
+      const nodes = [...slide.querySelectorAll(selector)];
+      if (nodes.length !== 1) throw new Error('Source readable layout role binding changed.');
+      return nodes[0];
+    }
+    const sourceGraphicReleaseState = new Map();
+    function resetSourceGraphicReleases() {
+      for (const [node, values] of sourceGraphicReleaseState) {
+        for (const [key, original] of values) {
+          if (original.value) node.style.setProperty(key, original.value, original.priority);
+          else node.style.removeProperty(key);
+        }
+      }
+      sourceGraphicReleaseState.clear();
+    }
+    function applySourceGraphicReleases(slide) {
+      for (const graphic of config.source_graphic_releases || []) {
+        if (slides[graphic.index] !== slide) continue;
+        const node = oneRole(slide, graphic.selector);
+        if (String(node.tagName).toLowerCase() !== 'svg' || node.namespaceURI !== 'http://www.w3.org/2000/svg'
+          || node.getAttribute('viewBox') !== graphic.view_box || node.getAttribute('width') !== graphic.width
+          || node.getAttribute('height') !== graphic.height) throw new Error('Source graphic release geometry changed.');
+        let parent = node.parentNode;
+        for (const name of graphic.parent_chain) {
+          if (!parent?.classList.contains(name)) throw new Error('Source graphic release parent role changed.');
+          parent = parent.parentNode;
+        }
+        if (parent !== slide) throw new Error('Source graphic release page identity changed.');
+        let values = sourceGraphicReleaseState.get(node);
+        if (!values) { values = new Map(); sourceGraphicReleaseState.set(node, values); }
+        for (const key of ['overflow-x', 'overflow-y']) {
+          if (!values.has(key)) values.set(key, { value: node.style.getPropertyValue(key), priority: node.style.getPropertyPriority(key) });
+          node.style.setProperty(key, 'visible', 'important');
+        }
+      }
+    }
+    function rememberStyle(state, node, key, value) {
+      let values = state.styles.get(node);
+      if (!values) { values = new Map(); state.styles.set(node, values); }
+      if (!values.has(key)) values.set(key, { value: node.style.getPropertyValue(key), priority: node.style.getPropertyPriority(key) });
+      node.style.setProperty(key, value, 'important');
+    }
+    function resetReadableLayout(slide) {
+      const state = readableStates.get(slide);
+      if (!state) return null;
+      const prior = { owner: state.owner, top: state.owner.scrollTop, left: state.owner.scrollLeft,
+        scrolling: state.owner.dataset.atlasDeckInnerScroll === 'true', nested: [] };
+      state.owner.scrollTop = 0; state.owner.scrollLeft = 0;
+      if (state.wrapper) { state.wrapper.parentNode.insertBefore(state.content, state.wrapper); state.wrapper.remove(); state.wrapper = null; }
+      for (const [node, values] of state.styles) for (const [key, original] of values) {
+        if (original.value) node.style.setProperty(key, original.value, original.priority); else node.style.removeProperty(key);
+      }
+      state.styles.clear();
+      for (const [key, value] of state.attributes) {
+        if (value === null) state.owner.removeAttribute(key); else state.owner.setAttribute(key, value);
+      }
+      for (const [node, values] of state.nestedAttributes) {
+        prior.nested.push({ node, top: node.scrollTop, left: node.scrollLeft }); node.scrollTop = 0; node.scrollLeft = 0;
+        for (const [key, value] of values) { if (value === null) node.removeAttribute(key); else node.setAttribute(key, value); }
+        delete node.dataset.atlasSourceContentOwner; delete node.dataset.atlasSourceScrollAxes; delete node.dataset.atlasDeckInnerScroll;
+      }
+      state.nestedAttributes.clear();
+      state.owner.dataset.atlasDeckInnerScroll = 'false';
+      delete state.owner.dataset.atlasSourceContentOwner;
+      delete state.owner.dataset.atlasSourceScrollAxes;
+      return prior;
+    }
+    function localScrollOwner(slide) {
+      const state = readableStates.get(slide);
+      return state?.owner.dataset.atlasDeckInnerScroll === 'true' ? state.owner
+        : slide.dataset.atlasDeckInnerScroll === 'true' ? slide : null;
+    }
+    function applyTasteEndGutter(slide, state, set, scale) {
+      // Exact two source-native Taste editions only. The owned zero-height
+      // pseudo box reserves real horizontal end space, without changing the
+      // original content box widths, fonts, layout order or source pseudo art.
+      if (!config.source_native_flow_viewport) return;
+      if (slide.getAttribute('data-atlas-source-tail-gutter') !== null)
+        throw new Error('Source Taste previous end extent was not restored.');
+      const css = getComputedStyle(slide), pseudo = getComputedStyle(slide, '::after');
+      const px = value => /^(?:[0-9]+(?:\.[0-9]+)?)px$/.test(value) ? Number.parseFloat(value) : NaN;
+      const em = px(css.fontSize), left = px(css.paddingLeft) + px(css.borderLeftWidth), right = px(css.paddingRight) + px(css.borderRightWidth);
+      const box = slide.getBoundingClientRect();
+      if (!Number.isFinite(scale) || !(scale > 0) || !Number.isFinite(em) || !(em > 0)
+        || !Number.isFinite(left) || !Number.isFinite(right) || css.flexDirection !== 'column'
+        || !['none', 'normal'].includes(pseudo.content) || ![box.left, box.right, box.width, box.height].every(Number.isFinite)
+        || !(box.width > 0 && box.height > 0) || slide.scrollLeft !== 0)
+        throw new Error('Source Taste native end extent geometry is not measurable.');
+      const visible = node => {
+        for (let n = node; n && n !== slide; n = n.parentNode) {
+          if (['SCRIPT', 'STYLE', 'NOSCRIPT', 'TEMPLATE'].includes(n.tagName)) return false;
+          const style = getComputedStyle(n); if (style.display === 'none' || style.visibility !== 'visible') return false;
+        }
+        return true;
+      };
+      let maxRight = -Infinity, textCount = 0;
+      const include = rect => {
+        if (![rect.left, rect.right, rect.top, rect.bottom].every(Number.isFinite)) throw new Error('Source Taste end extent contains nonfinite bounds.');
+        if (rect.right > rect.left && rect.bottom > rect.top) maxRight = Math.max(maxRight, rect.right);
+      };
+      for (const node of slide.querySelectorAll('*')) if (visible(node)) include(node.getBoundingClientRect());
+      const walker = document.createTreeWalker(slide, NodeFilter.SHOW_TEXT); let text;
+      while ((text = walker.nextNode())) if (text.data.trim() && visible(text.parentNode)) {
+        const range = document.createRange(); range.setStart(text, 0); range.setEnd(text, text.data.length);
+        const rect = range.getBoundingClientRect(); include(rect);
+        if (rect.right > rect.left && rect.bottom > rect.top) textCount++;
+      }
+      if (!textCount || !Number.isFinite(maxRight)) throw new Error('Source Taste text end extent is missing.');
+      const contentStart = box.left + left * scale, contentEnd = box.right - right * scale;
+      if (maxRight <= contentEnd) return;
+      const width = (maxRight - contentStart) / scale + em;
+      if (!Number.isFinite(width) || !(width > 0)) throw new Error('Source Taste end extent width is invalid.');
+      set(slide, '--atlas-source-tail-extent', width + 'px');
+      slide.setAttribute('data-atlas-source-tail-gutter', 'taste-native-inline-end');
+    }
+    function applyReadableLayout(slide, prior) {
+      const recipe = (config.source_readable_layouts || []).find(item => slides[item.index] === slide);
+      if (!recipe) return;
+      const owner = oneRole(slide, recipe.owner), content = oneRole(slide, recipe.content);
+      const reserves = recipe.reserve.map(selector => oneRole(slide, selector));
+      const bounds = recipe.bounds.map(selector => oneRole(slide, selector));
+      let state = readableStates.get(slide);
+      if (!state) {
+        state = { owner, content, styles: new Map(), attributes: new Map(['tabindex', 'role', 'aria-label', 'data-atlas-source-tail-gutter'].map(key => [key, owner.getAttribute(key)])), nestedAttributes: new Map(), wrapper: null };
+        readableStates.set(slide, state);
+      } else if (state.owner !== owner || state.content !== content) throw new Error('Source readable layout owner identity changed.');
+      const set = (node, key, value) => rememberStyle(state, node, key, value);
+      const scale = Number(scene.dataset.atlasDeckScale);
+      if (!(scale > 0)) throw new Error('Source readable layout scale is invalid.');
+      if (recipe.kind === 'SOURCE_FLOW_CHILDREN') {
+        const graphics = new Map((recipe.definite_graphics || []).map(selector => { const node = oneRole(slide, selector); return [node, node.getBoundingClientRect().height / scale]; }));
+        if (config.source_native_flow_viewport) {
+          // This is an explicit responsive adaptation for the two immutable
+          // Taste editions, not a claimed source breakpoint. Retain the source
+          // gutters unless together they consume more than half the viewport;
+          // then retain one source body em on each edge, without shrinking type.
+          const css = getComputedStyle(slide), px = value => Number.parseFloat(value) || 0;
+          const em = px(css.fontSize), left = px(css.paddingLeft), right = px(css.paddingRight);
+          if (em > 0 && slide.clientWidth < 2 * (left + right)) {
+            for (const [key, value] of [['padding-left', left], ['padding-right', right], ['padding-top', px(css.paddingTop)], ['padding-bottom', px(css.paddingBottom)]]) set(slide, key, Math.min(value, em) + 'px');
+          }
+        }
+        if (recipe.source_block_flow) {
+          const spec = recipe.source_block_flow, children = Array.from(slide.children);
+          if (children.length !== spec.direct_roles.length || children.some((node, at) => !node.matches(spec.direct_roles[at])))
+            throw new Error('Source Block headerless direct role binding changed.');
+          for (const selector of spec.required_roles) oneRole(slide, selector);
+          const safe = node => {
+            const css = getComputedStyle(node);
+            for (const [key, value] of [['justify-content', css.justifyContent], ['align-items', css.alignItems], ['align-content', css.alignContent]])
+              if (['center', 'end', 'flex-end'].includes(value)) set(node, key, 'safe ' + value);
+          };
+          safe(slide);
+          const intrinsic = node => {
+            safe(node); set(node, 'flex-shrink', '0'); set(node, 'min-height', 'max-content'); set(node, 'min-width', 'min-content');
+            for (const child of node.children) if (!['absolute', 'fixed'].includes(getComputedStyle(child).position)) set(child, 'flex-shrink', '0');
+          };
+          const separate = (node, align) => {
+            const sourceFont = getComputedStyle(slide).fontSize, em = Number.parseFloat(sourceFont);
+            if (!/^(?:[0-9]+(?:\.[0-9]+)?)px$/.test(sourceFont) || !Number.isFinite(em) || !(em > 0) || !Number.isFinite(em * 2))
+              throw new Error('Source Block body spacing font is not a positive used pixel size.');
+            const gap = String(em * 2) + 'px';
+            // The source ornament remains painted, with its original size,
+            // rotation and DOM order, but has real space outside the copy.
+            set(node, 'position', 'relative'); set(node, 'inset', 'auto'); set(node, 'flex', '0 0 auto');
+            set(node, 'align-self', align); set(node, 'margin-top', gap); set(node, 'margin-bottom', gap);
+          };
+          if (spec.page_kind === 'intro' || spec.page_kind === 'split') {
+            // Retain the current original media-query column widths and row /
+            // column direction. Read real source boxes before changing flex.
+            const widths = children.map(node => node.getBoundingClientRect().width / scale);
+            if (!widths.every(value => Number.isFinite(value) && value > 0)) throw new Error('Source Block column width is not measurable.');
+            children.forEach((node, at) => { set(node, 'box-sizing', 'border-box'); set(node, 'width', widths[at] + 'px'); intrinsic(node); });
+            if (spec.page_kind === 'split') {
+              const visual = children[0], box = oneRole(slide, '.visual-box'), label = oneRole(slide, '.visual-label');
+              // This exact original panel contains a CSS shape and a text label,
+              // no image. Its former hidden clip loses the rotated label.
+              set(visual, 'overflow', 'visible'); intrinsic(box); separate(label, 'center');
+            }
+          } else {
+            const selector = spec.page_kind === 'hero' ? '.hero-frame' : spec.page_kind === 'quote' ? '.quote-frame' : '.close-frame';
+            const frame = oneRole(slide, selector); intrinsic(frame);
+            set(frame, 'display', 'flex'); set(frame, 'flex-direction', 'column');
+            set(frame, 'align-items', spec.page_kind === 'hero' ? 'flex-start' : 'safe center');
+            if (spec.page_kind === 'hero') {
+              separate(oneRole(slide, '.deco-pink-rect'), 'flex-end');
+              separate(oneRole(slide, '.deco-green-circle'), 'flex-end');
+              separate(oneRole(slide, '.deco-yellow-bar'), 'flex-start');
+            } else if (spec.page_kind === 'quote') {
+              separate(oneRole(slide, '.deco-quote-marks'), 'flex-start');
+              separate(oneRole(slide, '.deco-stripes'), 'flex-end');
+            } else separate(oneRole(slide, '.deco-star'), 'flex-end');
+          }
+        }
+        if (recipe.source_vellum_flow) {
+          const flow = recipe.source_vellum_flow, children = Array.from(slide.children), css = getComputedStyle(slide);
+          if (children.length !== flow.direct_roles.length || children.some((node, at) => !node.matches(flow.direct_roles[at])))
+            throw new Error('Source Vellum direct role binding changed.');
+          let compareLayout = null;
+          if (flow.page_kind === 'compare') {
+            const body = oneRole(slide, '.slide-body'), panels = Array.from(body.children);
+            if (panels.length !== 2 || !panels[0].matches('.compare-panel') || !panels[0].matches('.left')
+              || !panels[1].matches('.compare-panel') || !panels[1].matches('.right'))
+              throw new Error('Source Vellum compare panel binding changed.');
+            // The source body is display:contents. Measure the two real source
+            // panels before changing the parent layout, never its absent box.
+            const boxes = panels.map(node => node.getBoundingClientRect()), widths = boxes.map(box => box.width / scale);
+            const gap = (boxes[1].left - boxes[0].right) / scale;
+            if (!widths.every(value => Number.isFinite(value) && value > 0) || !Number.isFinite(gap) || gap < 0)
+              throw new Error('Source Vellum original compare columns are not measurable.');
+            compareLayout = { body, panels, widths, gap };
+          }
+          // The original source order becomes one reachable vertical flow.
+          // Centering is retained when it fits, with a positive overflow origin.
+          set(slide, 'display', 'flex'); set(slide, 'flex-direction', 'column');
+          set(slide, 'align-items', css.alignItems === 'center' ? 'safe center' : 'stretch');
+          const safe = node => { const style = getComputedStyle(node); for (const [key, value] of [['justify-content', style.justifyContent], ['align-items', style.alignItems], ['align-content', style.alignContent]]) if (value === 'center') set(node, key, 'safe center'); };
+          for (const node of children) safe(node);
+          const annotation = oneRole(slide, '.pin-annotation');
+          set(annotation, 'align-self', 'flex-start'); set(annotation, 'margin-top', 'var(--gap-md)');
+          if (flow.direct_roles.includes('header.slide-chrome')) {
+            const chrome = oneRole(slide, '.slide-chrome'); set(chrome, 'align-self', 'stretch');
+            set(chrome, 'margin-bottom', 'var(--gap-md)');
+          }
+          if (flow.page_kind === 'stats') {
+            const row = oneRole(slide, '.stats-row'), items = row.querySelectorAll('.pin-stat');
+            if (items.length !== 3) throw new Error('Source Vellum stat count changed.');
+            set(row, 'min-width', 'min-content'); set(row, 'align-self', 'safe center');
+            for (const node of items) safe(node);
+          } else if (flow.page_kind === 'compare') {
+            const body = oneRole(slide, '.slide-body'), panels = Array.from(body.children);
+            if (panels.length !== 2 || !panels[0].matches('.compare-panel') || !panels[0].matches('.left')
+              || !panels[1].matches('.compare-panel') || !panels[1].matches('.right'))
+              throw new Error('Source Vellum compare panel binding changed.');
+            const original = compareLayout, width = original.widths[0] + original.widths[1] + original.gap;
+            set(body, 'display', 'grid'); set(body, 'grid-template-columns', original.widths.map(value => value + 'px').join(' '));
+            set(body, 'column-gap', original.gap + 'px'); set(body, 'width', width + 'px'); set(body, 'min-width', width + 'px');
+            for (const panel of panels) { set(panel, 'box-sizing', 'border-box'); set(panel, 'height', 'auto'); safe(panel); }
+          } else if (flow.page_kind === 'chart') {
+            const wrapper = oneRole(slide, '.chart-wrapper'), track = oneRole(slide, '.bar-track');
+            if (track.querySelectorAll('.bar-col').length !== 5 || track.querySelectorAll('.bar-fill').length !== 5
+              || track.querySelectorAll('.bar-x-label').length !== 5)
+              throw new Error('Source Vellum chart role binding changed.');
+            set(wrapper, 'flex', '0 0 auto'); set(wrapper, 'min-height', 'max-content');
+            set(wrapper, 'justify-content', 'safe flex-end');
+            // Keep authored 28vh and each original fill percentage untouched.
+            set(track, 'flex-shrink', '0'); set(track, 'min-width', 'max-content');
+            set(track, 'padding-right', '1em');
+          }
+        }
+        if (recipe.source_cover_flow) {
+          const children = Array.from(slide.children), matches = (node, selector) => !!node && node.matches(selector);
+          if (recipe.source_cover_flow === 'GROVE_FOUR_DIRECT_ROLES') {
+            const [sidebar, watermark, main, footer] = children;
+            if (children.length !== 4 || !matches(sidebar, 'div.grove-sidebar') || !matches(watermark, 'div.grove-num')
+              || !matches(main, 'div') || !matches(footer, 'div') || main.children.length !== 4
+              || !matches(main.children[0], '.kicker') || !matches(main.children[1], '.rule')
+              || !matches(main.children[2], 'h1.h1') || !matches(main.children[3], 'p.lead')
+              || footer.children.length !== 2 || Array.from(footer.children).some(node => !matches(node, 'span.label')))
+              throw new Error('Source cover direct role binding changed.');
+            // The source disabled sidebar and absolute watermark remain as is.
+            set(main, 'justify-content', 'flex-start');
+          } else if (recipe.source_cover_flow === 'MAT_THREE_GRID_ROLES') {
+            const names = ['cover-headline', 'cover-copy', 'cover-bottom'];
+            if (children.length !== 3 || children.some((node, at) => !matches(node, 'div.' + names[at])))
+              throw new Error('Source cover direct role binding changed.');
+            // Preserve the source two-column / spanning-footer grid. The first
+            // row retains spare height when it fits, but cannot compress copy.
+            set(slide, 'grid-template-rows', 'minmax(max-content, 1fr) max-content');
+            set(slide, 'align-content', 'start');
+            set(children[1], 'justify-content', 'safe center');
+          } else throw new Error('Source cover flow kind is not reviewed.');
+        }
+        set(slide, 'justify-content', 'safe center');
+        for (const selector of recipe.flow_chrome || []) { const node = oneRole(slide, selector); set(node, 'position', 'relative'); set(node, 'inset', 'auto'); }
+        for (const node of slide.children) {
+          const css = getComputedStyle(node);
+          if (!['absolute', 'fixed'].includes(css.position) && css.display !== 'none') {
+            set(node, 'flex', '0 0 auto');
+            if (graphics.has(node)) {
+              const height = graphics.get(node);
+              if (!(height > 0)) throw new Error('Source percentage graphic has no definite measured height.');
+              set(node, 'box-sizing', 'border-box'); set(node, 'height', height + 'px'); set(node, 'min-height', height + 'px');
+            } else set(node, 'min-height', 'max-content');
+          }
+        }
+        for (const selector of recipe.intrinsic_containers || []) { const node = oneRole(slide, selector); set(node, 'height', 'auto'); set(node, 'flex', '0 0 auto'); set(node, 'min-height', 'max-content'); }
+        if (recipe.horizontal_table) {
+          const table = oneRole(slide, '.table-scroll');
+          state.nestedAttributes.set(table, new Map(['tabindex', 'role', 'aria-label'].map(key => [key, table.getAttribute(key)])));
+          table.setAttribute('tabindex', '0'); table.setAttribute('role', 'region'); table.setAttribute('aria-label', '表格內容／Table content');
+          table.dataset.atlasSourceContentOwner = 'SOURCE_TABLE_HORIZONTAL'; table.dataset.atlasSourceScrollAxes = 'xy';
+          table.dataset.atlasDeckInnerScroll = 'true';
+          const previous = prior?.nested.find(item => item.node === table);
+          table.scrollLeft = table.scrollWidth > table.clientWidth && previous ? previous.left : 0;
+        }
+      } else if (recipe.kind === 'RESERVED_SOURCE_FRAME' || recipe.kind === 'RESERVED_HEADER_BODY') {
+        set(slide, 'display', 'grid'); set(slide, 'grid-template-rows', recipe.kind === 'RESERVED_HEADER_BODY' ? 'auto minmax(0,1fr)' : 'auto minmax(0,1fr) auto');
+        set(slide, 'justify-content', 'normal'); set(slide, 'align-items', 'stretch');
+        set(owner, 'height', '100%'); set(owner, 'box-sizing', 'border-box'); set(owner, 'align-content', 'safe center');
+        if (recipe.kind === 'RESERVED_HEADER_BODY') { set(owner, 'align-content', 'start'); set(owner, 'grid-auto-rows', 'max-content'); }
+        if (recipe.source_intrinsic_flow) {
+          set(owner, 'max-height', 'none'); set(owner, 'justify-content', 'flex-start');
+          for (const child of owner.children) set(child, 'flex-shrink', '0');
+        }
+        if (recipe.source_svg_canvas) {
+          const canvas = recipe.source_svg_canvas, svg = oneRole(slide, canvas.selector);
+          if (svg.getAttribute('viewBox') !== canvas.view_box) throw new Error('Source SVG viewBox identity changed.');
+          // Explicit source-coordinate canvas: preserve aspect, all primitives
+          // and SVG text, then expose its full extent through the native owner.
+          for (const key of ['width', 'min-width', 'max-width']) set(svg, key, canvas.width + 'px');
+          for (const key of ['height', 'min-height', 'max-height']) set(svg, key, canvas.height + 'px');
+          set(svg, 'flex', '0 0 auto');
+          for (const selector of recipe.intrinsic_containers) {
+            const node = oneRole(slide, selector); set(node, 'flex', '0 0 auto');
+            set(node, 'min-width', 'max-content'); set(node, 'min-height', 'max-content');
+          }
+          set(oneRole(slide, '.chart-body'), 'width', 'max-content');
+          set(oneRole(slide, '.chart-body'), 'height', 'auto');
+        }
+        for (const node of reserves) {
+          set(node, 'position', 'relative'); set(node, 'inset', 'auto');
+          // The source absolute chrome's inline padding matched the slide's.
+          // Its new grid cell is already inside that same slide content edge.
+          set(node, 'padding-left', '0'); set(node, 'padding-right', '0');
+        }
+        for (const selector of recipe.release_clips || []) { const node = oneRole(slide, selector); set(node, 'overflow-x', 'visible'); set(node, 'overflow-y', 'visible'); }
+      } else if (recipe.kind === 'RESERVED_SOURCE_FAMILY_BODY') {
+        const graphics = (recipe.definite_graphics || []).map(selector => oneRole(slide, selector));
+        set(slide, 'display', 'grid'); set(slide, 'grid-template-rows', 'auto minmax(0,1fr) auto');
+        set(slide, 'justify-content', 'normal'); set(slide, 'align-items', 'stretch');
+        set(owner, 'height', '100%'); set(owner, 'box-sizing', 'border-box');
+        // Keep centering where it fits, but never center overflow behind a
+        // negative, unreachable scroll origin. Do not change text metrics.
+        const css = getComputedStyle(owner);
+        for (const [property, value] of [['align-items', css.alignItems], ['align-content', css.alignContent], ['justify-content', css.justifyContent]])
+          if (['center', 'end', 'flex-end'].includes(value)) set(owner, property, 'safe ' + value);
+        for (const node of owner.children) if (getComputedStyle(node).display !== 'none') set(node, 'flex-shrink', '0');
+        for (const node of reserves) { set(node, 'position', 'relative'); set(node, 'inset', 'auto'); }
+        for (const selector of recipe.intrinsic_containers || []) {
+          const node = oneRole(slide, selector); set(node, 'flex', '0 0 auto'); set(node, 'min-height', 'max-content');
+        }
+        for (const node of graphics) {
+          // Only the exact Grove/MAT source .bar-track enters this family branch.
+          // Its authored vh height (Grove 30/42vh; MAT 30/38vh) is definite. Prevent flex shrink
+          // and expose the original nowrap label extent without freezing a
+          // previously compressed used height or replacing the source unit.
+          set(node, 'flex-shrink', '0'); set(node, 'min-width', 'max-content');
+          // Keep a readable end gutter after the original nowrap labels. This
+          // reserves real scrollable layout space; text, bars and vh heights remain.
+          set(node, 'padding-right', '1em');
+        }
+      } else if (recipe.kind === 'RESERVED_CHROME_BODY') {
+        set(slide, 'display', 'grid'); set(slide, 'grid-template-rows', 'auto minmax(0,1fr) auto');
+        set(slide, 'justify-content', 'normal');
+        set(owner, 'align-items', 'start'); set(owner, 'align-content', 'start');
+        for (const node of reserves) set(node, 'position', 'relative');
+      } else if (recipe.kind === 'RESERVED_ATTRIBUTION_BODY') {
+        set(slide, 'display', 'grid'); set(slide, 'grid-template-rows', 'minmax(0,1fr) auto');
+        set(slide, 'justify-content', 'normal'); set(slide, 'justify-items', 'center');
+        set(owner, 'height', '100%'); set(owner, 'box-sizing', 'border-box');
+        set(owner, 'justify-content', 'flex-start');
+        for (const node of owner.children) set(node, 'flex-shrink', '0');
+        for (const node of reserves) {
+          set(node, 'position', 'relative'); set(node, 'inset', 'auto');
+          set(node, 'justify-self', 'start');
+        }
+      } else if (recipe.kind === 'POSITIVE_SOURCE_COMPOSITION') {
+        // Keep the source content's exact used width. The wrapper reserves
+        // transformed semantic labels as real layout space, including their
+        // negative source offsets, so both axes have reachable positive bounds.
+        if (recipe.source_intrinsic_flow) {
+          set(content, 'flex-shrink', '0'); set(content, 'min-height', 'max-content');
+          set(content, 'justify-content', 'flex-start');
+          for (const child of content.children) set(child, 'flex-shrink', '0');
+          for (const chart of content.querySelectorAll('.pixel-bar-chart')) set(chart, 'flex-shrink', '0');
+          for (const group of content.querySelectorAll('.chart-bar-group')) {
+            set(group, 'flex-shrink', '0');
+            for (const child of group.children) set(child, 'flex-shrink', '0');
+          }
+        }
+        if (recipe.source_separated_notes) {
+          const spec = recipe.source_separated_notes, cluster = oneRole(slide, spec.container);
+          const notes = spec.notes.map(selector => oneRole(slide, selector));
+          if (cluster.children.length !== 5 || notes.some((node, index) => cluster.children[index] !== node)) throw new Error('Source closing note order binding changed.');
+          // The five immutable post-its contain meaningful text. Keep their
+          // source fonts, padding, transforms, sizes and DOM order, while
+          // reserving each rotated border box in its own native-scroll row.
+          const used = notes.map(node => {
+            const css = getComputedStyle(node);
+            if (![css.width, css.height].every(value => /^(?:[0-9]+(?:\.[0-9]+)?)px$/.test(value) && parseFloat(value) > 0)) throw new Error('Source closing note used size is not positive.');
+            return { width: css.width, height: css.height };
+          });
+          set(cluster, 'display', 'grid'); set(cluster, 'grid-template-columns', 'max-content');
+          set(cluster, 'justify-content', 'center'); set(cluster, 'align-items', 'center'); set(cluster, 'row-gap', '2em');
+          notes.forEach((node, index) => {
+            set(node, 'position', 'relative'); set(node, 'inset', 'auto'); set(node, 'margin', '0');
+            set(node, 'width', used[index].width); set(node, 'height', used[index].height);
+            set(node, 'justify-self', 'center'); set(node, 'align-self', 'center');
+            set(node, 'grid-column', '1'); set(node, 'grid-row', String(index + 1));
+          });
+          const boxes = notes.map(node => node.getBoundingClientRect());
+          if (boxes.some(box => ![box.width, box.height].every(value => Number.isFinite(value) && value > 0))) throw new Error('Source closing note measured box is not positive.');
+          set(cluster, 'grid-template-rows', boxes.map(box => box.height / scale + 'px').join(' '));
+          set(cluster, 'width', Math.max(...boxes.map(box => box.width / scale)) + 'px');
+          const separated = notes.map(node => node.getBoundingClientRect());
+          for (let a = 0; a < separated.length; a++) for (let b = a + 1; b < separated.length; b++) {
+            const x = separated[a], y = separated[b];
+            if (Math.min(x.right, y.right) > Math.max(x.left, y.left) && Math.min(x.bottom, y.bottom) > Math.max(x.top, y.top)) throw new Error('Source closing note rectangles still overlap.');
+          }
+        }
+        const graphicBounds = (recipe.source_graphic_bounds || []).map(graphic => {
+          const node = oneRole(slide, graphic.selector);
+          if (String(node.tagName).toLowerCase() !== 'svg' || node.getAttribute('viewBox') !== graphic.view_box) throw new Error('Source readable graphic role binding changed.');
+          return node;
+        });
+        // These immutable source roles contain foreground text. Their internal
+        // clip is unnecessary (photo label), or demonstrably cuts SVG legends.
+        // Keep original transforms, viewBox, geometry, fonts and used SVG size.
+        for (const selector of recipe.release_clips || []) { const node = oneRole(slide, selector); set(node, 'overflow-x', 'visible'); set(node, 'overflow-y', 'visible'); }
+        const width = content.getBoundingClientRect().width / scale;
+        if (!(width > 0)) throw new Error('Source readable composition has no measured width.');
+        set(content, 'flex-shrink', '0'); set(content, 'box-sizing', 'border-box'); set(content, 'width', width + 'px');
+        const wrapper = document.createElement('div'); wrapper.dataset.atlasSourceContentExtent = 'true';
+        content.parentNode.insertBefore(wrapper, content); wrapper.append(content); state.wrapper = wrapper;
+        wrapper.style.setProperty('position', 'relative'); wrapper.style.setProperty('flex', '0 0 auto');
+        wrapper.style.setProperty('box-sizing', 'content-box'); wrapper.style.setProperty('width', width + 'px');
+        set(slide, 'justify-content', 'flex-start'); set(slide, 'align-items', 'flex-start');
+        const base = content.getBoundingClientRect();
+        const complete = recipe.complete_content_extent ? [...content.querySelectorAll('*')].filter(node => {
+          const css = getComputedStyle(node); return css.display !== 'none' && css.visibility !== 'hidden' && css.visibility !== 'collapse';
+        }) : [];
+        const union = [base, ...bounds.map(node => node.getBoundingClientRect()), ...complete.map(node => node.getBoundingClientRect()),
+          ...(recipe.source_descendant_bounds ? [...content.querySelectorAll('*')].map(node => node.getBoundingClientRect()) : []),
+          ...graphicBounds.flatMap(node => [...node.children].map(child => child.getBoundingClientRect()))];
+        const left = Math.min(...union.map(rect => rect.left)), right = Math.max(...union.map(rect => rect.right));
+        const top = Math.min(...union.map(rect => rect.top)), bottom = Math.max(...union.map(rect => rect.bottom));
+        const insetLeft = Math.max(0, (base.left - left) / scale), insetTop = Math.max(0, (base.top - top) / scale);
+        const insetRight = Math.max(0, (right - base.right) / scale), insetBottom = Math.max(0, (bottom - base.bottom) / scale);
+        wrapper.style.setProperty('padding', `${insetTop}px ${insetRight}px ${insetBottom}px ${insetLeft}px`);
+        const css = getComputedStyle(slide), availableWidth = slide.clientWidth - px(css.paddingLeft) - px(css.paddingRight);
+        const availableHeight = slide.clientHeight - px(css.paddingTop) - px(css.paddingBottom);
+        const extentWidth = width + insetLeft + insetRight, extentHeight = base.height / scale + insetTop + insetBottom;
+        wrapper.style.setProperty('margin-left', Math.max(0, (availableWidth - extentWidth) / 2) + 'px');
+        wrapper.style.setProperty('margin-top', Math.max(0, (availableHeight - extentHeight) / 2) + 'px');
+        wrapper.dataset.atlasSourceExtentWidth = String(extentWidth); wrapper.dataset.atlasSourceExtentHeight = String(extentHeight);
+      } else throw new Error('Unsupported source readable layout recipe.');
+      applyTasteEndGutter(slide, state, set, scale);
+      set(owner, 'min-height', '0'); set(owner, 'min-width', '0');
+      set(owner, 'overflow-y', 'auto'); set(owner, 'overflow-x', recipe.axes === 'xy' ? 'auto' : 'hidden');
+      set(owner, 'scroll-behavior', 'auto'); set(owner, 'scroll-snap-type', 'none');
+      owner.dataset.atlasSourceContentOwner = recipe.kind; owner.dataset.atlasSourceScrollAxes = recipe.axes;
+      const scrolling = config.source_readable_scroll && owner.dataset.atlasDeckInnerScroll === 'true'
+        || owner.scrollHeight > owner.clientHeight || recipe.axes === 'xy' && owner.scrollWidth > owner.clientWidth;
+      owner.dataset.atlasDeckInnerScroll = String(scrolling);
+      if (scrolling) {
+        owner.setAttribute('tabindex', '0'); owner.setAttribute('role', 'region'); owner.setAttribute('aria-label', '投影片內容／Slide content');
+        owner.scrollTop = prior?.owner === owner && prior.scrolling ? prior.top : 0;
+        owner.scrollLeft = prior?.owner === owner && prior.scrolling ? prior.left : 0;
+      } else { owner.scrollTop = 0; owner.scrollLeft = 0; }
+    }
+    for (const recipe of config.source_readable_layouts || []) {
+      const slide = slides[recipe.index];
+      if (!slide) throw new Error('Source readable layout page binding changed.');
+      for (const selector of new Set([recipe.owner, recipe.content, ...recipe.reserve, ...recipe.bounds, ...(recipe.release_clips || []), ...(recipe.flow_chrome || []), ...(recipe.intrinsic_containers || []), ...(recipe.definite_graphics || []), ...(recipe.source_svg_canvas ? [recipe.source_svg_canvas.selector] : []), ...(recipe.horizontal_table ? ['.table-scroll'] : [])])) oneRole(slide, selector);
+    }
+    let current = config.initial_index;
+    function select(index) {
+      resetSourceGraphicReleases();
+      const innerFocused = slides.some(slide => { const owner = localScrollOwner(slide); return owner && owner.contains(document.activeElement); });
+      slides.forEach(resetReadableLayout);
+      current = Math.max(0, Math.min(slides.length - 1, index));
+      slides.forEach((slide, at) => {
+        const active = at === current;
+        slide.dataset.atlasDeckActive = String(active);
+        slide.setAttribute('aria-hidden', String(!active)); slide.inert = !active;
+        if (config.variant === 'STAGE_ACTIVE_SECTIONS') slide.classList.toggle('active', active);
+        if (sourceIsActive) slide.classList.toggle('is-active', active);
+        for (const state of config.source_states || []) slide.classList.toggle(state, active);
+        if (config.source_readable_scroll) { slide.dataset.atlasDeckInnerScroll = 'false'; slide.scrollTop = 0; }
+      });
+      previous.disabled = current === 0; next.disabled = current === slides.length - 1;
+      counter.textContent = `${current + 1} / ${slides.length}`;
+      deck.dataset.atlasDeckIndex = String(current); deck.dataset.atlasDeckCount = String(slides.length);
+      sourceDataEndpoint(); sourceAutoFit(slides[current]); sourceHeadingFit(slides[current]);
+      fit();
+      if (innerFocused) { const target = localScrollOwner(slides[current]) || slides[current]; target.setAttribute('tabindex', localScrollOwner(slides[current]) ? '0' : '-1'); target.focus({ preventScroll: true }); }
+      deck.dispatchEvent(new CustomEvent('atlas-source-deck-change', { bubbles: true, detail: { index: current, count: slides.length } }));
+    }
+    function fit() {
+      resetSourceGraphicReleases();
+      const rect = viewport.getBoundingClientRect();
+      const width = config.viewport ? window.innerWidth : config.width;
+      if (config.banner_extra) scene.style.setProperty('width', String(width) + 'px', 'important');
+      const bannerHeight = config.banner_extra ? [...scene.children].find(node => node.classList.contains('demo-banner')).offsetHeight : 0;
+      const height = (config.viewport ? window.innerHeight : config.height) + bannerHeight;
+      if (rect.width <= 0 || rect.height <= 0 || width <= 0 || height <= 0) { scene.dataset.atlasDeckReady = 'WAITING_FOR_VISIBLE_VIEWPORT'; return; }
+      const scale = Math.min(rect.width / width, rect.height / height);
+      const previousContentScroll = resetReadableLayout(slides[current]);
+      const previousInnerTop = config.source_readable_scroll && slides[current].dataset.atlasDeckInnerScroll === 'true' ? slides[current].scrollTop : 0;
+      if (config.source_readable_scroll) { slides[current].scrollTop = 0; slides[current].dataset.atlasDeckInnerScroll = 'false'; slides[current].setAttribute('tabindex', '-1'); }
+      scene.style.setProperty('width', `${width}px`, 'important'); scene.style.setProperty('height', `${height}px`, 'important');
+      scene.style.setProperty('left', `${(rect.width - width * scale) / 2}px`, 'important');
+      scene.style.setProperty('top', `${(rect.height - height * scale) / 2}px`, 'important');
+      scene.style.setProperty('transform', `scale(${scale})`, 'important');
+      scene.dataset.atlasDeckScale = String(scale); scene.dataset.atlasDeckReady = 'READY';
+      sourceDataEndpoint(); sourceAutoFit(slides[current]); sourceHeadingFit(slides[current]);
+      if (config.source_native_flow_viewport || needsReadableScroll(slides[current])) {
+        // The source's narrow single-column text is taller than its fixed
+        // slide. Preserve readable source typography and expose all of it in
+        // a real local scroll viewport, rather than shrinking or clipping it.
+        scene.style.setProperty('width', rect.width + 'px', 'important'); scene.style.setProperty('height', rect.height + 'px', 'important');
+        scene.style.setProperty('left', '0px', 'important'); scene.style.setProperty('top', '0px', 'important'); scene.style.setProperty('transform', 'none', 'important');
+        scene.dataset.atlasDeckScale = '1'; slides[current].dataset.atlasDeckInnerScroll = 'true'; slides[current].setAttribute('tabindex', '0');
+        sourceAutoFit(slides[current]);
+        slides[current].scrollTop = previousInnerTop;
+      }
+      applyReadableLayout(slides[current], previousContentScroll);
+      applySourceGraphicReleases(slides[current]);
+      if (config.source_orbit_data) sourceDataEndpoint();
+    }
+    previous.addEventListener('click', () => select(current - 1)); next.addEventListener('click', () => select(current + 1));
+    document.addEventListener('keydown', (event) => {
+      if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey) return;
+      const chain = event.composedPath ? event.composedPath() : [event.target];
+      if (chain.some((node) => node && (node.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT', 'BUTTON'].includes(node.tagName)))) return;
+      if (['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Home', 'End', ' '].includes(event.key)
+        && chain.some(node => node?.dataset?.atlasDeckInnerScroll === 'true')) return;
+      if (['ArrowLeft', 'ArrowRight'].includes(event.key)
+        && chain.some(node => node?.dataset?.atlasDeckInnerScroll === 'true' && node.dataset.atlasSourceScrollAxes === 'xy' && node.scrollWidth > node.clientWidth)) return;
+      const target = { ArrowRight: current + 1, PageDown: current + 1, ' ': current + 1, ArrowLeft: current - 1, PageUp: current - 1, Home: 0, End: slides.length - 1 }[event.key];
+      if (typeof target !== 'number') return;
+      event.preventDefault(); select(target);
+    });
+    const observer = new ResizeObserver(fit); observer.observe(viewport);
+    if (config.banner_extra) observer.observe([...scene.children].find(node => node.classList.contains('demo-banner')));
+    window.addEventListener('resize', fit);
+    window.addEventListener('pageshow', () => { observer.observe(viewport); if (config.banner_extra) observer.observe([...scene.children].find(node => node.classList.contains('demo-banner'))); fit(); });
+    window.addEventListener('pagehide', () => { observer.disconnect(); resetSourceGraphicReleases(); });
+    select(current); fit();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true }); else start();
+})({"variant":"DECK_STAGE_SECTIONS","selector":"deck-stage","slide_count":12,"initial_index":0,"width":1920,"height":1080,"viewport":false,"banner_extra":false,"source_heading_fit":false,"source_readable_layouts":[],"source_native_flow_viewport":false});
+</script><script data-atlas-owned-adapter="1" data-atlas-script-sha256="e25745c36278ca1cd09dd4b0611e22a7b228f0a46464fb72401062bd5e482b80">(function reducedMotionRuntime() {
+  'use strict';
+  const media = matchMedia('(prefers-reduced-motion: reduce)');
+  const held = new Map();
+  let scheduled = 0, closed = false;
+  const state = { version: 1, reduced: media.matches, sampled: 0, scheduled: false };
+  Object.defineProperty(window, '__atlasSourceMotion', { value: state });
+  function scan() {
+    scheduled = 0; state.scheduled = false;
+    if (closed) return;
+    state.reduced = media.matches;
+    const current = new Set(document.getAnimations().filter(animation => animation instanceof CSSAnimation));
+    for (const [animation] of held) if (!current.has(animation)) held.delete(animation);
+    if (!media.matches) {
+      for (const [animation, prior] of held) {
+        animation.playbackRate = prior.rate;
+        animation.currentTime = prior.time;
+        if (prior.state === 'running') animation.play();
+        else if (prior.state === 'paused') animation.pause();
+      }
+      held.clear(); return;
+    }
+    for (const animation of current) {
+      if (held.has(animation)) continue;
+      const effect = animation.effect, timing = effect && effect.getTiming();
+      if (!timing || !Number.isFinite(Number(timing.duration)) || Number(timing.duration) <= 0) continue;
+      const prior = { state: animation.playState, time: animation.currentTime, rate: animation.playbackRate };
+      const duration = Number(timing.duration), delay = Number(timing.delay) || 0;
+      const iterations = Number(timing.iterations);
+      const pose = iterations === Infinity ? delay + duration / 2 : delay + duration * iterations;
+      if (!Number.isFinite(pose)) continue;
+      animation.pause(); animation.currentTime = Math.max(0, pose);
+      held.set(animation, prior); state.sampled++;
+    }
+  }
+  function schedule() {
+    if (closed || scheduled || (!media.matches && !held.size)) return;
+    state.scheduled = true; scheduled = requestAnimationFrame(scan);
+  }
+  const resize = new ResizeObserver(() => { if (media.matches) schedule(); });
+  resize.observe(document.documentElement);
+  document.addEventListener('animationstart', schedule, true);
+  document.addEventListener('atlas-source-deck-change', schedule);
+  document.addEventListener('DOMContentLoaded', schedule, { once: true });
+  window.addEventListener('load', schedule, { once: true });
+  media.addEventListener('change', schedule);
+  window.addEventListener('pagehide', () => {
+    closed = true; resize.disconnect(); media.removeEventListener('change', schedule);
+    document.removeEventListener('animationstart', schedule, true);
+    document.removeEventListener('atlas-source-deck-change', schedule);
+    if (scheduled) cancelAnimationFrame(scheduled);
+    // A bfcache page retains the source Animation objects and their original
+    // playback state; discard neither merely because the document is hidden.
+    scheduled = 0; state.scheduled = false;
+  });
+  window.addEventListener('pageshow', () => {
+    if (!closed) return;
+    closed = false; resize.observe(document.documentElement);
+    document.addEventListener('animationstart', schedule, true);
+    document.addEventListener('atlas-source-deck-change', schedule);
+    media.addEventListener('change', schedule);
+    schedule();
+  });
+  schedule();
+})();</script></body>
+</html>

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'sha256-4ldFw2J4yhzQndSwYR4ip7Io8KRkZPtyQBBivV5IK4A='; img-src data:; font-src 'none'; media-src 'none'; connect-src 'none'; frame-src 'none'; child-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"><meta name="atlas-source-entry" content="open-design-official:plugin:example-waitlist-page-e4cd3aa8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meridian — Coming Soon</title>
+  
+  
+  
+  <style>
+    :root {
+      --bg: #FDE8DF;
+      --fg: #1A1410;
+      --color-ink: #1A1410;
+      --accent: #1A1410;
+      --deco: #E8835A;
+      --deco-logo: #E8522A;
+      --deco-stripe: #F5A623;
+      --input-border: rgba(196, 169, 154, 0.38);
+      --success: #2D6A4F;
+      --btn-label: #FDE8DF;
+      --ticker-bg: rgba(0, 0, 0, 0.9);
+      --ticker-fg: rgba(255, 255, 255, 0.9);
+      --deco-stroke: rgba(0, 0, 0, 0.12);
+      --logo-shadow: rgba(0, 0, 0, 0.08);
+      --font-body: 'DM Sans', sans-serif;
+      --font-display: 'Syne', sans-serif;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      height: 100%;
+      overflow-x: hidden;
+    }
+    .logo {
+      position: absolute;
+      top: 20px;
+      left: 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      z-index: 10;
+    }
+    .logo-container {
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--deco-logo) 0%, var(--deco) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: 0 2px 8px var(--logo-shadow);
+    }
+    .logo-svg {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 2px;
+    }
+    .logo-text {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .logo-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+      color: var(--color-ink);
+    }
+    .logo-dot {
+      font-size: 10px;
+      color: var(--deco-logo);
+      opacity: 0.6;
+    }
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg);
+      color: var(--fg);
+      display: flex;
+      flex-direction: column;
+      min-height: 100svh;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    .upper {
+      flex: 0 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 24px 40px;
+      position: relative;
+      z-index: 2;
+    }
+    .headline {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(56px, 8vw, 96px);
+      letter-spacing: -0.03em;
+      line-height: 1.0;
+      color: var(--fg);
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto 22px;
+    }
+    .subtext {
+      font-size: clamp(15px, 1.5vw, 18px);
+      font-weight: 400;
+      line-height: 1.6;
+      color: var(--fg);
+      max-width: 420px;
+      margin-bottom: 44px;
+    }
+    .form-row {
+      display: flex;
+      gap: 8px;
+      width: 100%;
+      max-width: 560px;
+      justify-content: center;
+    }
+    .form-row input {
+      flex: 1;
+      min-width: 0;
+      padding: 14px 18px;
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: var(--color-ink);
+      background: transparent;
+      border: 1.5px solid var(--input-border);
+      border-radius: 4px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-row input::placeholder {
+      color: var(--input-border);
+    }
+    .form-row input:focus {
+      border-color: var(--fg);
+      outline: 2px solid var(--fg);
+      outline-offset: 2px;
+    }
+    .form-row button {
+      flex-shrink: 0;
+      padding: 14px 22px;
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--btn-label);
+      background: var(--accent);
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity 0.15s, transform 0.1s;
+    }
+    .form-row button:hover {
+      opacity: 0.85;
+    }
+    .form-row button:active {
+      transform: scale(0.98);
+    }
+    .success-msg {
+      display: none;
+      margin-top: 18px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--success);
+    }
+    .success-msg.visible {
+      display: block;
+    }
+    .deco-section {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      min-height: 25vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .coil-row {
+      display: block;
+      width: 100%;
+      height: 60px;
+      flex-shrink: 0;
+      background: var(--bg);
+    }
+    .stripe {
+      width: 100%;
+      height: 14px;
+      background: var(--deco-stripe);
+      flex-shrink: 0;
+    }
+    .grid-floor {
+      flex: 1;
+      position: relative;
+      background-color: var(--deco);
+      min-height: 80px;
+    }
+    .grid-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .ticker-wrap {
+      width: 100%;
+      overflow: hidden;
+      background: var(--ticker-bg);
+      padding: 10px 0;
+      flex-shrink: 0;
+    }
+    .ticker-track {
+      display: flex;
+      gap: 24px;
+      white-space: nowrap;
+      animation: ticker-scroll 20s linear infinite;
+    }
+    .ticker-unit {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ticker-fg);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-right: -12px;
+    }
+    .ticker-star {
+      color: var(--deco-stripe);
+      margin-right: 4px;
+    }
+    @keyframes ticker-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ticker-track {
+        animation: none;
+      }
+    }
+    @media (max-width: 600px) {
+      .logo {
+        left: 16px;
+        top: 16px;
+        gap: 10px;
+      }
+      .logo-container {
+        width: 40px;
+        height: 40px;
+      }
+      .logo-name {
+        font-size: 14px;
+      }
+      .upper {
+        padding: 30px 16px;
+        flex: 0 0 50vh;
+      }
+      .form-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .form-row input,
+      .form-row button {
+        width: 100%;
+      }
+    }
+  </style>
+<style data-atlas-owned-adapter>@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:0s!important;transition-delay:0s!important;scroll-behavior:auto!important}}</style></head>
+<body data-atlas-language-policy="ORIGINAL_SOURCE_LABELED">
+
+  <div class="logo">
+    <div class="logo-container">
+      <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="48" fill="var(--deco-logo)"/>
+        <text x="50" y="60" font-family="'DM Sans', sans-serif" font-size="42" font-weight="700" text-anchor="middle" fill="var(--btn-label)" letter-spacing="-1">Md</text>
+      </svg>
+    </div>
+    <div class="logo-text">
+      <span class="logo-name">Meridian</span>
+      <span class="logo-dot">·</span>
+    </div>
+  </div>
+
+  <section class="upper">
+    <h1 class="headline">Meridian is<br>almost here</h1>
+    <p class="subtext">The workspace that connects your ideas before you've finished thinking them.</p>
+
+    <div data-atlas-sanitized-form class="form-row" id="waitlist-form">
+      <input type="text" name="firstname" placeholder="First name" autocomplete="given-name">
+      <input type="email" name="email" placeholder="Work email" autocomplete="email" required>
+      <button type="submit">Join the Waitlist</button>
+    </div>
+    <p class="success-msg" id="success-msg" role="status">You're on the list! We'll be in touch.</p>
+  </section>
+
+  <div class="deco-section">
+
+    <svg class="coil-row" viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" style="stroke: var(--deco-stroke);" stroke-width="1.5">
+        <path d="M 9,60 A 41,30 0 0 1 91,60"/>
+        <path d="M 94,60 A 41,30 0 0 1 176,60"/>
+        <path d="M 179,60 A 41,30 0 0 1 261,60"/>
+        <path d="M 264,60 A 41,30 0 0 1 346,60"/>
+        <path d="M 349,60 A 41,30 0 0 1 431,60"/>
+        <path d="M 434,60 A 41,30 0 0 1 516,60"/>
+        <path d="M 519,60 A 41,30 0 0 1 601,60"/>
+        <path d="M 604,60 A 41,30 0 0 1 686,60"/>
+        <path d="M 689,60 A 41,30 0 0 1 771,60"/>
+        <path d="M 774,60 A 41,30 0 0 1 856,60"/>
+        <path d="M 859,60 A 41,30 0 0 1 941,60"/>
+        <path d="M 944,60 A 41,30 0 0 1 1026,60"/>
+        <path d="M 1029,60 A 41,30 0 0 1 1111,60"/>
+        <path d="M 1114,60 A 41,30 0 0 1 1196,60"/>
+        <path d="M 1199,60 A 41,30 0 0 1 1281,60"/>
+        <path d="M 1284,60 A 41,30 0 0 1 1366,60"/>
+        <path d="M 1369,60 A 41,30 0 0 1 1451,60"/>
+      </g>
+    </svg>
+
+    <div class="stripe"></div>
+
+    <div class="grid-floor">
+      <svg class="grid-svg" viewBox="0 0 1280 400" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <g style="stroke: var(--deco-stroke);" stroke-width="1" fill="none">
+          <line x1="640" y1="0" x2="0"    y2="400"/>
+          <line x1="640" y1="0" x2="128"  y2="400"/>
+          <line x1="640" y1="0" x2="256"  y2="400"/>
+          <line x1="640" y1="0" x2="384"  y2="400"/>
+          <line x1="640" y1="0" x2="512"  y2="400"/>
+          <line x1="640" y1="0" x2="640"  y2="400"/>
+          <line x1="640" y1="0" x2="768"  y2="400"/>
+          <line x1="640" y1="0" x2="896"  y2="400"/>
+          <line x1="640" y1="0" x2="1024" y2="400"/>
+          <line x1="640" y1="0" x2="1152" y2="400"/>
+          <line x1="640" y1="0" x2="1280" y2="400"/>
+          <line x1="0" y1="80"  x2="1280" y2="80"/>
+          <line x1="0" y1="160" x2="1280" y2="160"/>
+          <line x1="0" y1="240" x2="1280" y2="240"/>
+          <line x1="0" y1="320" x2="1280" y2="320"/>
+          <line x1="0" y1="390" x2="1280" y2="390"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <div class="ticker-wrap" aria-hidden="true">
+    <div class="ticker-track">
+      <span class="ticker-unit">COMING SOON <span class="ticker-star">✳</span></span>
+      <span class="ticker-unit">COMING SOON <span class="ticker-star">✳</span></span>
+      <span class="ticker-unit">COMING SOON <span class="ticker-star">✳</span></span>
+      <span class="ticker-unit">COMING SOON <span class="ticker-star">✳</span></span>
+      <span class="ticker-unit">COMING SOON <span class="ticker-star">✳</span></span>
+      <span class="ticker-unit">COMING SOON <span class="ticker-star">✳</span></span>
+      <span class="ticker-unit">COMING SOON <span class="ticker-star">✳</span></span>
+      <span class="ticker-unit">COMING SOON <span class="ticker-star">✳</span></span>
+      <span class="ticker-unit">COMING SOON <span class="ticker-star">✳</span></span>
+      <span class="ticker-unit">COMING SOON <span class="ticker-star">✳</span></span>
+      <span class="ticker-unit">COMING SOON <span class="ticker-star">✳</span></span>
+      <span class="ticker-unit">COMING SOON <span class="ticker-star">✳</span></span>
+      <span class="ticker-unit">COMING SOON <span class="ticker-star">✳</span></span>
+      <span class="ticker-unit">COMING SOON <span class="ticker-star">✳</span></span>
+      <span class="ticker-unit">COMING SOON <span class="ticker-star">✳</span></span>
+      <span class="ticker-unit">COMING SOON <span class="ticker-star">✳</span></span>
+      <span class="ticker-unit">COMING SOON <span class="ticker-star">✳</span></span>
+      <span class="ticker-unit">COMING SOON <span class="ticker-star">✳</span></span>
+      <span class="ticker-unit">COMING SOON <span class="ticker-star">✳</span></span>
+      <span class="ticker-unit">COMING SOON <span class="ticker-star">✳</span></span>
+      <span class="ticker-unit">COMING SOON <span class="ticker-star">✳</span></span>
+      <span class="ticker-unit">COMING SOON <span class="ticker-star">✳</span></span>
+      <span class="ticker-unit">COMING SOON <span class="ticker-star">✳</span></span>
+      <span class="ticker-unit">COMING SOON <span class="ticker-star">✳</span></span>
+    </div>
+  </div>
+
+  
+<aside id="atlas-source-proof" aria-label="Atlas 來源證據 / Source evidence" data-language-exempt="original-source" style="all:initial;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;position:relative;z-index:2147483647;padding:10px 14px;color:#30464d;background:#f8faf9;border-top:1px solid rgba(21,39,45,.22);font:12px/1.4 ui-monospace,Consolas,monospace"><span>來源版式離線適配（保留原文）· 原始程式已停用；本機適配器提供頁面與減動控制<br><span lang="en">Offline source-layout adaptation; original text retained. Source scripts are disabled; local adapters provide page and reduced-motion controls.</span></span><span>bf714528070d · 192da176ef1c</span></aside><script data-atlas-owned-adapter="0" data-atlas-script-sha256="e25745c36278ca1cd09dd4b0611e22a7b228f0a46464fb72401062bd5e482b80">(function reducedMotionRuntime() {
+  'use strict';
+  const media = matchMedia('(prefers-reduced-motion: reduce)');
+  const held = new Map();
+  let scheduled = 0, closed = false;
+  const state = { version: 1, reduced: media.matches, sampled: 0, scheduled: false };
+  Object.defineProperty(window, '__atlasSourceMotion', { value: state });
+  function scan() {
+    scheduled = 0; state.scheduled = false;
+    if (closed) return;
+    state.reduced = media.matches;
+    const current = new Set(document.getAnimations().filter(animation => animation instanceof CSSAnimation));
+    for (const [animation] of held) if (!current.has(animation)) held.delete(animation);
+    if (!media.matches) {
+      for (const [animation, prior] of held) {
+        animation.playbackRate = prior.rate;
+        animation.currentTime = prior.time;
+        if (prior.state === 'running') animation.play();
+        else if (prior.state === 'paused') animation.pause();
+      }
+      held.clear(); return;
+    }
+    for (const animation of current) {
+      if (held.has(animation)) continue;
+      const effect = animation.effect, timing = effect && effect.getTiming();
+      if (!timing || !Number.isFinite(Number(timing.duration)) || Number(timing.duration) <= 0) continue;
+      const prior = { state: animation.playState, time: animation.currentTime, rate: animation.playbackRate };
+      const duration = Number(timing.duration), delay = Number(timing.delay) || 0;
+      const iterations = Number(timing.iterations);
+      const pose = iterations === Infinity ? delay + duration / 2 : delay + duration * iterations;
+      if (!Number.isFinite(pose)) continue;
+      animation.pause(); animation.currentTime = Math.max(0, pose);
+      held.set(animation, prior); state.sampled++;
+    }
+  }
+  function schedule() {
+    if (closed || scheduled || (!media.matches && !held.size)) return;
+    state.scheduled = true; scheduled = requestAnimationFrame(scan);
+  }
+  const resize = new ResizeObserver(() => { if (media.matches) schedule(); });
+  resize.observe(document.documentElement);
+  document.addEventListener('animationstart', schedule, true);
+  document.addEventListener('atlas-source-deck-change', schedule);
+  document.addEventListener('DOMContentLoaded', schedule, { once: true });
+  window.addEventListener('load', schedule, { once: true });
+  media.addEventListener('change', schedule);
+  window.addEventListener('pagehide', () => {
+    closed = true; resize.disconnect(); media.removeEventListener('change', schedule);
+    document.removeEventListener('animationstart', schedule, true);
+    document.removeEventListener('atlas-source-deck-change', schedule);
+    if (scheduled) cancelAnimationFrame(scheduled);
+    // A bfcache page retains the source Animation objects and their original
+    // playback state; discard neither merely because the document is hidden.
+    scheduled = 0; state.scheduled = false;
+  });
+  window.addEventListener('pageshow', () => {
+    if (!closed) return;
+    closed = false; resize.observe(document.documentElement);
+    document.addEventListener('animationstart', schedule, true);
+    document.addEventListener('atlas-source-deck-change', schedule);
+    media.addEventListener('change', schedule);
+    schedule();
+  });
+  schedule();
+})();</script></body>
+</html>

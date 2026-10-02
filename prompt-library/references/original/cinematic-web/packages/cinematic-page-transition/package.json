@@ -1,0 +1,12 @@
+{
+  "name": "cinematic-page-transition",
+  "private": true,
+  "version": "1.0.0",
+  "dependencies": {
+    "motion": "13.1.1",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "license": "SEE LICENSE IN LICENSE_SCOPE.md",
+  "author": "junru-norple"
+}

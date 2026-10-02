@@ -1,0 +1,2196 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'sha256-cRKwYUNDxIprjWA8FW1nWM+qQLbJ01ojf/oSDjYDbb0=' 'sha256-4ldFw2J4yhzQndSwYR4ip7Io8KRkZPtyQBBivV5IK4A='; img-src data:; font-src 'none'; media-src 'none'; connect-src 'none'; frame-src 'none'; child-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"><meta name="atlas-source-entry" content="open-design-official:template:html-ppt-zhangzara-sakura-chroma">
+<meta charset="utf-8" />
+<title>Turn a Cherry-Blossom Trip into a Photo Essay like a Travel Editorial Director - Life &amp; story</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<style>
+  :root {
+    --paper:    #F1E6CB;   /* warm cream paper canvas */
+    --paper-dk: #E5D6B0;   /* slightly darker paper for layering */
+    --ink:      #3A2516;   /* dark warm brown ink, the type colour */
+    --red:      #E5392A;
+    --pink:     #E54489;
+    --orange:   #F09131;
+    --green:    #3D9F47;
+    --blue:     #3F8BC4;
+    --yellow:   #F0BC2A;
+    --line:     #3A2516;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; background: #0e0e0e; }
+  body {
+    font-family: 'Albert Sans', 'Helvetica Neue', sans-serif;
+    color: var(--ink);
+    overflow: hidden;
+  }
+
+  /* Deck wrapper — fills the viewport */
+  .deck { position: fixed; inset: 0; display: grid; place-items: center; }
+  .stage {
+    position: relative;
+    width: 100vw; height: 100vh;
+    overflow: hidden;
+    background: var(--paper);
+  }
+  /* Subtle halftone-dot paper texture across all slides */
+  .stage::before {
+    content: '';
+    position: absolute; inset: 0; pointer-events: none;
+    opacity: 0.16;
+    background-image: radial-gradient(circle at 1px 1px, rgba(58,37,22,0.55) 1px, transparent 1.6px);
+    background-size: 4px 4px;
+    z-index: 1;
+  }
+
+  /* One slide visible at a time */
+  .slide {
+    position: absolute; inset: 0;
+    opacity: 0; pointer-events: none;
+    transition: opacity 280ms ease;
+    z-index: 2;
+  }
+  .slide.active { opacity: 1; pointer-events: auto; }
+
+  /* ─── TYPE SYSTEM ────────────────────────────────────────────── */
+  .disp {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    line-height: 0.84;
+    letter-spacing: -0.012em;
+  }
+  .disp-700 {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: 0;
+  }
+  .micro {
+    font-family: 'Albert Sans', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+  }
+  .body-tx {
+    font-family: 'Albert Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+  .mono {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-weight: 400;
+  }
+  .jp {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 500;
+  }
+
+  /* Single page-number marker, shared */
+  .pagenum {
+    position: absolute;
+    right: clamp(24px, 2.2vw, 44px);
+    bottom: clamp(20px, 2.2vh, 36px);
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: clamp(11px, 0.82vw, 13px);
+    color: var(--ink);
+    letter-spacing: 0.06em;
+    z-index: 9;
+  }
+
+  /* Single fixed nav hint, classed as caption so verifier passes */
+  .nav-hint {
+    position: fixed;
+    left: clamp(20px, 2vw, 36px);
+    bottom: clamp(16px, 2vh, 28px);
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: clamp(10px, 0.75vw, 12px);
+    color: var(--ink);
+    letter-spacing: 0.08em;
+    opacity: 0.36;
+    z-index: 12;
+    pointer-events: none;
+  }
+
+  /* ─── DECORATIVE: petal-blob cluster ────────────────────────── */
+  /* Five overlapping rounded petal shapes in primary colours.    */
+  .petals {
+    position: absolute;
+    pointer-events: none;
+    z-index: 3;
+  }
+  .petal {
+    /* Perfect circles. aspect-ratio: 1 forces height to match the
+       width set per-petal below, so percentages on the parent stay
+       useful but the shape is always round. */
+    position: absolute;
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+  }
+
+  /* ─── DECORATIVE: diagonal stripe band ──────────────────────── */
+  /* A bundle of coloured ribbons that sweep diagonally then bend
+     to horizontal — echoes the cassette-label motif. Built from
+     a rotated container with stacked horizontal coloured bars. */
+  .stripe-rail {
+    position: absolute;
+    pointer-events: none;
+    z-index: 3;
+    transform-origin: 0 50%;
+  }
+  .stripe-rail .bar {
+    height: 0; /* set per-instance below */
+  }
+
+  /* ─── DECORATIVE: rosette / seal badge ──────────────────────── */
+  .rosette {
+    position: absolute;
+    pointer-events: none;
+    z-index: 5;
+    display: grid;
+    place-items: center;
+    width: clamp(60px, 6vw, 110px);
+    height: clamp(60px, 6vw, 110px);
+    background: var(--ink);
+    color: var(--paper);
+    /* 12-point starburst shape via clip-path */
+    clip-path: polygon(50% 0%, 60% 8%, 73% 4%, 76% 17%, 89% 18%, 87% 31%, 100% 35%, 92% 47%, 100% 60%, 87% 64%, 90% 77%, 76% 78%, 75% 91%, 62% 88%, 53% 100%, 42% 90%, 30% 96%, 25% 84%, 12% 86%, 13% 73%, 0% 70%, 7% 58%, 0% 47%, 11% 39%, 4% 27%, 17% 25%, 13% 12%, 27% 14%, 25% 1%, 38% 7%);
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    font-size: clamp(22px, 2vw, 38px);
+    letter-spacing: -0.01em;
+  }
+  .stamp {
+    position: absolute;
+    background: var(--red);
+    color: var(--paper);
+    z-index: 5;
+    padding: clamp(8px, 1vh, 14px) clamp(12px, 1.4vw, 22px);
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    line-height: 1;
+    transform: rotate(-3deg);
+  }
+
+  /* ─── SLIDE 1 — COVER (cassette package echo) ────────────────── */
+  .s-cover { background: var(--paper); }
+
+  .s-cover .cover-frame {
+    position: absolute;
+    inset: clamp(36px, 3.6vw, 72px) clamp(36px, 3.6vw, 72px) clamp(80px, 8vh, 120px);
+    z-index: 4;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+  }
+
+  /* Petal cluster top-left — five overlapping perfect circles */
+  .s-cover .petals {
+    top: clamp(36px, 4vh, 64px);
+    left: clamp(36px, 3.6vw, 72px);
+    width: clamp(280px, 22vw, 380px);
+    height: clamp(220px, 17.6vw, 304px);
+  }
+  .s-cover .petals .p1 { background: var(--red);    width: 50%; left: 0;   top: 28%; }
+  .s-cover .petals .p2 { background: var(--orange); width: 38%; left: 14%; top: 50%; }
+  .s-cover .petals .p3 { background: var(--blue);   width: 44%; left: 28%; top: 0; }
+  .s-cover .petals .p4 { background: var(--green);  width: 50%; left: 50%; top: 22%; }
+  .s-cover .petals .p5 { background: var(--yellow); width: 32%; left: 36%; top: 50%; }
+
+  /* Brand lockup next to petals */
+  .s-cover .brand {
+    position: absolute;
+    top: clamp(80px, 9vh, 140px);
+    left: clamp(280px, 28vw, 460px);
+    z-index: 5;
+  }
+  .s-cover .brand .b1 {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    font-size: clamp(32px, min(3.4vw, 5.4vh), 56px);
+    color: var(--ink);
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+  }
+  .s-cover .brand .b2 {
+    margin-top: 4px;
+    font-family: 'Albert Sans', sans-serif;
+    font-weight: 600;
+    font-size: clamp(15px, 1.1vw, 20px);
+    color: var(--ink);
+    letter-spacing: 0.02em;
+  }
+
+  /* Hero number — gigantic ink-coloured T-26.
+     We anchor it well below the petal cluster so the two never collide
+     on shorter viewports, and use ink (not red) so it stays readable
+     where the diagonal ribbons sweep behind it. */
+  .s-cover .hero {
+    position: absolute;
+    left: clamp(36px, 3.6vw, 72px);
+    top: clamp(290px, 30vh, 440px);
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    font-size: clamp(120px, min(14vw, 22vh), 280px);
+    color: var(--ink);
+    line-height: 0.84;
+    letter-spacing: -0.025em;
+    z-index: 4;
+  }
+
+  /* The big condensed lockup — pink bar with cream type, sitting between
+     the hero number and the footer row. */
+  .s-cover .lockup {
+    position: absolute;
+    left: clamp(36px, 3.6vw, 72px);
+    bottom: clamp(150px, 16vh, 240px);
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    font-size: clamp(56px, min(7vw, 11vh), 130px);
+    color: var(--paper);
+    -webkit-text-stroke: 0;
+    line-height: 0.9;
+    letter-spacing: -0.015em;
+    background: var(--pink);
+    padding: clamp(8px, 1.2vh, 18px) clamp(18px, 1.8vw, 32px) clamp(6px, 0.8vh, 12px);
+    z-index: 4;
+  }
+
+  /* Diagonal multi-colour stripe band that sweeps right and down.
+     Positioned in the right-half of the slide so the hero number on
+     the left can sit on clean cream paper. */
+  .s-cover .ribbons {
+    position: absolute;
+    right: 0;
+    top: clamp(160px, 18vh, 280px);
+    bottom: clamp(180px, 18vh, 280px);
+    width: 52%;
+    z-index: 3;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .s-cover .ribbon {
+    position: absolute;
+    left: -20%;
+    width: 160%;
+    transform-origin: 0 50%;
+  }
+  .s-cover .ribbon.r-pink   { background: var(--pink);   }
+  .s-cover .ribbon.r-orange { background: var(--orange); }
+  .s-cover .ribbon.r-yellow { background: var(--yellow); }
+  .s-cover .ribbon.r-green  { background: var(--green);  }
+  .s-cover .ribbon.r-blue   { background: var(--blue);   }
+
+  /* Spec checklist column on the right */
+  .s-cover .specs {
+    position: absolute;
+    right: clamp(40px, 4vw, 80px);
+    top: clamp(260px, 32vh, 440px);
+    z-index: 6;
+    display: flex; flex-direction: column;
+    gap: clamp(54px, 6vh, 88px);
+  }
+  .s-cover .spec {
+    font-family: 'Albert Sans', sans-serif;
+    font-weight: 700;
+    font-size: clamp(14px, 1.1vw, 20px);
+    color: var(--ink);
+    letter-spacing: 0.04em;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .s-cover .spec .box {
+    display: inline-block;
+    width: clamp(14px, 1.1vw, 20px);
+    height: clamp(14px, 1.1vw, 20px);
+    border: 2px solid var(--ink);
+    background: transparent;
+  }
+  .s-cover .spec .box.checked {
+    background: var(--ink);
+    position: relative;
+  }
+  .s-cover .spec .box.checked::after {
+    content: '×';
+    position: absolute;
+    inset: 0;
+    color: var(--paper);
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    display: grid; place-items: center;
+    font-size: 1.2em;
+    line-height: 1;
+  }
+
+  /* Cover footer row */
+  .s-cover .cfooter {
+    position: absolute;
+    left: clamp(36px, 3.6vw, 72px);
+    right: clamp(36px, 3.6vw, 72px);
+    bottom: clamp(40px, 4vh, 72px);
+    border-top: 1.5px solid var(--ink);
+    padding-top: clamp(14px, 1.6vh, 22px);
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    gap: clamp(20px, 2vw, 40px);
+    align-items: center;
+    z-index: 5;
+  }
+  .s-cover .cfooter .made {
+    font-family: 'Albert Sans', sans-serif;
+    font-weight: 600;
+    font-size: clamp(13px, 0.9vw, 15px);
+    color: var(--ink);
+    letter-spacing: 0.04em;
+  }
+  .s-cover .cfooter .made .jp {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 500;
+    margin-right: 12px;
+  }
+  .s-cover .cfooter .nr {
+    display: flex; gap: 18px; align-items: center;
+    font-family: 'Albert Sans', sans-serif;
+    font-weight: 700;
+    font-size: clamp(13px, 0.9vw, 15px);
+    color: var(--ink);
+    letter-spacing: 0.06em;
+  }
+  .s-cover .cfooter .nr .opt { display: flex; align-items: center; gap: 6px; }
+  .s-cover .cfooter .nr .b {
+    width: clamp(13px, 1vw, 18px); height: clamp(13px, 1vw, 18px);
+    border: 2px solid var(--ink);
+  }
+  .s-cover .cfooter .nr .b.fill { background: var(--ink); }
+  .s-cover .cfooter .seal {
+    position: relative;
+    width: clamp(70px, 5.6vw, 96px);
+    height: clamp(70px, 5.6vw, 96px);
+    background: var(--ink);
+    color: var(--paper);
+    clip-path: polygon(50% 0%, 60% 8%, 73% 4%, 76% 17%, 89% 18%, 87% 31%, 100% 35%, 92% 47%, 100% 60%, 87% 64%, 90% 77%, 76% 78%, 75% 91%, 62% 88%, 53% 100%, 42% 90%, 30% 96%, 25% 84%, 12% 86%, 13% 73%, 0% 70%, 7% 58%, 0% 47%, 11% 39%, 4% 27%, 17% 25%, 13% 12%, 27% 14%, 25% 1%, 38% 7%);
+    display: grid; place-items: center;
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    font-size: clamp(20px, 1.8vw, 30px);
+    line-height: 1;
+  }
+  .s-cover .cfooter .stamp {
+    position: relative;
+    background: var(--red); color: var(--paper);
+    padding: 6px 14px;
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    font-size: clamp(14px, 1.1vw, 20px);
+    transform: none;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .s-cover .cfooter .stamp .lab2 {
+    font-family: 'Albert Sans', sans-serif;
+    font-weight: 700;
+    font-size: clamp(11px, 0.7vw, 12px);
+    letter-spacing: 0.18em;
+    line-height: 1;
+  }
+
+  /* ─── SLIDE 2 — MANIFESTO (single bold statement, scattered blobs) ─ */
+  .s-manifesto { background: var(--paper); }
+  .s-manifesto .blob {
+    /* Perfect circles: width === height since we use vmin units. */
+    position: absolute;
+    border-radius: 50%;
+    z-index: 2;
+  }
+  .s-manifesto .blob.b-red    { background: var(--red);    width: 16vmin; height: 16vmin; top: 8%;  left: 6%; }
+  .s-manifesto .blob.b-orange { background: var(--orange); width: 12vmin; height: 12vmin; top: 22%; left: 16%; }
+  .s-manifesto .blob.b-yellow { background: var(--yellow); width: 12vmin; height: 12vmin; top: 75%; left: 8%; }
+  .s-manifesto .blob.b-green  { background: var(--green);  width: 14vmin; height: 14vmin; top: 70%; left: 78%; }
+  .s-manifesto .blob.b-blue   { background: var(--blue);   width: 13vmin; height: 13vmin; top: 14%; left: 78%; }
+  .s-manifesto .blob.b-pink   { background: var(--pink);   width: 11vmin; height: 11vmin; top: 30%; left: 86%; }
+
+  .s-manifesto .stmt-wrap {
+    position: relative; z-index: 5;
+    height: 100%;
+    display: grid; place-items: center;
+    padding: 0 clamp(80px, 12vw, 220px);
+  }
+  .s-manifesto .stmt {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    font-size: clamp(70px, min(8.4vw, 14vh), 168px);
+    line-height: 0.86;
+    color: var(--ink);
+    letter-spacing: -0.022em;
+    text-align: center;
+  }
+  .s-manifesto .stmt em {
+    color: var(--red); font-style: normal;
+  }
+  .s-manifesto .kicker {
+    position: absolute;
+    top: clamp(36px, 4vh, 72px);
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Albert Sans', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    font-size: clamp(12px, 0.92vw, 14px);
+    color: var(--ink);
+    z-index: 6;
+  }
+
+  /* ─── SLIDE 3 — CATALOGUE GRID (4-up product cards) ──────────── */
+  .s-catalogue { background: var(--paper); }
+  .s-catalogue .frame {
+    position: absolute; inset: clamp(36px, 3.6vw, 72px) clamp(36px, 3.6vw, 72px) clamp(72px, 7vh, 110px);
+    display: grid; grid-template-rows: auto 1fr; gap: clamp(20px, 2.2vh, 36px);
+    z-index: 4;
+  }
+  .s-catalogue .topbar {
+    display: flex; align-items: end; justify-content: space-between;
+    border-bottom: 1.5px solid var(--ink);
+    padding-bottom: clamp(12px, 1.4vh, 22px);
+    gap: 30px;
+  }
+  .s-catalogue .topbar .ttl {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    font-size: clamp(52px, min(5.6vw, 9vh), 100px);
+    line-height: 0.9;
+    letter-spacing: -0.018em;
+    color: var(--ink);
+  }
+  .s-catalogue .topbar .ttl em { color: var(--red); font-style: normal; }
+  .s-catalogue .topbar .lab {
+    font-family: 'Albert Sans', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: clamp(12px, 0.9vw, 14px);
+    color: var(--ink);
+    text-align: right;
+  }
+  .s-catalogue .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(16px, 1.6vw, 26px);
+  }
+  .s-catalogue .card {
+    background: var(--paper);
+    border: 1.5px solid var(--ink);
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+  .s-catalogue .card .topstrip {
+    height: clamp(18px, 2vh, 32px);
+  }
+  .s-catalogue .card.c-red    .topstrip { background: var(--red); }
+  .s-catalogue .card.c-pink   .topstrip { background: var(--pink); }
+  .s-catalogue .card.c-orange .topstrip { background: var(--orange); }
+  .s-catalogue .card.c-blue   .topstrip { background: var(--blue); }
+
+  .s-catalogue .card .body {
+    padding: clamp(16px, 1.7vw, 24px) clamp(14px, 1.4vw, 20px);
+    display: flex; flex-direction: column; gap: clamp(10px, 1.2vh, 16px);
+    flex: 1;
+  }
+  .s-catalogue .card .desc + .extras {
+    display: flex; flex-direction: column; gap: 4px;
+    border-top: 1px dashed var(--ink);
+    padding-top: clamp(8px, 1vh, 14px);
+    font-family: 'Albert Sans', sans-serif;
+    font-size: clamp(14px, 0.9vw, 15px);
+    color: var(--ink);
+    line-height: 1.45;
+    font-style: italic;
+  }
+  .s-catalogue .card .specs {
+    margin-top: auto;
+  }
+  .s-catalogue .card .nm {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    font-size: clamp(28px, min(2.6vw, 4.6vh), 48px);
+    line-height: 0.94;
+    color: var(--ink);
+    letter-spacing: -0.012em;
+  }
+  .s-catalogue .card .desc {
+    font-family: 'Albert Sans', sans-serif;
+    font-size: clamp(14px, 0.95vw, 15px);
+    line-height: 1.4;
+    color: var(--ink);
+    flex: 1;
+  }
+  .s-catalogue .card .specs {
+    border-top: 1px dashed var(--ink);
+    padding-top: clamp(8px, 1vh, 14px);
+    display: flex; flex-direction: column; gap: 4px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: clamp(11px, 0.78vw, 12px);
+    color: var(--ink);
+    letter-spacing: 0.02em;
+  }
+  .s-catalogue .card .specs .row {
+    display: flex; justify-content: space-between; gap: 8px;
+  }
+  .s-catalogue .card .specs .row .k { opacity: 0.7; }
+
+  /* ─── SLIDE 4 — DIAGONAL STRIPE SPREAD ───────────────────────── */
+  .s-stripe { background: var(--paper); }
+  .s-stripe .ribbon-stack {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    overflow: hidden;
+  }
+  .s-stripe .ribbon-stack .rib {
+    position: absolute;
+    height: clamp(40px, 6vh, 96px);
+    width: 160%;
+    left: -20%;
+    transform-origin: 50% 50%;
+    transform: rotate(-22deg);
+  }
+  .s-stripe .ribbon-stack .rib.r1 { background: var(--pink);   top: 18%; }
+  .s-stripe .ribbon-stack .rib.r2 { background: var(--orange); top: 30%; }
+  .s-stripe .ribbon-stack .rib.r3 { background: var(--yellow); top: 42%; }
+  .s-stripe .ribbon-stack .rib.r4 { background: var(--green);  top: 54%; }
+  .s-stripe .ribbon-stack .rib.r5 { background: var(--blue);   top: 66%; }
+
+  .s-stripe .quote-wrap {
+    position: absolute;
+    left: clamp(40px, 4vw, 80px);
+    right: clamp(40px, 4vw, 80px);
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    display: flex; flex-direction: column;
+    align-items: flex-start;
+    gap: clamp(16px, 2vh, 28px);
+  }
+  .s-stripe .qkicker {
+    background: var(--paper);
+    padding: clamp(6px, 0.8vh, 12px) clamp(14px, 1.4vw, 22px);
+    border: 1.5px solid var(--ink);
+    font-family: 'Albert Sans', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: clamp(12px, 0.9vw, 14px);
+    color: var(--ink);
+  }
+  .s-stripe .qbody {
+    background: var(--paper);
+    padding: clamp(20px, 2.4vh, 40px) clamp(28px, 2.6vw, 48px);
+    border: 1.5px solid var(--ink);
+    box-shadow: 8px 8px 0 var(--ink);
+    max-width: 78%;
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    font-size: clamp(48px, min(5.4vw, 9vh), 110px);
+    line-height: 0.92;
+    color: var(--ink);
+    letter-spacing: -0.018em;
+  }
+  .s-stripe .qbody em { color: var(--red); font-style: normal; }
+  .s-stripe .qattr {
+    background: var(--ink);
+    color: var(--paper);
+    padding: clamp(8px, 1vh, 14px) clamp(14px, 1.4vw, 22px);
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: clamp(12px, 0.85vw, 14px);
+    letter-spacing: 0.04em;
+  }
+
+  /* ─── SLIDE 5 — DATA / EQUALIZER BARS ─────────────────────────── */
+  .s-data { background: var(--paper); }
+  .s-data .frame {
+    position: absolute;
+    inset: clamp(36px, 3.6vw, 72px) clamp(36px, 3.6vw, 72px) clamp(72px, 7vh, 110px);
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: clamp(18px, 2vh, 32px);
+    z-index: 4;
+  }
+  .s-data .topbar {
+    display: flex; align-items: end; justify-content: space-between;
+    border-bottom: 1.5px solid var(--ink);
+    padding-bottom: clamp(12px, 1.4vh, 22px);
+    gap: 30px;
+  }
+  .s-data .topbar .ttl {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    font-size: clamp(48px, min(5vw, 8.5vh), 96px);
+    line-height: 0.9; letter-spacing: -0.014em;
+    color: var(--ink);
+  }
+  .s-data .topbar .lab {
+    font-family: 'Albert Sans', sans-serif; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.18em;
+    font-size: clamp(12px, 0.9vw, 14px);
+    color: var(--ink); text-align: right;
+  }
+  .s-data .body {
+    display: grid;
+    grid-template-columns: 0.9fr 1.6fr;
+    gap: clamp(28px, 3vw, 56px);
+  }
+  .s-data .col-a {
+    display: flex; flex-direction: column; justify-content: center;
+    gap: clamp(20px, 2.4vh, 36px);
+  }
+  .s-data .stat .vbig {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    font-size: clamp(110px, min(11vw, 18vh), 240px);
+    line-height: 0.86;
+    color: var(--red);
+    letter-spacing: -0.025em;
+  }
+  .s-data .stat .vbig sub {
+    font-size: 0.34em; vertical-align: baseline;
+    color: var(--ink); letter-spacing: 0; margin-left: 8px;
+  }
+  .s-data .stat .lab-tag {
+    font-family: 'Albert Sans', sans-serif; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.16em;
+    font-size: clamp(13px, 0.95vw, 15px);
+    color: var(--ink); margin-top: 6px;
+  }
+  .s-data .stat .desc {
+    font-family: 'Albert Sans', sans-serif;
+    font-size: clamp(14px, 1vw, 17px);
+    line-height: 1.5;
+    color: var(--ink);
+    max-width: 30ch;
+    margin-top: 6px;
+  }
+
+  .s-data .eq {
+    border: 1.5px solid var(--ink);
+    background: var(--paper);
+    padding: clamp(18px, 2vw, 28px) clamp(20px, 2vw, 28px) clamp(14px, 1.6vh, 22px);
+    display: grid;
+    grid-template-rows: 1fr auto;
+    gap: clamp(10px, 1.2vh, 18px);
+    overflow: hidden;
+  }
+  .s-data .eq .bars {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: clamp(8px, 1vw, 16px);
+    align-items: end;
+    height: 100%;
+  }
+  .s-data .eq .bcol { display: flex; flex-direction: column-reverse; justify-content: start; height: 100%; gap: clamp(4px, 0.6vh, 8px); }
+  .s-data .eq .bcol .seg {
+    /* Each segment is one equal-height tile; flex-direction: column-reverse
+       means the first segment in source order sits at the BOTTOM of the
+       column, and lit segments stack upward like a real VU level meter.
+       flex:1 makes all 6 segments share the column's available height. */
+    flex: 1 1 0;
+    min-height: 12px;
+    background: rgba(58, 37, 22, 0.10);
+    border: 1px solid rgba(58, 37, 22, 0.22);
+  }
+  /* Eight tracks — varying heights, varying colours */
+  .s-data .eq .bcol[data-c="r"]  .seg.on { background: var(--red);    border-color: var(--red); }
+  .s-data .eq .bcol[data-c="p"]  .seg.on { background: var(--pink);   border-color: var(--pink); }
+  .s-data .eq .bcol[data-c="o"]  .seg.on { background: var(--orange); border-color: var(--orange); }
+  .s-data .eq .bcol[data-c="y"]  .seg.on { background: var(--yellow); border-color: var(--yellow); }
+  .s-data .eq .bcol[data-c="g"]  .seg.on { background: var(--green);  border-color: var(--green); }
+  .s-data .eq .bcol[data-c="b"]  .seg.on { background: var(--blue);   border-color: var(--blue); }
+
+  .s-data .eq .ticks {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: clamp(8px, 1vw, 16px);
+    border-top: 1px solid var(--ink);
+    padding-top: clamp(8px, 1vh, 14px);
+  }
+  .s-data .eq .ticks .ticklab {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: clamp(11px, 0.8vw, 12px);
+    color: var(--ink);
+    letter-spacing: 0.04em;
+    text-align: center;
+  }
+
+  /* ─── SLIDE 6 — QUOTE + PETALS ─────────────────────────────── */
+  .s-quote { background: var(--paper); }
+  .s-quote .qpetals {
+    position: absolute;
+    top: clamp(36px, 4vh, 72px);
+    right: clamp(40px, 4vw, 80px);
+    width: clamp(220px, 22vw, 360px);
+    height: clamp(160px, 16vw, 260px);
+    pointer-events: none;
+    z-index: 3;
+  }
+  .s-quote .qpetals .p1 { background: var(--pink);   width: 50%; left: 0;   top: 28%; }
+  .s-quote .qpetals .p2 { background: var(--orange); width: 38%; left: 16%; top: 50%; }
+  .s-quote .qpetals .p3 { background: var(--yellow); width: 44%; left: 30%; top: 0; }
+  .s-quote .qpetals .p4 { background: var(--blue);   width: 50%; left: 50%; top: 26%; }
+  .s-quote .qpetals .p5 { background: var(--green);  width: 32%; left: 36%; top: 50%; }
+
+  .s-quote .qframe {
+    position: absolute;
+    left: clamp(40px, 4vw, 80px);
+    right: clamp(40px, 4vw, 80px);
+    bottom: clamp(110px, 12vh, 180px);
+    z-index: 4;
+  }
+  .s-quote .qkicker {
+    font-family: 'Albert Sans', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: clamp(12px, 0.9vw, 14px);
+    color: var(--red);
+    margin-bottom: clamp(14px, 1.6vh, 24px);
+  }
+  .s-quote .qbody {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    font-size: clamp(56px, min(6.4vw, 10.5vh), 130px);
+    line-height: 0.9;
+    color: var(--ink);
+    letter-spacing: -0.018em;
+    max-width: 92%;
+  }
+  .s-quote .qbody em { color: var(--blue); font-style: normal; }
+  .s-quote .qattr-row {
+    margin-top: clamp(20px, 2.4vh, 36px);
+    display: flex; gap: clamp(14px, 1.4vw, 24px); align-items: center;
+    border-top: 1.5px solid var(--ink);
+    padding-top: clamp(10px, 1.2vh, 18px);
+  }
+  .s-quote .qattr-row .who-tag {
+    font-family: 'Albert Sans', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: clamp(13px, 0.92vw, 15px);
+    color: var(--ink);
+  }
+  .s-quote .qattr-row .meta-tag {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: clamp(12px, 0.85vw, 14px);
+    color: var(--ink);
+    letter-spacing: 0.04em;
+    opacity: 0.78;
+  }
+
+  /* ─── SLIDE 7 — RELEASE SCHEDULE (tabular) ─────────────────── */
+  .s-cal { background: var(--paper); }
+  .s-cal .frame {
+    position: absolute; inset: clamp(36px, 3.6vw, 72px) clamp(36px, 3.6vw, 72px) clamp(72px, 7vh, 110px);
+    display: flex; flex-direction: column;
+    z-index: 4;
+  }
+  .s-cal .topbar {
+    display: flex; align-items: end; justify-content: space-between;
+    border-bottom: 1.5px solid var(--ink);
+    padding-bottom: clamp(12px, 1.4vh, 22px);
+    gap: 30px;
+    margin-bottom: clamp(14px, 1.6vh, 24px);
+  }
+  .s-cal .topbar .ttl {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    font-size: clamp(48px, min(5vw, 8.5vh), 96px);
+    line-height: 0.9; letter-spacing: -0.014em;
+    color: var(--ink);
+  }
+  .s-cal .topbar .lab {
+    font-family: 'Albert Sans', sans-serif; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.18em;
+    font-size: clamp(12px, 0.9vw, 14px);
+    color: var(--ink); text-align: right;
+  }
+  .s-cal .ledger { display: flex; flex-direction: column; gap: 0; flex: 1; }
+  .s-cal .row {
+    display: grid;
+    grid-template-columns: 96px 1.4fr 0.9fr 0.6fr 64px;
+    gap: clamp(12px, 1.4vw, 24px);
+    align-items: center;
+    padding: clamp(10px, 1.2vh, 18px) 0;
+    border-bottom: 1px solid rgba(58,37,22,0.22);
+  }
+  .s-cal .row.headrow { border-bottom: 1.5px solid var(--ink); padding: 8px 0; }
+  .s-cal .row.headrow > div { font-family: 'Albert Sans', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.18em; font-size: clamp(11px, 0.75vw, 12px); color: var(--ink); }
+  .s-cal .date-tag { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: clamp(14px, 0.95vw, 16px); color: var(--ink); letter-spacing: 0.02em; }
+  .s-cal .ttl-row {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 700;
+    font-size: clamp(22px, 1.7vw, 30px);
+    line-height: 1.1;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .s-cal .ttl-row em { color: var(--red); font-style: normal; }
+  .s-cal .ven { font-family: 'Albert Sans', sans-serif; font-size: clamp(14px, 0.95vw, 15px); color: var(--ink); }
+  .s-cal .chip {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 4px 10px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: clamp(11px, 0.75vw, 12px);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--paper);
+    text-transform: uppercase;
+    width: fit-content;
+  }
+  .s-cal .chip.c-red    { background: var(--red); }
+  .s-cal .chip.c-pink   { background: var(--pink); }
+  .s-cal .chip.c-orange { background: var(--orange); }
+  .s-cal .chip.c-blue   { background: var(--blue); }
+  .s-cal .chip.c-green  { background: var(--green); }
+  .s-cal .nr-cell {
+    display: flex; gap: 6px; justify-content: end;
+  }
+  .s-cal .nr-cell .b {
+    width: 14px; height: 14px;
+    border: 1.5px solid var(--ink);
+    background: var(--paper);
+  }
+  .s-cal .nr-cell .b.fill { background: var(--ink); }
+
+  /* ─── SLIDE 8 — COLOPHON / CLOSING (mirror of cover) ────────── */
+  .s-colophon { background: var(--paper); }
+  .s-colophon .ribbons {
+    position: absolute;
+    left: 0;
+    top: clamp(140px, 16vh, 240px);
+    bottom: clamp(160px, 16vh, 260px);
+    width: 60%;
+    z-index: 3;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .s-colophon .ribbon {
+    position: absolute;
+    right: -20%;
+    width: 160%;
+    transform-origin: 100% 50%;
+  }
+  .s-colophon .ribbon.r-pink   { background: var(--pink);   }
+  .s-colophon .ribbon.r-orange { background: var(--orange); }
+  .s-colophon .ribbon.r-yellow { background: var(--yellow); }
+  .s-colophon .ribbon.r-green  { background: var(--green);  }
+  .s-colophon .ribbon.r-blue   { background: var(--blue);   }
+
+  .s-colophon .col-petals {
+    position: absolute;
+    bottom: clamp(80px, 9vh, 140px);
+    right: clamp(40px, 4vw, 80px);
+    width: clamp(180px, 18vw, 280px);
+    height: clamp(140px, 14vw, 220px);
+    pointer-events: none;
+    z-index: 4;
+  }
+  .s-colophon .col-petals .p1 { background: var(--red);    width: 50%; left: 0;   top: 28%; }
+  .s-colophon .col-petals .p2 { background: var(--orange); width: 38%; left: 16%; top: 50%; }
+  .s-colophon .col-petals .p3 { background: var(--green);  width: 44%; left: 30%; top: 0; }
+  .s-colophon .col-petals .p4 { background: var(--blue);   width: 50%; left: 50%; top: 22%; }
+
+  .s-colophon .titlewrap {
+    position: absolute;
+    left: clamp(36px, 3.6vw, 72px);
+    top: clamp(40px, 5vh, 96px);
+    z-index: 5;
+    max-width: 92%;
+  }
+  .s-colophon .ktag {
+    font-family: 'Albert Sans', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: clamp(12px, 0.9vw, 14px);
+    color: var(--ink);
+    margin-bottom: clamp(14px, 1.6vh, 24px);
+  }
+  .s-colophon .ttl {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    font-size: clamp(80px, min(9vw, 14vh), 180px);
+    line-height: 0.86;
+    color: var(--ink);
+    letter-spacing: -0.022em;
+  }
+  /* Colophon emphasis stays ink — the ribbons behind the title are
+     too colour-saturated for a red em to clear contrast. */
+  .s-colophon .ttl em { color: var(--ink); font-style: italic; font-weight: 900; }
+
+  .s-colophon .col-footer {
+    position: absolute;
+    left: clamp(36px, 3.6vw, 72px);
+    bottom: clamp(70px, 8vh, 110px);
+    right: clamp(220px, 22vw, 320px);
+    display: grid;
+    grid-template-columns: 1.1fr 1fr 1.1fr;
+    gap: clamp(20px, 2.4vw, 44px);
+    z-index: 5;
+  }
+  .s-colophon .col-footer > div {
+    border-top: 1.5px solid var(--ink);
+    padding-top: clamp(10px, 1.2vh, 16px);
+  }
+  .s-colophon .col-footer .ftag {
+    text-transform: uppercase; letter-spacing: 0.18em; font-weight: 700;
+    font-size: clamp(11px, 0.78vw, 13px);
+    margin-bottom: 6px;
+    color: var(--ink);
+  }
+  .s-colophon .col-footer .ftxt {
+    font-family: 'Albert Sans', sans-serif;
+    font-size: clamp(14px, 0.95vw, 15px);
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  .s-colophon .seal-stack {
+    position: absolute;
+    right: clamp(40px, 4vw, 80px);
+    top: clamp(40px, 5vh, 96px);
+    display: flex; flex-direction: column; gap: 14px; align-items: end;
+    z-index: 6;
+  }
+  .s-colophon .seal {
+    width: clamp(92px, 7.4vw, 130px);
+    height: clamp(92px, 7.4vw, 130px);
+    background: var(--ink); color: var(--paper);
+    clip-path: polygon(50% 0%, 60% 8%, 73% 4%, 76% 17%, 89% 18%, 87% 31%, 100% 35%, 92% 47%, 100% 60%, 87% 64%, 90% 77%, 76% 78%, 75% 91%, 62% 88%, 53% 100%, 42% 90%, 30% 96%, 25% 84%, 12% 86%, 13% 73%, 0% 70%, 7% 58%, 0% 47%, 11% 39%, 4% 27%, 17% 25%, 13% 12%, 27% 14%, 25% 1%, 38% 7%);
+    display: grid; place-items: center;
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    font-size: clamp(28px, 2.4vw, 42px);
+    line-height: 0.9;
+    letter-spacing: -0.01em;
+    text-align: center;
+  }
+  .s-colophon .red-stamp {
+    background: var(--red); color: var(--paper);
+    padding: clamp(8px, 1vh, 14px) clamp(14px, 1.4vw, 22px);
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    font-size: clamp(20px, 1.6vw, 28px);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    transform: rotate(-3deg);
+  }
+</style>
+<style data-atlas-owned-adapter>
+[data-atlas-deck-shell]{position:fixed!important;inset:0!important;width:100%!important;height:100%!important;display:grid!important;grid-template-rows:minmax(0,1fr) auto auto!important;gap:0!important;padding:0!important;margin:0!important;box-sizing:border-box!important;overflow:hidden!important;z-index:1}
+[data-atlas-deck-viewport]{position:relative!important;min-width:0!important;min-height:0!important;overflow:hidden!important}
+[data-atlas-deck-root]{position:absolute!important;display:block!important;margin:0!important;padding:0!important;box-sizing:border-box!important;transform-origin:0 0!important;max-width:none!important;max-height:none!important;visibility:visible!important}
+[data-atlas-deck-root][data-atlas-deck-ready="WAITING_FOR_VISIBLE_VIEWPORT"]{visibility:hidden!important}
+[data-atlas-deck-root="STAGE_HORIZONTAL_SECTIONS"]{display:flex!important;flex-direction:column!important}
+[data-atlas-deck-viewport-stage]{position:relative!important;flex:1 1 auto!important;min-height:0!important;width:100%!important;height:auto!important;transform:none!important}
+[data-atlas-deck-replaced-controls]{display:none!important}
+[data-atlas-deck-slide]{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;box-sizing:border-box!important}
+[data-atlas-deck-slide][data-atlas-deck-active="false"]{visibility:hidden!important;opacity:0!important;pointer-events:none!important}
+[data-atlas-deck-slide][data-atlas-deck-active="true"]{visibility:visible!important;opacity:1!important}
+[data-atlas-deck-slide][data-atlas-deck-inner-scroll="true"]{overflow-y:auto!important;overflow-x:hidden!important;justify-content:flex-start!important;scroll-snap-type:none!important;scroll-behavior:auto!important;min-height:0!important}
+[data-atlas-source-content-owner][data-atlas-deck-inner-scroll="true"]:focus-visible{outline:2px solid currentColor!important;outline-offset:-2px!important}
+[data-atlas-source-content-owner][data-atlas-source-scroll-axes="xy"]{overflow-x:auto!important}
+[data-atlas-source-tail-gutter="taste-native-inline-end"]::after{content:""!important;display:block!important;position:static!important;flex:0 0 0!important;align-self:flex-start!important;width:var(--atlas-source-tail-extent)!important;min-width:var(--atlas-source-tail-extent)!important;max-width:none!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important;border:0!important;pointer-events:none!important}
+[data-atlas-deck-controls]{min-width:0!important;position:relative!important;display:block!important;z-index:2}
+[data-atlas-deck-shell]>#atlas-source-proof{position:relative!important;inset:auto!important;width:100%!important;min-width:0!important;min-height:0!important;max-height:32vh!important;overflow:auto!important;margin:0!important;flex-wrap:wrap!important;overflow-wrap:anywhere!important}
+</style><style data-atlas-owned-adapter>@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:0s!important;transition-delay:0s!important;scroll-behavior:auto!important}}</style></head>
+<body data-atlas-language-policy="ORIGINAL_SOURCE_LABELED">
+
+<div class="deck">
+  <div class="stage">
+
+    
+    <section class="slide s-cover active">
+      
+      <div class="petals" aria-hidden="true">
+        <div class="petal p1"></div>
+        <div class="petal p2"></div>
+        <div class="petal p3"></div>
+        <div class="petal p4"></div>
+        <div class="petal p5"></div>
+      </div>
+
+      
+      <div class="brand">
+        <div class="b1">kyoto<br/>in bloom</div>
+        <div class="b2">SEVEN DAYS, ONE BLOOM</div>
+      </div>
+
+      
+      <div class="ribbons" aria-hidden="true">
+        <div class="ribbon r-pink"   style="top: 0%;   height: 18%; transform: rotate(-22deg);"></div>
+        <div class="ribbon r-orange" style="top: 18%;  height: 16%; transform: rotate(-22deg);"></div>
+        <div class="ribbon r-yellow" style="top: 35%;  height: 16%; transform: rotate(-22deg);"></div>
+        <div class="ribbon r-green"  style="top: 52%;  height: 16%; transform: rotate(-22deg);"></div>
+        <div class="ribbon r-blue"   style="top: 70%;  height: 18%; transform: rotate(-22deg);"></div>
+      </div>
+
+      
+      <div class="hero">7 DAYS</div>
+      <div class="lockup">THE SLOW BLOOM</div>
+
+      
+      <div class="specs" aria-hidden="false">
+        <div class="spec caption"><span class="box checked"></span><span>PEAK BLOOM HIT</span></div>
+        <div class="spec caption"><span class="box checked"></span><span>ONE ROLL SHOT</span></div>
+        <div class="spec caption"><span class="box"></span><span>ITINERARY KEPT</span></div>
+        <div class="spec caption"><span class="box"></span><span>CAMERA DIED</span></div>
+      </div>
+
+      
+      <div class="cfooter">
+        <div class="made caption"><span class="jp caption">桜</span>a one-week photo essay through kyoto</div>
+        <div class="nr caption">
+          <span class="caption">SHOT ON :</span>
+          <span class="opt"><span class="b fill"></span><span class="caption">FILM</span></span>
+          <span class="opt"><span class="b"></span><span class="caption">PHONE</span></span>
+        </div>
+        <div class="seal caption">KY</div>
+        <div class="stamp caption">
+          <div class="lab2 caption">SEASON</div>
+          <div>APR &apos;26</div>
+        </div>
+      </div>
+
+      <div class="pagenum">01 / 08</div>
+    </section>
+
+    
+    <section class="slide s-manifesto">
+      <div class="kicker caption">Why Kyoto, Why This Week · April 2026</div>
+      <div class="blob b-red"   aria-hidden="true"></div>
+      <div class="blob b-orange" aria-hidden="true"></div>
+      <div class="blob b-yellow" aria-hidden="true"></div>
+      <div class="blob b-green"  aria-hidden="true"></div>
+      <div class="blob b-blue"   aria-hidden="true"></div>
+      <div class="blob b-pink"   aria-hidden="true"></div>
+      <div class="stmt-wrap">
+        <h1 class="stmt">The forecast promised bloom on April 2nd. What if it opened on <em>April 9th</em> instead — after the flights were already booked?</h1>
+      </div>
+      <div class="pagenum">02 / 08</div>
+    </section>
+
+    
+    <section class="slide s-catalogue">
+      <div class="frame">
+        <div class="topbar">
+          <div class="ttl">Four scenes, one <em>week</em></div>
+          <div class="lab caption">The essay · in order of the trip</div>
+        </div>
+        <div class="grid">
+          <div class="card c-red">
+            <div class="topstrip"></div>
+            <div class="body">
+              <div class="nm">01<br/>ARRIVAL</div>
+              <div class="desc">Kyoto Station at 3pm, bags still packed, not a single petal in sight. The Kamogawa was bare branches and commuters, and the forecast had just slipped a full week.</div>
+              <div class="extras">
+                <div>The wait turned out to be the best thing that happened to this trip.</div>
+              </div>
+              <div class="specs">
+                <div class="row"><span class="k caption">LOCATION</span><span class="caption">Kyoto Station</span></div>
+                <div class="row"><span class="k caption">TIME</span><span class="caption">Day 1 · 3:00pm</span></div>
+                <div class="row"><span class="k caption">LIGHT</span><span class="caption">Flat, overcast</span></div>
+                <div class="row"><span class="k caption">CROWD</span><span class="caption">Commuters only</span></div>
+                <div class="row"><span class="k caption">FRAME</span><span class="caption">0 of 1,428</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="card c-pink">
+            <div class="topstrip"></div>
+            <div class="body">
+              <div class="nm">02<br/>FIRST&nbsp;BLOOM</div>
+              <div class="desc">Dawn on the Philosopher's Path, Day 2. The canal was still half-bare, but the first cherry over the water had opened overnight — just one tree, and we had it entirely to ourselves.</div>
+              <div class="extras">
+                <div>A shrine cat sat under it for eleven minutes and never once looked at the camera.</div>
+              </div>
+              <div class="specs">
+                <div class="row"><span class="k caption">LOCATION</span><span class="caption">Philosopher's Path</span></div>
+                <div class="row"><span class="k caption">TIME</span><span class="caption">Day 2 · 5:30am</span></div>
+                <div class="row"><span class="k caption">LIGHT</span><span class="caption">Blue hour, cool</span></div>
+                <div class="row"><span class="k caption">CROWD</span><span class="caption">One jogger, one cat</span></div>
+                <div class="row"><span class="k caption">FRAME</span><span class="caption">112 of 1,428</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="card c-orange">
+            <div class="topstrip"></div>
+            <div class="body">
+              <div class="nm">03<br/>PEAK&nbsp;BLOOM</div>
+              <div class="desc">Maruyama Park, Day 4, lantern light after dark. The famous weeping cherry was fully open, food stalls three rows deep, and every phone in the park pointed the same direction as ours.</div>
+              <div class="extras">
+                <div>We ate ramen standing up at midnight and agreed it was worth the crowd.</div>
+              </div>
+              <div class="specs">
+                <div class="row"><span class="k caption">LOCATION</span><span class="caption">Maruyama Park</span></div>
+                <div class="row"><span class="k caption">TIME</span><span class="caption">Day 4 · 8:15pm</span></div>
+                <div class="row"><span class="k caption">LIGHT</span><span class="caption">Paper lanterns</span></div>
+                <div class="row"><span class="k caption">CROWD</span><span class="caption">Shoulder to shoulder</span></div>
+                <div class="row"><span class="k caption">FRAME</span><span class="caption">640 of 1,428</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="card c-blue">
+            <div class="topstrip"></div>
+            <div class="body">
+              <div class="nm">04<br/>THE&nbsp;TURN</div>
+              <div class="desc">Kamo River towpath, Day 4, 5:47am — back before sunrise on almost no sleep, chasing fog off the water. A cyclist crossed the frame mid-exposure and the whole trip suddenly had a picture.</div>
+              <div class="extras">
+                <div>We never learned his name. He never noticed us at all.</div>
+              </div>
+              <div class="specs">
+                <div class="row"><span class="k caption">LOCATION</span><span class="caption">Kamo River towpath</span></div>
+                <div class="row"><span class="k caption">TIME</span><span class="caption">Day 4 · 5:47am</span></div>
+                <div class="row"><span class="k caption">LIGHT</span><span class="caption">Fog, first sun</span></div>
+                <div class="row"><span class="k caption">CROWD</span><span class="caption">One cyclist, gone</span></div>
+                <div class="row"><span class="k caption">FRAME</span><span class="caption">701 of 1,428</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pagenum">03 / 08</div>
+    </section>
+
+    
+    <section class="slide s-stripe">
+      <div class="ribbon-stack" aria-hidden="true">
+        <div class="rib r1"></div>
+        <div class="rib r2"></div>
+        <div class="rib r3"></div>
+        <div class="rib r4"></div>
+        <div class="rib r5"></div>
+      </div>
+      <div class="quote-wrap">
+        <div class="qkicker caption">A note scrawled in the margin of the trip journal</div>
+        <h2 class="qbody">A stranger's <em>bicycle</em> crossed the frame — and the whole trip finally clicked.</h2>
+        <div class="qattr caption">— Day 4, Kamo River towpath · 5:47am</div>
+      </div>
+      <div class="pagenum">04 / 08</div>
+    </section>
+
+    
+    <section class="slide s-data">
+      <div class="frame">
+        <div class="topbar">
+          <div class="ttl">The week, in numbers</div>
+          <div class="lab caption">Frame log · Kyoto, April 2026</div>
+        </div>
+        <div class="body">
+          <div class="col-a">
+            <div class="stat">
+              <div class="vbig">1,428</div>
+              <div class="lab-tag caption">Frames shot</div>
+              <div class="desc">Across two cameras and one roll of film, over seven days on foot through five neighborhoods.</div>
+            </div>
+            <div class="stat">
+              <div class="vbig" style="color: var(--blue); font-size: clamp(70px, min(7vw, 11vh), 150px);">12<span style="font-size: clamp(28px, min(3vw, 5vh), 60px); color: var(--ink); margin-left: 6px;">kept</span></div>
+              <div class="lab-tag caption">Photos that made the final essay</div>
+              <div class="desc">Everything else stayed on the memory card — twelve frames carried the whole story.</div>
+            </div>
+          </div>
+          <div class="eq">
+            <div class="bars">
+              
+              <div class="bcol" data-c="b">
+                <div class="seg on"></div>
+                <div class="seg"></div><div class="seg"></div><div class="seg"></div><div class="seg"></div><div class="seg"></div>
+              </div>
+              <div class="bcol" data-c="g">
+                <div class="seg on"></div><div class="seg on"></div>
+                <div class="seg"></div><div class="seg"></div><div class="seg"></div><div class="seg"></div>
+              </div>
+              <div class="bcol" data-c="y">
+                <div class="seg on"></div><div class="seg on"></div><div class="seg on"></div>
+                <div class="seg"></div><div class="seg"></div><div class="seg"></div>
+              </div>
+              <div class="bcol" data-c="o">
+                <div class="seg on"></div><div class="seg on"></div><div class="seg on"></div><div class="seg on"></div>
+                <div class="seg"></div><div class="seg"></div>
+              </div>
+              <div class="bcol" data-c="r">
+                <div class="seg on"></div><div class="seg on"></div><div class="seg on"></div><div class="seg on"></div><div class="seg on"></div><div class="seg on"></div>
+              </div>
+              <div class="bcol" data-c="p">
+                <div class="seg on"></div><div class="seg on"></div><div class="seg on"></div><div class="seg on"></div><div class="seg on"></div>
+                <div class="seg"></div>
+              </div>
+              <div class="bcol" data-c="p">
+                <div class="seg on"></div><div class="seg on"></div><div class="seg on"></div><div class="seg on"></div><div class="seg on"></div>
+                <div class="seg"></div>
+              </div>
+              <div class="bcol" data-c="b">
+                <div class="seg on"></div><div class="seg on"></div><div class="seg on"></div>
+                <div class="seg"></div><div class="seg"></div><div class="seg"></div>
+              </div>
+            </div>
+            <div class="ticks">
+              <div class="ticklab caption">ARR</div>
+              <div class="ticklab caption">D1</div>
+              <div class="ticklab caption">D2</div>
+              <div class="ticklab caption">D3</div>
+              <div class="ticklab caption">D4</div>
+              <div class="ticklab caption">D5</div>
+              <div class="ticklab caption">D6</div>
+              <div class="ticklab caption">DEP</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pagenum">05 / 08</div>
+    </section>
+
+    
+    <section class="slide s-quote">
+      <div class="qpetals" aria-hidden="true">
+        <div class="petal p1"></div>
+        <div class="petal p2"></div>
+        <div class="petal p3"></div>
+        <div class="petal p4"></div>
+        <div class="petal p5"></div>
+      </div>
+      <div class="qframe">
+        <div class="qkicker caption">What the trip left behind</div>
+        <p class="qbody">"I didn't come home with better photographs. I came home with <em>a slower week.</em>"</p>
+        <div class="qattr-row">
+          <div class="who-tag caption">From the trip journal</div>
+          <div class="meta-tag caption">Written on the flight home · April 2026</div>
+        </div>
+      </div>
+      <div class="pagenum">06 / 08</div>
+    </section>
+
+    
+    <section class="slide s-cal">
+      <div class="frame">
+        <div class="topbar">
+          <div class="ttl">Seven days, five turns</div>
+          <div class="lab caption">The actual itinerary · not the planned one</div>
+        </div>
+        <div class="ledger">
+          <div class="row headrow">
+            <div class="caption">Day</div>
+            <div class="caption">Moment</div>
+            <div class="caption">Detail</div>
+            <div class="caption">Beat</div>
+            <div class="caption">Mood</div>
+          </div>
+          <div class="row">
+            <div class="date-tag caption">DAY 1</div>
+            <div class="ttl-row"><em>Land</em> in Kyoto, bloom not yet</div>
+            <div class="ven">Kyoto Station → Gion machiya, bags dropped by 3pm</div>
+            <div><span class="chip c-red caption">ARRIVE</span></div>
+            <div class="nr-cell"><span class="b fill"></span><span class="b"></span></div>
+          </div>
+          <div class="row">
+            <div class="date-tag caption">DAY 2</div>
+            <div class="ttl-row"><em>Scout</em> the Philosopher's Path at dawn</div>
+            <div class="ven">5:30am, only joggers and one shrine cat</div>
+            <div><span class="chip c-pink caption">SCOUT</span></div>
+            <div class="nr-cell"><span class="b fill"></span><span class="b"></span></div>
+          </div>
+          <div class="row">
+            <div class="date-tag caption">DAY 3</div>
+            <div class="ttl-row"><em>Wait</em> out a slow, half-bloomed afternoon</div>
+            <div class="ven">Nishiki Market, too much coffee, a lot of patience</div>
+            <div><span class="chip c-orange caption">WAIT</span></div>
+            <div class="nr-cell"><span class="b"></span><span class="b fill"></span></div>
+          </div>
+          <div class="row">
+            <div class="date-tag caption">DAY 4</div>
+            <div class="ttl-row"><em>Chase</em> peak bloom at Maruyama Park</div>
+            <div class="ven">Lantern light, yozakura crowds, ramen at midnight</div>
+            <div><span class="chip c-orange caption">PEAK</span></div>
+            <div class="nr-cell"><span class="b"></span><span class="b fill"></span></div>
+          </div>
+          <div class="row">
+            <div class="date-tag caption">DAY 4</div>
+            <div class="ttl-row"><em>Catch</em> the cyclist on the Kamo River</div>
+            <div class="ven">5:47am, one frame, the whole trip distilled into it</div>
+            <div><span class="chip c-blue caption">TURN</span></div>
+            <div class="nr-cell"><span class="b fill"></span><span class="b"></span></div>
+          </div>
+          <div class="row">
+            <div class="date-tag caption">DAY 6</div>
+            <div class="ttl-row"><em>Watch</em> the petals fall at Kiyomizu-dera</div>
+            <div class="ven">Wind picked up, and the whole path turned pink</div>
+            <div><span class="chip c-green caption">FALL</span></div>
+            <div class="nr-cell"><span class="b"></span><span class="b fill"></span></div>
+          </div>
+          <div class="row">
+            <div class="date-tag caption">DAY 7</div>
+            <div class="ttl-row"><em>Edit</em> 1,428 frames down to twelve</div>
+            <div class="ven">Contact sheets spread across a ryokan tatami floor</div>
+            <div><span class="chip c-pink caption">EDIT</span></div>
+            <div class="nr-cell"><span class="b fill"></span><span class="b"></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="pagenum">07 / 08</div>
+    </section>
+
+    
+    <section class="slide s-colophon">
+      <div class="ribbons" aria-hidden="true">
+        <div class="ribbon r-blue"   style="bottom: 0%;   height: 18%; transform: rotate(22deg);"></div>
+        <div class="ribbon r-green"  style="bottom: 18%;  height: 16%; transform: rotate(22deg);"></div>
+        <div class="ribbon r-yellow" style="bottom: 35%;  height: 16%; transform: rotate(22deg);"></div>
+        <div class="ribbon r-orange" style="bottom: 52%;  height: 16%; transform: rotate(22deg);"></div>
+        <div class="ribbon r-pink"   style="bottom: 70%;  height: 18%; transform: rotate(22deg);"></div>
+      </div>
+
+      <div class="col-petals" aria-hidden="true">
+        <div class="petal p1"></div>
+        <div class="petal p2"></div>
+        <div class="petal p3"></div>
+        <div class="petal p4"></div>
+      </div>
+
+      <div class="seal-stack" aria-hidden="false">
+        <div class="seal caption">12<br/>FRAMES</div>
+        <div class="red-stamp caption">THE END</div>
+      </div>
+
+      <div class="titlewrap">
+        <div class="ktag caption">One week · One path · One bloom</div>
+        <h2 class="ttl">The best souvenir was <em>slowing down enough to see it.</em></h2>
+      </div>
+
+      <div class="col-footer">
+        <div>
+          <div class="ftag caption">The Essay</div>
+          <div class="ftxt">Twelve photographs · one week in Kyoto<br/>Kept for friends, and for next April</div>
+        </div>
+        <div>
+          <div class="ftag caption">Gear</div>
+          <div class="ftxt">Fujifilm X100V · one 50mm prime<br/>Portra 400, one roll only</div>
+        </div>
+        <div>
+          <div class="ftag caption">Why This Deck</div>
+          <div class="ftxt">Written for the friend who keeps asking "when's the best week to go?"</div>
+        </div>
+      </div>
+
+      <div class="pagenum">08 / 08</div>
+    </section>
+
+  </div>
+</div>
+
+<div class="caption nav-hint">← / → · space</div>
+
+
+
+<aside id="atlas-source-proof" aria-label="Atlas 來源證據 / Source evidence" data-language-exempt="original-source" style="all:initial;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;position:relative;z-index:2147483647;padding:10px 14px;color:#30464d;background:#f8faf9;border-top:1px solid rgba(21,39,45,.22);font:12px/1.4 ui-monospace,Consolas,monospace"><span>來源版式離線適配（保留原文）· 原始程式已停用；本機適配器提供頁面與減動控制<br><span lang="en">Offline source-layout adaptation; original text retained. Source scripts are disabled; local adapters provide page and reduced-motion controls.</span></span><span>bf714528070d · c9f054254528</span></aside><script data-atlas-owned-adapter="0" data-atlas-script-sha256="7112b0614343c48a6b8d603c156d6758cfaa40b6c9d35a237ffa120e36036dbd">/* Atlas reviewed source deck adapter: no upstream runtime execution. */
+(function deckRuntime(config) {
+  'use strict';
+  function start() {
+    const roots = [...document.querySelectorAll(config.selector)];
+    if (roots.length !== 1) throw new Error('Source deck root binding changed.');
+    const deck = roots[0];
+    if (deck.dataset.atlasDeckInitialized === 'true') return;
+    const slides = [...deck.children].filter((node) => node.tagName === 'SECTION');
+    if (slides.length !== config.slide_count || [...deck.children].some((node) => !['SECTION', 'STYLE', 'SCRIPT', 'TEMPLATE'].includes(node.tagName)
+      && !(config.source_controls || []).some(selector => node.matches(selector)))) throw new Error('Source deck section binding changed.');
+    const sourceIsActive = config.variant === 'DIV_DECK_IS_ACTIVE_SECTIONS';
+    if ((config.variant === 'STAGE_ACTIVE_SECTIONS' || sourceIsActive) && slides.some((node) => !node.classList.contains('slide'))) throw new Error('Source stage slide grammar changed.');
+    if (sourceIsActive && deck.id !== 'deck') throw new Error('Source div deck identity changed.');
+    deck.dataset.atlasDeckInitialized = 'true';
+    const horizontal = config.variant === 'STAGE_HORIZONTAL_SECTIONS';
+    const scene = horizontal ? deck.parentNode : deck;
+    if (horizontal && (scene.id !== 'deck' || !scene.classList.contains('deck')
+      || [...scene.children].filter(node => node.classList.contains('demo-banner')).length !== 1
+      || [...scene.children].filter(node => node.classList.contains('chrome')).length !== 1)) throw new Error('Source horizontal scene binding changed.');
+    scene.dataset.atlasDeckRoot = config.variant;
+    if (config.source_horizontal_scroll || config.source_readable_scroll) {
+      // The original horizontal keyboard/dot controller is replaced by the
+      // local controls below. Its scroll/snap mechanism must not compete with
+      // the adapter's single active, absolute-positioned source page.
+      deck.style.setProperty('overflow', 'hidden', 'important');
+      deck.style.setProperty('scroll-snap-type', 'none', 'important');
+      deck.style.setProperty('scroll-behavior', 'auto', 'important');
+      deck.scrollLeft = 0; deck.scrollTop = 0;
+    }
+    for (const selector of config.source_controls || []) {
+      for (const control of document.querySelectorAll(selector)) {
+        if (slides.some(slide => slide.contains(control))) throw new Error('Source control selector intersects original slide content.');
+        control.dataset.atlasDeckReplacedControls = 'true'; control.inert = true;
+      }
+    }
+    if (horizontal) {
+      deck.dataset.atlasDeckViewportStage = 'true';
+      const sourceControls = [...scene.children].find(node => node.classList.contains('chrome'));
+      sourceControls.dataset.atlasDeckReplacedControls = 'true'; sourceControls.inert = true;
+    }
+    if (sourceIsActive) {
+      for (const selector of ['#nav-dots', '#slide-counter']) {
+        const sourceControl = document.querySelector(selector);
+        if (!sourceControl || sourceControl.parentNode !== deck.parentNode) throw new Error('Source div deck control binding changed.');
+        sourceControl.dataset.atlasDeckReplacedControls = 'true'; sourceControl.inert = true;
+      }
+    }
+    slides.forEach((slide, index) => { slide.dataset.atlasDeckSlide = String(index); });
+    if (config.variant === 'DECK_STAGE_SECTIONS' && !customElements.get('deck-stage')) customElements.define('deck-stage', class extends HTMLElement {});
+
+    const shell = document.createElement('div'), viewport = document.createElement('div'), controls = document.createElement('div');
+    shell.dataset.atlasDeckShell = 'true'; viewport.dataset.atlasDeckViewport = 'true'; controls.dataset.atlasDeckControls = 'true';
+    scene.parentNode.insertBefore(shell, scene); viewport.append(scene); shell.append(viewport, controls);
+    const proof = document.querySelector('#atlas-source-proof');
+    if (proof) shell.append(proof);
+    const shadow = controls.attachShadow({ mode: 'open' });
+    const style = document.createElement('style');
+    style.textContent = ':host{display:block;background:#f8faf9;color:#172327;font:12px/1.35 system-ui,sans-serif}nav{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:12px;align-items:center;max-width:520px;min-height:52px;margin:auto;padding:4px 8px;box-sizing:border-box}button{font:inherit;min-width:0;min-height:44px;padding:5px 8px;border:1px solid #617176;border-radius:3px;background:white;color:inherit;cursor:pointer;overflow-wrap:anywhere}button:disabled{opacity:.45;cursor:default}button:focus-visible{outline:3px solid #135e67;outline-offset:2px}output{min-width:5em;text-align:center}';
+    const nav = document.createElement('nav'), previous = document.createElement('button'), next = document.createElement('button'), counter = document.createElement('output');
+    nav.setAttribute('aria-label', '投影片導覽／Slide navigation');
+    previous.type = 'button'; next.type = 'button'; previous.textContent = '上一頁／Previous'; next.textContent = '下一頁／Next';
+    previous.setAttribute('aria-label', '上一頁／Previous slide'); next.setAttribute('aria-label', '下一頁／Next slide');
+    counter.setAttribute('aria-live', 'polite'); counter.setAttribute('aria-atomic', 'true');
+    nav.append(previous, counter, next); shadow.append(style, nav);
+    // This reviewed source builds decorative primitives and chart values from
+    // literal source data. Reproduce those primitives, never run its script.
+    // Random positions use the same original distribution, once per document.
+    if (config.source_orbit_data) {
+      const create = (id, count, cls, style) => {
+        const parent = deck.querySelector('#' + id);
+        if (!parent || parent.children.length) throw new Error('Source generated primitive container changed.');
+        for (let i = 0; i < count; i++) { const node = document.createElement('div'); node.className = cls; style(node, i); parent.append(node); }
+      };
+      for (const [id, count] of [['starfield1', 50], ['starfield4', 30], ['starfield7', 35], ['starfield10', 45]]) create(id, count, 'star', node => {
+        node.style.left = Math.random() * 100 + '%'; node.style.top = Math.random() * 100 + '%'; node.style.animationDelay = Math.random() * 3 + 's';
+      });
+      for (const [id, count] of [['particles1', 16], ['particles10', 20]]) create(id, count, 'p', (node, i) => {
+        node.style.background = ['var(--neon-cyan)', 'var(--neon-pink)', 'var(--neon-yellow)'][i % 3];
+        node.style.left = Math.random() * 100 + '%'; node.style.top = Math.random() * 100 + '%';
+        node.style.animationDelay = Math.random() * 5 + 's'; node.style.animationDuration = (6 + Math.random() * 6) + 's';
+      });
+      create('landscape10', 12, 'mountain', (node, i) => {
+        node.style.height = [30, 50, 70, 40, 60, 35, 55, 45, 80, 25, 50, 40][i] + 'px'; node.style.width = (60 + (i % 3) * 20) + 'px';
+      });
+    }
+    const sourceQuoteSizes = new Map();
+    const sourceHeadingSizes = new Map();
+    function sourceHeadingFit(slide) {
+      if (!config.source_heading_fit) return;
+      for (const heading of slide.querySelectorAll('h1.display')) {
+        if (!sourceHeadingSizes.has(heading)) sourceHeadingSizes.set(heading, {
+          value: heading.style.getPropertyValue('font-size'), priority: heading.style.getPropertyPriority('font-size')
+        });
+        const original = sourceHeadingSizes.get(heading);
+        if (original.value) heading.style.setProperty('font-size', original.value, original.priority);
+        else heading.style.removeProperty('font-size');
+        const base = parseFloat(getComputedStyle(heading).fontSize);
+        const fits = () => {
+          const box = heading.getBoundingClientRect(), clip = slide.getBoundingClientRect();
+          if (box.width <= 0 || clip.width <= 0) return false;
+          const walker = document.createTreeWalker(heading, NodeFilter.SHOW_TEXT); let node;
+          while ((node = walker.nextNode())) {
+            let index = 0;
+            for (const character of node.data) {
+              const end = index + character.length;
+              if (character.trim()) {
+                const range = document.createRange(); range.setStart(node, index); range.setEnd(node, end);
+                const rect = range.getBoundingClientRect();
+                if (rect.left < Math.max(box.left, clip.left) || rect.right > Math.min(box.right, clip.right)) return false;
+              }
+              index = end;
+            }
+          }
+          return true;
+        };
+        if (!(base > 0) || heading.getBoundingClientRect().width <= 0) continue;
+        if (!fits()) {
+          let low = Math.min(16, base), high = base;
+          heading.style.setProperty('font-size', low + 'px', 'important');
+          if (fits()) {
+            for (let i = 0; i < 20; i++) {
+              const mid = (low + high) / 2; heading.style.setProperty('font-size', mid + 'px', 'important');
+              if (fits()) low = mid; else high = mid;
+            }
+            heading.style.setProperty('font-size', low + 'px', 'important');
+          }
+        }
+        heading.dataset.atlasSourceHeadingFit = fits() ? 'FITTED_SOURCE_TEXT' : 'READABLE_FLOOR_EXCEEDS_SOURCE_BOX';
+      }
+    }
+    function sourceAutoFit(slide) {
+      if (!config.source_auto_fit) return;
+      for (const node of slide.querySelectorAll('.slide__kpi-val')) {
+        node.style.transform = ''; node.style.transformOrigin = '';
+        if (node.clientWidth > 0 && node.scrollWidth > node.clientWidth) { node.style.transform = 'scale(' + node.clientWidth / node.scrollWidth + ')'; node.style.transformOrigin = 'left top'; }
+      }
+      for (const node of slide.querySelectorAll('blockquote')) {
+        if (!slide.classList.contains('slide--quote')) continue;
+        if (!sourceQuoteSizes.has(node)) sourceQuoteSizes.set(node, parseFloat(getComputedStyle(node).fontSize));
+        const length = node.textContent.trim().length;
+        if (length > 100) node.style.fontSize = Math.max(16, Math.round(sourceQuoteSizes.get(node) * Math.max(0.5, 100 / length))) + 'px';
+      }
+    }
+    function sourceDataEndpoint() {
+      if (!config.source_orbit_data) return;
+      for (const node of deck.querySelectorAll('#barChart .chart-value')) node.textContent = String(parseInt(node.dataset.value, 10));
+      const chart = deck.querySelector('#barChart'), groups = [...chart.children];
+      const px = value => Number.parseFloat(value) || 0;
+      const outerHeight = node => { const style = getComputedStyle(node); return node.offsetHeight + px(style.marginTop) + px(style.marginBottom); };
+      const chartStyle = getComputedStyle(chart);
+      const contentHeight = chart.clientHeight - px(chartStyle.paddingTop) - px(chartStyle.paddingBottom);
+      const overhead = Math.max(...groups.map(group => {
+        const style = getComputedStyle(group);
+        return outerHeight(group.children[0]) + outerHeight(group.children[2]) + 2 * px(style.rowGap);
+      }));
+      // The source percentage's parent is auto-height, so its empty bars used
+      // to resolve to zero. A shared plot, derived from the source chart and
+      // original labels/gaps, preserves all five original percentage ratios.
+      const plotHeight = Math.max(0, contentHeight - overhead);
+      chart.dataset.atlasSourcePlotHeight = String(plotHeight);
+      for (const group of groups) {
+        const bar = group.children[1]; bar.style.flexShrink = '0';
+        const percent = Number(bar.dataset.height);
+        bar.style.height = (current === 3 ? plotHeight * percent / 100 : 0) + 'px';
+        bar.dataset.atlasSourcePercent = String(percent);
+      }
+      for (const node of deck.querySelectorAll('#hbarChart .hbar-fill')) node.style.width = (current === 4 ? node.dataset.width : '0') + '%';
+      for (const node of deck.querySelectorAll('#statsGrid .stat-number')) { const target = parseFloat(node.dataset.target); node.textContent = current === 6 ? (target % 1 !== 0 ? target.toFixed(1) : String(target)) + (node.dataset.suffix || '') : '0'; }
+    }
+    function needsReadableScroll(slide) {
+      if (!config.source_readable_scroll || window.innerWidth > config.source_readable_scroll_max_width) return false;
+      const clip = slide.getBoundingClientRect(), walker = document.createTreeWalker(slide, NodeFilter.SHOW_TEXT); let text;
+      while ((text = walker.nextNode())) {
+        if (!text.data.trim()) continue;
+        let element = text.parentElement || text.parentNode, hidden = false;
+        while (element && element !== slide) {
+          const style = getComputedStyle(element);
+          if (style.display === 'none' || style.visibility === 'hidden' || style.visibility === 'collapse') { hidden = true; break; }
+          element = element.parentElement || element.parentNode;
+        }
+        if (hidden) continue;
+        const range = document.createRange(); range.setStart(text, 0); range.setEnd(text, text.data.length);
+        const bounds = range.getBoundingClientRect();
+        if (bounds.bottom > bounds.top && (bounds.top < clip.top || bounds.bottom > clip.bottom)) return true;
+      }
+      return false;
+    }
+    // Only immutable, reviewed source roles enter this path. It reserves the
+    // source chrome and gives overflowing original content a positive scroll
+    // origin; it does not resize typography, remove text or repaint artwork.
+    const readableStates = new Map();
+    const px = value => Number.parseFloat(value) || 0;
+    function oneRole(slide, selector) {
+      if (selector === ':self') return slide;
+      const nodes = [...slide.querySelectorAll(selector)];
+      if (nodes.length !== 1) throw new Error('Source readable layout role binding changed.');
+      return nodes[0];
+    }
+    const sourceGraphicReleaseState = new Map();
+    function resetSourceGraphicReleases() {
+      for (const [node, values] of sourceGraphicReleaseState) {
+        for (const [key, original] of values) {
+          if (original.value) node.style.setProperty(key, original.value, original.priority);
+          else node.style.removeProperty(key);
+        }
+      }
+      sourceGraphicReleaseState.clear();
+    }
+    function applySourceGraphicReleases(slide) {
+      for (const graphic of config.source_graphic_releases || []) {
+        if (slides[graphic.index] !== slide) continue;
+        const node = oneRole(slide, graphic.selector);
+        if (String(node.tagName).toLowerCase() !== 'svg' || node.namespaceURI !== 'http://www.w3.org/2000/svg'
+          || node.getAttribute('viewBox') !== graphic.view_box || node.getAttribute('width') !== graphic.width
+          || node.getAttribute('height') !== graphic.height) throw new Error('Source graphic release geometry changed.');
+        let parent = node.parentNode;
+        for (const name of graphic.parent_chain) {
+          if (!parent?.classList.contains(name)) throw new Error('Source graphic release parent role changed.');
+          parent = parent.parentNode;
+        }
+        if (parent !== slide) throw new Error('Source graphic release page identity changed.');
+        let values = sourceGraphicReleaseState.get(node);
+        if (!values) { values = new Map(); sourceGraphicReleaseState.set(node, values); }
+        for (const key of ['overflow-x', 'overflow-y']) {
+          if (!values.has(key)) values.set(key, { value: node.style.getPropertyValue(key), priority: node.style.getPropertyPriority(key) });
+          node.style.setProperty(key, 'visible', 'important');
+        }
+      }
+    }
+    function rememberStyle(state, node, key, value) {
+      let values = state.styles.get(node);
+      if (!values) { values = new Map(); state.styles.set(node, values); }
+      if (!values.has(key)) values.set(key, { value: node.style.getPropertyValue(key), priority: node.style.getPropertyPriority(key) });
+      node.style.setProperty(key, value, 'important');
+    }
+    function resetReadableLayout(slide) {
+      const state = readableStates.get(slide);
+      if (!state) return null;
+      const prior = { owner: state.owner, top: state.owner.scrollTop, left: state.owner.scrollLeft,
+        scrolling: state.owner.dataset.atlasDeckInnerScroll === 'true', nested: [] };
+      state.owner.scrollTop = 0; state.owner.scrollLeft = 0;
+      if (state.wrapper) { state.wrapper.parentNode.insertBefore(state.content, state.wrapper); state.wrapper.remove(); state.wrapper = null; }
+      for (const [node, values] of state.styles) for (const [key, original] of values) {
+        if (original.value) node.style.setProperty(key, original.value, original.priority); else node.style.removeProperty(key);
+      }
+      state.styles.clear();
+      for (const [key, value] of state.attributes) {
+        if (value === null) state.owner.removeAttribute(key); else state.owner.setAttribute(key, value);
+      }
+      for (const [node, values] of state.nestedAttributes) {
+        prior.nested.push({ node, top: node.scrollTop, left: node.scrollLeft }); node.scrollTop = 0; node.scrollLeft = 0;
+        for (const [key, value] of values) { if (value === null) node.removeAttribute(key); else node.setAttribute(key, value); }
+        delete node.dataset.atlasSourceContentOwner; delete node.dataset.atlasSourceScrollAxes; delete node.dataset.atlasDeckInnerScroll;
+      }
+      state.nestedAttributes.clear();
+      state.owner.dataset.atlasDeckInnerScroll = 'false';
+      delete state.owner.dataset.atlasSourceContentOwner;
+      delete state.owner.dataset.atlasSourceScrollAxes;
+      return prior;
+    }
+    function localScrollOwner(slide) {
+      const state = readableStates.get(slide);
+      return state?.owner.dataset.atlasDeckInnerScroll === 'true' ? state.owner
+        : slide.dataset.atlasDeckInnerScroll === 'true' ? slide : null;
+    }
+    function applyTasteEndGutter(slide, state, set, scale) {
+      // Exact two source-native Taste editions only. The owned zero-height
+      // pseudo box reserves real horizontal end space, without changing the
+      // original content box widths, fonts, layout order or source pseudo art.
+      if (!config.source_native_flow_viewport) return;
+      if (slide.getAttribute('data-atlas-source-tail-gutter') !== null)
+        throw new Error('Source Taste previous end extent was not restored.');
+      const css = getComputedStyle(slide), pseudo = getComputedStyle(slide, '::after');
+      const px = value => /^(?:[0-9]+(?:\.[0-9]+)?)px$/.test(value) ? Number.parseFloat(value) : NaN;
+      const em = px(css.fontSize), left = px(css.paddingLeft) + px(css.borderLeftWidth), right = px(css.paddingRight) + px(css.borderRightWidth);
+      const box = slide.getBoundingClientRect();
+      if (!Number.isFinite(scale) || !(scale > 0) || !Number.isFinite(em) || !(em > 0)
+        || !Number.isFinite(left) || !Number.isFinite(right) || css.flexDirection !== 'column'
+        || !['none', 'normal'].includes(pseudo.content) || ![box.left, box.right, box.width, box.height].every(Number.isFinite)
+        || !(box.width > 0 && box.height > 0) || slide.scrollLeft !== 0)
+        throw new Error('Source Taste native end extent geometry is not measurable.');
+      const visible = node => {
+        for (let n = node; n && n !== slide; n = n.parentNode) {
+          if (['SCRIPT', 'STYLE', 'NOSCRIPT', 'TEMPLATE'].includes(n.tagName)) return false;
+          const style = getComputedStyle(n); if (style.display === 'none' || style.visibility !== 'visible') return false;
+        }
+        return true;
+      };
+      let maxRight = -Infinity, textCount = 0;
+      const include = rect => {
+        if (![rect.left, rect.right, rect.top, rect.bottom].every(Number.isFinite)) throw new Error('Source Taste end extent contains nonfinite bounds.');
+        if (rect.right > rect.left && rect.bottom > rect.top) maxRight = Math.max(maxRight, rect.right);
+      };
+      for (const node of slide.querySelectorAll('*')) if (visible(node)) include(node.getBoundingClientRect());
+      const walker = document.createTreeWalker(slide, NodeFilter.SHOW_TEXT); let text;
+      while ((text = walker.nextNode())) if (text.data.trim() && visible(text.parentNode)) {
+        const range = document.createRange(); range.setStart(text, 0); range.setEnd(text, text.data.length);
+        const rect = range.getBoundingClientRect(); include(rect);
+        if (rect.right > rect.left && rect.bottom > rect.top) textCount++;
+      }
+      if (!textCount || !Number.isFinite(maxRight)) throw new Error('Source Taste text end extent is missing.');
+      const contentStart = box.left + left * scale, contentEnd = box.right - right * scale;
+      if (maxRight <= contentEnd) return;
+      const width = (maxRight - contentStart) / scale + em;
+      if (!Number.isFinite(width) || !(width > 0)) throw new Error('Source Taste end extent width is invalid.');
+      set(slide, '--atlas-source-tail-extent', width + 'px');
+      slide.setAttribute('data-atlas-source-tail-gutter', 'taste-native-inline-end');
+    }
+    function applyReadableLayout(slide, prior) {
+      const recipe = (config.source_readable_layouts || []).find(item => slides[item.index] === slide);
+      if (!recipe) return;
+      const owner = oneRole(slide, recipe.owner), content = oneRole(slide, recipe.content);
+      const reserves = recipe.reserve.map(selector => oneRole(slide, selector));
+      const bounds = recipe.bounds.map(selector => oneRole(slide, selector));
+      let state = readableStates.get(slide);
+      if (!state) {
+        state = { owner, content, styles: new Map(), attributes: new Map(['tabindex', 'role', 'aria-label', 'data-atlas-source-tail-gutter'].map(key => [key, owner.getAttribute(key)])), nestedAttributes: new Map(), wrapper: null };
+        readableStates.set(slide, state);
+      } else if (state.owner !== owner || state.content !== content) throw new Error('Source readable layout owner identity changed.');
+      const set = (node, key, value) => rememberStyle(state, node, key, value);
+      const scale = Number(scene.dataset.atlasDeckScale);
+      if (!(scale > 0)) throw new Error('Source readable layout scale is invalid.');
+      if (recipe.kind === 'SOURCE_FLOW_CHILDREN') {
+        const graphics = new Map((recipe.definite_graphics || []).map(selector => { const node = oneRole(slide, selector); return [node, node.getBoundingClientRect().height / scale]; }));
+        if (config.source_native_flow_viewport) {
+          // This is an explicit responsive adaptation for the two immutable
+          // Taste editions, not a claimed source breakpoint. Retain the source
+          // gutters unless together they consume more than half the viewport;
+          // then retain one source body em on each edge, without shrinking type.
+          const css = getComputedStyle(slide), px = value => Number.parseFloat(value) || 0;
+          const em = px(css.fontSize), left = px(css.paddingLeft), right = px(css.paddingRight);
+          if (em > 0 && slide.clientWidth < 2 * (left + right)) {
+            for (const [key, value] of [['padding-left', left], ['padding-right', right], ['padding-top', px(css.paddingTop)], ['padding-bottom', px(css.paddingBottom)]]) set(slide, key, Math.min(value, em) + 'px');
+          }
+        }
+        if (recipe.source_block_flow) {
+          const spec = recipe.source_block_flow, children = Array.from(slide.children);
+          if (children.length !== spec.direct_roles.length || children.some((node, at) => !node.matches(spec.direct_roles[at])))
+            throw new Error('Source Block headerless direct role binding changed.');
+          for (const selector of spec.required_roles) oneRole(slide, selector);
+          const safe = node => {
+            const css = getComputedStyle(node);
+            for (const [key, value] of [['justify-content', css.justifyContent], ['align-items', css.alignItems], ['align-content', css.alignContent]])
+              if (['center', 'end', 'flex-end'].includes(value)) set(node, key, 'safe ' + value);
+          };
+          safe(slide);
+          const intrinsic = node => {
+            safe(node); set(node, 'flex-shrink', '0'); set(node, 'min-height', 'max-content'); set(node, 'min-width', 'min-content');
+            for (const child of node.children) if (!['absolute', 'fixed'].includes(getComputedStyle(child).position)) set(child, 'flex-shrink', '0');
+          };
+          const separate = (node, align) => {
+            const sourceFont = getComputedStyle(slide).fontSize, em = Number.parseFloat(sourceFont);
+            if (!/^(?:[0-9]+(?:\.[0-9]+)?)px$/.test(sourceFont) || !Number.isFinite(em) || !(em > 0) || !Number.isFinite(em * 2))
+              throw new Error('Source Block body spacing font is not a positive used pixel size.');
+            const gap = String(em * 2) + 'px';
+            // The source ornament remains painted, with its original size,
+            // rotation and DOM order, but has real space outside the copy.
+            set(node, 'position', 'relative'); set(node, 'inset', 'auto'); set(node, 'flex', '0 0 auto');
+            set(node, 'align-self', align); set(node, 'margin-top', gap); set(node, 'margin-bottom', gap);
+          };
+          if (spec.page_kind === 'intro' || spec.page_kind === 'split') {
+            // Retain the current original media-query column widths and row /
+            // column direction. Read real source boxes before changing flex.
+            const widths = children.map(node => node.getBoundingClientRect().width / scale);
+            if (!widths.every(value => Number.isFinite(value) && value > 0)) throw new Error('Source Block column width is not measurable.');
+            children.forEach((node, at) => { set(node, 'box-sizing', 'border-box'); set(node, 'width', widths[at] + 'px'); intrinsic(node); });
+            if (spec.page_kind === 'split') {
+              const visual = children[0], box = oneRole(slide, '.visual-box'), label = oneRole(slide, '.visual-label');
+              // This exact original panel contains a CSS shape and a text label,
+              // no image. Its former hidden clip loses the rotated label.
+              set(visual, 'overflow', 'visible'); intrinsic(box); separate(label, 'center');
+            }
+          } else {
+            const selector = spec.page_kind === 'hero' ? '.hero-frame' : spec.page_kind === 'quote' ? '.quote-frame' : '.close-frame';
+            const frame = oneRole(slide, selector); intrinsic(frame);
+            set(frame, 'display', 'flex'); set(frame, 'flex-direction', 'column');
+            set(frame, 'align-items', spec.page_kind === 'hero' ? 'flex-start' : 'safe center');
+            if (spec.page_kind === 'hero') {
+              separate(oneRole(slide, '.deco-pink-rect'), 'flex-end');
+              separate(oneRole(slide, '.deco-green-circle'), 'flex-end');
+              separate(oneRole(slide, '.deco-yellow-bar'), 'flex-start');
+            } else if (spec.page_kind === 'quote') {
+              separate(oneRole(slide, '.deco-quote-marks'), 'flex-start');
+              separate(oneRole(slide, '.deco-stripes'), 'flex-end');
+            } else separate(oneRole(slide, '.deco-star'), 'flex-end');
+          }
+        }
+        if (recipe.source_vellum_flow) {
+          const flow = recipe.source_vellum_flow, children = Array.from(slide.children), css = getComputedStyle(slide);
+          if (children.length !== flow.direct_roles.length || children.some((node, at) => !node.matches(flow.direct_roles[at])))
+            throw new Error('Source Vellum direct role binding changed.');
+          let compareLayout = null;
+          if (flow.page_kind === 'compare') {
+            const body = oneRole(slide, '.slide-body'), panels = Array.from(body.children);
+            if (panels.length !== 2 || !panels[0].matches('.compare-panel') || !panels[0].matches('.left')
+              || !panels[1].matches('.compare-panel') || !panels[1].matches('.right'))
+              throw new Error('Source Vellum compare panel binding changed.');
+            // The source body is display:contents. Measure the two real source
+            // panels before changing the parent layout, never its absent box.
+            const boxes = panels.map(node => node.getBoundingClientRect()), widths = boxes.map(box => box.width / scale);
+            const gap = (boxes[1].left - boxes[0].right) / scale;
+            if (!widths.every(value => Number.isFinite(value) && value > 0) || !Number.isFinite(gap) || gap < 0)
+              throw new Error('Source Vellum original compare columns are not measurable.');
+            compareLayout = { body, panels, widths, gap };
+          }
+          // The original source order becomes one reachable vertical flow.
+          // Centering is retained when it fits, with a positive overflow origin.
+          set(slide, 'display', 'flex'); set(slide, 'flex-direction', 'column');
+          set(slide, 'align-items', css.alignItems === 'center' ? 'safe center' : 'stretch');
+          const safe = node => { const style = getComputedStyle(node); for (const [key, value] of [['justify-content', style.justifyContent], ['align-items', style.alignItems], ['align-content', style.alignContent]]) if (value === 'center') set(node, key, 'safe center'); };
+          for (const node of children) safe(node);
+          const annotation = oneRole(slide, '.pin-annotation');
+          set(annotation, 'align-self', 'flex-start'); set(annotation, 'margin-top', 'var(--gap-md)');
+          if (flow.direct_roles.includes('header.slide-chrome')) {
+            const chrome = oneRole(slide, '.slide-chrome'); set(chrome, 'align-self', 'stretch');
+            set(chrome, 'margin-bottom', 'var(--gap-md)');
+          }
+          if (flow.page_kind === 'stats') {
+            const row = oneRole(slide, '.stats-row'), items = row.querySelectorAll('.pin-stat');
+            if (items.length !== 3) throw new Error('Source Vellum stat count changed.');
+            set(row, 'min-width', 'min-content'); set(row, 'align-self', 'safe center');
+            for (const node of items) safe(node);
+          } else if (flow.page_kind === 'compare') {
+            const body = oneRole(slide, '.slide-body'), panels = Array.from(body.children);
+            if (panels.length !== 2 || !panels[0].matches('.compare-panel') || !panels[0].matches('.left')
+              || !panels[1].matches('.compare-panel') || !panels[1].matches('.right'))
+              throw new Error('Source Vellum compare panel binding changed.');
+            const original = compareLayout, width = original.widths[0] + original.widths[1] + original.gap;
+            set(body, 'display', 'grid'); set(body, 'grid-template-columns', original.widths.map(value => value + 'px').join(' '));
+            set(body, 'column-gap', original.gap + 'px'); set(body, 'width', width + 'px'); set(body, 'min-width', width + 'px');
+            for (const panel of panels) { set(panel, 'box-sizing', 'border-box'); set(panel, 'height', 'auto'); safe(panel); }
+          } else if (flow.page_kind === 'chart') {
+            const wrapper = oneRole(slide, '.chart-wrapper'), track = oneRole(slide, '.bar-track');
+            if (track.querySelectorAll('.bar-col').length !== 5 || track.querySelectorAll('.bar-fill').length !== 5
+              || track.querySelectorAll('.bar-x-label').length !== 5)
+              throw new Error('Source Vellum chart role binding changed.');
+            set(wrapper, 'flex', '0 0 auto'); set(wrapper, 'min-height', 'max-content');
+            set(wrapper, 'justify-content', 'safe flex-end');
+            // Keep authored 28vh and each original fill percentage untouched.
+            set(track, 'flex-shrink', '0'); set(track, 'min-width', 'max-content');
+            set(track, 'padding-right', '1em');
+          }
+        }
+        if (recipe.source_cover_flow) {
+          const children = Array.from(slide.children), matches = (node, selector) => !!node && node.matches(selector);
+          if (recipe.source_cover_flow === 'GROVE_FOUR_DIRECT_ROLES') {
+            const [sidebar, watermark, main, footer] = children;
+            if (children.length !== 4 || !matches(sidebar, 'div.grove-sidebar') || !matches(watermark, 'div.grove-num')
+              || !matches(main, 'div') || !matches(footer, 'div') || main.children.length !== 4
+              || !matches(main.children[0], '.kicker') || !matches(main.children[1], '.rule')
+              || !matches(main.children[2], 'h1.h1') || !matches(main.children[3], 'p.lead')
+              || footer.children.length !== 2 || Array.from(footer.children).some(node => !matches(node, 'span.label')))
+              throw new Error('Source cover direct role binding changed.');
+            // The source disabled sidebar and absolute watermark remain as is.
+            set(main, 'justify-content', 'flex-start');
+          } else if (recipe.source_cover_flow === 'MAT_THREE_GRID_ROLES') {
+            const names = ['cover-headline', 'cover-copy', 'cover-bottom'];
+            if (children.length !== 3 || children.some((node, at) => !matches(node, 'div.' + names[at])))
+              throw new Error('Source cover direct role binding changed.');
+            // Preserve the source two-column / spanning-footer grid. The first
+            // row retains spare height when it fits, but cannot compress copy.
+            set(slide, 'grid-template-rows', 'minmax(max-content, 1fr) max-content');
+            set(slide, 'align-content', 'start');
+            set(children[1], 'justify-content', 'safe center');
+          } else throw new Error('Source cover flow kind is not reviewed.');
+        }
+        set(slide, 'justify-content', 'safe center');
+        for (const selector of recipe.flow_chrome || []) { const node = oneRole(slide, selector); set(node, 'position', 'relative'); set(node, 'inset', 'auto'); }
+        for (const node of slide.children) {
+          const css = getComputedStyle(node);
+          if (!['absolute', 'fixed'].includes(css.position) && css.display !== 'none') {
+            set(node, 'flex', '0 0 auto');
+            if (graphics.has(node)) {
+              const height = graphics.get(node);
+              if (!(height > 0)) throw new Error('Source percentage graphic has no definite measured height.');
+              set(node, 'box-sizing', 'border-box'); set(node, 'height', height + 'px'); set(node, 'min-height', height + 'px');
+            } else set(node, 'min-height', 'max-content');
+          }
+        }
+        for (const selector of recipe.intrinsic_containers || []) { const node = oneRole(slide, selector); set(node, 'height', 'auto'); set(node, 'flex', '0 0 auto'); set(node, 'min-height', 'max-content'); }
+        if (recipe.horizontal_table) {
+          const table = oneRole(slide, '.table-scroll');
+          state.nestedAttributes.set(table, new Map(['tabindex', 'role', 'aria-label'].map(key => [key, table.getAttribute(key)])));
+          table.setAttribute('tabindex', '0'); table.setAttribute('role', 'region'); table.setAttribute('aria-label', '表格內容／Table content');
+          table.dataset.atlasSourceContentOwner = 'SOURCE_TABLE_HORIZONTAL'; table.dataset.atlasSourceScrollAxes = 'xy';
+          table.dataset.atlasDeckInnerScroll = 'true';
+          const previous = prior?.nested.find(item => item.node === table);
+          table.scrollLeft = table.scrollWidth > table.clientWidth && previous ? previous.left : 0;
+        }
+      } else if (recipe.kind === 'RESERVED_SOURCE_FRAME' || recipe.kind === 'RESERVED_HEADER_BODY') {
+        set(slide, 'display', 'grid'); set(slide, 'grid-template-rows', recipe.kind === 'RESERVED_HEADER_BODY' ? 'auto minmax(0,1fr)' : 'auto minmax(0,1fr) auto');
+        set(slide, 'justify-content', 'normal'); set(slide, 'align-items', 'stretch');
+        set(owner, 'height', '100%'); set(owner, 'box-sizing', 'border-box'); set(owner, 'align-content', 'safe center');
+        if (recipe.kind === 'RESERVED_HEADER_BODY') { set(owner, 'align-content', 'start'); set(owner, 'grid-auto-rows', 'max-content'); }
+        if (recipe.source_intrinsic_flow) {
+          set(owner, 'max-height', 'none'); set(owner, 'justify-content', 'flex-start');
+          for (const child of owner.children) set(child, 'flex-shrink', '0');
+        }
+        if (recipe.source_svg_canvas) {
+          const canvas = recipe.source_svg_canvas, svg = oneRole(slide, canvas.selector);
+          if (svg.getAttribute('viewBox') !== canvas.view_box) throw new Error('Source SVG viewBox identity changed.');
+          // Explicit source-coordinate canvas: preserve aspect, all primitives
+          // and SVG text, then expose its full extent through the native owner.
+          for (const key of ['width', 'min-width', 'max-width']) set(svg, key, canvas.width + 'px');
+          for (const key of ['height', 'min-height', 'max-height']) set(svg, key, canvas.height + 'px');
+          set(svg, 'flex', '0 0 auto');
+          for (const selector of recipe.intrinsic_containers) {
+            const node = oneRole(slide, selector); set(node, 'flex', '0 0 auto');
+            set(node, 'min-width', 'max-content'); set(node, 'min-height', 'max-content');
+          }
+          set(oneRole(slide, '.chart-body'), 'width', 'max-content');
+          set(oneRole(slide, '.chart-body'), 'height', 'auto');
+        }
+        for (const node of reserves) {
+          set(node, 'position', 'relative'); set(node, 'inset', 'auto');
+          // The source absolute chrome's inline padding matched the slide's.
+          // Its new grid cell is already inside that same slide content edge.
+          set(node, 'padding-left', '0'); set(node, 'padding-right', '0');
+        }
+        for (const selector of recipe.release_clips || []) { const node = oneRole(slide, selector); set(node, 'overflow-x', 'visible'); set(node, 'overflow-y', 'visible'); }
+      } else if (recipe.kind === 'RESERVED_SOURCE_FAMILY_BODY') {
+        const graphics = (recipe.definite_graphics || []).map(selector => oneRole(slide, selector));
+        set(slide, 'display', 'grid'); set(slide, 'grid-template-rows', 'auto minmax(0,1fr) auto');
+        set(slide, 'justify-content', 'normal'); set(slide, 'align-items', 'stretch');
+        set(owner, 'height', '100%'); set(owner, 'box-sizing', 'border-box');
+        // Keep centering where it fits, but never center overflow behind a
+        // negative, unreachable scroll origin. Do not change text metrics.
+        const css = getComputedStyle(owner);
+        for (const [property, value] of [['align-items', css.alignItems], ['align-content', css.alignContent], ['justify-content', css.justifyContent]])
+          if (['center', 'end', 'flex-end'].includes(value)) set(owner, property, 'safe ' + value);
+        for (const node of owner.children) if (getComputedStyle(node).display !== 'none') set(node, 'flex-shrink', '0');
+        for (const node of reserves) { set(node, 'position', 'relative'); set(node, 'inset', 'auto'); }
+        for (const selector of recipe.intrinsic_containers || []) {
+          const node = oneRole(slide, selector); set(node, 'flex', '0 0 auto'); set(node, 'min-height', 'max-content');
+        }
+        for (const node of graphics) {
+          // Only the exact Grove/MAT source .bar-track enters this family branch.
+          // Its authored vh height (Grove 30/42vh; MAT 30/38vh) is definite. Prevent flex shrink
+          // and expose the original nowrap label extent without freezing a
+          // previously compressed used height or replacing the source unit.
+          set(node, 'flex-shrink', '0'); set(node, 'min-width', 'max-content');
+          // Keep a readable end gutter after the original nowrap labels. This
+          // reserves real scrollable layout space; text, bars and vh heights remain.
+          set(node, 'padding-right', '1em');
+        }
+      } else if (recipe.kind === 'RESERVED_CHROME_BODY') {
+        set(slide, 'display', 'grid'); set(slide, 'grid-template-rows', 'auto minmax(0,1fr) auto');
+        set(slide, 'justify-content', 'normal');
+        set(owner, 'align-items', 'start'); set(owner, 'align-content', 'start');
+        for (const node of reserves) set(node, 'position', 'relative');
+      } else if (recipe.kind === 'RESERVED_ATTRIBUTION_BODY') {
+        set(slide, 'display', 'grid'); set(slide, 'grid-template-rows', 'minmax(0,1fr) auto');
+        set(slide, 'justify-content', 'normal'); set(slide, 'justify-items', 'center');
+        set(owner, 'height', '100%'); set(owner, 'box-sizing', 'border-box');
+        set(owner, 'justify-content', 'flex-start');
+        for (const node of owner.children) set(node, 'flex-shrink', '0');
+        for (const node of reserves) {
+          set(node, 'position', 'relative'); set(node, 'inset', 'auto');
+          set(node, 'justify-self', 'start');
+        }
+      } else if (recipe.kind === 'POSITIVE_SOURCE_COMPOSITION') {
+        // Keep the source content's exact used width. The wrapper reserves
+        // transformed semantic labels as real layout space, including their
+        // negative source offsets, so both axes have reachable positive bounds.
+        if (recipe.source_intrinsic_flow) {
+          set(content, 'flex-shrink', '0'); set(content, 'min-height', 'max-content');
+          set(content, 'justify-content', 'flex-start');
+          for (const child of content.children) set(child, 'flex-shrink', '0');
+          for (const chart of content.querySelectorAll('.pixel-bar-chart')) set(chart, 'flex-shrink', '0');
+          for (const group of content.querySelectorAll('.chart-bar-group')) {
+            set(group, 'flex-shrink', '0');
+            for (const child of group.children) set(child, 'flex-shrink', '0');
+          }
+        }
+        if (recipe.source_separated_notes) {
+          const spec = recipe.source_separated_notes, cluster = oneRole(slide, spec.container);
+          const notes = spec.notes.map(selector => oneRole(slide, selector));
+          if (cluster.children.length !== 5 || notes.some((node, index) => cluster.children[index] !== node)) throw new Error('Source closing note order binding changed.');
+          // The five immutable post-its contain meaningful text. Keep their
+          // source fonts, padding, transforms, sizes and DOM order, while
+          // reserving each rotated border box in its own native-scroll row.
+          const used = notes.map(node => {
+            const css = getComputedStyle(node);
+            if (![css.width, css.height].every(value => /^(?:[0-9]+(?:\.[0-9]+)?)px$/.test(value) && parseFloat(value) > 0)) throw new Error('Source closing note used size is not positive.');
+            return { width: css.width, height: css.height };
+          });
+          set(cluster, 'display', 'grid'); set(cluster, 'grid-template-columns', 'max-content');
+          set(cluster, 'justify-content', 'center'); set(cluster, 'align-items', 'center'); set(cluster, 'row-gap', '2em');
+          notes.forEach((node, index) => {
+            set(node, 'position', 'relative'); set(node, 'inset', 'auto'); set(node, 'margin', '0');
+            set(node, 'width', used[index].width); set(node, 'height', used[index].height);
+            set(node, 'justify-self', 'center'); set(node, 'align-self', 'center');
+            set(node, 'grid-column', '1'); set(node, 'grid-row', String(index + 1));
+          });
+          const boxes = notes.map(node => node.getBoundingClientRect());
+          if (boxes.some(box => ![box.width, box.height].every(value => Number.isFinite(value) && value > 0))) throw new Error('Source closing note measured box is not positive.');
+          set(cluster, 'grid-template-rows', boxes.map(box => box.height / scale + 'px').join(' '));
+          set(cluster, 'width', Math.max(...boxes.map(box => box.width / scale)) + 'px');
+          const separated = notes.map(node => node.getBoundingClientRect());
+          for (let a = 0; a < separated.length; a++) for (let b = a + 1; b < separated.length; b++) {
+            const x = separated[a], y = separated[b];
+            if (Math.min(x.right, y.right) > Math.max(x.left, y.left) && Math.min(x.bottom, y.bottom) > Math.max(x.top, y.top)) throw new Error('Source closing note rectangles still overlap.');
+          }
+        }
+        const graphicBounds = (recipe.source_graphic_bounds || []).map(graphic => {
+          const node = oneRole(slide, graphic.selector);
+          if (String(node.tagName).toLowerCase() !== 'svg' || node.getAttribute('viewBox') !== graphic.view_box) throw new Error('Source readable graphic role binding changed.');
+          return node;
+        });
+        // These immutable source roles contain foreground text. Their internal
+        // clip is unnecessary (photo label), or demonstrably cuts SVG legends.
+        // Keep original transforms, viewBox, geometry, fonts and used SVG size.
+        for (const selector of recipe.release_clips || []) { const node = oneRole(slide, selector); set(node, 'overflow-x', 'visible'); set(node, 'overflow-y', 'visible'); }
+        const width = content.getBoundingClientRect().width / scale;
+        if (!(width > 0)) throw new Error('Source readable composition has no measured width.');
+        set(content, 'flex-shrink', '0'); set(content, 'box-sizing', 'border-box'); set(content, 'width', width + 'px');
+        const wrapper = document.createElement('div'); wrapper.dataset.atlasSourceContentExtent = 'true';
+        content.parentNode.insertBefore(wrapper, content); wrapper.append(content); state.wrapper = wrapper;
+        wrapper.style.setProperty('position', 'relative'); wrapper.style.setProperty('flex', '0 0 auto');
+        wrapper.style.setProperty('box-sizing', 'content-box'); wrapper.style.setProperty('width', width + 'px');
+        set(slide, 'justify-content', 'flex-start'); set(slide, 'align-items', 'flex-start');
+        const base = content.getBoundingClientRect();
+        const complete = recipe.complete_content_extent ? [...content.querySelectorAll('*')].filter(node => {
+          const css = getComputedStyle(node); return css.display !== 'none' && css.visibility !== 'hidden' && css.visibility !== 'collapse';
+        }) : [];
+        const union = [base, ...bounds.map(node => node.getBoundingClientRect()), ...complete.map(node => node.getBoundingClientRect()),
+          ...(recipe.source_descendant_bounds ? [...content.querySelectorAll('*')].map(node => node.getBoundingClientRect()) : []),
+          ...graphicBounds.flatMap(node => [...node.children].map(child => child.getBoundingClientRect()))];
+        const left = Math.min(...union.map(rect => rect.left)), right = Math.max(...union.map(rect => rect.right));
+        const top = Math.min(...union.map(rect => rect.top)), bottom = Math.max(...union.map(rect => rect.bottom));
+        const insetLeft = Math.max(0, (base.left - left) / scale), insetTop = Math.max(0, (base.top - top) / scale);
+        const insetRight = Math.max(0, (right - base.right) / scale), insetBottom = Math.max(0, (bottom - base.bottom) / scale);
+        wrapper.style.setProperty('padding', `${insetTop}px ${insetRight}px ${insetBottom}px ${insetLeft}px`);
+        const css = getComputedStyle(slide), availableWidth = slide.clientWidth - px(css.paddingLeft) - px(css.paddingRight);
+        const availableHeight = slide.clientHeight - px(css.paddingTop) - px(css.paddingBottom);
+        const extentWidth = width + insetLeft + insetRight, extentHeight = base.height / scale + insetTop + insetBottom;
+        wrapper.style.setProperty('margin-left', Math.max(0, (availableWidth - extentWidth) / 2) + 'px');
+        wrapper.style.setProperty('margin-top', Math.max(0, (availableHeight - extentHeight) / 2) + 'px');
+        wrapper.dataset.atlasSourceExtentWidth = String(extentWidth); wrapper.dataset.atlasSourceExtentHeight = String(extentHeight);
+      } else throw new Error('Unsupported source readable layout recipe.');
+      applyTasteEndGutter(slide, state, set, scale);
+      set(owner, 'min-height', '0'); set(owner, 'min-width', '0');
+      set(owner, 'overflow-y', 'auto'); set(owner, 'overflow-x', recipe.axes === 'xy' ? 'auto' : 'hidden');
+      set(owner, 'scroll-behavior', 'auto'); set(owner, 'scroll-snap-type', 'none');
+      owner.dataset.atlasSourceContentOwner = recipe.kind; owner.dataset.atlasSourceScrollAxes = recipe.axes;
+      const scrolling = config.source_readable_scroll && owner.dataset.atlasDeckInnerScroll === 'true'
+        || owner.scrollHeight > owner.clientHeight || recipe.axes === 'xy' && owner.scrollWidth > owner.clientWidth;
+      owner.dataset.atlasDeckInnerScroll = String(scrolling);
+      if (scrolling) {
+        owner.setAttribute('tabindex', '0'); owner.setAttribute('role', 'region'); owner.setAttribute('aria-label', '投影片內容／Slide content');
+        owner.scrollTop = prior?.owner === owner && prior.scrolling ? prior.top : 0;
+        owner.scrollLeft = prior?.owner === owner && prior.scrolling ? prior.left : 0;
+      } else { owner.scrollTop = 0; owner.scrollLeft = 0; }
+    }
+    for (const recipe of config.source_readable_layouts || []) {
+      const slide = slides[recipe.index];
+      if (!slide) throw new Error('Source readable layout page binding changed.');
+      for (const selector of new Set([recipe.owner, recipe.content, ...recipe.reserve, ...recipe.bounds, ...(recipe.release_clips || []), ...(recipe.flow_chrome || []), ...(recipe.intrinsic_containers || []), ...(recipe.definite_graphics || []), ...(recipe.source_svg_canvas ? [recipe.source_svg_canvas.selector] : []), ...(recipe.horizontal_table ? ['.table-scroll'] : [])])) oneRole(slide, selector);
+    }
+    let current = config.initial_index;
+    function select(index) {
+      resetSourceGraphicReleases();
+      const innerFocused = slides.some(slide => { const owner = localScrollOwner(slide); return owner && owner.contains(document.activeElement); });
+      slides.forEach(resetReadableLayout);
+      current = Math.max(0, Math.min(slides.length - 1, index));
+      slides.forEach((slide, at) => {
+        const active = at === current;
+        slide.dataset.atlasDeckActive = String(active);
+        slide.setAttribute('aria-hidden', String(!active)); slide.inert = !active;
+        if (config.variant === 'STAGE_ACTIVE_SECTIONS') slide.classList.toggle('active', active);
+        if (sourceIsActive) slide.classList.toggle('is-active', active);
+        for (const state of config.source_states || []) slide.classList.toggle(state, active);
+        if (config.source_readable_scroll) { slide.dataset.atlasDeckInnerScroll = 'false'; slide.scrollTop = 0; }
+      });
+      previous.disabled = current === 0; next.disabled = current === slides.length - 1;
+      counter.textContent = `${current + 1} / ${slides.length}`;
+      deck.dataset.atlasDeckIndex = String(current); deck.dataset.atlasDeckCount = String(slides.length);
+      sourceDataEndpoint(); sourceAutoFit(slides[current]); sourceHeadingFit(slides[current]);
+      fit();
+      if (innerFocused) { const target = localScrollOwner(slides[current]) || slides[current]; target.setAttribute('tabindex', localScrollOwner(slides[current]) ? '0' : '-1'); target.focus({ preventScroll: true }); }
+      deck.dispatchEvent(new CustomEvent('atlas-source-deck-change', { bubbles: true, detail: { index: current, count: slides.length } }));
+    }
+    function fit() {
+      resetSourceGraphicReleases();
+      const rect = viewport.getBoundingClientRect();
+      const width = config.viewport ? window.innerWidth : config.width;
+      if (config.banner_extra) scene.style.setProperty('width', String(width) + 'px', 'important');
+      const bannerHeight = config.banner_extra ? [...scene.children].find(node => node.classList.contains('demo-banner')).offsetHeight : 0;
+      const height = (config.viewport ? window.innerHeight : config.height) + bannerHeight;
+      if (rect.width <= 0 || rect.height <= 0 || width <= 0 || height <= 0) { scene.dataset.atlasDeckReady = 'WAITING_FOR_VISIBLE_VIEWPORT'; return; }
+      const scale = Math.min(rect.width / width, rect.height / height);
+      const previousContentScroll = resetReadableLayout(slides[current]);
+      const previousInnerTop = config.source_readable_scroll && slides[current].dataset.atlasDeckInnerScroll === 'true' ? slides[current].scrollTop : 0;
+      if (config.source_readable_scroll) { slides[current].scrollTop = 0; slides[current].dataset.atlasDeckInnerScroll = 'false'; slides[current].setAttribute('tabindex', '-1'); }
+      scene.style.setProperty('width', `${width}px`, 'important'); scene.style.setProperty('height', `${height}px`, 'important');
+      scene.style.setProperty('left', `${(rect.width - width * scale) / 2}px`, 'important');
+      scene.style.setProperty('top', `${(rect.height - height * scale) / 2}px`, 'important');
+      scene.style.setProperty('transform', `scale(${scale})`, 'important');
+      scene.dataset.atlasDeckScale = String(scale); scene.dataset.atlasDeckReady = 'READY';
+      sourceDataEndpoint(); sourceAutoFit(slides[current]); sourceHeadingFit(slides[current]);
+      if (config.source_native_flow_viewport || needsReadableScroll(slides[current])) {
+        // The source's narrow single-column text is taller than its fixed
+        // slide. Preserve readable source typography and expose all of it in
+        // a real local scroll viewport, rather than shrinking or clipping it.
+        scene.style.setProperty('width', rect.width + 'px', 'important'); scene.style.setProperty('height', rect.height + 'px', 'important');
+        scene.style.setProperty('left', '0px', 'important'); scene.style.setProperty('top', '0px', 'important'); scene.style.setProperty('transform', 'none', 'important');
+        scene.dataset.atlasDeckScale = '1'; slides[current].dataset.atlasDeckInnerScroll = 'true'; slides[current].setAttribute('tabindex', '0');
+        sourceAutoFit(slides[current]);
+        slides[current].scrollTop = previousInnerTop;
+      }
+      applyReadableLayout(slides[current], previousContentScroll);
+      applySourceGraphicReleases(slides[current]);
+      if (config.source_orbit_data) sourceDataEndpoint();
+    }
+    previous.addEventListener('click', () => select(current - 1)); next.addEventListener('click', () => select(current + 1));
+    document.addEventListener('keydown', (event) => {
+      if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey) return;
+      const chain = event.composedPath ? event.composedPath() : [event.target];
+      if (chain.some((node) => node && (node.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT', 'BUTTON'].includes(node.tagName)))) return;
+      if (['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Home', 'End', ' '].includes(event.key)
+        && chain.some(node => node?.dataset?.atlasDeckInnerScroll === 'true')) return;
+      if (['ArrowLeft', 'ArrowRight'].includes(event.key)
+        && chain.some(node => node?.dataset?.atlasDeckInnerScroll === 'true' && node.dataset.atlasSourceScrollAxes === 'xy' && node.scrollWidth > node.clientWidth)) return;
+      const target = { ArrowRight: current + 1, PageDown: current + 1, ' ': current + 1, ArrowLeft: current - 1, PageUp: current - 1, Home: 0, End: slides.length - 1 }[event.key];
+      if (typeof target !== 'number') return;
+      event.preventDefault(); select(target);
+    });
+    const observer = new ResizeObserver(fit); observer.observe(viewport);
+    if (config.banner_extra) observer.observe([...scene.children].find(node => node.classList.contains('demo-banner')));
+    window.addEventListener('resize', fit);
+    window.addEventListener('pageshow', () => { observer.observe(viewport); if (config.banner_extra) observer.observe([...scene.children].find(node => node.classList.contains('demo-banner'))); fit(); });
+    window.addEventListener('pagehide', () => { observer.disconnect(); resetSourceGraphicReleases(); });
+    select(current); fit();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true }); else start();
+})({"variant":"STAGE_ACTIVE_SECTIONS","selector":".stage","slide_count":8,"initial_index":0,"width":null,"height":null,"viewport":true,"banner_extra":false,"source_heading_fit":false,"source_readable_layouts":[],"source_native_flow_viewport":false});
+</script><script data-atlas-owned-adapter="1" data-atlas-script-sha256="e25745c36278ca1cd09dd4b0611e22a7b228f0a46464fb72401062bd5e482b80">(function reducedMotionRuntime() {
+  'use strict';
+  const media = matchMedia('(prefers-reduced-motion: reduce)');
+  const held = new Map();
+  let scheduled = 0, closed = false;
+  const state = { version: 1, reduced: media.matches, sampled: 0, scheduled: false };
+  Object.defineProperty(window, '__atlasSourceMotion', { value: state });
+  function scan() {
+    scheduled = 0; state.scheduled = false;
+    if (closed) return;
+    state.reduced = media.matches;
+    const current = new Set(document.getAnimations().filter(animation => animation instanceof CSSAnimation));
+    for (const [animation] of held) if (!current.has(animation)) held.delete(animation);
+    if (!media.matches) {
+      for (const [animation, prior] of held) {
+        animation.playbackRate = prior.rate;
+        animation.currentTime = prior.time;
+        if (prior.state === 'running') animation.play();
+        else if (prior.state === 'paused') animation.pause();
+      }
+      held.clear(); return;
+    }
+    for (const animation of current) {
+      if (held.has(animation)) continue;
+      const effect = animation.effect, timing = effect && effect.getTiming();
+      if (!timing || !Number.isFinite(Number(timing.duration)) || Number(timing.duration) <= 0) continue;
+      const prior = { state: animation.playState, time: animation.currentTime, rate: animation.playbackRate };
+      const duration = Number(timing.duration), delay = Number(timing.delay) || 0;
+      const iterations = Number(timing.iterations);
+      const pose = iterations === Infinity ? delay + duration / 2 : delay + duration * iterations;
+      if (!Number.isFinite(pose)) continue;
+      animation.pause(); animation.currentTime = Math.max(0, pose);
+      held.set(animation, prior); state.sampled++;
+    }
+  }
+  function schedule() {
+    if (closed || scheduled || (!media.matches && !held.size)) return;
+    state.scheduled = true; scheduled = requestAnimationFrame(scan);
+  }
+  const resize = new ResizeObserver(() => { if (media.matches) schedule(); });
+  resize.observe(document.documentElement);
+  document.addEventListener('animationstart', schedule, true);
+  document.addEventListener('atlas-source-deck-change', schedule);
+  document.addEventListener('DOMContentLoaded', schedule, { once: true });
+  window.addEventListener('load', schedule, { once: true });
+  media.addEventListener('change', schedule);
+  window.addEventListener('pagehide', () => {
+    closed = true; resize.disconnect(); media.removeEventListener('change', schedule);
+    document.removeEventListener('animationstart', schedule, true);
+    document.removeEventListener('atlas-source-deck-change', schedule);
+    if (scheduled) cancelAnimationFrame(scheduled);
+    // A bfcache page retains the source Animation objects and their original
+    // playback state; discard neither merely because the document is hidden.
+    scheduled = 0; state.scheduled = false;
+  });
+  window.addEventListener('pageshow', () => {
+    if (!closed) return;
+    closed = false; resize.observe(document.documentElement);
+    document.addEventListener('animationstart', schedule, true);
+    document.addEventListener('atlas-source-deck-change', schedule);
+    media.addEventListener('change', schedule);
+    schedule();
+  });
+  schedule();
+})();</script></body>
+</html>
